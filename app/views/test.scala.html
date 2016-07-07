@@ -1,0 +1,16 @@
+@(products: ProductList, logs: LoginList)
+
+@main("Mark") {
+    <h1>TING</h1>
+    <h2>Products</h2>
+    @for(p <- products.list) {
+        <li>@p.ean : @p.name  &nbsp;&nbsp;&nbsp; £@p.price</li>
+        <p>@p.description</p>
+
+    }
+    <h2>Users</h2>
+    @for(l <- logs.list) {
+        <li>@l.lid:  @l.name: </li>
+        <p>@l.pass</p>
+    }
+}
