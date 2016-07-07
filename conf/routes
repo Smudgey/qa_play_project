@@ -1,4 +1,5 @@
-GET         /           controllers.Application.diddly
+GET         /           controllers.HomeController.index
+GET         /test       controllers.Application.diddly
 
 GET     /login                      controllers.LoginController.login()
 GET     /register                   controllers.RegisterController.register()
