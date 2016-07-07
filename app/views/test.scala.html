@@ -1,16 +1,20 @@
-@(products: ProductList, logs: LoginList)
+@import models.{Login, Product}
 
 @main("Mark") {
     <h1>TING</h1>
     <h2>Products</h2>
-    @for(p <- products.list) {
-        <li>@p.ean : @p.name  &nbsp;&nbsp;&nbsp; £@p.price</li>
+    @for(p <- Product.list) {
+        <li>@p.pid : @p.name  &nbsp;&nbsp;&nbsp; £@p.price</li>
         <p>@p.description</p>
 
     }
     <h2>Users</h2>
-    @for(l <- logs.list) {
+    @for(l <- Login.list) {
         <li>@l.lid:  @l.name: </li>
         <p>@l.pass</p>
     }
+
+    <!--This is how you find a product with a specific id-->
+    <!--This will return the name of the product being searched for-->
+    <p>@Product.findProduct(702).get.name</p>
 }
