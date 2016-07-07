@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.css")">
+    <script src="@routes.Assets.versioned("javascripts/jquery-3.0.0.min.js")"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Manage Account</title>
 </head>
 <body>
+<h1>My Account</h1>
+<h2>Edit personal details</h2>
+<form action="manageAccount.asp">
+<div id="editAccountForm">
+    <div class="input-group input-group-lg wrapper text-center">
+        <div class="form-group">
+        <input type="text" id="emailAddress" placeholder="Email Address" aria-describedby="sizing-addon1"><br>
 
+        <input type="tel" id="telephoneNumber" placeholder="Phone Number" aria-describedby="sizing-addon1"><br>
+        <input type="text" id="firstName" placeholder="First Name" aria-describedby="sizing-addon1"><br>
+        <input type="text" id="lastName" placeholder="Last Name" aria-describedby="sizing-addon1"><br>
+        <input type="text" id="addressLine1" placeholder="Address Line 1" aria-describedby="sizing-addon1"><br>
+        <input type="text" id="addressLine2" placeholder="AddressLine 2" aria-describedby="sizing-addon1"><br>
+        <input type="text" id="city" placeholder="City" aria-describedby="sizing-addon1"><br>
+        <input type="text" id="county" placeholder="County" aria-describedby="sizing-addon1"><br>
+        <input type="text" id="postCode" placeholder="Post Code" aria-describedby="sizing-addon1"><br>
+        <input type="password" id="currentPassword" placeholder="Current Password" aria-describedby="sizing-addon1"><br>
+        <input type="password" id="newPassword" placeholder="New Password" aria-describedby="sizing-addon1"><br>
+        <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" aria-describedby="sizing-addon1"><br>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    <input type="submit" value="Save">
+</form>
 </body>
 </html>
