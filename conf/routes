@@ -1,5 +1,5 @@
 GET     /                           controllers.HomeController.index
-GET     /test                       controllers.Application.diddly
+GET     /catalogue                  controllers.CatalogueController.doGrid
 # An example controller showing a sample home page
 GET     /viewproduct                controllers.ProductViewController.viewProoduct
 
