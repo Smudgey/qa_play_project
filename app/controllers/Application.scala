@@ -13,4 +13,8 @@ class Application extends Controller {
     Ok(views.html.test())
   }
 
+  def loginDrop = Action {
+    Ok(views.html.dropDownLogin())
+  }
+
 }
