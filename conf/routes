@@ -1,5 +1,10 @@
-GET         /           controllers.Application.diddly
-GET     /                           controllers.ManageAccountController.ManageAccounts()
+
+GET     /                           controllers.ManageAccountController.ManageAccounts
+GET     /                           controllers.HomeController.index
+GET     /catalogue                  controllers.CatalogueController.doGrid
+# An example controller showing a sample home page
+GET     /viewproduct                controllers.ProductViewController.viewProoduct
+
 
 GET     /login                      controllers.LoginController.login()
 GET     /register                   controllers.RegisterController.register()
