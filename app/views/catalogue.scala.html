@@ -11,11 +11,24 @@
                 class="glyphicon glyphicon-th"></span>Grid</a>
         </div>
     </div>
+
+    <div class ="sidebar-wrapper">
+        <h3 class="sidebar-brand">View By Category</h3>
+        <ul class="sidebar-nav">
+            <li>
+                <a class="sidebar-brand" href='#'>
+                    INSERT CATEGORY HERE&nbsp; <span>(0)</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
     <div id="products" class="row list-group">
         @for(p <- Product.list) {
             <div class="item  col-xs-4 col-lg-4">
                 <div class="thumbnail">
-                    <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                    <img class="group list-group-image" src="http://notyourgrandmasgardengnomes.com/wp-content/uploads/2015/05/naughty-gnomes-610x343.jpg" alt="" />
                     <div class="caption">
                         <h4 class="group inner list-group-item-heading">
                             @p.name</h4>

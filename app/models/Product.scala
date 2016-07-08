@@ -12,6 +12,7 @@ object Product {
   var list = new ArrayBuffer[Product]
 
   def generate(): Unit = {
+    list.clear()
     this.add(Product(701, "Justin Bieber Gnome", "This is a small gnome with bad hair.", 6, 0, 99.99))
     this.add(Product(702,"Sexy Gnome", "This is a large sexy gnome dressed in a bikini", 87, 58, 11.99))
     this.add(Product(703,"Red Gnome", "A small red gnome", 14, 2, 6.99))
