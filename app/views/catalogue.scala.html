@@ -1,3 +1,5 @@
+@import _root_.models.{Login, Product}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,19 @@
     <title>Title</title>
 </head>
 <body>
+
+<div>
+    @for(p <- Product.list) {
+        <img src = "http://thehomeofgnome.co.uk/wp-content/uploads/2016/03/Naughty-Dancing-Gnome-180x300.jpg"/>
+        <h2>@p.name</h2>
+        <h3>£@p.price</h3>
+        <p>@p.description</p>
+        <p>We have @p.stock in stock.</p>
+    }
+
+</div>
+
+
 
 </body>
 </html>
