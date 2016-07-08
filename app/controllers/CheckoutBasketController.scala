@@ -18,8 +18,6 @@ class CheckoutBasketController @Inject() extends Controller {
 
 
 
-
-
   def checkoutBasket = Action {
     Ok(views.html.checkoutBasket())
   }
