@@ -16,3 +16,5 @@ GET     /aboutContact               controllers.AboutContactController.aboutAndC
 
 GET     /payment                    controllers.PaymentController.index
 
+GET     /checkout                   controllers.CheckoutBasketController.checkoutBasket
+
