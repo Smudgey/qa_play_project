@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import _root_.models.{Product, Login}
+import _root_.models.{Product}
 import play.api.mvc._
 
 /**

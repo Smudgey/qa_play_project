@@ -17,6 +17,8 @@ GET         /aboutContact        controllers.AboutContactController.aboutAndCont
 
 GET         /payment             controllers.PaymentController.index
 
+GET         /basket              controllers.BasketController.add(pid: Int)
+
 
 
 
