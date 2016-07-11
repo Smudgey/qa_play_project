@@ -11,7 +11,7 @@ import play.api.mvc.{Action, Controller}
   */
 class LoginController @Inject extends Controller {
   // this variable will create login form
-  private val loginForm: Form[Login] = Form(
+  val loginForm: Form[Login] = Form(
     mapping(
       "" -> text,
       "" -> text,
@@ -24,6 +24,7 @@ class LoginController @Inject extends Controller {
 
   /**
     * this function will create login page
+    *
     * @return
     */
   def login() = Action {
@@ -33,6 +34,7 @@ class LoginController @Inject extends Controller {
   //TODO Error messages
   /**
     * this function will validate user
+    *
     * @return
     */
   def validateLogin() = Action {
@@ -45,7 +47,7 @@ class LoginController @Inject extends Controller {
         val user = Login.findLogin(loginForm.bindFromRequest().data("email")).get
         if (user.pass == loginForm.bindFromRequest().data("password")) {
           println("password is correct")
-
+          Login.toggleLogin()
           Redirect(routes.HomeController.index())
 
         } else {
