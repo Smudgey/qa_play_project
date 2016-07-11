@@ -1,7 +1,13 @@
+@import _root_.models.{Login, Product, OrderLine}
+
 @(p: Product)
 
 @main("Basket") {
-    <p></p>
+    <p>There are currently <strong><em>@OrderLine.oline.size</em></strong> items in your basket</p>
+    @for(oli <- OrderLine.oline) {
+        <p>@oli.prod.name </br> Ordered:@oli.quantity</p></br> New Stock level: @oli.prod.stock</p>
+    }
 
+    <a class="btn btn-success" href="@models.OrderLine.clear()">Clear basket</a>
 
 }

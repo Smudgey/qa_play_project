@@ -10,10 +10,20 @@ import _root_.models.{OrderLine, Product}
 @Singleton
 class BasketController @Inject() extends Controller {
 
+  //TODO separate the add functionality from the show functionality.
+
   def add(pid: Int) =  Action {
-    Product.findProduct(pid).map {
-      product => Ok(views.html.basket(product))
+
+    val p = Product.findProduct(pid)
+
+    OrderLine.addToBasket(OrderLine(p.get))
+
+    p.map {
+      product => Ok(views.html.basket(p.get))
     }.getOrElse(NotFound)
   }
 
+  def show: Unit = {
+    Ok(views.html....)
+  }
 }

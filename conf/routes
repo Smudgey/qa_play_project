@@ -20,7 +20,7 @@ GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
 
 GET         /basket              controllers.BasketController.add(pid: Int)
 
-
 GET         /checkout            controllers.CheckoutBasketController.checkoutBasket
+
 
 

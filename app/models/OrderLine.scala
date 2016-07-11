@@ -10,15 +10,23 @@ import scala.collection.mutable.ArrayBuffer
   */
 case class OrderLine(prod: Product, quantity: Int = 1, pwareQuantity: Int = 0) {}
 
-  object OrderLine {
+object OrderLine {
 
-    var oline = new ArrayBuffer[OrderLine]
+  var oline = new ArrayBuffer[OrderLine]
 
-    def addToBasket(oli: OrderLine){
-      //Do product stock validation here
-      oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
-      oline += oli
-    }
+  //TODO increment the stock when the orderline is cleared
+  //TODO increment the stock when the orderline is cleared
+  def clear(): Unit = {
+
+   // for
+    oline.clear()
   }
+
+  def addToBasket(oli: OrderLine) {
+    //Do product stock validation here
+    oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
+    oline += oli
+  }
+}
 
 
