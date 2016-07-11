@@ -1,11 +1,10 @@
 
 
-GET     /ManageAccount              controllers.ManageAccountController.ManageAccount
+GET     /ManageAccount                           controllers.ManageAccountController.ManageAccounts
 GET     /                           controllers.HomeController.index
 GET     /catalogue                  controllers.CatalogueController.doGrid
 
-GET         /                    controllers.HomeController.index
-GET         /catalogue           controllers.CatalogueController.doGrid
+
 
 
 
