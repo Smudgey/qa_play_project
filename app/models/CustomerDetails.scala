@@ -3,9 +3,7 @@ package models
 
 import scala.collection.mutable.ArrayBuffer
 
-/**
-  * Created by Administrator on 11/07/2016.
-  */
+
 case class CustomerDetails (phoneNumber: Int, fName: String, lName: String, addressLine1: String, addressLine2: String, city: String, county: String, postCode: String ) extends Address{}
 
 object CustomerDetails {
@@ -23,4 +21,6 @@ object CustomerDetails {
     detailsList += detail
   }
 
-}*/
+}
+
+*/

@@ -1,27 +1,90 @@
 @main("ManageAccount") {
-<div>
-<body>
 
 
+<style>
+    .input-group-addon {
+    min-width: 200px;
+    }
+.center-text {
+  margin-left: 40%;
+  }
+  .center{
+  margin-left: 36%;
+  }
+</style>
+<div class="center-text">
 <h1>My Account</h1>
+</div>
+<div class="center">
 <h2>Edit personal details</h2>
-<form action="manageAccount.asp">
-    <div id="editAccountForm">
-        <div class="myTable" >
+    </div>
 
-            <input type="text" id="emailAddress" placeholder="Email Address" aria-describedby="sizing-addon1"><br>
-            <input type="tel" id="telephoneNumber" placeholder="Phone Number" aria-describedby="sizing-addon1"><br>
-            <input type="text" id="firstName" placeholder="First Name" aria-describedby="sizing-addon1"><br>
-            <input type="text" id="lastName" placeholder="Last Name" aria-describedby="sizing-addon1"><br>
-            <input type="text" id="addressLine1" placeholder="Address Line 1" aria-describedby="sizing-addon1"><br>
-            <input type="text" id="addressLine2" placeholder="AddressLine 2" aria-describedby="sizing-addon1"><br>
-            <input type="text" id="city" placeholder="City" aria-describedby="sizing-addon1"><br>
-            <input type="text" id="county" placeholder="County" aria-describedby="sizing-addon1"><br>
-            <input type="text" id="postCode" placeholder="Post Code" aria-describedby="sizing-addon1"><br>
-            <input type="password" id="currentPassword" placeholder="Current Password" aria-describedby="sizing-addon1"><br>
-            <input type="password" id="newPassword" placeholder="New Password" aria-describedby="sizing-addon1"><br>
-            <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" aria-describedby="sizing-addon1"><br>
-            <div  style="padding-left: 10%">
+<form class="navbar-left">
+    <div id="editAccountForm">
+        <div class="text-center">
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="userName">Username</span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+            </div>
+
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="telephoneNumber">Telephone Number</span>
+                <input type="tel" class="form-control" placeholder="Telephone Number" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="fName">First Name</span>
+                <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="lName">Last Name</span>
+                <input type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="addrLine1">Address Line 1</span>
+                <input type="text" class="form-control" placeholder="Address Line 1" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="addrLine2">Address Line 2</span>
+                <input type="text" class="form-control" placeholder="Address Line 2" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="city">City</span>
+                <input type="text" class="form-control" placeholder="City" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="county">County</span>
+                <input type="text" class="form-control" placeholder="County" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="postCode">Post Code</span>
+                <input type="text" class="form-control" placeholder="Post Code" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="currentPwd">Current Password</span>
+                <input type="password" class="form-control" placeholder="Current Password" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="newPwd">New Password</span>
+                <input type="text" class="form-control" placeholder="New Password" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group input-group">
+                <span class="input-group-addon" id="confirmPwd">Confirm New Password</span>
+                <input type="text" class="form-control" placeholder="Confirm New Password" aria-describedby="basic-addon1">
+            </div>
+
+            <div >
                 <input class="btn btn-default" type="submit" value="Save">
             </div>
 
@@ -29,7 +92,4 @@
     </div>
 </form>
 
-
-</body>
-</div>
 }
