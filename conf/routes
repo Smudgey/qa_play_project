@@ -16,6 +16,7 @@ GET         /assets/*file        controllers.Assets.versioned(path="/public", fi
 GET         /aboutContact        controllers.AboutContactController.aboutAndContact
 
 GET         /payment             controllers.PaymentController.index
+GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
 
 
 
