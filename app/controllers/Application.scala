@@ -8,7 +8,6 @@ class Application extends Controller {
   def diddly = Action {
 
     Product.generate()
-    Login.generate()
 
     Ok(views.html.test())
   }
