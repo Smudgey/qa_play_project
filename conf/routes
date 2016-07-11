@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -5,6 +6,11 @@ GET     /                           controllers.HomeController.index
 GET     /catalogue                  controllers.CatalogueController.doGrid
 
 GET     /ManageAccount              controllers.ManageAccountController.ManageAccounts
+
+
+GET         /                    controllers.HomeController.index
+POST        /                    controllers.LoginController.validateLogin
+GET         /catalogue           controllers.CatalogueController.doGrid
 
 
 
