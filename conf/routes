@@ -1,7 +1,8 @@
 GET         /                    controllers.HomeController.index
+
 GET         /catalogue           controllers.CatalogueController.doGrid
 
-GET         /viewproduct         controllers.ProductViewController.viewProoduct
+GET         /view-product        controllers.ProductViewController.viewProduct(pid: Int)
 
 POST        /login               controllers.LoginController.validateLogin
 GET         /login               controllers.LoginController.login
@@ -13,8 +14,10 @@ GET         /assets/*file        controllers.Assets.versioned(path="/public", fi
 
 GET         /aboutContact        controllers.AboutContactController.aboutAndContact
 
-POST        /payment             controllers.PaymentController.validatePayment
+POST        /payment             controllers.PaymentController.registerPayment
 GET         /payment             controllers.PaymentController.payment
 
-GET         /checkout            controllers.CheckoutBasketController.checkoutBasket
+GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
+
+
 
