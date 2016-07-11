@@ -1,33 +1,27 @@
 package models
 
 import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
-/**
-  * Created by Administrator on 07/07/2016.
-  */
-case class Login(lid: Int, name: String, pass: String) {}
+case class Login(lid: String, name: String, pass: String, email: String) {}
 
 object Login {
 
-  var list = new ArrayBuffer[Login]
+  // dummy data
+  private var list = ArrayBuffer[Login](
+    Login("101", "dave", "1234", ""),
+    Login("102", "betty", "1235", ""),
+    Login("103", "bob", "pass", "bob@bob.com")
+  )
 
-  def generate(): Unit = {
-    this.add(Login(101, "Dave", "1234"))
-    this.add(Login(102, "Betty", "1235"))
-    this.add(Login(103, "Bob", "1236"))
+  def createUser(name: String, password: String, email: String): Boolean = {
+    if (findLogin(email).isEmpty) {
+      list += Login(Random.nextString(10), name, password, email)
+      true
+    } else {
+      false
+    }
   }
 
-  def add(login: Login): Unit = {
-    list += login
-  }
-
-  /*  This function returns an Option{Login}.  To access elements within the object call;
-          <your Login List>.findLogin( name:String ).get.<YOUR VARIABLE>
-   */
-  def findLogin(name: String) = list.find(_.name == name)
-
-  def printLogin(login: Login): Unit = {
-
-  }
-
+  def findLogin(email: String) = list.find(_.email == email.toLowerCase)
 }
