@@ -19,6 +19,6 @@ GET         /payment             controllers.PaymentController.index
 GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
 
 
-
+GET         /checkout            controllers.CheckoutBasketController.checkoutBasket
 
 
