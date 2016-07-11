@@ -13,7 +13,8 @@ GET         /assets/*file        controllers.Assets.versioned(path="/public", fi
 
 GET         /aboutContact        controllers.AboutContactController.aboutAndContact
 
-GET         /payment             controllers.PaymentController.index
+POST        /payment             controllers.PaymentController.validatePayment
+GET         /payment             controllers.PaymentController.payment
 
 GET         /checkout            controllers.CheckoutBasketController.checkoutBasket
 
