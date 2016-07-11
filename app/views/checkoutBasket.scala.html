@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html lang="en">
 
 
@@ -24,12 +23,10 @@
 
 
 
-
-
 <table style="width:80%;float:left">
     <th style="width:25.5%;text-align:left;font-size:200%;padding:5px;background-color:white;">Item</th>
     <th style="width:46.1%;text-align:left;font-size:200%;padding:5px;background-color:white;">Quantity
-        <button type="button" onclick="alert('Basket was updated lol')">Update basket</button>
+        <button type="button" onclick=location.reload();>Update basket</button>
     </th>
     <th style="width:2;text-align:left;font-size:200%;padding:5px;background-color:white;">Price</th>
 </table>
@@ -51,7 +48,7 @@
         <td style="width:46.1%;padding:5px;background-color:white;">
             <form>
                 <br>
-                <input type="number" name="quantity"><br>
+                <input type="number" value="1" min="0" max="99" name="quantity"><br>
 
             </form>
         </td>
@@ -73,7 +70,7 @@
             <td style="width:46.1%;padding:5px;background-color:white;">
                 <form>
                     <br>
-                    <input type="number" name="quantity"><br>
+                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
 
                 </form>
             </td>
@@ -95,7 +92,7 @@
             <td style="width:46.1%;padding:5px;background-color:white;">
                 <form>
                     <br>
-                    <input type="number" name="quantity"><br>
+                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
 
                 </form>
             </td>
@@ -117,7 +114,7 @@
             <td style="width:46.1%;padding:5px;background-color:white;">
                 <form>
                     <br>
-                    <input type="number" name="quantity"><br>
+                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
 
                 </form>
             </td>
@@ -139,7 +136,7 @@
             <td style="width:46.1%;padding:5px;background-color:white;">
                 <form>
                     <br>
-                    <input type="number" name="quantity"><br>
+                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
 
                 </form>
             </td>
@@ -161,10 +158,11 @@
             <td style="width:46.1%;padding:5px;background-color:white;">
                 <form>
                     <br>
-                    <input type="number" name="quantity"><br>
+                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
 
                 </form>
             </td>
+
             <td style="width:5;padding:5px;background-color:white;">
                 <form>
                     <br>
@@ -207,6 +205,7 @@
 
 
 
+
 <table style="width:20%;padding:14px;background-color:white;">
 
     <td>Total: </td>
@@ -215,10 +214,29 @@
 
 <table style="width:20%;padding:14px;background-color:white;">
 
-    <td><button type="button" onclick="alert('Get rekt')">Checkout</button></td>
+    <td><form action="http://wish.org/~/media/100-000/Content/Cena%20500/cena200x299.ashx?h=299&w=200&la=en" method="get">
+        <button>Checkout</button>
+    </form></td>
 
 </table>
 
+
+
+<img src="https://lh5.googleusercontent.com/-T5V_ucVXmXU/AAAAAAAAAAI/AAAAAAAAABc/O9yq4A6PKbA/photo.jpg" alt="My Image" height="264" width="291">
+
+
+
+<canvas id="myCanvas" width="578" height="400"></canvas>
+<script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var imageObj = new Image();
+
+      imageObj.onload = function() {
+        context.drawImage(imageObj, 69, 50);
+      };
+      imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
+    </script>
 
 
 
@@ -230,6 +248,7 @@
 </tail>
 
 </html>
+
 
 
 

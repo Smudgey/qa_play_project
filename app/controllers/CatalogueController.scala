@@ -13,7 +13,6 @@ class CatalogueController @Inject() extends Controller {
   def doGrid = Action {
 
     Product.generate()
-    Login.generate()
     Ok(views.html.catalogue())
   }
 

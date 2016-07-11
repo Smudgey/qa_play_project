@@ -15,22 +15,20 @@
             <div class="col-md-12 col-lg-12">
                 <div class="vcenter">
                     <img src="" class="img-circle form-group" width="100" height="100">
-                    <form action="" method="post" class="form-horizontal" role="form">
-
+                    @helper.form(routes.RegisterController.createUser()) {
                         <div class="input-group form-group">
-                            <span class="input-group-addon">Username</span>
-                            <input type="text" class="form-control">
+                            <span class="input-group-addon">Full name</span>
+                            <input name="fullName" type="text" class="form-control">
                         </div>
-
 
                         <div class="input-group form-group">
                             <span class="input-group-addon">Email</span>
-                            <input type="text" class="form-control">
+                            <input name="email" type="text" class="form-control">
                         </div>
 
                         <div class="input-group form-group">
                             <span class="input-group-addon">Password</span>
-                            <input type="text" class="form-control">
+                            <input name="password" type="text" class="form-control">
                         </div>
 
                         <div class="input-group form-group">
@@ -39,21 +37,20 @@
                         </div>
 
                         <div class="form-group text-center">
-                            <input id="btnLogin" type="submit" class="btn btn-default" value="Register">
+                            <input id="btnRegister" type="submit" class="btn btn-default" value="Register">
                         </div>
 
-                    </form>
+                    }
                     <hr>
-                    <form>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="button" class="btn btn-default" value="Login">
-                            </div>
-                            <div class="form-group">
-                                <a class="label label-default">Already registered?</a>
-                            </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a href="@routes.LoginController.login()" class="btn btn-default">Login</a>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <a class="label label-default">Already registered?</a>
+                        </div>
+                    </div>
 
 
                 </div>

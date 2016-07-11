@@ -1,25 +1,76 @@
 @import _root_.models.{Login, Product}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+@main("Catalogue"){
 
-<div>
-    @for(p <- Product.list) {
-        <img src = "http://thehomeofgnome.co.uk/wp-content/uploads/2016/03/Naughty-Dancing-Gnome-180x300.jpg"/>
-        <h2>@p.name</h2>
-        <h3>£@p.price</h3>
-        <p>@p.description</p>
-        <p>We have @p.stock in stock.</p>
-    }
+<div class="container">
+    <div class="well well-sm">
+        <strong>Category Title</strong>
+        <div class="btn-group">
+            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                class="glyphicon glyphicon-th"></span>Grid</a>
+        </div>
+    </div>
 
+    <div class ="sidebar-wrapper">
+
+        <ul class="sidebar-nav">
+            <li class="sidebar-first"><h4 class="sidebar-brand">View By</br> Category</h4></li>
+            <li>
+                <a class="sidebar-brand" href='#'>
+                    Big Gnomes&nbsp;<span>(0)</span>
+                </a>
+            </li>
+            <li>
+                <a class="sidebar-brand" href='#'>
+                    Small Gnomes&nbsp; <span>(0)</span>
+                </a>
+            </li>
+            <li>
+                <a class="sidebar-brand" href='#'>
+                    Garden Accessories&nbsp; <span>(0)</span>
+                </a>
+            </li>
+            <li>
+                <a class="sidebar-brand" href='#'>
+                    Sexy Gnomeware&nbsp; <span>(0)</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div id="products" class="row list-group">
+        @for(p <- Product.list) {
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail">
+                    <img class="group list-group-image" src="http://notyourgrandmasgardengnomes.com/wp-content/uploads/2015/05/naughty-gnomes-610x343.jpg" alt="" />
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">
+                            @p.name</h4>
+                        <p class="group inner list-group-item-text">
+                            @p.description</p>
+                        <div class="row">
+                            <div class="col-xs-20 col-md-6">
+                                <p class="lead">
+                                    £@p.price</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <a class="btn btn-success" href=" ">Add to basket</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
 </div>
+
 
 
 
 </body>
 </html>
+}
