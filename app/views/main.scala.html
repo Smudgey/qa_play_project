@@ -83,8 +83,26 @@
                             </ul>
                         </li>
                     </ul>
-                    <li role="presentation" align="right" style="border-bottom: -20px"><a href="@routes.LoginController.login()">Login</a>
-                        | <a href="@routes.RegisterController.register()">Sign up</a></li>
+                    <div class="dropdown" align="right">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="border-bottom -20px">
+                            Log in
+                            <span class="caret"></span>
+                        </button>
+                        <div class="dropdown-menu pull-right" style="padding: 12px; background: #eee">
+                            <form class="form" id="formLogin">
+                                <div class="col-md-12" align="middle">
+                                    <input id="username" type="text" class="form-control input-group-lg reg_name" placeholder="Username or Email"><br>
+                                    <input id="password" type="password" class="form-control input-group-lg reg_name" placeholder="Password"><br>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default">Login</a>
+                                        <a href="register" class="btn btn-default">Register</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--<li role="presentation" align="right" style="border-bottom: -20px"><a href="login">Login</a>-->
+                        <!--| <a href="register">Sign up</a></li>-->
                 </div> <!--/.nav-collapse -->
             </div>
         </nav>
@@ -115,7 +133,7 @@
 
 
             <div class="page-header">
-                <h1>Sub-heading...</h1>
+                <!--<h1>Sub-heading...</h1>-->
                 @content
             </div>
             <div class="container text-center">
@@ -140,5 +158,5 @@
 
     <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
     <script src="@routes.Assets.versioned("javascripts/bootstrap.js")"></script>
-    <script src="@routes.Assets.versioned("stylesheets/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
 </html>

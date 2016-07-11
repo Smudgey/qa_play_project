@@ -11,17 +11,15 @@ import play.api.mvc._
 @Singleton
 class CheckoutBasketController @Inject() extends Controller {
 
+  object Application extends Controller {
+
+    
+
+    def checkoutBasket = Action {
+      Ok(views.html.checkoutBasket())
+    }
 
 
-
-
-
-
-
-  def checkoutBasket = Action {
-    Ok(views.html.checkoutBasket())
   }
-
-
 
 }
