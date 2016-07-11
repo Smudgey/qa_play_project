@@ -1,7 +1,9 @@
 GET         /                    controllers.HomeController.index
 GET         /catalogue           controllers.CatalogueController.doGrid
 
-GET         /viewproduct         controllers.ProductViewController.viewProoduct
+
+# An example controller showing a sample home page
+GET         /view-product        controllers.ProductViewController.viewProduct(pid: Int)
 
 POST        /login               controllers.LoginController.validateLogin
 GET         /login               controllers.LoginController.login
