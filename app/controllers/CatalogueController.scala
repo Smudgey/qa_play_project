@@ -12,7 +12,7 @@ class CatalogueController @Inject() extends Controller {
 
   def doGrid = Action {
 
-    Product.generate()
+    Product.list
     Ok(views.html.catalogue())
   }
 
