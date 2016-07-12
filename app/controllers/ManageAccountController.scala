@@ -38,26 +38,50 @@ class ManageAccountController @Inject extends Controller {
 
   def updateAccount() = Action {
     implicit request => {
-      if (manageAccountForm.bindFromRequest().data("eMail").length != 0 ||
-        manageAccountForm.bindFromRequest().data("telephoneNumber").length != 0 ||
-        manageAccountForm.bindFromRequest().data("fName").length != 0 ||
-        manageAccountForm.bindFromRequest().data("lName").length != 0 ||
-        manageAccountForm.bindFromRequest().data("addrLine1").length != 0 ||
-        manageAccountForm.bindFromRequest().data("addrLine2").length != 0 ||
-        manageAccountForm.bindFromRequest().data("city").length != 0 ||
-        manageAccountForm.bindFromRequest().data("county").length != 0 ||
-        manageAccountForm.bindFromRequest().data("postCode").length != 0) {
+      if (manageAccountForm.bindFromRequest().data("eMail").length != 0) {
         // def findCustomerEmail(eMail: String): ArrayBuffer[CustomerDetails]
         if(CustomerDetails.findCustomerEmail(manageAccountForm.bindFromRequest().data("eMail").toLowerCase).isEmpty) {
           println(manageAccountForm.bindFromRequest().data("eMail"))
-          println("Scrub")
+          println("Account not found")
         } else {
           println(manageAccountForm.bindFromRequest().data("eMail"))
           println("Email found")
-        }
 
+          var temp:CustomerDetails = CustomerDetails.findCustomerEmail(manageAccountForm.bindFromRequest().data("eMail")).head
+          if(manageAccountForm.bindFromRequest().data("telephoneNumber").length != 0) {
+            //add new telephone number
+            temp = temp.copy(phoneNumber = manageAccountForm.bindFromRequest().data("telephoneNumber"))
+
+          }
+          if(manageAccountForm.bindFromRequest().data("fName").length != 0) {
+            temp = temp.copy(fName = manageAccountForm.bindFromRequest().data("fName"))
+          }
+          if(manageAccountForm.bindFromRequest().data("lName").length != 0){
+            temp = temp.copy(lName = manageAccountForm.bindFromRequest().data("lName"))
+          }
+
+          if(manageAccountForm.bindFromRequest().data("addrLine1").length != 0){
+            temp = temp.copy(addressLine1 = manageAccountForm.bindFromRequest().data("addrLine1"))
+          }
+
+          if(manageAccountForm.bindFromRequest().data("addrLine2").length != 0){
+            temp = temp.copy(addressLine2 = manageAccountForm.bindFromRequest().data("addrLine2"))
+          }
+
+          if(manageAccountForm.bindFromRequest().data("city").length != 0){
+            temp = temp.copy(city = manageAccountForm.bindFromRequest().data("city"))
+          }
+
+          if(manageAccountForm.bindFromRequest().data("county").length != 0){
+            temp = temp.copy(county = manageAccountForm.bindFromRequest().data("county"))
+          }
+
+          if(manageAccountForm.bindFromRequest().data("postCode").length != 0){
+            temp = temp.copy(postCode = manageAccountForm.bindFromRequest().data("postCode"))
+          }
+          CustomerDetails.updateAccount(temp)
+        }
       }
-      println("hello")
       Redirect(routes.ManageAccountController.ManageAccounts())
     }
   }
