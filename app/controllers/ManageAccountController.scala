@@ -7,7 +7,7 @@ import play.api.mvc
 import play.api.mvc.Controller
 import play.api.data._
 import play.api.data.Forms._
-import models.CustomerDetails
+import models.{CustomerDetails, LoginSession}
 
 
 /**
@@ -32,7 +32,12 @@ class ManageAccountController @Inject extends Controller {
   )
 
   def ManageAccounts() = Action {
-    Ok(views.html.ManageAccount(manageAccountForm))
+    if(LoginSession.getCurrentUser != "") {
+      Ok(views.html.ManageAccount(manageAccountForm))
+    }
+    else {
+      Redirect(routes.LoginController.login())
+    }
 
   }
 
