@@ -9,7 +9,7 @@ import play.api.mvc._
   */
 @Singleton
 class PaymentConfirmedController @Inject() extends Controller {
-  def index = Action {
-    Ok(views.html.paymentConfirmed())
+  def paymentProcessed(orderID: String) = Action {
+    Ok(views.html.paymentConfirmed(orderID))
   }
 }

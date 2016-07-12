@@ -14,10 +14,7 @@ GET         /assets/*file        controllers.Assets.versioned(path="/public", fi
 
 GET         /aboutContact        controllers.AboutContactController.aboutAndContact
 
-POST        /payment             controllers.PaymentController.registerPayment
+POST        /payment             controllers.PaymentController.registerPayment(orderID: String)
 GET         /payment             controllers.PaymentController.payment
 
-GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
-
-
-
+GET         /paymentConfirmed    controllers.PaymentConfirmedController.paymentProcessed(orderID: String)
