@@ -38,7 +38,6 @@ object OrderLine {
     addOrIncrease(basket, oli)
   }
 
-
   def findOrderLine(pid:Int) = basket.find(_.prod.pid == pid)
 }
 
