@@ -15,29 +15,34 @@
             <div class="col-md-12 col-lg-12">
                 <div class="vcenter">
                     <img src="" class="img-circle form-group" width="100" height="100">
-                    @helper.form(routes.RegisterController.createUser()) {
+                    @helper.form(routes.RegisterController.createCard()) {
                         <div class="input-group form-group">
-                            <span class="input-group-addon">Full name</span>
-                            <input name="fullName" type="text" class="form-control">
+                            <span class="input-group-addon">Cardholder name</span>
+                            <input name="cardholder" type="text" class="form-control">
                         </div>
 
                         <div class="input-group form-group">
-                            <span class="input-group-addon">Email</span>
-                            <input name="email" type="text" class="form-control">
+                            <span class="input-group-addon">Card number</span>
+                            <input name="cardNumber" type="text" class="form-control">
                         </div>
 
                         <div class="input-group form-group">
-                            <span class="input-group-addon">Password</span>
-                            <input name="password" type="text" class="form-control">
+                            <span class="input-group-addon">CV</span>
+                            <input name="cv" type="text" class="form-control">
                         </div>
 
                         <div class="input-group form-group">
-                            <span class="input-group-addon">Confirm Password</span>
-                            <input type="text" class="form-control">
+                            <span class="input-group-addon">Expiration month</span>
+                            <input name="expirationMonth" type="text" class="form-control">
+                        </div>
+
+                        <div class="input-group form-group">
+                            <span class="input-group-addon">Expiration year</span>
+                            <input name="expirationYear" type="text" class="form-control">
                         </div>
 
                         <div class="form-group text-center">
-                            <input id="btnRegister" type="submit" class="btn btn-default" value="Register">
+                            <input id="btnRegister" type="submit" class="btn btn-default" value="Complete">
                         </div>
 
                     }

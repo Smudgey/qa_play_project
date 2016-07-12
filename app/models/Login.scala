@@ -1,11 +1,15 @@
 package models
 
+import java.lang.ProcessBuilder.Redirect
+
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 case class Login(lid: String, name: String, pass: String, email: String) {}
 
 object Login {
+
+  private var loggedIn = false
 
   // dummy data
   private var list = ArrayBuffer[Login](
@@ -16,7 +20,9 @@ object Login {
 
   def createUser(name: String, password: String, email: String): Boolean = {
     if (findLogin(email).isEmpty) {
-      list += Login(Random.nextString(10), name, password, email)
+      val randomUID = Random.nextString(10)
+      LoginSession.setUser(randomUID)
+      list += Login(randomUID, name, password, email)
       true
     } else {
       false
@@ -24,4 +30,17 @@ object Login {
   }
 
   def findLogin(email: String) = list.find(_.email == email.toLowerCase)
+
+  def toggleLogin(): Unit = {
+    if (loggedIn) {
+      loggedIn = false
+      // TODO logout message
+    }  else {
+      loggedIn = true
+    }
+  }
+
+  def getStatus() = {
+    loggedIn
+  }
 }

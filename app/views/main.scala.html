@@ -24,7 +24,7 @@
             <!-- Custom styles for this template -->
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/catalogue.css")"/>
-        <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
+
     </head>
 
     <body role="document">
@@ -39,13 +39,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="@routes.Assets.versioned("images/logo2.png")" alt="logo2" width="150" height="38"></a>
+                    <a class="navbar-brand" href="@routes.HomeController.index"><img src="@routes.Assets.versioned("images/logo2.png")" alt="logo2" width="150" height="38"></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="localhost:9000">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li class="active"><a href="@routes.HomeController.index">Home</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gnomes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -83,25 +81,43 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="dropdown" align="right">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="border-bottom -20px">
-                            Log in
-                            <span class="caret"></span>
-                        </button>
-                        <div class="dropdown-menu pull-right" style="padding: 12px; background: #eee">
-                            <form class="form" id="formLogin">
-                                <div class="col-md-12" align="middle">
-                                    <input id="username" type="text" class="form-control input-group-lg reg_name" placeholder="Username or Email"><br>
-                                    <input id="password" type="password" class="form-control input-group-lg reg_name" placeholder="Password"><br>
-                                    <div class="btn-group">
-                                        <a class="btn btn-default">Login</a>
-                                        <a href="register" class="btn btn-default">Register</a>
+                    <div class="pull-right">
+
+                    @if(models.Login.getStatus()) {
+                        <div>
+                            <a href="@models.Login.toggleLogin" class="btn btn-default">Logout</a>
+                        </div>
+                    } else {
+                        <div class="dropdownLogin">
+                            <button class="btn btn-default" data-toggle="dropdown">Log in</button>
+                            <div class="dropdown-menu pull-right" style="padding: 12px;
+                                background: #eee">
+                                <div class="dropdownLogin text-center" style="max-width: 200px">
+                                @helper.form(routes.LoginController.validateLogin()) {
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="input-group form-group">
+                                                <input name="email" type="text" class="form-control" placeholder="Email">
+                                            </div>
+                                            <div class="input-group form-group">
+                                                <input name="password" type="password" class="form-control" placeholder="Password">
+                                                @*TODO password reset page*@
+                                                <a href="" class="label label-default">Forgot password?</a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn btn-default" type="submit">Login</button>
+                                                <a href="@routes.RegisterController.register" class="btn btn-default">
+                                                    Register</a>
+                                            </div>
+                                        </div>
                                     </div>
+                                }
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                    <!--<li role="presentation" align="right" style="border-bottom: -20px"><a href="login">Login</a>-->
+                    }
+                        <!--<li role="presentation" align="right" style="border-bottom: -20px"><a href="login">Login</a>-->
                         <!--| <a href="register">Sign up</a></li>-->
                 </div> <!--/.nav-collapse -->
             </div>
@@ -148,7 +164,7 @@
                             <li><a href="/">© 2016 NBGnomes</a></li>
                             <li><a href="#">Terms of Service</a></li>
                             <li><a href="#">Privacy</a></li>
-                            <li><a href="#">About us</a></li>
+                            <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -157,6 +173,7 @@
     </body>
 
     <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/bootstrap.js")"></script>
     <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/slider.js")"></script>
 </html>
