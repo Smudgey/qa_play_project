@@ -39,8 +39,9 @@ object OrderLine {
     oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
 
       def addOrIncrease(bsk: ArrayBuffer[OrderLine], oli2: OrderLine): Unit ={
-        if( bsk.isEmpty ){ basket += oli2}
-        else if(bsk.head.prod.pid == oli2.prod.pid) {
+        if( bsk.isEmpty ){
+          basket += oli2
+        } else if(bsk.head.prod.pid == oli2.prod.pid) {
           bsk.head.quantity       += oli2.quantity
           bsk.head.pwareQuantity  += oli2.pwareQuantity
       } else {

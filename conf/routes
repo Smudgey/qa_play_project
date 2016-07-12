@@ -1,8 +1,6 @@
 GET         /                        controllers.HomeController.index
 GET         /catalogue               controllers.CatalogueController.show
 
-
-# An example controller showing a sample home page
 GET         /view-product            controllers.ProductViewController.viewProduct(pid: Int)
 
 POST        /login                   controllers.LoginController.validateLogin
@@ -15,12 +13,13 @@ POST        /register/bank           controllers.RegisterController.createAddres
 GET         /register/bank           controllers.RegisterController.bank
 POST        /                        controllers.RegisterController.createCard
 
+POST        /payment                 controllers.PaymentController.registerPayment
+GET         /payment                 controllers.PaymentController.payment
+POST        /payment/confirmed       controllers.PaymentController.paymentProcessed(orderID: String)
+
 GET         /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)
 
 GET         /aboutContact            controllers.AboutContactController.aboutAndContact
-
-GET         /payment                 controllers.PaymentController.index
-GET         /paymentConfirmed        controllers.PaymentConfirmedController.index
 
 GET         /basket                  controllers.BasketController.add(pid: Int)
 GET         /basket/0                controllers.BasketController.clear()
