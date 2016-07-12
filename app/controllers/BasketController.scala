@@ -17,13 +17,14 @@ class BasketController @Inject() extends Controller {
     val p = Product.findProduct(pid)
 
     OrderLine.addToBasket(OrderLine(p.get))
-
-    p.map {
-      product => Ok(views.html.basket(p.get))
-    }.getOrElse(NotFound)
+    Ok(views.html.basket())
+//    p.map {
+//      product =>
+//    }.getOrElse(NotFound)
   }
 
-  def show: Unit = {
-    Ok(views.html....)
+  def clear = Action {
+    OrderLine.clear()
+    Ok(views.html.basket())
   }
 }
