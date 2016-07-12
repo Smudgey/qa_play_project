@@ -14,11 +14,23 @@ object OrderLine {
 
   var basket = new ArrayBuffer[OrderLine]
 
-  //TODO increment the stock when the orderline is cleared
-  //TODO increment the stock when the orderline is cleared
-  def clear(): Unit = {
+  def totalPrice(bsk: ArrayBuffer[OrderLine], total: Double = 0): Double = {
 
-   // for
+    var newTotal = total
+    if(bsk.isEmpty){newTotal}
+    else {
+      newTotal += bsk.head.prod.price * bsk.head.quantity
+      totalPrice(bsk.tail, newTotal)
+    }
+    BigDecimal(newTotal).setScale(2, BigDecimal.RoundingMode.UP).toDouble
+  }
+
+  def clear(): Unit = {
+    for(ol <- basket) {
+      val product = Product.findProduct(ol.prod.pid).get
+      product.stock       += ol.quantity
+      product.pwareStock  += ol.pwareQuantity
+    }
     basket.clear()
   }
 
