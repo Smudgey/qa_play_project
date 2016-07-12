@@ -24,13 +24,13 @@ object CustomerDetails {
   }
 
   def findCustomerEmail(eMail: String): ArrayBuffer[CustomerDetails] ={
-    var returnList = new ArrayBuffer[CustomerDetails] = ArrayBuffer.empty
+    var returnList:ArrayBuffer[CustomerDetails] = ArrayBuffer.empty
     def looklist (list: ArrayBuffer[CustomerDetails]): ArrayBuffer[CustomerDetails] ={
       if (list.isEmpty){
         returnList
       }
       else if (list.head.eMail == eMail){
-        returnList :+ list.head
+        returnList += list.head
       }
       else{
         looklist(list.tail)

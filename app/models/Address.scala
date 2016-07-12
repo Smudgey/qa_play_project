@@ -1,14 +1,43 @@
 package models
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator
+import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by Administrator on 11/07/2016.
+  * this class will represent user address
+  *
+  * @param uid         User ID
+  * @param houseNumber House number
+  * @param streetName  Street name
+  * @param town        town
+  * @param city        City
+  * @param county      County
+  * @param postcode    Postcode
   */
-trait Address {
-  var addressLine1: String
-  var addressLine2: String
-  var city: String
-  var county: String
-  var postCode: String
+case class Address(uid: String, houseNumber: String, streetName: String, town: String, city: String, county: String, postcode: String) {}
+
+object Address {
+  private var addressList = ArrayBuffer[Address]()
+
+
+  /**
+    * this function will add customer address to storage
+    *
+    * @param uid         User ID
+    * @param houseNumber House number
+    * @param streetName  Street name
+    * @param town        town
+    * @param city        City
+    * @param county      County
+    * @param postcode    Postcode
+    */
+  def addAddress(uid: String, houseNumber: String, streetName: String, town: String, city: String, county: String, postcode: String): Unit = {
+    addressList += Address(uid, houseNumber, streetName, town, city, county, postcode)
+  }
+
+  /**
+    * this function will return customer address
+    * @param uid User ID
+    * @return Address object
+    */
+  def getAddress(uid: String) = addressList.find(_.uid == uid)
 }
