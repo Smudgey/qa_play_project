@@ -1,17 +1,64 @@
 @*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+* This template takes a single argument, a String containing a
+* message to display.
+*@
+@(message: String)(form: Form[Login])
+    @*
+    * Call the `main` template with two arguments. The first
+    * argument is a `String` with the title of the page, the second
+    * argument is an `Html` object containing the body of the page.
+    *@
+    @main("Home") {
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Home") {
+        @message
 
-    @message
-    <p>This is the home page</p>
 
-}
+        <style>
+        .later {
+            -webkit-clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
+            clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
+        }
+
+        div.border > div img {
+            border: solid #fff 1px;
+        }
+
+        #sliderImages > img {
+            display: none;
+        }
+
+        </style>
+
+
+        <div id="homeSlider">
+
+            <div id="currentImage" class="col-md-12 col-lg-12">
+                <img src="">
+            </div>
+
+            <div id="sliderImages">
+                <img src="http://placehold.it/1200x700/ffffff">
+                <img src="http://placehold.it/1200x700">
+                <img src="http://placehold.it/1200x700/000000">
+            </div>
+        </div>
+
+        <div class="col-md-12 col-lg-12 border">
+            <div class="row inline-block">
+                <div class="col-md-6 col-lg-6">
+                    <img src="http://placehold.it/600x300">
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <img src="http://placehold.it/600x300">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <img src="http://placehold.it/600x300">
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <img src="http://placehold.it/600x300">
+                </div>
+            </div>
+        </div>
+    }
