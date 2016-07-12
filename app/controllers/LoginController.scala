@@ -1,7 +1,7 @@
 package controllers
 
 import com.google.inject.Inject
-import models.Login
+import models.{Login, LoginSession}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, nonEmptyText, number, text}
 import play.api.mvc.{Action, Controller}
@@ -48,6 +48,7 @@ class LoginController @Inject extends Controller {
         if (user.pass == loginForm.bindFromRequest().data("password")) {
           println("password is correct")
           Login.toggleLogin()
+          LoginSession.setUser(loginForm.bindFromRequest().data("email"))
           Redirect(routes.HomeController.index())
 
         } else {
