@@ -43,7 +43,7 @@
         <div class="col-sm-2 col-sm-4 col-md-4"> <!-- style="margin-top:15%" -->
                 <p>We have <strong><em>@p.stock</em></strong> in stock.</p>
                 <p>£@p.price</p>
-                <a class="btn btn-success" href=" ">Add to basket</a>
+                <a class="btn btn-success" href="@controllers.routes.BasketController.add(p.pid)">Add to basket</a>
         </div>
     </div>
 
