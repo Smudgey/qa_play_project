@@ -1,25 +1,29 @@
-GET         /                    controllers.HomeController.index
-POST        /                    controllers.LoginController.validateLogin
-GET         /catalogue           controllers.CatalogueController.doGrid
+GET         /                        controllers.HomeController.index
+GET         /catalogue               controllers.CatalogueController.show
 
 
 # An example controller showing a sample home page
-GET         /view-product        controllers.ProductViewController.viewProduct(pid: Int)
+GET         /view-product            controllers.ProductViewController.viewProduct(pid: Int)
 
-POST        /login               controllers.LoginController.validateLogin
-GET         /login               controllers.LoginController.login
+POST        /login                   controllers.LoginController.validateLogin
+GET         /login                   controllers.LoginController.login
 
-POST        /register            controllers.RegisterController.createUser
-GET         /register            controllers.RegisterController.register
+GET         /register                controllers.RegisterController.register
+POST        /register/address        controllers.RegisterController.createUser
+GET         /register/address        controllers.RegisterController.address
+POST        /register/bank           controllers.RegisterController.createAddress
+GET         /register/bank           controllers.RegisterController.bank
+POST        /                        controllers.RegisterController.createCard
 
-GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)
 
-GET         /aboutContact        controllers.AboutContactController.aboutAndContact
+GET         /aboutContact            controllers.AboutContactController.aboutAndContact
 
-GET         /payment             controllers.PaymentController.index
-GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
+GET         /payment                 controllers.PaymentController.index
+GET         /paymentConfirmed        controllers.PaymentConfirmedController.index
 
+GET         /basket                  controllers.BasketController.add(pid: Int)
+GET         /basket/0                controllers.BasketController.clear()
 
-GET         /checkout            controllers.CheckoutBasketController.checkoutBasket
-
+GET         /checkout                controllers.CheckoutBasketController.checkoutBasket
 
