@@ -1,10 +1,12 @@
 package controllers
 
 import com.google.inject.Inject
-import models.Login
+import models._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
+
+import scala.util.Random
 
 
 /**
@@ -13,7 +15,7 @@ import play.api.mvc.{Action, Controller}
 class RegisterController @Inject extends Controller {
 
   // this will create register form
-  private val registerForm: Form[Login] = Form(
+  private val userForm: Form[Login] = Form(
     mapping(
       "" -> text,
       "fullName" -> nonEmptyText,
@@ -23,32 +25,111 @@ class RegisterController @Inject extends Controller {
     (Login.apply)
     (Login.unapply)
   )
+  // this will create address form
+  private val addressForm: Form[Address] = Form(
+    mapping(
+      "" -> text,
+      "houseNumber" -> nonEmptyText,
+      "streetName" -> nonEmptyText,
+      "town" -> nonEmptyText,
+      "city" -> nonEmptyText,
+      "county" -> nonEmptyText,
+      "postcode" -> nonEmptyText
+    )
+    (Address.apply)
+    (Address.unapply)
+  )
+  // this will create card detail form
+  private val cardForm: Form[CardDetails] = Form(
+    mapping(
+      "" -> text,
+      "cardholder" -> nonEmptyText,
+      "cardNumber" -> nonEmptyText,
+      "cv" -> nonEmptyText,
+      "expirationMonth" -> nonEmptyText,
+      "expirationYear" -> nonEmptyText
+    )
+    (CardDetails.apply)
+    (CardDetails.unapply)
+  )
 
   /**
-    * this function will create the register page
+    * this function will display login part of register form
     */
   def register = Action {
-    Ok(views.html.register())
+    Ok(views.html.registerStart())
   }
 
-  //TODO create error messages
   /**
-    * This function will create user based on user input
+    * this function will display address part of register form
+    */
+  def address = Action {
+    Ok(views.html.registerAddress())
+  }
+
+  /**
+    * this function will display card detail part of register form
+    */
+  def bank = Action {
+    Ok(views.html.registerBank())
+  }
+
+
+  //TODO create error messages
+
+  /**
+    * This function will create Login object for the customer
     */
   def createUser() = Action {
     implicit request => {
-      if (Login.findLogin(registerForm.bindFromRequest().data("email")).isEmpty) {
-        if (Login.createUser(
-          registerForm.bindFromRequest().data("fullName"),
-          registerForm.bindFromRequest().data("password"),
-          registerForm.bindFromRequest().data("email"))) {
-          Redirect(routes.HomeController.index())
-        } else {
-          Redirect(routes.RegisterController.register())
-        }
+      if (Login.findLogin(userForm.bindFromRequest().data("email")).isEmpty) {
+        Login.createUser(userForm.bindFromRequest().data("fullName"), userForm.bindFromRequest().data("password"), userForm.bindFromRequest().data("email"))
+        Redirect(routes.RegisterController.address())
       } else {
         Redirect(routes.RegisterController.register())
       }
     }
   }
+
+  /**
+    * this function will create Address object for customer
+    *
+    * @return
+    */
+  def createAddress() = Action {
+    implicit request => {
+
+      Address.addAddress(
+        LoginSession.getCurrentUser,
+        addressForm.bindFromRequest().data("houseNumber"),
+        addressForm.bindFromRequest().data("streetName"),
+        addressForm.bindFromRequest().data("town"),
+        addressForm.bindFromRequest().data("city"),
+        addressForm.bindFromRequest().data("county"),
+        addressForm.bindFromRequest().data("postcode"))
+      Redirect(routes.RegisterController.bank())
+
+    }
+  }
+
+  /**
+    * this function will create CardDetails object for the customer
+    *
+    * @return
+    */
+  def createCard() = Action {
+    implicit request => {
+      CardDetails.addCard(
+        LoginSession.getCurrentUser,
+        cardForm.bindFromRequest().data("cardholder"),
+        cardForm.bindFromRequest().data("cardNumber"),
+        cardForm.bindFromRequest().data("cv"),
+        cardForm.bindFromRequest().data("expirationMonth"),
+        cardForm.bindFromRequest().data("expirationYear")
+      )
+      Login.toggleLogin()
+      Redirect(routes.HomeController.index())
+    }
+  }
+
 }
