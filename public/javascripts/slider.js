@@ -4,5 +4,5 @@ $('#currentImage :first-child').attr('src', $('#sliderImages :first-child').attr
 
 setInterval(function () {
     $('#sliderImages').append($('#sliderImages :first-child'));
-    $('#currentImage :first-child').attr('src', $('#sliderImages :first-child').attr('src')).fadeOut(1800).fadeIn(1500);
-}, 3000);
+    $('#currentImage :first-child').attr('src', $('#sliderImages :first-child').attr('src')).fadeOut(0).fadeIn(0);
+}, 5000);
