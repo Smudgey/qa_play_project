@@ -25,10 +25,12 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
     stock += quantity
     pwareStock += pwareQuantity
   }
+
+  def hasXAvailable(x: Int): Boolean ={
+   this.stock >= x
+  }
 }
 
-
-//
 object Product {
 
   var list = new ArrayBuffer[Product]

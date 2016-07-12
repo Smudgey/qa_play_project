@@ -13,6 +13,7 @@ case class OrderLine(prod: Product, var quantity: Int = 1, var pwareQuantity: In
 object OrderLine {
 
   var basket = new ArrayBuffer[OrderLine]
+  var size = basket.size
 
   def totalPrice(bsk: ArrayBuffer[OrderLine], total: Double = 0): Double = {
 
@@ -32,11 +33,13 @@ object OrderLine {
       product.pwareStock  += ol.pwareQuantity
     }
     basket.clear()
+    size = basket.size
   }
 
   def addToBasket(oli: OrderLine) {
     //Do product stock validation here
     oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
+    size += oli.quantity + oli.pwareQuantity
 
       def addOrIncrease(bsk: ArrayBuffer[OrderLine], oli2: OrderLine): Unit ={
         if( bsk.isEmpty ){
