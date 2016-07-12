@@ -15,8 +15,8 @@ class BasketController @Inject() extends Controller {
   def add(pid: Int) =  Action {
 
     val p = Product.findProduct(pid)
-
     OrderLine.addToBasket(OrderLine(p.get))
+
     Ok(views.html.basket())
 //    p.map {
 //      product =>

@@ -14,6 +14,12 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
     stock -= quantity
     pwareStock -= pwareQuantity
   }
+
+  def incrementStock(quantity: Int, pwareQuantity: Int): Unit ={
+    //Add stock validation here?
+    stock += quantity
+    pwareStock += pwareQuantity
+  }
 }
 
 object Product {
