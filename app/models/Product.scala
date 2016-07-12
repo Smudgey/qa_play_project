@@ -1,11 +1,20 @@
 package models
 
+import play.api.mvc.QueryStringBindable
+
 import scala.collection.mutable.ArrayBuffer
 
 /**
   * Created by Administrator on 06/07/2016.
   */
-case class Product(pid: Int, name: String, description: String, stock: Int, pwareStock: Int, price: Double) {}
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double) {
+
+  def decrementStock(quantity: Int, pwareQuantity: Int): Unit = {
+    //Add stock validation here?
+    stock -= quantity
+    pwareStock -= pwareQuantity
+  }
+}
 
 object Product {
 
@@ -13,7 +22,7 @@ object Product {
 
   def generate(): Unit = {
     list.clear()
-    this.add(Product(701, "Justin Bieber Gnome", "This is a small gnome with bad hair.", 6, 0, 99.99))
+    this.add(Product(701,"Justin Bieber Gnome", "This is a small gnome with bad hair.", 6, 0, 99.99))
     this.add(Product(702,"Sexy Gnome", "This is a large sexy gnome dressed in a bikini", 87, 58, 11.99))
     this.add(Product(703,"Red Gnome", "A small red gnome", 14, 2, 6.99))
     this.add(Product(704,"Rytis Gnome", "A funny looking gnome, angry face.", 2, 1, 5.98))
