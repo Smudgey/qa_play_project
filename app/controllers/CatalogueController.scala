@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import _root_.models.{Product, Login}
+import _root_.models.{Product}
 import play.api.mvc._
 
 /**
@@ -10,10 +10,10 @@ import play.api.mvc._
 @Singleton
 class CatalogueController @Inject() extends Controller {
 
-  def doGrid = Action {
-
-    Product.generate()
+  def show  = Action {
+    if(Product.list.isEmpty) {
+      Product.generate()
+    }
     Ok(views.html.catalogue())
   }
-
 }
