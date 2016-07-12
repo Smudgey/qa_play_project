@@ -11,7 +11,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Administrator on 06/07/2016.
   */
 
-case class Product(pid: Int, name: String, description: String, stock: Int, pwareStock: Int, var price: Double, clearance: Double, special: Double, category: CategoryAttributes.Value) {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: CategoryAttributes.Value) {
 
 
   def decrementStock(quantity: Int, pwareQuantity: Int): Unit = {
