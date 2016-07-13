@@ -27,6 +27,7 @@ object Login {
     } else {
       false
     }
+
   }
 
   def findLogin(email: String) = list.find(_.email == email.toLowerCase)
