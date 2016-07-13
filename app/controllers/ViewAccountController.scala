@@ -33,7 +33,7 @@ class ViewAccountController @Inject extends Controller {
     }
 
     else {
-      Ok(views.html.ViewAccount(viewAccountForm))
+      Redirect(routes.LoginController.login())
 
     }
 
@@ -42,4 +42,3 @@ class ViewAccountController @Inject extends Controller {
 
 
 }
-// Redirect(routes.LoginController.login())
