@@ -1,7 +1,7 @@
 GET         /                        controllers.HomeController.index
 
-POST        /ManageAccount           controllers.ManageAccountController.updateAccount
-GET         /ManageAccount           controllers.ManageAccountController.ManageAccounts
+POST        /manageAccount           controllers.ManageAccountController.updateAccount
+GET         /manageAccount           controllers.ManageAccountController.ManageAccounts
 
 
 GET         /catalogue                controllers.CatalogueController.show(query:String)
@@ -28,18 +28,8 @@ GET         /aboutContact             controllers.AboutContactController.aboutAn
 GET         /basket                   controllers.BasketController.add(pid: Int)
 GET         /basket/0                 controllers.BasketController.clear()
 
-GET         /checkout                 controllers.CheckoutBasketController.checkoutBasket
+GET         /checkout                 controllers.BasketController.checkout
 
-GET         /clothing                controllers.ClothingController.clothing
+GET         /clothing                 controllers.ClothingController.clothing
+
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
-
-
-GET         /bird                    controllers.BirdController.bird
-
-GET         /artificial              controllers.ArtificialController.artificial
-
-GET         /tool                    controllers.ToolController.tool
-
-GET         /gazebo                  controllers.GazeboController.gazebo
-
-GET         /furniture               controllers.FurnitureController.furniture
