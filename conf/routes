@@ -1,4 +1,8 @@
 GET         /                        controllers.HomeController.index
+
+POST        /ManageAccount           controllers.ManageAccountController.updateAccount
+GET         /ManageAccount           controllers.ManageAccountController.ManageAccounts
+
 GET         /catalogue               controllers.CatalogueController.show
 
 GET         /view-product            controllers.ProductViewController.viewProduct(pid: Int)
