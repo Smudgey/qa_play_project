@@ -5,6 +5,8 @@ import models.{Login, LoginSession}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, nonEmptyText, number, text}
 import play.api.mvc.{Action, Controller}
+import play.api.mvc.Cookie
+import play.api.mvc.DiscardingCookie
 
 /**
   * Created by rytis on 07/07/16.
@@ -28,7 +30,10 @@ class LoginController @Inject extends Controller {
     * @return
     */
   def login() = Action {
-    Ok(views.html.login(loginForm))
+    implicit request => {
+
+      Ok(views.html.login(request.session))
+    }
   }
 
   //TODO Error messages
@@ -47,15 +52,14 @@ class LoginController @Inject extends Controller {
         val user = Login.findLogin(loginForm.bindFromRequest().data("email")).get
         if (user.pass == loginForm.bindFromRequest().data("password")) {
           println("password is correct")
-          Login.toggleLogin()
-          LoginSession.setUser(loginForm.bindFromRequest().data("email"))
-          Redirect(routes.HomeController.index())
 
+          Ok(views.html.login.render(request.session)).withSession("connected" -> loginForm.bindFromRequest().data("email"))
+          Redirect(routes.HomeController.index())
         } else {
           println("incorrect password")
 
+          Ok("")
           Redirect(routes.LoginController.login())
-
         }
       }
     }

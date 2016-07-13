@@ -4,7 +4,8 @@
 * two arguments, a `String` for the title of the page and an `Html`
 * object to insert into the body of the page.
 *@
-@(title: String)(content: Html)
+
+@(title: String)(content: Html)(implicit session: Session)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +81,7 @@
                     </ul>
                     <div class="pull-right">
 
-                    @if(Login.getStatus()) {
+                    @if(session.get("connected")) {
                         <div>
                             <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
                             <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">Manage Account</a>
@@ -91,7 +92,7 @@
                             <div class="dropdown-menu pull-right" style="padding: 12px;
                                 background: #eee">
                                 <div class="dropdownLogin text-center" style="max-width: 200px">
-                                @helper.form(routes.LoginController.validateLogin()) {
+                                @helper.form(routes.LoginController.validateLogin) {
                                     <div class="col-md-12">
                                         <div>
                                             <div class="input-group form-group">

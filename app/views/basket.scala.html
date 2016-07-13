@@ -1,5 +1,5 @@
 
-
+@(implicit session: Session)
 @main("Basket") {
     <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket</p>
     @for(oli <- OrderLine.basket) {
