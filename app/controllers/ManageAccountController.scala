@@ -9,10 +9,6 @@ import play.api.data._
 import play.api.data.Forms._
 import models.{CustomerDetails, LoginSession}
 
-
-/**
-  * Created by Administrator on 07/07/2016.
-  */
 class ManageAccountController @Inject extends Controller {
   private val manageAccountForm: Form[CustomerDetails] = Form(
     mapping(

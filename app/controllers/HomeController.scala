@@ -19,7 +19,7 @@ class HomeController @Inject() extends Controller {
     * a path of `/`.
     */
   def index = Action {
-    Ok(views.html.index("Your new application is ready.")(new LoginController().loginForm))
+    Ok(views.html.index("")(new LoginController().loginForm))
   }
 
 }
