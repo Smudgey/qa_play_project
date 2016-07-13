@@ -1,32 +1,38 @@
 GET         /                        controllers.HomeController.index
-GET         /catalogue               controllers.CatalogueController.show
 
-GET         /view-product            controllers.ProductViewController.viewProduct(pid: Int)
+POST        /ManageAccount           controllers.ManageAccountController.updateAccount
+GET         /ManageAccount           controllers.ManageAccountController.ManageAccounts
 
-POST        /login                   controllers.LoginController.validateLogin
-GET         /login                   controllers.LoginController.login
 
-GET         /register                controllers.RegisterController.register
-POST        /register/address        controllers.RegisterController.createUser
-GET         /register/address        controllers.RegisterController.address
-POST        /register/bank           controllers.RegisterController.createAddress
-GET         /register/bank           controllers.RegisterController.bank
-POST        /                        controllers.RegisterController.createCard
+GET         /catalogue                controllers.CatalogueController.show(query:String)
+POST        /catalogue                controllers.SearchController.search
 
-POST        /payment                 controllers.PaymentController.registerPayment
-GET         /payment                 controllers.PaymentController.payment
-POST        /payment/confirmed       controllers.PaymentController.paymentProcessed(orderID: String)
+GET         /view-product             controllers.ProductViewController.viewProduct(pid: Int)
 
-GET         /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)
+POST        /login                    controllers.LoginController.validateLogin
+GET         /login                    controllers.LoginController.login
 
-GET         /aboutContact            controllers.AboutContactController.aboutAndContact
+GET         /register                 controllers.RegisterController.register
+POST        /register/address         controllers.RegisterController.createUser
+GET         /register/address         controllers.RegisterController.address
+POST        /register/bank            controllers.RegisterController.createAddress
+GET         /register/bank            controllers.RegisterController.bank
+POST        /                         controllers.RegisterController.createCard
 
-GET         /basket                  controllers.BasketController.add(pid: Int)
-GET         /basket/0                controllers.BasketController.clear()
+POST        /payment                  controllers.PaymentController.registerPayment
+GET         /payment                  controllers.PaymentController.payment
+POST        /payment/confirmed        controllers.PaymentController.paymentProcessed(orderID: String)
 
-GET         /checkout                controllers.CheckoutBasketController.checkoutBasket
+GET         /aboutContact             controllers.AboutContactController.aboutAndContact
+
+GET         /basket                   controllers.BasketController.add(pid: Int)
+GET         /basket/0                 controllers.BasketController.clear()
+
+GET         /checkout                 controllers.CheckoutBasketController.checkoutBasket
 
 GET         /clothing                controllers.ClothingController.clothing
+GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
+
 
 GET         /bird                    controllers.BirdController.bird
 

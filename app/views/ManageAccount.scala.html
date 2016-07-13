@@ -1,0 +1,98 @@
+@(form: Form[CustomerDetails])
+    @main("ManageAccount") {
+
+
+        <style>
+        .input-group-addon {
+            min-width: 180px;
+        }
+
+        .center-text {
+            margin-left: 40%;
+        }
+
+        .center {
+            margin-left: 36%;
+        }
+        </style>
+        <div class="center-text">
+            <h1>My Account</h1>
+        </div>
+        <div class="center">
+            <h2>Edit personal details</h2>
+        </div>
+
+        @helper.form(routes.ManageAccountController.updateAccount()) {
+            <div id="editAccountForm">
+                <div class="text-center">
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="email">Username</span>
+                        <input type="text" name="eMail" class="form-control" placeholder="Username*" aria-describedby="basic-addon1">
+                    </div>
+
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="telephoneNumber">Telephone Number</span>
+                        <input type="tel" name="telephoneNumber" class="form-control" placeholder="Telephone Number*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="fName">First Name</span>
+                        <input type="text" name="fName" class="form-control" placeholder="First Name*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="lName">Last Name</span>
+                        <input type="text" name="lName" class="form-control" placeholder="Last Name*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="addrLine1">Address Line 1</span>
+                        <input type="text" name="addrLine1" class="form-control" placeholder="Address Line 1*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="addrLine2">Address Line 2</span>
+                        <input type="text" name="addrLine2" class="form-control" placeholder="Address Line 2*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="city">City</span>
+                        <input type="text" name="city" class="form-control" placeholder="City*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="county">County</span>
+                        <input type="text" name="county" class="form-control" placeholder="County*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="postCode">Post Code</span>
+                        <input type="text" name="postCode" class="form-control" placeholder="Post Code*" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="currentPwd">Current Password</span>
+                        <input type="password" name="currentPwd" class="form-control" placeholder="Current Password" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="newPwd">New Password</span>
+                        <input type="text" new="newPwd" class="form-control" placeholder="New Password" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="confirmPwd">Confirm New Password</span>
+                        <input type="text" name="confirmPwd" class="form-control" placeholder="Confirm New Password" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div >
+                        <input class="btn btn-default" type="submit" value="Save">
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    }
