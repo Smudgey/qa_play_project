@@ -83,6 +83,7 @@
                     @if(Login.getStatus()) {
                         <div>
                             <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
+                            <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">Manage Account</a>
                         </div>
                     } else {
                         <div class="dropdownLogin">
@@ -120,7 +121,7 @@
             </div>
         </nav>
             <!-- SEARCH BAR -->
-        <div class="container">
+        <div class="container" style="margin-top:1%">
             <div class="row">
                 @helper.form(routes.SearchController.search) {
                 <div id="custom-search-input">
