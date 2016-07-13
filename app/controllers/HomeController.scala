@@ -20,7 +20,7 @@ class HomeController @Inject() extends Controller {
     */
   def index = Action {
     implicit request =>
-      Ok(views.html.index("Your new application is ready.")(new LoginController().loginForm)(request.session))
+      Ok(views.html.index("")(new LoginController().loginForm)(request.session))
   }
 
 }
