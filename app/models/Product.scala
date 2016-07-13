@@ -88,6 +88,7 @@ object Product {
   def searchByName(query: String) =  list.filter(_.name.toLowerCase.contains(query.toLowerCase()))
 
 
+
   def searchByPrice(price: Int) = list.filter(_.price <= price)
 
   def searchByCat(categoryAttributes: CategoryAttributes.Value) = list.filter(_.category == categoryAttributes)
