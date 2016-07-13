@@ -23,11 +23,11 @@
                     <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket
                     </p>
                         @if(!OrderLine.basket.isEmpty){
-                        @for(oli <- OrderLine.basket) {
+                            @for(oli <- OrderLine.basket) {
 
-                        <p>@oli.prod.name </br> Ordered:@oli.quantity</p><p> New Stock level: @oli.prod.stock
-                        </p>
-                        }
+                            <p>@oli.prod.name </br> Ordered:@oli.quantity</p><p> New Stock level: @oli.prod.stock
+
+                        }</p>
                     }
                 </div>
 
@@ -38,13 +38,12 @@
                         </div>
 
                         <div class="col-xs-6">
-
                             <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
                         </div>
                         <div class="col-xs-3">
-                            <button type="button" class="btn btn-success btn-block">
+                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout">
                                 Edit & Checkout Basket
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
