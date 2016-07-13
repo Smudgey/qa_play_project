@@ -22,7 +22,7 @@ class BasketController @Inject() extends Controller {
     if (p.hasXAvailable(1)) {
       OrderLine.addToBasket(OrderLine(p))
     } else {
-
+      //TODO Add some user feedback here
     }
 
     Ok(views.html.basket())
@@ -32,5 +32,11 @@ class BasketController @Inject() extends Controller {
   def clear = Action {
     OrderLine.clear()
     Ok(views.html.basket())
+  }
+
+  def checkout = Action {
+
+    Ok(views.html.checkoutBasket())
+
   }
 }
