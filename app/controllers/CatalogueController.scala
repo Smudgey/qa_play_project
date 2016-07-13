@@ -1,7 +1,8 @@
 package controllers
 
 import javax.inject._
-import _root_.models.{Product}
+
+import models.Product
 import play.api.mvc._
 
 /**
@@ -11,11 +12,12 @@ import play.api.mvc._
 class CatalogueController @Inject() extends Controller {
 
 
-  def show = Action {
+  def show(query: String) = Action {
     if (Product.list.isEmpty) {
       Product.generate()
     }
-
-    Ok(views.html.catalogue())
+    println(query)
+    println(Product.searchByName(query).isEmpty)
+    Ok(views.html.catalogue(Product.searchByName(query).toArray))
   }
 }

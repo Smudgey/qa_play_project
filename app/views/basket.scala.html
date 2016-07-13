@@ -1,16 +1,16 @@
-@import _root_.models.{OrderLine}
+
 
 @main("Basket") {
     <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket</p>
     @for(oli <- OrderLine.basket) {
 
-        <p>@oli.prod.name </br> Ordered:@oli.quantity</p></br> New Stock level: @oli.prod.stock</p>
+        <p>@oli.prod.name <br> Ordered:@oli.quantity</p><br><p> New Stock level: @oli.prod.stock</p>
     }
     <p>Total Price of basket: £@OrderLine.totalPrice(OrderLine.basket)</p>
 
 
     <a class="btn btn-success" href="@routes.BasketController.clear">Clear basket</a>
-    <a class="btn btn-default btn-sm" href="@routes.CatalogueController.show">
+    <a class="btn btn-default btn-sm" href="@routes.CatalogueController.show("gnome")">
         <span class="glyphicon glyphicon-arrow-left"></span> Back to Catalogue
     </a>
 
