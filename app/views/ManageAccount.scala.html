@@ -20,6 +20,12 @@
         </div>
         <div class="center">
             <h2>Edit personal details</h2>
+            <ul class="nav nav-pills">
+
+                <li role="presentation"><a href="@routes.MyAccountController.MyAccount()">My Account</a></li>
+                <li role="presentation"  class="active"><a href="@routes.ManageAccountController.updateAccount()">Update Details</a></li>
+
+            </ul>
         </div>
 
         @helper.form(routes.ManageAccountController.updateAccount()) {
