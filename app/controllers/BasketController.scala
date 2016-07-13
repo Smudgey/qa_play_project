@@ -15,6 +15,7 @@ class BasketController @Inject() extends Controller {
   def add(pid: Int) =  Action {
 
     //Load this product into value for ease
+    println("PID: " + pid)
     val p = Product.findProduct(pid).get
 
     //If product is available, add to basket.  Otherwise show appropriate error message
