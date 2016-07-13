@@ -50,36 +50,38 @@
                                 Gnomes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">All Gnomes</a></li>
-                                <li><a href="#">Discounted Gnomes</a></li>
+
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Gnome Accessories</li>
-                                <li><a href="@routes.ClothingController.clothing">Gnome Clothing</a></li>
-                                <li><a href="#">Discounted Gnome Clothing</a></li>
+                                <li><a href="#">Gnome Clothing</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gardening <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@routes.ToolController.tool">Tools</a></li>
-                                <li><a href="@routes.ArtificialController.artificial">Artificial Plants</a></li>
+                                <li><a href="#">Tools</a></li>
+                                <li><a href="#">Artificial Plants</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Miscellaneous <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@routes.BirdController.bird">Bird Items</a></li>
-                                <li><a href="@routes.FurnitureController.furniture">Furniture</a></li>
-                                <li><a href="@routes.GazeboController.gazebo">Gazebos</a></li>
+                                <li><a href="#">Bird Items</a></li>
+                                <li><a href="#">Furniture</a></li>
+                                <li><a href="#">Gazebos</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Clearance <span class="caret"></span></a>
+
                             <ul class="dropdown-menu">
-                                <li><a href="#">Gnome Clearance</a></li>
-                                <li><a href="#">All Clearance</a></li>
+                                <li><a href="#">All clearance</a></li>
+                                <li><a href="#">All Discounts</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -154,29 +156,36 @@
             </div>
             <div class="container text-center">
                 <hr />
-                <div class="row">
-                    Head Office, Address line 1, Stockport, Manchester, Post Code
-                </div>
-                <div class="row">
-                    Telephone Number, Email Address
-                </div>
+
                 <hr>
                 <div class="row">
                     <div class="col-lg-12">
                         <ul class="nav nav-pills nav-justified">
-                            <li><a href="/">© 2016 NBGnomes</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">Privacy</a></li>
+
                             <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
                         </ul>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <h2>Contact Us</h2>
+                                <p id="">NB Gardens Ltd</p>
+                                <p id="Address">25 Gardens avenue</p>
+                                <p id="City">Shire</p>
+                                <p id="County">Mordor</p>
+                                <p id="Post Code">4R4G0RN</p>
+                                <p id="Telephone">0782760293</p>
+                                <p id="Email">Send mail pls</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
 
+    </body>
     <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
     <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
     <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
     <script src="@routes.Assets.versioned("javascripts/slider.js")"></script>
+
+
 </html>
