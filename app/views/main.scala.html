@@ -47,45 +47,42 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gnomes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Large Gnomes</a></li>
-                                <li><a href="#">Small Gnomes</a></li>
-                                <li><a href="#">Something Gnomes</a></li>
+                                <li><a href="#">All Gnomes</a></li>
+                                <li><a href="#">Discounted Gnomes</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Special Edition Gnomes</li>
-                                <li><a href="#">4-dimensional gnomes</a></li>
-                                <li><a href="#">Immaterial gnomes</a></li>
+                                <li class="dropdown-header">Gnome Accessories</li>
+                                <li><a href="@routes.ClothingController.clothing">Gnome Clothing</a></li>
+                                <li><a href="#">Discounted Gnome Clothing</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accessories <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gardening <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Miscellaneous</a></li>
-                                <li><a href="#">Gnome clothing - NEW!</a></li>
-                                <li><a href="#">Gardening equipment</a></li>
+                                <li><a href="@routes.ToolController.tool">Tools</a></li>
+                                <li><a href="@routes.ArtificialController.artificial">Artificial Plants</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Seasonal <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Miscellaneous <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Miscellaneous</a></li>
-                                <li><a href="#">Gnome clothing - NEW!</a></li>
-                                <li><a href="#">Gardening equipment</a></li>
+                                <li><a href="@routes.BirdController.bird">Bird Items</a></li>
+                                <li><a href="@routes.FurnitureController.furniture">Furniture</a></li>
+                                <li><a href="@routes.GazeboController.gazebo">Gazebos</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clearance <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Miscellaneous</a></li>
-                                <li><a href="#">Gnome clothing - NEW!</a></li>
-                                <li><a href="#">Gardening equipment</a></li>
+                                <li><a href="#">Gnome Clearance</a></li>
+                                <li><a href="#">All Clearance</a></li>
                             </ul>
                         </li>
                     </ul>
                     <div class="pull-right">
 
-                    @if(models.Login.getStatus()) {
+                    @if(Login.getStatus()) {
                         <div>
-                            <a href="@models.Login.toggleLogin" class="btn btn-default">Logout</a>
+                            <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
                         </div>
                     } else {
                         <div class="dropdownLogin">
@@ -125,16 +122,20 @@
             <!-- SEARCH BAR -->
         <div class="container">
             <div class="row">
+                @helper.form(routes.SearchController.search) {
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
-                        <input type="text" class="  search-query form-control" placeholder="Search" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button">
-                                <span class=" glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
+
+                            <input name="searchQuery" type="text" class="search-query form-control" placeholder="Search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+
                     </div>
                 </div>
+                }
             </div>
         </div>
         <br>
@@ -149,7 +150,7 @@
 
 
             <div class="page-header">
-                <!--<h1>Sub-heading...</h1>-->
+                    <!--<h1>Sub-heading...</h1>-->
                 @content
             </div>
             <div class="container text-center">
