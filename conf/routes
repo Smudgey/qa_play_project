@@ -37,6 +37,5 @@ GET         /basket/0                 controllers.BasketController.clear()
 
 GET         /checkout                 controllers.BasketController.checkout
 
-
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 

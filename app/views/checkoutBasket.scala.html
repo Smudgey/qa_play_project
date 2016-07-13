@@ -1,267 +1,102 @@
+@import _root_.models.OrderLine
+
+@main("Basket") {
 
 
-<!DOCTYPE html>
+<div class ="container">
+    <div class = "row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h5><span class="glyphicon glyphicon-shopping-cart"></span>NBGardens Basket</h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <a class="btn btn-primary btn-sm btn-block" style ="max-width: 50%; float: right; " href="@routes.CatalogueController.show("")">
+                                <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "panel-body">
+                    <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket
+                    </p>
+                    @if(!OrderLine.basket.isEmpty){
+                    @for(oli <- OrderLine.basket) {
+                    <p>((New Stock level: @oli.prod.stock))</p>
 
-<html lang="en">
+                    <div class="row">
+                        <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+                        </div>
+                        <div class="col-xs-4">
+                            <h4 class="product-name"><strong>@oli.prod.name</strong></h4><h4><small>@oli.prod.description</small></h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="col-xs-6 text-right">
+                                <h6><strong>@oli.prod.price <span class="text-muted">x</span></strong></h6>
+                            </div>
 
+                            <div class="col-xs-6">
+                                <div class="input-group">
+                                  <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[@oli.prod.pid]">
+                                          <span class="glyphicon glyphicon-minus"></span>
+                                      </button>
+                                  </span>
+                                    <input type="text" name="quant[@oli.prod.pid]" class="form-control input-number" value="@oli.quantity" min="0" max="@oli.prod.stock">
+                                  <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@oli.prod.pid]">
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                      </button>
+                                  </span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-xs-2">
+                                <button type="button" class="btn btn-link btn-xs">
+                                    <span class="glyphicon glyphicon-trash"> </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    }
+                    }
+                </div>
+                <div class="row">
+                    <div class="text-center">
+                        <div class="col-xs-9">
+                            <h6 class="text-right">Happy with your changes?`</h6>
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="button" style ="max-width: 50%;" class="btn btn-default btn-sm btn-block">
+                                Update cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
 
-<head>
-<!--
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.css")">
-    <script src="@routes.Assets.versioned("javascripts/jquery-3.0.0.min.js")"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        -->
+                    <div class="row text-center">
+                        <div class = "col-xs-3">
+                            <a class="btn btn-danger" style="float:left;" href="@routes.BasketController.clear">Clear basket</a>
+                        </div>
 
-    <div id="header">
-
-        <h1 style="color:lightgreen;font-size:400%;text-align:center;padding:12px;background-color:black;">Dank Gardens</h1>
+                        <div class="col-xs-6">
+                            <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
+                        </div>
+                        <div class="col-xs-3">
+                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout">
+                                Edit & Checkout Basket
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</head>
-
-
-<body style="background-color:grey;">
-
-
-
-
-<table style="width:80%;float:left">
-    <th style="width:25.5%;text-align:left;font-size:200%;padding:5px;background-color:white;">Item</th>
-    <th style="width:46.1%;text-align:left;font-size:200%;padding:5px;background-color:white;">Quantity
-        <button type="button" onclick=location.reload();>Update basket</button>
-    </th>
-    <th style="width:2;text-align:left;font-size:200%;padding:5px;background-color:white;">Price</th>
-</table>
-
-<table style="width:20%">
-
-    <th style="font-size:200%;padding:5px;background-color:white">Basket</th>
-
-    </table>
-
-
-
-
-<div id="basket row1">
-<table style="width:80%;float:left">
-
-    <tr>
-        <td style="width:25.5%;padding:5px;background-color:white;">name</td>
-        <td style="width:46.1%;padding:5px;background-color:white;">
-            <form>
-                <br>
-                <input type="number" value="1" min="0" max="99" name="quantity"><br>
-
-            </form>
-        </td>
-        <td style="width:5;padding:5px;background-color:white;">
-            <form>
-                <br>
-                <input type="text" name="price"><br>
-
-            </form>
-        </td>
-</table>
 </div>
-
-<div id="basket row2">
-    <table style="width:80%;float:left">
-
-        <tr>
-            <td style="width:25.5%;padding:5px;background-color:white;">name</td>
-            <td style="width:46.1%;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
-
-                </form>
-            </td>
-            <td style="width:5;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="text" name="price"><br>
-
-                </form>
-            </td>
-    </table>
-</div>
-
-<div id="basket row3">
-    <table style="width:80%;float:left">
-
-        <tr>
-            <td style="width:25.5%;padding:5px;background-color:white;">name</td>
-            <td style="width:46.1%;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
-
-                </form>
-            </td>
-            <td style="width:5;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="text" name="price"><br>
-
-                </form>
-            </td>
-    </table>
-</div>
-
-<div id="basket row4">
-    <table style="width:80%;float:left">
-
-        <tr>
-            <td style="width:25.5%;padding:5px;background-color:white;">name</td>
-            <td style="width:46.1%;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
-
-                </form>
-            </td>
-            <td style="width:5;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="text" name="price"><br>
-
-                </form>
-            </td>
-    </table>
-</div>
-
-<div id="basket row5">
-    <table style="width:80%;float:left">
-
-        <tr>
-            <td style="width:25.5%;padding:5px;background-color:white;">name</td>
-            <td style="width:46.1%;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
-
-                </form>
-            </td>
-            <td style="width:5;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="text" name="price"><br>
-
-                </form>
-            </td>
-    </table>
-</div>
-
-<div id="basket row6">
-    <table style="width:80%;float:left">
-
-        <tr>
-            <td style="width:25.5%;padding:5px;background-color:white;">name</td>
-            <td style="width:46.1%;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="number" value="1" min="0" max="99" name="quantity"><br>
-
-                </form>
-            </td>
-
-            <td style="width:5;padding:5px;background-color:white;">
-                <form>
-                    <br>
-                    <input type="text" name="price"><br>
-
-                </form>
-            </td>
-    </table>
-</div>
-
-
-
-
-
-
-<table style="width:20%;padding:14px;background-color:white;">
-
-    <td>Subtotal: </td>
-
-</table>
-
-<table style="width:20%;padding:14px;background-color:white;">
-
-    <td>Discounts: </td>
-
-</table>
-
-<table style="width:20%;padding:14px;background-color:white;">
-
-    <td>Delivery: </td>
-    <td>
-        <form>
-            <input type="radio" name="gender" value="male" checked> Standard<br>
-            <input type="radio" name="gender" value="female"> Express<br>
-            <input type="radio" name="gender" value="other"> 24 Hour
-        </form>
-    </td>
-
-</table>
-
-
-
-
-<table style="width:20%;padding:14px;background-color:white;">
-
-    <td>Total: </td>
-
-</table>
-
-<table style="width:20%;padding:14px;background-color:white;">
-
-    <td><form action="http://wish.org/~/media/100-000/Content/Cena%20500/cena200x299.ashx?h=299&w=200&la=en" method="get">
-        <button>Pay now</button>
-    </form>
-       </td>
-    <td>
-        <form action="https://i.ytimg.com/vi/HjMILwTcLsQ/maxresdefault.jpg" method="get">
-            <button>Pay later</button>
-        </form></td>
-
-
-
-</table>
-
-
-
-<img src="https://lh5.googleusercontent.com/-T5V_ucVXmXU/AAAAAAAAAAI/AAAAAAAAABc/O9yq4A6PKbA/photo.jpg" alt="My Image" height="264" width="291">
-
-
-
-<canvas id="myCanvas" width="578" height="400"></canvas>
-<script>
-      var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      var imageObj = new Image();
-
-      imageObj.onload = function() {
-        context.drawImage(imageObj, 69, 50);
-      };
-      imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
-    </script>
-
-
-
-
-
-
-</body>
-
-<tail>
-
-
-</tail>
-
-</html>
-
-
-
-
-
+}

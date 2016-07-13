@@ -1,4 +1,4 @@
-
+@import _root_.models.OrderLine
 
 @main("Basket") {
 <div class ="container">
@@ -51,6 +51,10 @@
                         }
                 </div>
 
+               <form class="form" id="formBasket">
+                   <input name="basket" id="basket" type="hidden" value="tiddly" ></input>
+               </form>
+
                <div class="panel-footer">
                     <div class="row text-center">
                         <div class = "col-xs-3">
@@ -61,7 +65,7 @@
                             <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
                         </div>
                         <div class="col-xs-3">
-                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout">
+                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout()">
                                 Edit & Checkout Basket
                             </a>
                         </div>
