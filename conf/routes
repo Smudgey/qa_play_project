@@ -30,7 +30,7 @@ GET         /basket/0                controllers.BasketController.clear()
 
 GET         /checkout                controllers.CheckoutBasketController.checkoutBasket
 
-GET         /clothing                controllers.GnomeClothingController.gnomeClothing
+GET         /clothing                controllers.ClothingController.clothing
 
 GET         /bird                    controllers.BirdController.bird
 
