@@ -44,8 +44,10 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="@routes.HomeController.index">Home</a></li>
+                        <li><a href="@routes.CatalogueController.show("")">Catalogue</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gnomes <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Gnomes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">All Gnomes</a></li>
 
@@ -56,14 +58,16 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gardening <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Gardening <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Tools</a></li>
                                 <li><a href="#">Artificial Plants</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Miscellaneous <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Miscellaneous <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Bird Items</a></li>
                                 <li><a href="#">Furniture</a></li>
@@ -71,7 +75,10 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Specials <span class="caret"></span></a>
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Clearance <span class="caret"></span></a>
+
                             <ul class="dropdown-menu">
                                 <li><a href="#">All clearance</a></li>
                                 <li><a href="#">All Discounts</a></li>
@@ -83,6 +90,7 @@
                     @if(Login.getStatus()) {
                         <div>
                             <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
+                            <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">Manage Account</a>
                         </div>
                     } else {
                         <div class="dropdownLogin">
@@ -120,34 +128,27 @@
             </div>
         </nav>
             <!-- SEARCH BAR -->
-        <div class="container">
+        <div class="container" style="margin-top:1%">
             <div class="row">
-                @helper.form(routes.SearchController.search) {
+            @helper.form(routes.SearchController.search) {
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
 
-                            <input name="searchQuery" type="text" class="search-query form-control" placeholder="Search">
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" type="submit">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </span>
+                        <input name="searchQuery" type="text" class="search-query form-control" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
 
                     </div>
                 </div>
-                }
+            }
             </div>
         </div>
         <br>
         <br>
         <div class="container theme-showcase" role="main">
-
-                <!-- Main jumbotron for a primary marketing message or call to action -->
-            <div class="jumbotron">
-                <h1>@title</h1>
-                <p>Welcome to the @title page. Here you can find wonderful things...</p>
-            </div>
-
 
             <div class="page-header">
                     <!--<h1>Sub-heading...</h1>-->

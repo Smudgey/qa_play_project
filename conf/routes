@@ -1,7 +1,7 @@
 GET         /                        controllers.HomeController.index
 
-POST        /ManageAccount           controllers.ManageAccountController.updateAccount
-GET         /ManageAccount           controllers.ManageAccountController.ManageAccounts
+POST        /manageAccount           controllers.ManageAccountController.updateAccount
+GET         /manageAccount           controllers.ManageAccountController.ManageAccounts
 
 
 GET         /catalogue                controllers.CatalogueController.show(query:String)
