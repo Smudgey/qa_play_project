@@ -1,8 +1,10 @@
-GET         /                        controllers.HomeController.index
+GET         /                         controllers.HomeController.index
 
-POST        /manageAccount           controllers.ManageAccountController.updateAccount
-GET         /manageAccount           controllers.ManageAccountController.ManageAccounts
+POST        /manageAccount            controllers.ManageAccountController.updateAccount
+GET         /manageAccount            controllers.ManageAccountController.ManageAccounts
 
+
+GET         /viewAccount              controllers.ViewAccountController.ViewAccounts
 
 GET         /catalogue                controllers.CatalogueController.show(query:String)
 POST        /catalogue                controllers.SearchController.search
@@ -31,3 +33,4 @@ GET         /basket/0                 controllers.BasketController.clear()
 GET         /checkout                 controllers.BasketController.checkout
 
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
+

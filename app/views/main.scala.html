@@ -89,10 +89,22 @@
 
                     @if(Login.getStatus()) {
                         <div>
-                            <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
-                            <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">Manage Account</a>
+
+                            <li>
+                                <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button">Manage Account</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@routes.ManageAccountController.ManageAccounts">Edit Account</a></li>
+                                    <li><a href="@routes.ViewAccountController.ViewAccounts">Purchase History</a></li>
+                                </ul>
+                            </li>
+                            <!--<a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">Manage Account</a>-->
                         </div>
                     } else {
+
+
                         <div class="dropdownLogin">
                             <button class="btn btn-default" data-toggle="dropdown">Log in</button>
                             <div class="dropdown-menu pull-right" style="padding: 12px;
