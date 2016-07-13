@@ -15,15 +15,15 @@ object OrderLine {
   var basket = new ArrayBuffer[OrderLine]
   var size = basket.size
 
-  def totalPrice(bsk: ArrayBuffer[OrderLine], total: Double = 0): Double = {
-
-    var newTotal = total
-    if(bsk.isEmpty){newTotal}
-    else {
-      newTotal += bsk.head.prod.price * bsk.head.quantity
-      totalPrice(bsk.tail, newTotal)
+  def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
+    def addToTot(bsk: ArrayBuffer[OrderLine], total: Double): Double = {
+      if (bsk.isEmpty)
+        BigDecimal(total).setScale(2, BigDecimal.RoundingMode.UP).toDouble
+      else
+        addToTot(bsk.tail, total + bsk.head.prod.price * bsk.head.quantity)
     }
-    BigDecimal(newTotal).setScale(2, BigDecimal.RoundingMode.UP).toDouble
+    addToTot(bsk, 0)
+
   }
 
   def clear(): Unit = {
