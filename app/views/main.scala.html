@@ -51,7 +51,7 @@
                                 <li><a href="#">Discounted Gnomes</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Gnome Accessories</li>
-                                <li><a href="@routes.GnomeClothingController.gnomeClothing">Gnome Clothing</a></li>
+                                <li><a href="@routes.ClothingController.clothing">Gnome Clothing</a></li>
                                 <li><a href="#">Discounted Gnome Clothing</a></li>
                             </ul>
                         </li>
@@ -80,11 +80,10 @@
                     </ul>
                     <div class="pull-right">
 
-                    @if(models.Login.getStatus()) {
+                    @if(Login.getStatus()) {
                         <div>
-                            <a href="@models.Login.toggleLogin" class="btn btn-default">Logout</a>
+                            <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
                             <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">Manage Account</a>
-                            <p></p>
                         </div>
                     } else {
                         <div class="dropdownLogin">
@@ -124,16 +123,20 @@
             <!-- SEARCH BAR -->
         <div class="container" style="margin-top:1%">
             <div class="row">
+                @helper.form(routes.SearchController.search) {
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
-                        <input type="text" class="  search-query form-control" placeholder="Search" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button">
-                                <span class=" glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
+
+                            <input name="searchQuery" type="text" class="search-query form-control" placeholder="Search">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+
                     </div>
                 </div>
+                }
             </div>
         </div>
         <br>
@@ -148,7 +151,7 @@
 
 
             <div class="page-header">
-                <!--<h1>Sub-heading...</h1>-->
+                    <!--<h1>Sub-heading...</h1>-->
                 @content
             </div>
             <div class="container text-center">

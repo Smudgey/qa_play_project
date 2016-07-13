@@ -1,8 +1,8 @@
 package models
 
 
-
 import play.api.mvc.QueryStringBindable
+import scala.util.matching.Regex.MatchIterator
 
 
 import scala.collection.mutable.ArrayBuffer
@@ -20,7 +20,7 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
     pwareStock -= pwareQuantity
   }
 
-  def incrementStock(quantity: Int, pwareQuantity: Int): Unit ={
+  def incrementStock(quantity: Int, pwareQuantity: Int): Unit = {
     //Add stock validation here?
     stock += quantity
     pwareStock += pwareQuantity
@@ -35,7 +35,7 @@ object Product {
 
   var list = new ArrayBuffer[Product]
 
-//special price will be a negative int, minus from normal price on front end
+  //special price will be a negative int, minus from normal price on front end
   //clearance price will replace normal price if different, will be displayed in clearance section
   def generate(): Unit = {
     list.clear()
@@ -85,12 +85,14 @@ object Product {
 
   }
 
-  def searchByName(name:String) = list.filter(_.name.contains(name))
-  def searchByPrice(price:Int) = list.filter(_.price <= price)
-  def searchByCat(categoryAttributes: CategoryAttributes.Value) = list.filter(_.category <= categoryAttributes)
-  /*  This function returns an Option{Product}.  To access elements within the object call;
-            <your Product List>.findProduct( pid:Int ).get.<YOUR VARIABLE>
-     */
+  def searchByName(query: String) =  list.filter(_.name.toLowerCase.contains(query.toLowerCase()))
+
+
+
+  def searchByPrice(price: Int) = list.filter(_.price <= price)
+
+  def searchByCat(categoryAttributes: CategoryAttributes.Value) = list.filter(_.category == categoryAttributes)
+
   def findProduct(pid: Int) = list.find(_.pid == pid)
 
   def add(prod: Product): Unit = {
