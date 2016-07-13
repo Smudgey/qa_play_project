@@ -1,17 +1,54 @@
 
 
 @main("Basket") {
-    <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket</p>
-    @for(oli <- OrderLine.basket) {
+<div class ="container">
+   <div class = "row">
+       <div class="col-xs-12">
+           <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h5><span class="glyphicon glyphicon-shopping-cart"></span>NBGardens Basket</h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <a class="btn btn-primary btn-sm btn-block" style ="max-width: 50%; float: right; " href="@routes.CatalogueController.show("")">
+                                    <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "panel-body">
+                    <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket
+                    </p>
+                        @if(!OrderLine.basket.isEmpty){
+                            @for(oli <- OrderLine.basket) {
 
-        <p>@oli.prod.name <br> Ordered:@oli.quantity</p><br><p> New Stock level: @oli.prod.stock</p>
-    }
-    <p>Total Price of basket: £@OrderLine.totalPrice(OrderLine.basket)</p>
+                            <p>@oli.prod.name </br> Ordered:@oli.quantity</p><p> New Stock level: @oli.prod.stock
 
+                        }</p>
+                    }
+                </div>
 
-    <a class="btn btn-success" href="@routes.BasketController.clear">Clear basket</a>
-    <a class="btn btn-default btn-sm" href="@routes.CatalogueController.show("gnome")">
-        <span class="glyphicon glyphicon-arrow-left"></span> Back to Catalogue
-    </a>
+               <div class="panel-footer">
+                    <div class="row text-center">
+                        <div class = "col-xs-3">
+                            <a class="btn btn-danger" style="float:left;" href="@routes.BasketController.clear">Clear basket</a>
+                        </div>
 
+                        <div class="col-xs-6">
+                            <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
+                        </div>
+                        <div class="col-xs-3">
+                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout">
+                                Edit & Checkout Basket
+                            </a>
+                        </div>
+                    </div>
+                </div>
+           </div>
+       </div>
+   </div>
+</div>
 }
