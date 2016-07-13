@@ -1,6 +1,6 @@
 
 @import scala.collection.mutable.ArrayBuffer
-@(products: ArrayBuffer[Product])
+@(products: Array[Product])
 
 <style>
     #grid-p {
@@ -24,18 +24,16 @@
                     </p>
                 <p class="group inner list-group-item-text">
                     We have <strong><em>@p.stock</em></strong> in stock</p>
-                    <div class="row">
-                        <div class="col-xs-20 col-md-6">
-                            <p class="lead">
+                <div class="row">
+                    <div class="col-xs-20 col-md-6">
+                        <p class="lead">
                                 £@p.price</p>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="@controllers.routes.BasketController.add(p.pid)">Add to basket</a>
-                        </div>
                     </div>
+                    <div class="col-xs-12 col-md-6">
+                        <a class="btn btn-success" href="@controllers.routes.BasketController.add(p.pid)">Add to basket</a>
+                    </div>
+                </div>
             </div>
-    </div>
-</div>
+        </div>
 
-
-}
+    }
