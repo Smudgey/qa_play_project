@@ -31,15 +31,5 @@ GET         /basket/0                 controllers.BasketController.clear()
 GET         /checkout                 controllers.BasketController.checkout
 
 GET         /clothing                 controllers.ClothingController.clothing
+
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
-
-
-GET         /bird                    controllers.BirdController.bird
-
-GET         /artificial              controllers.ArtificialController.artificial
-
-GET         /tool                    controllers.ToolController.tool
-
-GET         /gazebo                  controllers.GazeboController.gazebo
-
-GET         /furniture               controllers.FurnitureController.furniture
