@@ -1,9 +1,9 @@
 package controllers
 
 import javax.inject._
-import play.api._
+
+import models.Product
 import play.api.mvc._
-import _root_.models.{Product}
 
 class ProductViewController @Inject() extends Controller {
 
