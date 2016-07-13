@@ -1,5 +1,7 @@
 GET         /                        controllers.HomeController.index
 
+GET         /MyAccount               controllers.MyAccountController.MyAccount
+
 POST        /ManageAccount           controllers.ManageAccountController.updateAccount
 GET         /ManageAccount           controllers.ManageAccountController.ManageAccounts
 
