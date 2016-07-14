@@ -1,5 +1,7 @@
 @import scala.collection.mutable.ArrayBuffer
-@(products: Array[Product])(implicit session: Session)
+
+
+@(form: Form[Int])(products: Array[Product])(implicit session: Session)
 
 <style>
 #grid-p {
@@ -30,12 +32,13 @@
                     <p class="lead">
                                 £@p.price</p>
                 </div>
-                @helper.form(action = routes.BasketController.addp ){
+                @helper.form(routes.BasketController.add){
                     <input type="hidden" name="pid" value="@p.pid">
-                }
                 <div class="col-xs-12 col-md-6">
-                    <a class="btn btn-success" href="@controllers.routes.BasketController.add">Add to basket</a>
+                    <input type="submit" class="btn btn-success" href="#" value ="Add to basket">
                 </div>
+                }
+
             </div>
         </div>
     </div>

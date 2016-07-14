@@ -1,5 +1,5 @@
 @import scala.collection.mutable.ArrayBuffer
-@(products: Array[Product])(implicit session: Session)
+@(form: Form[Int])(products: Array[Product])(implicit session: Session)
 @main("Catalogue") {
 
     <div class="container">
@@ -41,7 +41,7 @@
         </div>
 
         <div id="products" class="row list-group">
-        @grid(products)
+        @grid(form)(products)
         </div>
     </div>
 }

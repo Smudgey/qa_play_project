@@ -3,6 +3,8 @@ package controllers
 import javax.inject._
 
 import models.Product
+import play.api.data.Form
+import play.api.data.Forms._
 import play.api.mvc._
 
 /**
@@ -11,6 +13,11 @@ import play.api.mvc._
 @Singleton
 class CatalogueController @Inject() extends Controller {
 
+  private val prodFor = Form(
+    single(
+      "pid" -> number
+    )
+  )
 
   def show(query: String) = Action {
     implicit request =>
@@ -19,6 +26,6 @@ class CatalogueController @Inject() extends Controller {
     }
     println(query)
     println(Product.searchByName(query).isEmpty)
-    Ok(views.html.catalogue(Product.searchByName(query).toArray)(request.session))
+    Ok(views.html.catalogue(prodFor)(Product.searchByName(query).toArray)(request.session))
   }
 }
