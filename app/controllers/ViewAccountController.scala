@@ -35,12 +35,5 @@ class ViewAccountController @Inject extends Controller {
 
   }
 
-  def View2 = Action {
-    OrderTryOut.orderList
-
-    Ok(views.html.ViewAccount(viewAccountForm))
-
-  }
-
 
 }

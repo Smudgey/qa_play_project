@@ -11,8 +11,8 @@ class PurchaseHistoryController @Inject extends Controller{
 
   def showPurchase = Action{
 
-
-    Ok(views.html.purchaseHistory())
+    implicit request =>
+    Ok(views.html.purchaseHistory(request.session))
   }
 
 
