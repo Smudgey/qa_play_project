@@ -35,6 +35,7 @@ POST        /payment/confirmed        controllers.PaymentController.paymentProce
 GET         /aboutContact             controllers.AboutContactController.aboutAndContact
 
 GET         /basket                   controllers.BasketController.add(pid: Int)
+GET         /basket/removed           controllers.BasketController.removeItem(pid: Int)
 GET         /basket/0                 controllers.BasketController.clear()
 
 GET         /checkout                 controllers.BasketController.checkout

@@ -36,6 +36,20 @@ class BasketController @Inject() extends Controller {
       Ok(views.html.basket(request.session))
   }
 
+  def removeItem(pid: Int) = Action {
+    implicit request =>
+
+      if (OrderLine.findOrderLine(pid).isDefined) {
+        OrderLine.removeItem(pid)
+        Ok(views.html.basket(request.session))
+      } else {
+        //TODO add error message saying that item has already been deleted
+        Ok(views.html.basket(request.session))
+      }
+
+
+  }
+
   def checkout() = Action {
     implicit request =>
       Ok(views.html.checkoutBasket(request.session))
