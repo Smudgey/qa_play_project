@@ -4,7 +4,6 @@
 * two arguments, a `String` for the title of the page and an `Html`
 * object to insert into the body of the page.
 *@
-
 @(title: String)(content: Html)(implicit session: Session)
 
 <!DOCTYPE html>
@@ -88,24 +87,7 @@
                     </ul>
                     <div class="pull-right">
 
-                    @if(session.get("connected")) {
-                        <div>
-
-                            <li>
-                                <a href="@Login.toggleLogin" class="btn btn-default">Logout</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button">Manage Account</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="@routes.ManageAccountController.ManageAccounts">Edit Account</a></li>
-                                    <li><a href="@routes.ViewAccountController.ViewAccounts">Purchase History</a></li>
-                                </ul>
-                            </li>
-                            <!--<a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">Manage Account</a>-->
-                        </div>
-                    } else {
-
-
+                    @if(session.get("connected").isEmpty) {
                         <div class="dropdownLogin">
                             <button class="btn btn-default" data-toggle="dropdown">Log in</button>
                             <div class="dropdown-menu pull-right" style="padding: 12px;
@@ -134,14 +116,27 @@
                             </div>
                         </div>
                     </div>
-                    }
-                        <!--<li role="presentation" align="right" style="border-bottom: -20px"><a href="login">Login</a>-->
-                        <!--| <a href="register">Sign up</a></li>-->
+                    } else {
+                    <div>
+
+                        <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button">Manage Account</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@routes.ManageAccountController.ManageAccounts">Edit Account</a></li>
+                                <li><a href="@routes.ViewAccountController.ViewAccounts">Purchase History</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                }
+
                 </div> <!--/.nav-collapse -->
             </div>
         </nav>
             <!-- SEARCH BAR -->
-        <div class="container" style="margin-top:1%">
+        <div class="container" style="margin-top: 1%">
             <div class="row">
             @helper.form(routes.SearchController.search) {
                 <div id="custom-search-input">

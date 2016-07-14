@@ -12,26 +12,27 @@ import play.api._
 @Singleton
 class BasketController @Inject() extends Controller {
 
-  def add(pid: Int) =  Action {
+  def add(pid: Int) = Action {
+    implicit request =>
+      //Load this product into value for ease
+      println("PID: " + pid)
+      val p = Product.findProduct(pid).get
 
-    //Load this product into value for ease
-    println("PID: " + pid)
-    val p = Product.findProduct(pid).get
+      //If product is available, add to basket.  Otherwise show appropriate error message
+      if (p.hasXAvailable(1)) {
+        OrderLine.addToBasket(OrderLine(p))
+      } else {
+        //TODO Add some user feedback here
+      }
 
-    //If product is available, add to basket.  Otherwise show appropriate error message
-    if (p.hasXAvailable(1)) {
-      OrderLine.addToBasket(OrderLine(p))
-    } else {
-      //TODO Add some user feedback here
-    }
-
-    Ok(views.html.basket())
+      Ok(views.html.basket(request.session))
 
   }
 
   def clear = Action {
+    implicit request =>
     OrderLine.clear()
-    Ok(views.html.basket())
+    Ok(views.html.basket(request.session))
   }
 
   def checkout = Action {

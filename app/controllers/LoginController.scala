@@ -31,7 +31,6 @@ class LoginController @Inject extends Controller {
     */
   def login() = Action {
     implicit request => {
-
       Ok(views.html.login(request.session))
     }
   }
@@ -53,15 +52,17 @@ class LoginController @Inject extends Controller {
         if (user.pass == loginForm.bindFromRequest().data("password")) {
           println("password is correct")
 
-          Ok(views.html.login.render(request.session)).withSession("connected" -> loginForm.bindFromRequest().data("email"))
-          Redirect(routes.HomeController.index())
+          Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
         } else {
           println("incorrect password")
-
           Ok("")
-          Redirect(routes.LoginController.login())
         }
       }
     }
+  }
+
+  def logout() = Action {
+    implicit request =>
+      Redirect(routes.HomeController.index()).withSession()
   }
 }

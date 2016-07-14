@@ -57,21 +57,24 @@ class RegisterController @Inject extends Controller {
     * this function will display login part of register form
     */
   def register = Action {
-    Ok(views.html.registerStart())
+    implicit request =>
+    Ok(views.html.registerStart(request.session))
   }
 
   /**
     * this function will display address part of register form
     */
   def address = Action {
-    Ok(views.html.registerAddress())
+    implicit request =>
+    Ok(views.html.registerAddress(request.session))
   }
 
   /**
     * this function will display card detail part of register form
     */
   def bank = Action {
-    Ok(views.html.registerBank())
+    implicit request =>
+    Ok(views.html.registerBank(request.session))
   }
 
 

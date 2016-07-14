@@ -9,7 +9,7 @@ case class Login(lid: String, name: String, pass: String, email: String) {}
 
 object Login {
 
-  private var loggedIn = false
+  private var loggedIn = true
 
   // dummy data
   private var list = ArrayBuffer[Login](
