@@ -32,7 +32,7 @@ object OrderLine {
       product.pwareStock  += ol.pwareQuantity
     }
     basket.clear()
-
+    size = basket.size
   }
 
   private def getSize: Int = {
