@@ -10,7 +10,8 @@ import play.api.mvc._
 class AboutContactController @Inject() extends Controller{
 
   def aboutAndContact = Action {
-    Ok(views.html.aboutContact())
+    implicit request =>
+    Ok(views.html.aboutContact(request.session))
   }
 
 }
