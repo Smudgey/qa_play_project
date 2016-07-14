@@ -33,7 +33,8 @@ class PaymentController @Inject() extends Controller {
     * @return
     */
   def payment() = Action {
-    Ok(views.html.payment(cardForm))
+    implicit request =>
+    Ok(views.html.payment(cardForm)(request.session))
   }
 
   /**
@@ -42,7 +43,8 @@ class PaymentController @Inject() extends Controller {
     * @return
     */
   def paymentProcessed(orderID: String) = Action {
-    Ok(views.html.paymentConfirmed(orderID))
+    implicit request =>
+    Ok(views.html.paymentConfirmed(orderID)(request.session))
   }
 
   //TODO

@@ -13,11 +13,12 @@ class CatalogueController @Inject() extends Controller {
 
 
   def show(query: String) = Action {
+    implicit request =>
     if (Product.list.isEmpty) {
       Product.generate()
     }
     println(query)
     println(Product.searchByName(query).isEmpty)
-    Ok(views.html.catalogue(Product.searchByName(query).toArray))
+    Ok(views.html.catalogue(Product.searchByName(query).toArray)(request.session))
   }
 }
