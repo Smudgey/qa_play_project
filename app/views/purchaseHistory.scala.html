@@ -1,0 +1,36 @@
+@import _root_.models.{OrderTryOut}
+@main("PurchaseHistory"){
+
+<div id="container" class="row">
+
+
+    <table class="table table-hover">
+        @for(o <- OrderTryOut.orderList){
+        <tr>
+            <td>
+                @o.id
+            </td>
+            <td>
+                @o.items
+            </td>
+            <td>
+                @o.status
+            </td>
+            <td>
+                @o.time
+            </td>
+            <td>
+                <button class="btn btn-default">
+
+
+                    <p>@OrderTryOut.itemList(o.items)</p>
+
+                </button>
+            </td>
+        </tr>
+        }
+    </table>
+
+</div>
+
+}

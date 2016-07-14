@@ -1,5 +1,4 @@
 @(form: Form[CustomerDetails])
-import _root_.{Order, OrderLine,Product}
 @main("ViewAccount") {
 
 
@@ -35,13 +34,6 @@ import _root_.{Order, OrderLine,Product}
 </ul>​<!-Spacing-->
 
 
-@for(o <- Order.orderList){
-
-
-
-}
-
-
 
 <!-One table per order-->
 <table style="width:100%">
@@ -50,7 +42,7 @@ import _root_.{Order, OrderLine,Product}
     <tr>
 
         <th style = color:white;background-color:black>Order date:</th>
-        <th style = color:white;background-color:black>Order status: @</th>
+        <th style = color:white;background-color:black>Order status:</th>
         <th style = color:white;background-color:black>Total:</th>
     </tr>
 
