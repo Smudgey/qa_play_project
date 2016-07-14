@@ -25,45 +25,44 @@
                     <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket
                     </p>
                     @if(!OrderLine.basket.isEmpty){
-                    @for(oli <- OrderLine.basket) {
-                    <p>((New Stock level: @oli.prod.stock))</p>
+                        @for(oli <- OrderLine.basket) {
+                        <p>((New Stock level: @oli.prod.stock))</p>
 
-                    <div class="row">
-                        <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
-                        </div>
-                        <div class="col-xs-4">
-                            <h4 class="product-name"><strong>@oli.prod.name</strong></h4><h4><small>@oli.prod.description</small></h4>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="col-xs-6 text-right">
-                                <h6><strong>@oli.prod.price <span class="text-muted">x</span></strong></h6>
+                        <div class="row">
+                            <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
                             </div>
-
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>@oli.prod.name</strong></h4><h4><small>@oli.prod.description</small></h4>
+                            </div>
                             <div class="col-xs-6">
-                                <div class="input-group">
-                                  <span class="input-group-btn">
-                                      <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[@oli.prod.pid]">
-                                          <span class="glyphicon glyphicon-minus"></span>
-                                      </button>
-                                  </span>
-                                    <input type="text" name="quant[@oli.prod.pid]" class="form-control input-number" value="@oli.quantity" min="0" max="@oli.prod.stock">
-                                  <span class="input-group-btn">
-                                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@oli.prod.pid]">
-                                          <span class="glyphicon glyphicon-plus"></span>
-                                      </button>
-                                  </span>
+                                <div class="col-xs-6 text-right">
+                                    <h6><strong>@oli.prod.price <span class="text-muted">x</span></strong></h6>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <div class="input-group">
+                                      <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[@oli.prod.pid]">
+                                              <span class="glyphicon glyphicon-minus"></span>
+                                          </button>
+                                      </span>
+                                        <input type="text" name="quant[@oli.prod.pid]" class="form-control input-number" value="@oli.quantity" min="0" max="@oli.prod.stock">
+                                      <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@oli.prod.pid]">
+                                              <span class="glyphicon glyphicon-plus"></span>
+                                          </button>
+                                      </span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button style ="margin:10x;" type="button" class="btn btn-link btn-xs">
+                                        <span class="glyphicon glyphicon-trash"> </span>
+                                    </button>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="col-xs-2">
-                                <button type="button" class="btn btn-link btn-xs">
-                                    <span class="glyphicon glyphicon-trash"> </span>
-                                </button>
-                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    }
+                        <hr>
+                        }
                     }
                 </div>
                 <div class="row">
