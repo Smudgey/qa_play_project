@@ -28,14 +28,10 @@ class ViewAccountController @Inject extends Controller {
   )
 
   def ViewAccounts() = Action {
-    if(LoginSession.getCurrentUser != "") {
-      Ok(views.html.ViewAccount(viewAccountForm))
-    }
+    implicit request =>
 
-    else {
-      Redirect(routes.LoginController.login())
+      Ok(views.html.ViewAccount(viewAccountForm)(request.session))
 
-    }
 
   }
 

@@ -1,4 +1,4 @@
-@(form: Form[CustomerDetails])
+@(form: Form[CustomerDetails])(implicit session: Session)
 @main("ViewAccount") {
 
 
@@ -34,6 +34,10 @@
 </ul>​<!-Spacing-->
 
 
+
+
+
+<h1>@session.get("connected")</h1>
 
 <!-One table per order-->
 <table style="width:100%">

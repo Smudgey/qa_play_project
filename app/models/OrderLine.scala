@@ -13,7 +13,7 @@ case class OrderLine(prod: Product, var quantity: Int = 1, var pwareQuantity: In
 object OrderLine {
 
   var basket = new ArrayBuffer[OrderLine]
-  var size = basket.size
+  var size = getSize
 
   def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
     def addToTot(bsk: ArrayBuffer[OrderLine], total: Double): Double = {
@@ -23,7 +23,6 @@ object OrderLine {
         addToTot(bsk.tail, total + bsk.head.prod.price * bsk.head.quantity)
     }
     addToTot(bsk, 0)
-
   }
 
   def clear(): Unit = {
@@ -34,6 +33,22 @@ object OrderLine {
     }
     basket.clear()
     size = basket.size
+  }
+
+  private def getSize: Int = {
+    def accumulate(bsk: ArrayBuffer[OrderLine], total: Int): Int = {
+      if(bsk.isEmpty)
+        total
+      else
+        accumulate(bsk.tail, total + bsk.head.quantity)
+    }
+    accumulate(basket, 0)
+  }
+
+  def removeItem(pid: Int): Unit = {
+
+    size -= findOrderLine(pid).get.quantity
+    basket.remove(basket.indexOf(findOrderLine(pid).get))
   }
 
   def addToBasket(oli: OrderLine) {

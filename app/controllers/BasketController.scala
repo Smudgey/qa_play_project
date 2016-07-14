@@ -14,38 +14,45 @@ import play.api.data.Forms._
 @Singleton
 class BasketController @Inject() extends Controller {
 
-//  val loginForm: Form[Login] = Form(
-//    mapping(
-//      "basket" -> seq(number)
-//    )
-//    (Login.apply)
-//    (Login.unapply)
-//  )
+  def add(pid: Int) = Action {
+    implicit request =>
+      //Load this product into value for ease
+      val p = Product.findProduct(pid).get
 
-  def add(pid: Int) =  Action {
+      //If product is available, add to basket.  Otherwise show appropriate error message
+      if (p.hasXAvailable(1)) {
+        OrderLine.addToBasket(OrderLine(p))
+      } else {
+        //TODO Add some user feedback here
+      }
 
-    //Load this product into value for ease
-    val p = Product.findProduct(pid).get
-
-    //If product is available, add to basket.  Otherwise show appropriate error message
-    if (p.hasXAvailable(1)) {
-      OrderLine.addToBasket(OrderLine(p))
-    } else {
-      //TODO Add some user feedback here
-    }
-
-    Ok(views.html.basket())
+      Ok(views.html.basket(request.session))
 
   }
 
   def clear = Action {
-    OrderLine.clear()
-    Ok(views.html.basket())
+    implicit request =>
+      OrderLine.clear()
+      Ok(views.html.basket(request.session))
+  }
+
+  def removeItem(pid: Int) = Action {
+    implicit request =>
+
+      if (OrderLine.findOrderLine(pid).isDefined) {
+        OrderLine.removeItem(pid)
+        Ok(views.html.basket(request.session))
+      } else {
+        //TODO add error message saying that item has already been deleted
+        Ok(views.html.basket(request.session))
+      }
+
+
   }
 
   def checkout() = Action {
-
-    Ok(views.html.checkoutBasket())
+    implicit request =>
+      Ok(views.html.checkoutBasket(request.session))
 
   }
 }

@@ -28,12 +28,11 @@ class ManageAccountController @Inject extends Controller {
   )
 
   def ManageAccounts() = Action {
-    if(LoginSession.getCurrentUser != "") {
-      Ok(views.html.ManageAccount(manageAccountForm))
-    }
-    else {
-      Redirect(routes.LoginController.login())
-    }
+    implicit request =>
+
+      Ok(views.html.ManageAccount(manageAccountForm)(request.session))
+
+
 
   }
 

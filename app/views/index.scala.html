@@ -2,7 +2,7 @@
 * This template takes a single argument, a String containing a
 * message to display.
 *@
-@(message: String)(form: Form[Login])
+@(message: String)(form: Form[Login])(implicit session: Session)
     @*
     * Call the `main` template with two arguments. The first
     * argument is a `String` with the title of the page, the second
@@ -37,27 +37,27 @@
             </div>
 
             <div id="sliderImages">
-                <img src="http://lot-images.atgmedia.com/SR/10632/2869543/43-201332813233_original.jpg">
-                <img src="http://www.emmilius.pl/SKETCH/2013/fog%20tree.jpg">
-                <img src="http://images-resrc.staticlp.com/S=W1000M,H700M/O=85/http://media.lonelyplanet.com/assets/image/8199cf1d879892325c9eb05c4effca1979a9a4b8f2b544a5d72739359c190e5d/3d376619f11b0ec0394d644820af182a849754084b5a221aefd617e1b5758748.jpg">
+                <a href= "@routes.CatalogueController.show("")"> <img src="https://i.imgsafe.org/654ff3d7c5.jpg"/> </a>
+                <img src="https://i.imgsafe.org/655cb5def4.jpg">
+                <img src="https://i.imgsafe.org/65509218e6.jpg">
             </div>
         </div>
 
         <div class="col-md-12 col-lg-12 border">
             <div class="row inline-block">
                 <div class="col-md-6 col-lg-6">
-                    <img src="http://homeli.co.uk/wp-content/uploads/2014/04/Laying-Woman-Concrete-Plant-Terraform-Sculpture-by-Robert-Cannon.jpg">
+                   <a href="http://www.gannett-cdn.com/-mm-/7420484b74b75a2c735248dcda61358fb389f70a/c=0-30-1058-628&r=x329&c=580x326/local/-/media/2015/12/06/USATODAY/USATODAY/635850267481025932-JARJAR-1553719.JPG"> <img src="https://i.imgsafe.org/657cbad1af.jpg"/> </a>
                 </div>
                 <div class="col-md-6 col-lg-6">
-                    <img src="https://pbs.twimg.com/media/Ce1mTfQUsAAifSN.jpg">
+                   <a href="http://assets1.ignimgs.com/thumbs/userUploaded/2015/5/21/JarJar-1432251548744_large.jpg"> <img src="https://i.imgsafe.org/657cc1311c.jpg"/> </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 col-lg-6">
-                    <img src="http://awesome-sauce.com/wp-content/uploads/2013/08/zombie-gnome1-600x300.jpg">
+                   <a href="https://i.ytimg.com/vi/pSxYqeVWH8o/maxresdefault.jpg"> <img src="https://i.imgsafe.org/657cc6b65f.jpg"/> </a>
                 </div>
                 <div class="col-md-6 col-lg-6">
-                    <img src="http://www.thesingleman.co.uk/wp-content/uploads/2015/07/gnome-title.jpg">
+                   <a href="http://i.imgur.com/UMN9Uv2.png"> <img src="https://i.imgsafe.org/657cc1311c.jpg"/> </a>
                 </div>
             </div>
         </div>
