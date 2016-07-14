@@ -5,7 +5,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Marko on 11/07/2016.
   *
-  * The orderline class takes in a product, an order quantitry and a porousware quantity.  A product is passed rather than a product ID so that the objects variables can be called
+  * The orderline class takes in a product, an order quantitry and a porousware quantity <NOT USED>.  A product is passed rather than a product ID so that the objects variables can be called
   * within this class, rather than
   */
 case class OrderLine(prod: Product, var quantity: Int = 1, var pwareQuantity: Int = 0) {}
