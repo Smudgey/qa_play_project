@@ -40,7 +40,7 @@ object Product {
   def generate(): Unit = {
     list.clear()
 
-    this.add(Product(701, "Justin Bieber Gnome", "Our worst selling gnome, buy this JB replica if you are angry and want something to smash.", 6, 0, 99.99, 99.99, 0, CategoryAttributes.Gnome))
+    this.add(Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 99.99, 99.99, 0, CategoryAttributes.Gnome))
     this.add(Product(702, "Sexy Gnome", "This is a very sexy gnome dressed in a bikini, NSFW.", 87, 58, 11.99, 11.99, 0, CategoryAttributes.Gnome))
     this.add(Product(703, "Supportive Gnome", "His supportive face will support you in your times of need.", 14, 2, 6.99, 6.99, 0, CategoryAttributes.Gnome))
     this.add(Product(704, "Evil Gnome", "Possessed by evil demons, do not let inside your house.", 2, 1, 5.98, 5.98, 0, CategoryAttributes.Gnome))
@@ -87,7 +87,7 @@ object Product {
 
   def searchByName(query: String) =  list.filter(_.name.toLowerCase.contains(query.toLowerCase()))
 
-
+  def searchByCategory(query: String) = list.filter(_.description.toLowerCase.contains(query.toLowerCase()))
 
   def searchByPrice(price: Int) = list.filter(_.price <= price)
 
