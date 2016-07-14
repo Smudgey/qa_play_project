@@ -55,7 +55,7 @@ class LoginController @Inject extends Controller {
           Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
         } else {
           println("incorrect password")
-          Ok("")
+          Redirect(routes.LoginController.login())
         }
       }
     }
