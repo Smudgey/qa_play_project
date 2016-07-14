@@ -26,8 +26,6 @@
                     </p>
                     @if(!OrderLine.basket.isEmpty){
                         @for(oli <- OrderLine.basket) {
-                        <p>((New Stock level: @oli.prod.stock))</p>
-
                         <div class="row">
                             <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
                             </div>
@@ -46,7 +44,7 @@
                                               <span class="glyphicon glyphicon-minus"></span>
                                           </button>
                                       </span>
-                                        <input type="text" name="quant[@oli.prod.pid]" class="form-control input-number" value="@oli.quantity" min="0" max="@oli.prod.stock">
+                                        <input type="text" name="quant[@oli.prod.pid]" class="form-control input-number" disabled = "disabled" value="@oli.quantity" min="0" max="@oli.prod.stock">
                                       <span class="input-group-btn">
                                           <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@oli.prod.pid]">
                                               <span class="glyphicon glyphicon-plus"></span>
