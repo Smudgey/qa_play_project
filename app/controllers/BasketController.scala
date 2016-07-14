@@ -3,8 +3,10 @@ package controllers
 import javax.inject._
 
 import play.api.mvc._
-import _root_.models.{OrderLine, Product}
+import _root_.models.{Login, OrderLine, Product}
 import play.api._
+import play.api.data.Form
+import play.api.data.Forms._
 
 /**
   * Created by Marko on 11/07/2016.
@@ -15,7 +17,6 @@ class BasketController @Inject() extends Controller {
   def add(pid: Int) = Action {
     implicit request =>
       //Load this product into value for ease
-      println("PID: " + pid)
       val p = Product.findProduct(pid).get
 
       //If product is available, add to basket.  Otherwise show appropriate error message
@@ -31,13 +32,13 @@ class BasketController @Inject() extends Controller {
 
   def clear = Action {
     implicit request =>
-    OrderLine.clear()
-    Ok(views.html.basket(request.session))
+      OrderLine.clear()
+      Ok(views.html.basket(request.session))
   }
 
-  def checkout = Action {
-
-    Ok(views.html.checkoutBasket())
+  def checkout() = Action {
+    implicit request =>
+      Ok(views.html.checkoutBasket(request.session))
 
   }
 }
