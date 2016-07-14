@@ -1,7 +1,7 @@
 GET         /                    controllers.HomeController.index
 POST        /                    controllers.LoginController.validateLogin
 GET         /catalogue           controllers.CatalogueController.doGrid
-
+POST         /aboutContact       controllers.AboutContactController.createEnquiry
 
 # An example controller showing a sample home page
 GET         /view-product        controllers.ProductViewController.viewProduct(pid: Int)
