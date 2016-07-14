@@ -17,7 +17,8 @@ class CheckoutBasketController @Inject() extends Controller {
 
 
   def checkoutBasket = Action {
-    Ok(views.html.checkoutBasket())
+    implicit request =>
+    Ok(views.html.checkoutBasket(request.session))
   }
 
 

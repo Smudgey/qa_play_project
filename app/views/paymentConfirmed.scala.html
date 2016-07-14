@@ -1,4 +1,4 @@
-@(orderID: String)
+@(orderID: String)(implicit session: Session)
 @main("Payment Confirmation") {
     <h1>Your order has been successfully placed. Your order ID is: @orderID</h1>
 }

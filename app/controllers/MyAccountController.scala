@@ -11,6 +11,7 @@ import views.html.MyAccount
   */
 class MyAccountController @Inject extends Controller{
   def MyAccount = Action {
-    Ok(views.html.MyAccount())
+    implicit request =>
+    Ok(views.html.MyAccount(request.session))
   }
 }
