@@ -14,14 +14,6 @@ import play.api.data.Forms._
 @Singleton
 class BasketController @Inject() extends Controller {
 
-//  val loginForm: Form[Login] = Form(
-//    mapping(
-//      "basket" -> seq(number)
-//    )
-//    (Login.apply)
-//    (Login.unapply)
-//  )
-
   def add(pid: Int) =  Action {
 
     //Load this product into value for ease
