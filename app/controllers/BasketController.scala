@@ -25,15 +25,21 @@ class BasketController @Inject() extends Controller {
       } else {
         //TODO Add some user feedback here
       }
-
       Ok(views.html.basket(request.session))
+  }
+
+  private val prodFor: Form[Int]
+
+  def addp: Action = {
+
 
   }
+
 
   def clear = Action {
     implicit request =>
       OrderLine.clear()
-      Ok(views.html.basket(request.session))
+      Redirect(routes.BasketController.basket)
   }
 
   def removeItem(pid: Int) = Action {

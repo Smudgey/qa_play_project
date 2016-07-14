@@ -30,8 +30,11 @@
                     <p class="lead">
                                 £@p.price</p>
                 </div>
+                @helper.form(action = routes.BasketController.addp ){
+                    <input type="hidden" name="pid" value="@p.pid">
+                }
                 <div class="col-xs-12 col-md-6">
-                    <a class="btn btn-success" href="@controllers.routes.BasketController.add(p.pid)">Add to basket</a>
+                    <a class="btn btn-success" href="@controllers.routes.BasketController.add">Add to basket</a>
                 </div>
             </div>
         </div>
