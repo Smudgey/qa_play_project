@@ -12,6 +12,7 @@ GET         /manageAccount            controllers.ManageAccountController.Manage
 GET         /viewAccount              controllers.ViewAccountController.ViewAccounts
 GET         /purchaseHistory          controllers.PurchaseHistoryController.showPurchase
 
+
 GET         /catalogue                controllers.CatalogueController.show(query:String)
 POST        /catalogue                controllers.SearchController.search
 
