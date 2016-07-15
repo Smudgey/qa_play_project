@@ -33,7 +33,6 @@ $('.btn-number').click(function(e){
     }
 });
 $('.input-number').focusin(function(){
-    $(".input-number").removeAttr('disabled')
    $(this).data('oldValue', $(this).val());
 });
 $('.input-number').change(function() {

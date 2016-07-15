@@ -14,10 +14,21 @@ import play.api.data.Forms._
 @Singleton
 class BasketController @Inject() extends Controller {
 
-  def add(pid: Int) = Action {
+  private val prodFor = Form(
+    single(
+      "pid" -> number
+    )
+  )
+
+  def basket = Action {
+    implicit request =>
+      Ok(views.html.basket(request.session))
+  }
+
+  def add = Action {
     implicit request =>
       //Load this product into value for ease
-      val p = Product.findProduct(pid).get
+      val p = Product.findProduct(prodFor.bindFromRequest().get).get
 
       //If product is available, add to basket.  Otherwise show appropriate error message
       if (p.hasXAvailable(1)) {
@@ -25,15 +36,13 @@ class BasketController @Inject() extends Controller {
       } else {
         //TODO Add some user feedback here
       }
-
       Ok(views.html.basket(request.session))
-
   }
 
   def clear = Action {
     implicit request =>
       OrderLine.clear()
-      Ok(views.html.basket(request.session))
+      Redirect(routes.BasketController.basket)
   }
 
   def removeItem(pid: Int) = Action {
@@ -41,13 +50,11 @@ class BasketController @Inject() extends Controller {
 
       if (OrderLine.findOrderLine(pid).isDefined) {
         OrderLine.removeItem(pid)
-        Ok(views.html.basket(request.session))
+        Redirect(routes.BasketController.basket)
       } else {
         //TODO add error message saying that item has already been deleted
-        Ok(views.html.basket(request.session))
+        Redirect(routes.BasketController.basket)
       }
-
-
   }
 
   def checkout() = Action {
