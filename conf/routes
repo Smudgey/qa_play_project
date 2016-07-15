@@ -22,4 +22,4 @@ GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
 
 GET         /checkout            controllers.CheckoutBasketController.checkoutBasket
 
-
+GET         /adminEnquiries      controllers.AboutContactController.printEnquiries

@@ -1,0 +1,10 @@
+@main("Admin panel: Enquiries") {
+    @for(enquiry <- Enquiry.enquiries){
+        <b>Name</b> @enquiry.name
+        <b>Email</b> @enquiry.email
+        <b>Enquiry</b> @enquiry.enquiry
+        <b>Addressed?</b> @enquiry.dealtWith
+        <br/>
+        <hr>
+    }
+}

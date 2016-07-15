@@ -16,7 +16,7 @@ class AboutContactController @Inject() extends Controller{
 
   val enquiryForm: Form[EnquiryDescription] = Form(
     mapping(
-      "fullname" -> nonEmptyText,
+      "name" -> nonEmptyText,
       "email" -> nonEmptyText,
       "enquiry" -> nonEmptyText
     )
@@ -31,12 +31,17 @@ class AboutContactController @Inject() extends Controller{
 
   def createEnquiry() = Action {
     implicit request => {
-      val name = enquiryForm.bindFromRequest().data("fullname")
+      val name = enquiryForm.bindFromRequest().data("name")
       val email = enquiryForm.bindFromRequest().data("email")
       val enquiry = enquiryForm.bindFromRequest().data("enquiry")
       Enquiry.createNewEnquiry(name, email, enquiry)
       Redirect(routes.AboutContactController.aboutAndContact)
     }
+  }
+
+  def printEnquiries() = Action{
+    implicit request =>
+    Ok(views.html.enquiriesAdmin())
   }
 
 }
