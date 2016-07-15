@@ -35,7 +35,7 @@ object OrderLine {
     size = basket.size
   }
 
-  private def getSize: Int = {
+  def getSize: Int = {
     def accumulate(bsk: ArrayBuffer[OrderLine], total: Int): Int = {
       if(bsk.isEmpty)
         total
@@ -55,7 +55,7 @@ object OrderLine {
     if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
 
     } else {
-      oli.quan
+
     }
 
   }

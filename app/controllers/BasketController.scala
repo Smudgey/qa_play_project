@@ -54,11 +54,12 @@ class BasketController @Inject() extends Controller {
 
   def update = Action {
     implicit request =>
-        val quant = updateFor.bindFromRequest().get._1(0)
-        val pid = updateFor.bindFromRequest().get._2(0)
-        val p = Product.findProduct(pid).get
-        OrderLine.addToBasket(OrderLine(p, quant, 0))
+      val quant = updateFor.bindFromRequest().get._1(0)
+      val pid = updateFor.bindFromRequest().get._2(0)
 
+      OrderLine.findOrderLine(pid).get.quantity = quant
+      Product.findProduct(pid).get.stock -= quant
+      OrderLine.getSize
       Redirect(routes.BasketController.basket)
   }
 
