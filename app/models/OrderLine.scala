@@ -51,10 +51,22 @@ object OrderLine {
     basket.remove(basket.indexOf(findOrderLine(pid).get))
   }
 
-  def addToBasket(oli: OrderLine) {
+  def updateBasket(oli: OrderLine): Unit = {
+    if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
+
+    } else {
+      oli.quan
+    }
+
+  }
+
+  def addToBasket(oli: OrderLine): Unit = {
     //Do product stock validation here
-    oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
-    size += oli.quantity + oli.pwareQuantity
+    if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
+
+    } else {
+      oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
+      size += oli.quantity + oli.pwareQuantity
 
       def addOrIncrease(bsk: ArrayBuffer[OrderLine], oli2: OrderLine): Unit ={
         if( bsk.isEmpty ){
@@ -62,11 +74,14 @@ object OrderLine {
         } else if(bsk.head.prod.pid == oli2.prod.pid) {
           bsk.head.quantity       += oli2.quantity
           bsk.head.pwareQuantity  += oli2.pwareQuantity
-      } else {
+        } else {
           addOrIncrease(bsk.tail, oli2)
         }
+      }
+      addOrIncrease(basket, oli)
     }
-    addOrIncrease(basket, oli)
+
+
   }
 
   def findOrderLine(pid:Int) = basket.find(_.prod.pid == pid)

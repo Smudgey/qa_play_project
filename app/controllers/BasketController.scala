@@ -22,8 +22,8 @@ class BasketController @Inject() extends Controller {
 
   private val updateFor = Form(
     tuple(
-
-      "quant"  -> list(number),"pid"       -> list(number)
+      "quant"  -> list(number),
+      "pid"       -> list(number)
     )
   )
 
@@ -54,8 +54,11 @@ class BasketController @Inject() extends Controller {
 
   def update = Action {
     implicit request =>
-      println(updateFor.bindFromRequest().get._1(0))
-      println(updateFor.bindFromRequest().get._2(0))
+        val quant = updateFor.bindFromRequest().get._1(0)
+        val pid = updateFor.bindFromRequest().get._2(0)
+        val p = Product.findProduct(pid).get
+        OrderLine.addToBasket(OrderLine(p, quant, 0))
+
       Redirect(routes.BasketController.basket)
   }
 
