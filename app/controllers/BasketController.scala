@@ -20,9 +20,16 @@ class BasketController @Inject() extends Controller {
     )
   )
 
+  private val updateFor = Form(
+    tuple(
+      "quant"  -> list(number),
+      "pid"       -> list(number)
+    )
+  )
+
   def basket = Action {
     implicit request =>
-      Ok(views.html.basket(request.session))
+      Ok(views.html.basket(updateFor)(request.session))
   }
 
   def add = Action {
@@ -36,12 +43,23 @@ class BasketController @Inject() extends Controller {
       } else {
         //TODO Add some user feedback here
       }
-      Ok(views.html.basket(request.session))
+      Redirect(routes.BasketController.basket)
   }
 
   def clear = Action {
     implicit request =>
       OrderLine.clear()
+      Redirect(routes.BasketController.basket)
+  }
+
+  def update = Action {
+    implicit request =>
+      val quant = updateFor.bindFromRequest().get._1(0)
+      val pid = updateFor.bindFromRequest().get._2(0)
+
+      OrderLine.findOrderLine(pid).get.quantity = quant
+      Product.findProduct(pid).get.stock -= quant
+      OrderLine.getSize
       Redirect(routes.BasketController.basket)
   }
 
