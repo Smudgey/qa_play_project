@@ -5,8 +5,7 @@ package models
   */
 object OrderStatus extends Enumeration {
 
+  val Dispatched  = Value("Dispatched")
   val Ordered     = Value("Ordered")
   val Processing  = Value("Processing")
-  val Dispatched  = Value("Dispatched")
-
 }
