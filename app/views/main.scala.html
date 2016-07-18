@@ -87,8 +87,6 @@
 
                     <div class="navbar-form navbar-right">
                     @if(session.get("connected").isEmpty) {
-                            <!-- Single button -->
-
                         <div class="btn-group">
                         @helper.form(routes.LoginController.validateLogin) {
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -98,7 +96,7 @@
                             <ul class="dropdown-menu loginDropdown">
                                 <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
                                 <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
-                                <li><span href=""  class="label label-danger">Forgot password?</span></li>
+                                <li><span href="" class="label label-danger">Forgot password?</span></li>
                                 <li>
                                     <div class="btn-group">
                                         <button type="submit" class="btn btn-default">Login</button>
@@ -113,19 +111,17 @@
                     } else {
                         <div>
                             <div class="btn-group">
-                                <a href="@routes.ManageAccountController.ManageAccounts()" class="btn btn-default">
+                                <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">
                                     Manage Account</a>
                                 <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
                             </div>
                         </div>
                     }
                     </div>
-
                 </div>
-
             </div>
         </nav>
-            <!-- SEARCH BAR -->
+
         @helper.form(routes.SearchController.search) {
             <div class="col-md-12 col-lg-12">
                 <div class="searchBar input-group">
@@ -139,12 +135,9 @@
                 </div>
             </div>
         }
-        <br>
-        <div class="container" role="main">
 
-
+        <div class="container text-center">
             @content
-
 
             <div class="container text-center">
                 <hr>
@@ -164,17 +157,27 @@
                             <p id="Post Code">4R4G0RN</p>
                             <p id="Telephone">0782760293</p>
                             <p id="Email">Send mail pls</p>
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <ul class="nav nav-pills nav-justified">
+
+
+                                        <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
     </body>
-    <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
-
 
 </html>

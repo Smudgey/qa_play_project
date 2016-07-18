@@ -1,5 +1,6 @@
 //plugin bootstrap minus and plus
 //http://jsfiddle.net/laelitenetwork/puJ6G/
+
 $('.btn-number').click(function(e){
     e.preventDefault();
 
@@ -10,7 +11,7 @@ $('.btn-number').click(function(e){
 
     if (!isNaN(currentVal)) {
         if(type == 'minus') {
-
+            $('.btn-number[data-type="plus"]').attr('disabled', false);
             if(currentVal > input.attr('min')) {
                 input.val(currentVal - 1).change();
             }
@@ -33,25 +34,27 @@ $('.btn-number').click(function(e){
     }
 });
 $('.input-number').focusin(function(){
-   $(this).data('oldValue', $(this).val());
+
+   $(this).data('oldValue', $(this).val());$(".input-number").removeAttr('disabled')
 });
 $('.input-number').change(function() {
 
     minValue =  parseInt($(this).attr('min'));
     maxValue =  parseInt($(this).attr('max'));
     valueCurrent = parseInt($(this).val());
-
+    console.log($(".input-number"))
+    $(".input-number").removeAttr('disabled')
     name = $(this).attr('name');
     if(valueCurrent >= minValue) {
         $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
     } else {
-        alert('Sorry, the minimum value was reached');
+        alert('Sorry, we only have '+ maxValue + " in stock");
         $(this).val($(this).data('oldValue'));
     }
     if(valueCurrent <= maxValue) {
         $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
     } else {
-        alert('Sorry, the maximum value was reached');
+        alert('Sorry, we only have '+ maxValue + " in stock");
         $(this).val($(this).data('oldValue'));
     }
 

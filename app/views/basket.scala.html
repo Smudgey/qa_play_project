@@ -1,11 +1,14 @@
 @import _root_.models.OrderLine
-@(implicit session: Session)
 
+@(form : Form[(List[Int], List[Int])] )(implicit session: Session)
 @main("Basket") {
+
+<script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
+
 <div class ="container">
-   <div class = "row">
-       <div class="col-xs-12">
-           <div class="panel panel-info">
+    <div class = "row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">
                         <div class="row">
@@ -14,66 +17,86 @@
                             </div>
                             <div class="col-xs-6">
                                 <a class="btn btn-primary btn-sm btn-block" style ="max-width: 50%; float: right; " href="@routes.CatalogueController.show("")">
-                                    <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+                                <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class = "panel-body">
-                    <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket
+                    <p>There are currently <strong><em>@OrderLine.getSize</em></strong> items in your basket
                     </p>
-                        @if(!OrderLine.basket.isEmpty){
-                            @for(oli <- OrderLine.basket) {
-                            <p>((New Stock level: @oli.prod.stock))</p>
+                    @if(!OrderLine.basket.isEmpty){
+                        @for((oli, i) <- OrderLine.basket.view.zipWithIndex) {
+                        @helper.form(routes.BasketController.update) {
+                        <div class="row">
+                            <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+                            </div>
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>@oli.prod.name</strong></h4><h4><small>@oli.prod.description</small></h4>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-4 text-right">
+                                        <h6><strong>@oli.prod.price <span class="text-muted">x</span></strong></h6>
                                     </div>
+
                                     <div class="col-xs-4">
-                                        <h4 class="product-name"><strong>@oli.prod.name</strong></h4><h4><small>@oli.prod.description</small></h4>
+                                        <div class="input-group">
+                                              <span class="input-group-btn">
+                                                  <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[@i]">
+                                                      <span class="glyphicon glyphicon-minus"></span>
+                                                  </button>
+                                              </span>
+                                            <!-- Removed disabled="disabled" as the form crashes if the input field is not edited. Add javascript to enable the input field on submit button click?-->
+                                            <input type="text" name="quant[@i]" class="form-control input-number"  disabled="disabled" value="@oli.quantity" min="0" max="@oli.prod.stock">
+                                              <span class="input-group-btn">
+                                                  <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@i]">
+                                                      <span class="glyphicon glyphicon-plus"></span>
+                                                  </button>
+                                              </span>
+
+                                        </div>
+
                                     </div>
-                                    <div class="col-xs-6">
-                                        <div class="col-xs-6 text-right">
-                                            <h6><strong>@oli.prod.price <span class="text-muted">x</span></strong></h6>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <p><strong>@oli.quantity</strong></p>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <button type="button" class="btn btn-link btn-xs">
-                                                <span class="glyphicon glyphicon-trash"> </span>
-                                            </button>
-                                        </div>
+                                    <div class="col-xs-1">
+                                        <a class="glyphicon glyphicon-trash" style="float:left;" href="@routes.BasketController.removeItem(oli.prod.pid)">
+                                        </a>
                                     </div>
+
+                                <div  class="col-xs-3">
+                                    <input type="hidden" name="pid[@i]" value="@oli.prod.pid">
+                                    <input type="submit" class="btn btn-warning btn-sm btn-block" href="#" value ="Update Item">
                                 </div>
-                                <hr>
-                            }
+
+                            </div>
+                        } <!--- End Form--->
+                        </div>
+                        <hr>
                         }
+                    }
                 </div>
 
-               <form class="form" id="formBasket">
-                   <input name="basket" id="basket" type="hidden" value="tiddly" ></input>
-               </form>
 
-               <div class="panel-footer">
+                <div class="panel-footer">
+
                     <div class="row text-center">
                         <div class = "col-xs-3">
-                            <a class="btn btn-danger" style="float:left;" href="@routes.BasketController.clear">Clear basket</a>
+                            <a class="btn btn-danger" style="float:left;" href="@routes.BasketController.clear"><span class="glyphicon glyphicon-remove"></span> Clear Basket</a>
                         </div>
 
                         <div class="col-xs-6">
                             <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
                         </div>
-                        <div class="col-xs-3">
-                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout()">
-                                Edit & Checkout Basket
+                        <div style="width: auto;" class="col-xs-3">
+                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout">
+                                Checkout Basket <span class="glyphicon glyphicon-play"></span>
                             </a>
                         </div>
                     </div>
                 </div>
-           </div>
-       </div>
-   </div>
+            </div>
+        </div>
+    </div>
 </div>
 }

@@ -14,10 +14,28 @@ import play.api.data.Forms._
 @Singleton
 class BasketController @Inject() extends Controller {
 
-  def add(pid: Int) = Action {
+  private val prodFor = Form(
+    single(
+      "pid" -> number
+    )
+  )
+
+  private val updateFor = Form(
+    tuple(
+      "quant"  -> list(number),
+      "pid"       -> list(number)
+    )
+  )
+
+  def basket = Action {
+    implicit request =>
+      Ok(views.html.basket(updateFor)(request.session))
+  }
+
+  def add = Action {
     implicit request =>
       //Load this product into value for ease
-      val p = Product.findProduct(pid).get
+      val p = Product.findProduct(prodFor.bindFromRequest().get).get
 
       //If product is available, add to basket.  Otherwise show appropriate error message
       if (p.hasXAvailable(1)) {
@@ -25,15 +43,36 @@ class BasketController @Inject() extends Controller {
       } else {
         //TODO Add some user feedback here
       }
-
-      Ok(views.html.basket(request.session))
-
+      Redirect(routes.BasketController.basket)
   }
 
   def clear = Action {
     implicit request =>
       OrderLine.clear()
-      Ok(views.html.basket(request.session))
+      Redirect(routes.BasketController.basket)
+  }
+
+  def update = Action {
+    implicit request =>
+      val quant = updateFor.bindFromRequest().get._1(0)
+      val pid = updateFor.bindFromRequest().get._2(0)
+
+      OrderLine.findOrderLine(pid).get.quantity = quant
+      Product.findProduct(pid).get.stock -= quant
+      OrderLine.getSize
+      Redirect(routes.BasketController.basket)
+  }
+
+  def removeItem(pid: Int) = Action {
+    implicit request =>
+
+      if (OrderLine.findOrderLine(pid).isDefined) {
+        OrderLine.removeItem(pid)
+        Redirect(routes.BasketController.basket)
+      } else {
+        //TODO add error message saying that item has already been deleted
+        Redirect(routes.BasketController.basket)
+      }
   }
 
   def checkout() = Action {
@@ -41,4 +80,5 @@ class BasketController @Inject() extends Controller {
       Ok(views.html.checkoutBasket(request.session))
 
   }
+
 }
