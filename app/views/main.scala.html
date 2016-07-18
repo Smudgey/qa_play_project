@@ -22,15 +22,15 @@
             <!-- Bootstrap theme -->
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.min.css")">
             <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/catalogue.css")"/>
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme.css")">
 
     </head>
 
     <body role="document">
 
             <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="@routes.HomeController.index"><img src="@routes.Assets.versioned("images/logo2.png")" alt="logo2" width="150" height="38"></a>
+                    <a class="navbar-brand" href="@routes.HomeController.index">NBG</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -50,7 +50,6 @@
                                 Gnomes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">All Gnomes</a></li>
-
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Gnome Accessories</li>
                                 <li><a href="#">Gnome Clothing</a></li>
@@ -85,144 +84,100 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="pull-right">
 
+                    <div class="navbar-form navbar-right">
                     @if(session.get("connected").isEmpty) {
-                        <div class="dropdownLogin">
-                            <button class="btn btn-default" data-toggle="dropdown">Log in</button>
-                            <div class="dropdown-menu pull-right" style="padding: 12px;
-                                background: #eee">
-                                <div class="dropdownLogin text-center" style="max-width: 200px">
-                                @helper.form(routes.LoginController.validateLogin) {
-                                    <div class="col-md-12">
-                                        <div>
-                                            <div class="input-group form-group">
-                                                <input name="email" type="text" class="form-control" placeholder="Email">
-                                            </div>
-                                            <div class="input-group form-group">
-                                                <input name="password" type="password" class="form-control" placeholder="Password">
-                                                @*TODO password reset page*@
-                                                <a href="" class="label label-default">Forgot password?</a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button class="btn btn-default" type="submit">Login</button>
-                                                <a href="@routes.RegisterController.register" class="btn btn-default">
-                                                    Register</a>
-                                            </div>
-                                        </div>
+                        <div class="btn-group">
+                        @helper.form(routes.LoginController.validateLogin) {
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Login
+                            </button>
+
+                            <ul class="dropdown-menu loginDropdown">
+                                <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
+                                <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
+                                <li><span href="" class="label label-danger">Forgot password?</span></li>
+                                <li>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-default">Login</button>
+                                        <button type="button" href="@routes.RegisterController.register" class="btn btn-default">
+                                            Register</button>
                                     </div>
-                                }
+                                </li>
+                            </ul>
+                        }
+                        </div>
+
+                    } else {
+                        <div>
+                            <div class="btn-group">
+                                <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">
+                                    Manage Account</a>
+                                <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        @helper.form(routes.SearchController.search) {
+            <div class="col-md-12 col-lg-12">
+                <div class="searchBar input-group">
+                    <input name="searchQuery" type="text" class="search-query form-control" placeholder="Search">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+
+                </div>
+            </div>
+        }
+
+        <div class="container text-center">
+            @content
+
+            <div class="container text-center">
+                <hr>
+
+                <div class="col-lg-12">
+                    <ul class="nav nav-pills nav-justified">
+
+                        <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <h2>Contact Us</h2>
+                            <p id="">NB Gardens Ltd</p>
+                            <p id="Address">25 Gardens avenue</p>
+                            <p id="City">Shire</p>
+                            <p id="County">Mordor</p>
+                            <p id="Post Code">4R4G0RN</p>
+                            <p id="Telephone">0782760293</p>
+                            <p id="Email">Send mail pls</p>
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <ul class="nav nav-pills nav-justified">
+
+
+                                        <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
+                                    </ul>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    } else {
-                    <div class="btn-group" role="group">
-                        <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Manage Account
-                            <span class="caret"></span>
-                        </button>
-
-                        <!--<div class="dropdown">-->
-                        <!--<a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button">Manage Account</a>-->
-                        <ul class="dropdown-menu">
-                            <li><a href="@routes.ManageAccountController.ManageAccounts">Edit Account</a></li>
-                            <li><a href="@routes.PurchaseHistoryController.showPurchase">Purchase History</a></li>
-                        </ul>
-                        <!--</div>-->
-                    </div>
-                }
-
-                </div> <!--/.nav-collapse -->
-            </div>
-        </nav>
-            <!-- SEARCH BAR -->
-        <div class="container" style="margin-top: 1%">
-            <div class="row">
-            @helper.form(routes.SearchController.search) {
-                <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-
-                        <input name="searchQuery" type="text" class="search-query form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-
-                    </div>
-                </div>
-            }
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="container theme-showcase" role="main">
-
-            <div class="page-header">
-                    <!--<h1>Sub-heading...</h1>-->
-                @content
-            </div>
-
-
-            <div class="container text-center">
-
-            <h2>Download our 2016 brochure now!</h2>
-
-<a href="http://www.literacytrust.org.uk/assets/0000/6825/JohnCena1.pdf" download="">
-                <img src="http://bluebirdexperience.com/wp-content/uploads/2013/04/Download-button-small3.jpg">
-
-</a>
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <div class="container text-center">
-                <hr />
-
-                <hr>
-                <div class="row">
-
-                    <div class="col-lg-12">
-                        <ul class="nav nav-pills nav-justified">
-
-
-
-                            <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
-                        </ul>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12">
-                                <h2>Contact Us</h2>
-                                <p id="">NB Gardens Ltd</p>
-                                <p id="Address">25 Gardens avenue</p>
-                                <p id="City">Shire</p>
-                                <p id="County">Mordor</p>
-                                <p id="Post Code">4R4G0RN</p>
-                                <p id="Telephone">0782760293</p>
-                                <p id="Email">Send mail pls</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
+        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
     </body>
-    <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/slider.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
-
 
 </html>
