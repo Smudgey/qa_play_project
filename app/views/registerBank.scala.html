@@ -1,5 +1,5 @@
-@(form: Form[Payment])(implicit session: Session)
-@main("Payment") {
+@(implicit session: Session)
+@main("Register") {
     <style>
     .vcenter {
         margin: 5% 25%;
@@ -11,7 +11,7 @@
             <div class="vcenter">
                 <div><h2>Enter Payment Details</h2></div>
 
-                @helper.form(routes.PaymentController.registerPayment()) {
+                @helper.form(routes.RegisterController.createCard()) {
                     <div class="col-md-8">
                         <div>
                             <div class='form-group col-md-12 required'>
@@ -49,3 +49,5 @@
         </div>
     </div>
 }
+
+

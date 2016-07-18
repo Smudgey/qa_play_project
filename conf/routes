@@ -1,25 +1,51 @@
+<<<<<<< HEAD
 GET         /                    controllers.HomeController.index
 POST        /                    controllers.LoginController.validateLogin
 GET         /catalogue           controllers.CatalogueController.doGrid
-POST         /aboutContact       controllers.AboutContactController.createEnquiry
+POST         /aboutContact       controllers.AboutContactController.createEnquire
 
-# An example controller showing a sample home page
-GET         /view-product        controllers.ProductViewController.viewProduct(pid: Int)
-
-POST        /login               controllers.LoginController.validateLogin
-GET         /login               controllers.LoginController.login
-
-POST        /register            controllers.RegisterController.createUser
-GET         /register            controllers.RegisterController.register
-
-GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
-
-GET         /aboutContact        controllers.AboutContactController.aboutAndContact
-
-GET         /payment             controllers.PaymentController.index
-GET         /paymentConfirmed    controllers.PaymentConfirmedController.index
+GET         /MyAccount                controllers.MyAccountController.MyAccount
 
 
-GET         /checkout            controllers.CheckoutBasketController.checkoutBasket
+
+POST        /manageAccount            controllers.ManageAccountController.updateAccount
+GET         /manageAccount            controllers.ManageAccountController.ManageAccounts
+
+
+
+GET         /viewAccount              controllers.ViewAccountController.ViewAccounts
+GET         /purchaseHistory          controllers.PurchaseHistoryController.showPurchase
+
+
+GET         /catalogue                controllers.CatalogueController.show(query:String)
+POST        /catalogue                controllers.SearchController.search
 
 GET         /adminEnquiries      controllers.AboutContactController.printEnquiries
+GET         /view-product             controllers.ProductViewController.viewProduct(pid: Int)
+
+POST        /login                    controllers.LoginController.validateLogin
+GET         /login                    controllers.LoginController.login
+
+GET         /logout                   controllers.LoginController.logout
+
+GET         /register                 controllers.RegisterController.register
+POST        /register/address         controllers.RegisterController.createUser
+GET         /register/address         controllers.RegisterController.address
+POST        /register/bank            controllers.RegisterController.createAddress
+GET         /register/bank            controllers.RegisterController.bank
+POST        /                         controllers.RegisterController.createCard
+
+POST        /payment                  controllers.PaymentController.registerPayment
+GET         /payment                  controllers.PaymentController.payment
+POST        /payment/confirmed        controllers.PaymentController.paymentProcessed(orderID: String)
+
+GET         /aboutContact             controllers.AboutContactController.aboutAndContact
+
+GET         /basket                   controllers.BasketController.basket
+POST        /basket                   controllers.BasketController.add
+GET         /basket/removed           controllers.BasketController.removeItem(pid: Int)
+GET         /basket/0                 controllers.BasketController.clear
+
+GET         /checkout                 controllers.BasketController.checkout
+
+GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)

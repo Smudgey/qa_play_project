@@ -1,0 +1,45 @@
+@import scala.collection.mutable.ArrayBuffer
+
+
+@(form: Form[Int])(products: Array[Product])(implicit session: Session)
+
+<style>
+#grid-p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+
+@for(p <- products) {
+    <div class="item  col-xs-4 col-lg-4" >
+        <div class="thumbnail">
+            <a href="@routes.ProductViewController.viewProduct(p.pid)">
+                <img class="group list-group-image" src="http://notyourgrandmasgardengnomes.com/wp-content/uploads/2015/05/naughty-gnomes-610x343.jpg" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading">
+                    @p.name</h4>
+                </div>
+            </a>
+
+            <p id = "grid-p" class="group inner list-group-item-text">
+            @p.description
+            </p>
+            <p class="group inner list-group-item-text">
+                    We have <strong><em>@p.stock</em></strong> in stock</p>
+            <div class="row">
+                <div class="col-xs-20 col-md-6">
+                    <p class="lead">
+                                £@p.price</p>
+                </div>
+                @helper.form(routes.BasketController.add){
+                    <input type="hidden" name="pid" value="@p.pid">
+                <div class="col-xs-12 col-md-6">
+                    <input type="submit" class="btn btn-success" href="#" value ="Add to basket">
+                </div>
+                }
+
+            </div>
+        </div>
+    </div>
+}
