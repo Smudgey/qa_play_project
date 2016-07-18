@@ -1,60 +1,153 @@
 body {
-  padding-top: 70px;
-  padding-bottom: 30px;
+    padding-top: 70px;
+    padding-bottom: 30px;
 }
 
 .theme-dropdown .dropdown-menu {
-  position: static;
-  display: block;
-  margin-bottom: 20px;
+    position: static;
+    display: block;
+    margin-bottom: 20px;
 }
 
 .theme-showcase > p > .btn {
-  margin: 5px 0;
+    margin: 5px 0;
+}
+
+@font-face {
+    font-family: logoFont;
+    src: url("/assets/fonts/BADABB__.TTF");
+    font-size: 30px !important;
+}
+
+.navbar-brand {
+    font-family: logoFont;
 }
 
 .theme-showcase .navbar .container {
-  width: auto;
+    width: auto;
 }
 
-
 #custom-search-input {
-        margin:0;
-        margin-top: 10px;
-        padding: 0;
-        width:50%;
-        margin: auto;
-    }
- 
-    #custom-search-input .search-query {
-        padding-right: 3px;
-        padding-right: 4px \9;
-        padding-left: 3px;
-        padding-left: 4px \9;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
- 
-        margin-bottom: 0;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
- 
-    #custom-search-input button {
-        border: 0;
-        background: none;
-        /** belows styles are working good */
-        padding: 2px 5px;
-        margin-top: 2px;
-        position: relative;
-        left: -28px;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
-        margin-bottom: 0;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-        color:#D9230F;
-    }
- 
-    .search-query:focus + button {
-        z-index: 3;   
-    }
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+    width: 50%;
+    margin: auto;
+}
+
+#custom-search-input .search-query {
+    padding-right: 3px;
+    padding-right: 4px \9;
+    padding-left: 3px;
+    padding-left: 4px \9;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#custom-search-input button {
+    border: 0;
+    background: none;
+    /** belows styles are working good */
+    padding: 2px 5px;
+    margin-top: 2px;
+    position: relative;
+    left: -28px;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #D9230F;
+}
+
+.search-query:focus + button {
+    z-index: 3;
+}
+
+/* navbar */
+.navbar-default {
+    background-color: #a80314;
+    border-bottom: #000 solid 1px;
+}
+
+/* title */
+.navbar-default .navbar-brand {
+    color: #a80314;
+    border-color: transparent;
+    -webkit-transition: color 0.5s ease-in-out;
+
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #000;
+    border-color: transparent;
+    -webkit-transition: color 0.5s ease-in-out;
+}
+
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #a80314;
+    -webkit-transition: color 0.5s ease-in-out;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #000;
+    -webkit-transition: color 0.5s ease-in-out;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    -webkit-transition: color 0.5s ease-in-out;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #000;
+    background-color: #a80314;
+}
+
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    -webkit-transition: color 0.5s ease-in-out;
+}
+
+.loginDropdown > li {
+    text-align: center;
+    margin: 5px;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: #5d0311;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #a80314;
+    outline: 0 none;
+}
+
+.searchBar {
+    max-width: 1000px;
+    margin: 30px 25% 40px;
+}

@@ -47,3 +47,5 @@ POST        /checkout                 controllers.PaymentController.checkoutBask
 
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
+GET         /aboutContact             controllers.AboutContactController.aboutAndContact
+POST        /aboutContact             controllers.AboutContactController.createEnquiry
