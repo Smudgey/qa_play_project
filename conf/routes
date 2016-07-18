@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-GET         /                    controllers.HomeController.index
-POST        /                    controllers.LoginController.validateLogin
-GET         /catalogue           controllers.CatalogueController.doGrid
-POST         /aboutContact       controllers.AboutContactController.createEnquire
+GET         /                         controllers.HomeController.index
 
 GET         /MyAccount                controllers.MyAccountController.MyAccount
 
@@ -20,7 +16,6 @@ GET         /purchaseHistory          controllers.PurchaseHistoryController.show
 GET         /catalogue                controllers.CatalogueController.show(query:String)
 POST        /catalogue                controllers.SearchController.search
 
-GET         /adminEnquiries      controllers.AboutContactController.printEnquiries
 GET         /view-product             controllers.ProductViewController.viewProduct(pid: Int)
 
 POST        /login                    controllers.LoginController.validateLogin
@@ -50,3 +45,6 @@ POST        /basket/update            controllers.BasketController.update
 GET         /checkout                 controllers.BasketController.checkout
 
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
+
+GET         /aboutContact             controllers.AboutContactController.aboutAndContact
+POST        /aboutContact             controllers.AboutContactController.createEnquiry

@@ -1,3 +1,5 @@
+@(implicit session: Session)
+
 @main("Admin panel: Enquiries") {
     @for(enquiry <- Enquiry.enquiries){
         <b>Name</b> @enquiry.name

@@ -41,7 +41,7 @@ class AboutContactController @Inject() extends Controller{
 
   def printEnquiries() = Action{
     implicit request =>
-    Ok(views.html.enquiriesAdmin())
+    Ok(views.html.enquiriesAdmin(request.session))
   }
 
 }

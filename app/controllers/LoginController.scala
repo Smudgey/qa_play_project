@@ -61,7 +61,7 @@ class LoginController @Inject extends Controller {
     }
   }
 
-  def logout() = Action {
+  def logout = Action {
     implicit request =>
       Redirect(routes.HomeController.index()).withSession()
   }
