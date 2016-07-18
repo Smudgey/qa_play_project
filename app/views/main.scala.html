@@ -25,6 +25,12 @@
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/catalogue.css")"/>
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme.css")">
 
+        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/pageChanger.js")"></script>
+
     </head>
 
     <body role="document">
@@ -43,8 +49,8 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="@routes.HomeController.index">Home</a></li>
-                        <li><a href="@routes.CatalogueController.show("")">Catalogue</a></li>
+                        <li id="homePageCategory" class="active"><a href="@routes.HomeController.index">Home</a></li>
+                        <li id="catalogueCategory"><a href="@routes.CatalogueController.show("")">Catalogue</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gnomes <span class="caret"></span></a>
@@ -173,11 +179,6 @@
                 </div>
             </div>
         </div>
-
-        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
     </body>
 
 </html>
