@@ -1,0 +1,85 @@
+@import _root_.models.OrderLine
+@import views.html.helper.inputRadioGroup
+@import play.api.Play.current
+@import play.api.i18n.Messages.Implicits._
+
+@(checkoutForm: Form[String])(implicit session: Session)
+@main("Basket") {
+
+<div class ="container">
+    <div class = "row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h5><span class="glyphicon glyphicon-shopping-cart"></span>NBGardens Basket</h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <a class="btn btn-primary btn-sm btn-block" style ="max-width: 50%; float: right; " href="@routes.CatalogueController.show("")">
+                                <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "panel-body">
+                    <p>There are currently <strong><em>@OrderLine.size</em></strong> items in your basket
+                    </p>
+                    @if(!OrderLine.basket.isEmpty){
+                        @for(oli <- OrderLine.basket) {
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>@oli.prod.name</strong></h4>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="col-xs-6 text-right">
+                                    <h6><strong>@oli.prod.price</h6>
+                                </div>
+                                <div class="col-xs-2 "><h6>x</h6></div>
+                                <div class="col-xs-4"><h6>@oli.quantity</h6></div>
+
+                            </div>
+                        </div>
+                        <hr>
+                        }
+                    }
+                    @helper.form(routes.PaymentController.checkoutBasket) {
+                    <div class="col-md-12 centre">
+                        <div class="vcenter">
+                            <div class ="form-group col-xs-12">
+                                <h3>Payment Options</h3>
+                                @inputRadioGroup(checkoutForm("payment"), options = Seq("payLater" -> "Buy Now, Pay Later", "payNow" -> "Pay Now"),
+                                '_label -> "Payment",
+                                '_error -> checkoutForm("payment").
+                                error.map(_.withMessage("Select Payment Method"))
+                                )
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="panel-footer">
+
+                    <div class="row text-center">
+                        <div class = "col-xs-3">
+                            <a class="btn btn-warning" style="float:left;" href="@routes.BasketController.basket">Back to Edit Basket</a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="submit" class="btn btn-success btn-block" value="Continue to Payment">
+                        </div>
+                    </div>
+                </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+}

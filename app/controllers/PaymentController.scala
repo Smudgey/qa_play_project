@@ -1,17 +1,20 @@
 package controllers
 
 import javax.inject._
+
 import play.api._
 import play.api.mvc._
-import play.api.data._
-import play.api.data.Forms.{mapping, number, nonEmptyText}
+import play.api.data.{Form, _}
+import play.api.data.Forms._
 import models._
+import play.api.i18n.I18nSupport
+import play.api.i18n.MessagesApi
 
 /**
   * Created by Luke on 07/07/2016.
   */
 @Singleton
-class PaymentController @Inject() extends Controller {
+class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controller {
 
   /**
     * Create a form of type Payment
@@ -28,8 +31,27 @@ class PaymentController @Inject() extends Controller {
     (Payment.unapply)
   )
 
+  private val checkoutForm = Form(
+    single(
+      "payment" -> nonEmptyText
+    )
+  )
+
+  def checkout = Action {
+    implicit request =>
+      Ok(views.html.checkout(checkoutForm)(request.session))
+  }
+
+  def checkoutBasket = Action {
+    implicit request =>
+      println(checkoutForm.bindFromRequest().data("payment"))
+      Ok(views.html.payment(cardForm)(request.session))
+  }
+
+
   /**
     * Load the payment page, passing in the card form
+    *
     * @return
     */
   def payment() = Action {
@@ -39,6 +61,7 @@ class PaymentController @Inject() extends Controller {
 
   /**
     * Payment is confirmed, redirect of payment confirmation screen
+    *
     * @param orderID
     * @return
     */

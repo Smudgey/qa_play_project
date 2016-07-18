@@ -42,7 +42,8 @@ GET         /basket/removed           controllers.BasketController.removeItem(pi
 GET         /basket/0                 controllers.BasketController.clear
 POST        /basket/update            controllers.BasketController.update
 
-GET         /checkout                 controllers.BasketController.checkout
+GET         /checkout                 controllers.PaymentController.checkout
+POST        /checkout                 controllers.PaymentController.checkoutBasket
 
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
