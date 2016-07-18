@@ -3,71 +3,72 @@
 * message to display.
 *@
 @(message: String)(form: Form[Login])(implicit session: Session)
-@*
-* Call the `main` template with two arguments. The first
-* argument is a `String` with the title of the page, the second
-* argument is an `Html` object containing the body of the page.
-*@
-@main("Home") {
+    @*
+    * Call the `main` template with two arguments. The first
+    * argument is a `String` with the title of the page, the second
+    * argument is an `Html` object containing the body of the page.
+    *@
+    @main("Home") {
 
-    @message
+        @message
 
 
-    <style>
-    .later {
-        -webkit-clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
-        clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
-    }
+        <style>
+        .later {
+            -webkit-clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
+            clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
+        }
 
-    .margin > div > a > img {
-        max-height: 1000px;
-        max-width: 500px;
-        margin: 5px;
-    }
+        .margin > div > a > img {
+            max-height: 1000px;
+            max-width: 500px;
+            margin: 5px;
+        }
 
-    #myCarousel {
-        margin-bottom: 40px;
-    }
+        #myCarousel {
+            margin-bottom: 40px;
+        }
 
-    </style>
+        </style>
 
-    <div class="container">
+        <script>changePage("home")</script>
+        <div class="container">
 
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-                    <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
+                        <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
 
-                    <div class="item active">
-                        <img class="image-responsive" src="http://placehold.it/1300x700/ffffff"/>
+                        <div class="item active">
+                            <img class="image-responsive" src="http://placehold.it/1300x700/ffffff"/>
+                        </div>
+                        <div class="item">
+                            <img class="image-reponsive" src="http://placehold.it/1300x700/ffffff">
+                        </div>
+                        <div class="item">
+                            <img class="image-reponsive" src="http://placehold.it/1300x700/ffffff">
+                        </div>
                     </div>
-                    <div class="item">
-                        <img class="image-reponsive" src="http://placehold.it/1300x700/ffffff">
-                    </div>
-                    <div class="item">
-                        <img class="image-reponsive" src="http://placehold.it/1300x700/ffffff">
-                    </div>
+
                 </div>
-
             </div>
+
+            <div class="margin text-center">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/clearance.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/new_arrivals.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/we_recommend.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/most_popular.png")"/></a>
+                </div>
+            </div>
+
+
         </div>
-
-        <div class="margin text-center">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/clearance.png")"/></a>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/new_arrivals.png")"/></a>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/we_recommend.png")"/></a>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/most_popular.png")"/></a>
-            </div>
-        </div>
-
-
-    </div>
-}
+    }
