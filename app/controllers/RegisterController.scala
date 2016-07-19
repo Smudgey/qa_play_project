@@ -130,7 +130,6 @@ class RegisterController @Inject extends Controller {
         cardForm.bindFromRequest().data("expirationMonth"),
         cardForm.bindFromRequest().data("expirationYear")
       )
-      Login.toggleLogin()
       Redirect(routes.HomeController.index())
     }
   }
