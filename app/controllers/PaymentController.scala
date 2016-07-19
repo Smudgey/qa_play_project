@@ -1,17 +1,22 @@
 package controllers
 
 import javax.inject._
+
 import play.api._
 import play.api.mvc._
-import play.api.data._
-import play.api.data.Forms.{mapping, number, nonEmptyText}
+import play.api.data.{Form, _}
+import play.api.data.Forms._
 import models._
+import play.api.i18n.I18nSupport
+import play.api.i18n.MessagesApi
+
+import scala.collection.mutable.ArrayBuffer
 
 /**
   * Created by Luke on 07/07/2016.
   */
 @Singleton
-class PaymentController @Inject() extends Controller {
+class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controller {
 
   /**
     * Create a form of type Payment
@@ -28,17 +33,51 @@ class PaymentController @Inject() extends Controller {
     (Payment.unapply)
   )
 
-  /**
-    * Load the payment page, passing in the card form
-    * @return
-    */
-  def payment() = Action {
+  private val checkoutForm = Form(
+    single(
+      "Payment" -> nonEmptyText
+    )
+  )
+
+  def checkout = Action {
     implicit request =>
-    Ok(views.html.payment(cardForm)(request.session))
+      Ok(views.html.checkout(checkoutForm)(request.session))
+  }
+
+  def checkoutBasket = Action {
+    implicit request =>
+      val in = checkoutForm.bindFromRequest().data("payment")
+      var payMthd : PaymentMethod.Value = null
+      if(in == "payNow"){
+        payMthd = PaymentMethod.PayNow
+      } else if(in == "payLater"){
+        payMthd = PaymentMethod.PayLater
+      } else {
+        payMthd = PaymentMethod.Other
+      }
+      val cust = Login.findLogin(request.session.data("connected")).get.lid
+      val ol = OrderLine.basket
+      val price = OrderLine.totalPrice(ol)
+      val status = OrderStatus.Ordered
+      val time = Order.today
+
+      val o = Order(cust, ol, price, status, payMthd, time)
+      Ok(views.html.payment(o)(cardForm)(request.session))
+
   }
 
   /**
+    * Load the payment page, passing in the card form
+    *
+    * @return
+    */
+//  def payment = Action {
+//    implicit request =>
+//    Ok(views.html.payment(order)(cardForm)(request.session))  }
+
+  /**
     * Payment is confirmed, redirect of payment confirmation screen
+    *
     * @param orderID
     * @return
     */

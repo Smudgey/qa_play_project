@@ -8,6 +8,8 @@ import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
   * Created by Marko on 11/07/2016.
   */
@@ -59,6 +61,7 @@ class BasketController @Inject() extends Controller {
 
       OrderLine.findOrderLine(pid).get.quantity = quant
       Product.findProduct(pid).get.stock -= quant
+
       OrderLine.getSize
       Redirect(routes.BasketController.basket)
   }
@@ -75,10 +78,10 @@ class BasketController @Inject() extends Controller {
       }
   }
 
-  def checkout() = Action {
-    implicit request =>
-      Ok(views.html.checkoutBasket(request.session))
-
-  }
+//  def checkout() = Action {
+//    implicit request =>
+//      Ok(views.html.checkout()(request.session))
+//
+//  }
 
 }

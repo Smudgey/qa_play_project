@@ -1,4 +1,4 @@
-@(form: Form[Payment])(implicit session: Session)
+@(order: Order)(form: Form[Payment])(implicit session: Session)
 @main("Payment") {
     <style>
     .vcenter {
@@ -9,6 +9,7 @@
     <div class="containter">
         <div class="col-md-12 centre">
             <div class="vcenter">
+                <p>@order</p>
                 <div><h2>Enter Payment Details</h2></div>
 
                 @helper.form(routes.PaymentController.registerPayment()) {
