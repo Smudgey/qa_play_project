@@ -10,6 +10,8 @@ import models._
 import play.api.i18n.I18nSupport
 import play.api.i18n.MessagesApi
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
   * Created by Luke on 07/07/2016.
   */
@@ -53,7 +55,16 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
       } else {
         payMthd = PaymentMethod.Other
       }
-      Ok(views.html.payment(cardForm)(request.session))
+      val cust = Login.findLogin(request.session.data("connected")).get.lid
+      val ol = OrderLine.basket
+      val price = OrderLine.totalPrice(ol)
+      val status = OrderStatus.Ordered
+      val time = Order.today
+
+      val o = Order(cust, ol, price, status, payMthd, time)
+      println(o)
+
+      Ok(views.html.payment(o)(cardForm)(request.session))
 
   }
 
@@ -62,9 +73,9 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
     *
     * @return
     */
-  def payment = Action {
-    implicit request =>
-    Ok(views.html.payment(payMthd)(cardForm)(request.session))  }
+//  def payment = Action {
+//    implicit request =>
+//    Ok(views.html.payment(order)(cardForm)(request.session))  }
 
   /**
     * Payment is confirmed, redirect of payment confirmation screen

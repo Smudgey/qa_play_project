@@ -26,7 +26,7 @@ GET         /register/bank            controllers.RegisterController.bank
 POST        /                         controllers.RegisterController.createCard
 
 POST        /payment                  controllers.PaymentController.registerPayment
-GET         /payment                  controllers.PaymentController.payment
+
 POST        /payment/confirmed        controllers.PaymentController.paymentProcessed(orderID: String)
 
 GET         /aboutContact             controllers.AboutContactController.aboutAndContact
