@@ -62,8 +62,6 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
       val time = Order.today
 
       val o = Order(cust, ol, price, status, payMthd, time)
-      println(o)
-
       Ok(views.html.payment(o)(cardForm)(request.session))
 
   }
