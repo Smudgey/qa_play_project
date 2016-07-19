@@ -5,7 +5,6 @@
 * object to insert into the body of the page.
 *@
 @(title: String)(content: Html)(implicit session: Session)
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -106,8 +105,8 @@
                                 <li>
                                     <div class="btn-group">
                                         <button type="submit" class="btn btn-default">Login</button>
-                                        <button type="button" href="@routes.RegisterController.register" class="btn btn-default">
-                                            Register</button>
+                                        <a type="button" href="@routes.RegisterController.register" class="btn btn-default">
+                                            Register</a>
                                     </div>
                                 </li>
                             </ul>
@@ -117,9 +116,17 @@
                     } else {
                         <div>
                             <div class="btn-group">
-                                <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">
-                                    Manage Account</a>
+                                <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Account
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="@routes.ManageAccountController.updateAccount()">My Account</a></li>
+                                    <li><a href="@routes.PurchaseHistoryController.showPurchase">Purchase History</a></li>
+                                </ul>
+
                                 <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+
                             </div>
                         </div>
                     }
@@ -147,35 +154,40 @@
 
             <div class="container text-center">
                 <hr>
+                <h2>Download our 2016 brochure now!</h2>
+
+                <a href="http://www.literacytrust.org.uk/assets/0000/6825/JohnCena1.pdf" download="">
+                    <img src="http://bluebirdexperience.com/wp-content/uploads/2013/04/Download-button-small3.jpg">
+
+                </a>
+
+            </div>
+            <div class="container text-center">
+                <h4>Contact Us</h4>
+                <hr />
+                <div class="row" align="left" style="display: inline-block">
+                    <div class="col-sm-12 col-md-12">
+                        <p id="address">NB Gardens, Head Office<br/>
+                            Gnome Road<br/>
+                            Stockport<br/>
+                            Greater Manchester<br/>
+                            M50 3UB<br/></p>
+                    </div>
+                </div>
+                <div class="row" align="right" style="display: inline-block;">
+                    <div class="col-sm-12 col-md-12">
+                        <p id="Telephone">#0738201883</p>
+                        <p id="Email">enquiriesnbgardens.com</p>
+                    </div>
+                </div>
 
                 <div class="col-lg-12">
                     <ul class="nav nav-pills nav-justified">
 
+
                         <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
                     </ul>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12">
-                            <h2>Contact Us</h2>
-                            <p id="">NB Gardens Ltd</p>
-                            <p id="Address">25 Gardens avenue</p>
-                            <p id="City">Shire</p>
-                            <p id="County">Mordor</p>
-                            <p id="Post Code">4R4G0RN</p>
-                            <p id="Telephone">0782760293</p>
-                            <p id="Email">Send mail pls</p>
-                            <div class="row">
 
-                                <div class="col-lg-12">
-                                    <ul class="nav nav-pills nav-justified">
-
-
-                                        <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
