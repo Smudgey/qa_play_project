@@ -19,45 +19,62 @@
             clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
         }
 
-        div.border > div img {
-            border: solid #fff 1px;
+        .margin > div > a > img {
+            max-height: 1000px;
+            max-width: 500px;
+            margin: 5px;
         }
 
-        #sliderImages > img {
-            display: none;
+        #myCarousel {
+            margin-bottom: 40px;
         }
 
         </style>
 
+        <script>changePage("home")</script>
+        <div class="container">
 
-        <div id="homeSlider">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-            <div id="currentImage" class="col-md-12 col-lg-12">
-                <img src="">
+                        <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+
+                        <div class="item active">
+                            <a href= "@routes.HomeController.index"> <img class="image-responsive" src="http://placehold.it/1300x700/ffffff"/> </a>
+                        </div>
+                        <div class="item">
+                            <a href= "@routes.HomeController.index"> <img class="image-reponsive" src="http://placehold.it/1300x700/ffffff"> </a>
+                        </div>
+                        <div class="item">
+                            <a href= "@routes.HomeController.index"> <img class="image-reponsive" src="http://placehold.it/1300x700/ffffff"> </a>
+                        </div>
+                    </div>
+
+
+           
+
+
+
+            <div class="margin text-center">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/clearance.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/new_arrivals.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/we_recommend.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href=""><img class="image-responsive" src="@routes.Assets.versioned("images/most_popular.png")"/></a>
+
+                </div>
             </div>
 
-            <div id="sliderImages">
-                <a href="@routes.HomeController.index"> <img src="https://i.imgsafe.org/654ff3d7c5.jpg"/> </a>
-                <img src="https://i.imgsafe.org/655cb5def4.jpg">
-                <img src="https://i.imgsafe.org/65509218e6.jpg">
+                </div>
             </div>
         </div>
-
-        <div class="col-md-12 col-lg-12 border">
-            <div class="row inline-block">
-                <div class="col-md-6 col-lg-6">
-                   <a href="@routes.HomeController.index"> <img src="https://i.imgsafe.org/657cbad1af.jpg"/> </a>
-                </div>
-                <div class="col-md-6 col-lg-6">
-                   <a href="@routes.HomeController.index"> <img src="https://i.imgsafe.org/77d68d9f63.jpg"/> </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-6">
-                   <a href="@routes.HomeController.index"> <img src="https://i.imgsafe.org/657cc6b65f.jpg"/> </a>
-                </div>
-                <div class="@routes.HomeController.index">
-                   <a href="@routes.HomeController.index"> <img src="https://i.imgsafe.org/657cc1311c.jpg"/> </a>
                 </div>
             </div>
         </div>

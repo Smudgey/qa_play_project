@@ -7,7 +7,7 @@ import play.api.mvc
 import play.api.mvc.Controller
 import play.api.data._
 import play.api.data.Forms._
-import models.{CustomerDetails, LoginSession}
+import models.{CustomerDetails, LoginSession, Order}
 
 class ViewAccountController @Inject extends Controller {
   private val viewAccountForm: Form[CustomerDetails] = Form(
@@ -34,7 +34,6 @@ class ViewAccountController @Inject extends Controller {
 
 
   }
-
 
 
 }

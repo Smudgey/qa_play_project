@@ -10,6 +10,8 @@ GET         /manageAccount            controllers.ManageAccountController.Manage
 
 
 GET         /viewAccount              controllers.ViewAccountController.ViewAccounts
+GET         /purchaseHistory          controllers.PurchaseHistoryController.showPurchase
+
 
 GET         /catalogue                controllers.CatalogueController.show(query:String)
 POST        /catalogue                controllers.SearchController.search
@@ -34,11 +36,15 @@ POST        /payment/confirmed        controllers.PaymentController.paymentProce
 
 GET         /aboutContact             controllers.AboutContactController.aboutAndContact
 
-GET         /basket                   controllers.BasketController.add(pid: Int)
+GET         /basket                   controllers.BasketController.basket
+POST        /basket                   controllers.BasketController.add
 GET         /basket/removed           controllers.BasketController.removeItem(pid: Int)
-GET         /basket/0                 controllers.BasketController.clear()
+GET         /basket/0                 controllers.BasketController.clear
+POST        /basket/update            controllers.BasketController.update
 
 GET         /checkout                 controllers.BasketController.checkout
 
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
+GET         /aboutContact             controllers.AboutContactController.aboutAndContact
+POST        /aboutContact             controllers.AboutContactController.createEnquiry
