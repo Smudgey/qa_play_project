@@ -49,7 +49,7 @@
                                                   </button>
                                               </span>
                                             <!-- Removed disabled="disabled" as the form crashes if the input field is not edited. Add javascript to enable the input field on submit button click?-->
-                                            <input type="text" name="quant[@i]" class="form-control input-number"  disabled="disabled" value="@oli.quantity" min="0" max="@oli.prod.stock">
+                                            <input type="text" name="quant[@i]" class="form-control input-number"  value="@oli.quantity" min="0" max="@oli.prod.stock">
                                               <span class="input-group-btn">
                                                   <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@i]">
                                                       <span class="glyphicon glyphicon-plus"></span>
@@ -89,7 +89,7 @@
                             <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
                         </div>
                         <div style="width: auto;" class="col-xs-3">
-                            <a class="btn btn-success btn-block" href="@routes.BasketController.checkout">
+                            <a class="btn btn-success btn-block" href="@routes.PaymentController.checkout">
                                 Checkout Basket <span class="glyphicon glyphicon-play"></span>
                             </a>
                         </div>

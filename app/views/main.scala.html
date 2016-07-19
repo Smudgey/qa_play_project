@@ -116,9 +116,17 @@
                     } else {
                         <div>
                             <div class="btn-group">
-                                <a href="@routes.ManageAccountController.ManageAccounts" class="btn btn-default">
-                                    Manage Account</a>
+                                <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Account
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="@routes.ManageAccountController.updateAccount()">My Account</a></li>
+                                    <li><a href="@routes.PurchaseHistoryController.showPurchase">Purchase History</a></li>
+                                </ul>
+
                                 <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+
                             </div>
                         </div>
                     }
