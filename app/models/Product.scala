@@ -33,7 +33,7 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
 
 object Product {
 
-  var list = new ArrayBuffer[Product]
+  var list = new ArrayBuffer[Product]()
 
   //special price will be a negative int, minus from normal price on front end
   //clearance price will replace normal price if different, will be displayed in clearance section
