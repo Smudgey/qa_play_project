@@ -33,7 +33,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   private val checkoutForm = Form(
     single(
-      "payment" -> nonEmptyText
+      "Payment" -> nonEmptyText
     )
   )
 
@@ -44,20 +44,27 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   def checkoutBasket = Action {
     implicit request =>
-      println(checkoutForm.bindFromRequest().data("payment"))
+      val in = checkoutForm.bindFromRequest().data("payment")
+      var payMthd : PaymentMethod.Value = null
+      if(in == "payNow"){
+        payMthd = PaymentMethod.PayNow
+      } else if(in == "payLater"){
+        payMthd = PaymentMethod.PayLater
+      } else {
+        payMthd = PaymentMethod.Other
+      }
       Ok(views.html.payment(cardForm)(request.session))
-  }
 
+  }
 
   /**
     * Load the payment page, passing in the card form
     *
     * @return
     */
-  def payment() = Action {
+  def payment = Action {
     implicit request =>
-    Ok(views.html.payment(cardForm)(request.session))
-  }
+    Ok(views.html.payment(payMthd)(cardForm)(request.session))  }
 
   /**
     * Payment is confirmed, redirect of payment confirmation screen

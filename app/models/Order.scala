@@ -11,6 +11,7 @@ import scala.collection.mutable.ArrayBuffer
 case class Order(id: Int, orderLines:ArrayBuffer[OrderLine], totalPrice:Double, status:OrderStatus.Value, paymentMethod: PaymentMethod.Value, time:String = Order.today, account:Int){
 
   val orderID = java.util.UUID.randomUUID
+  val payment
 }
 
 object Order{

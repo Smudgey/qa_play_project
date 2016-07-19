@@ -6,7 +6,7 @@
 @(checkoutForm: Form[String])(implicit session: Session)
 @main("Basket") {
 
-<div class ="container">
+<div class="container" xmlns:margin="http://www.w3.org/1999/xhtml">
     <div class = "row">
         <div class="col-xs-12">
             <div class="panel panel-info">
@@ -45,19 +45,18 @@
                         <hr>
                         }
                     }
+                    <div class ="form-group col-xs-4 text-center" >
                     @helper.form(routes.PaymentController.checkoutBasket) {
-                    <div class="col-md-12 centre">
-                        <div class="vcenter">
-                            <div class ="form-group col-xs-12">
-                                <h3>Payment Options</h3>
-                                @inputRadioGroup(checkoutForm("payment"), options = Seq("payLater" -> "Buy Now, Pay Later", "payNow" -> "Pay Now"),
-                                '_label -> "Payment",
-                                '_error -> checkoutForm("payment").
-                                error.map(_.withMessage("Select Payment Method"))
-                                )
-                            </div>
-                        </div>
+
+                            <h3>Payment Options</h3>
+                            @inputRadioGroup(checkoutForm("payment"), options = Seq("payLater" -> "Buy Now, Pay Later", "payNow" -> "Pay Now"),
+                            '_label -> "",
+                            '_error -> checkoutForm("payment").
+                            error.map(_.withMessage("Select Payment Method")),
+                            '_class -> "form-control")
+
                     </div>
+
 
                 </div>
 
