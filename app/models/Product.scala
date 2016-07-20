@@ -11,7 +11,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Administrator on 06/07/2016.
   */
 
-case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: CategoryAttributes.Value, URL: String) {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: CategoryAttributes.Value, URL: String) extends URL {
 
 
   def decrementStock(quantity: Int, pwareQuantity: Int): Unit = {
@@ -82,6 +82,16 @@ object Product {
     this.add(Product(740, "Deck Chair", "Sit on a flag", 5, 0, 8.99, 8.99, 0, CategoryAttributes.Furniture, "http://imageshotfroguk.blob.core.windows.net/companies/Deckchairs-Online-UK/images/Deckchairs-Online-UK_218175_image.jpg"))
     this.add(Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99, 8.99, 0, CategoryAttributes.Furniture, "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"))
     this.add(Product(742, "Normal Chair", "An avergae chair with a fancy cover", 5, 0, 8.99, 6.0, 0, CategoryAttributes.Furniture, "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"))
+
+    Product.findProduct(701).get.urlList += "http://globe-views.com/dcim/dreams/gnome/gnome-02.jpg"
+    Product.findProduct(702).get.urlList += "http://www.gardengnomesetc.com/images/products/Snerdley_Shell_Seeking_Gnomes.jpg"
+    Product.findProduct(703).get.urlList += "http://cf.ltkcdn.net/garden/images/std/109913-277x425-History_gnomes.jpg"
+    Product.findProduct(704).get.urlList += "http://cdn.thisiswhyimbroke.com/images/military-lawn-gnomes.jpg"
+    Product.findProduct(705).get.urlList += "https://img1.etsystatic.com/040/0/9374951/il_570xN.638630311_1f17.jpg"
+    Product.findProduct(706).get.urlList += "http://ep.yimg.com/ay/gadgetbargains/gnominator-gnome-4.jpg"
+    Product.findProduct(706).get.urlList += "http://ep.yimg.com/ay/gadgetbargains/gnominator-gnome-4.jpg"
+
+
 
   }
 
