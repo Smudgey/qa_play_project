@@ -1,6 +1,5 @@
 package models
 
-
 import play.api.mvc.QueryStringBindable
 import scala.util.matching.Regex.MatchIterator
 
@@ -84,7 +83,7 @@ object Product {
     this.add(Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99, 8.99, 0, Category.Furniture))
     this.add(Product(742, "Normal Chair", "An avergae chair with a fancy cover", 5, 0, 8.99, 6.0, 0, Category.Furniture))
 
-    Product.findProduct(701).get.urlList += "http://globe-views.com/dcim/dreams/gnome/gnome-02.jpg"
+    Product.findProduct(701).get.urlList += "https://thumbs.dreamstime.com/x/ugly-gnome-15606748.jpg"
     Product.findProduct(702).get.urlList += "http://www.gardengnomesetc.com/images/products/Snerdley_Shell_Seeking_Gnomes.jpg"
     Product.findProduct(703).get.urlList += "http://cf.ltkcdn.net/garden/images/std/109913-277x425-History_gnomes.jpg"
     Product.findProduct(704).get.urlList += "http://cdn.thisiswhyimbroke.com/images/military-lawn-gnomes.jpg"

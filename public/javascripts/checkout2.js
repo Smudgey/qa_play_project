@@ -1,9 +1,10 @@
 //plugin bootstrap minus and plus
 //http://jsfiddle.net/laelitenetwork/puJ6G/
-$(document).ready(function() {
+
 $('.btn-number').click(function(e){
     e.preventDefault();
     console.log("click")
+
     fieldName = $(this).attr('data-field');
     type      = $(this).attr('data-type');
     var input = $("input[name='"+fieldName+"']");
@@ -33,7 +34,7 @@ $('.btn-number').click(function(e){
     }
 });
 $('.input-number').focusin(function(){
-
+    console.log("focus")
    $(this).data('oldValue', $(this).val());
 });
 $('.input-number').change(function() {
@@ -57,6 +58,7 @@ $('.input-number').change(function() {
         $(this).val($(this).data('oldValue'));
     }
 
+
 });
 $(".input-number").keydown(function (e) {
         console.log("keydown")
@@ -74,7 +76,3 @@ $(".input-number").keydown(function (e) {
             e.preventDefault();
         }
     });
-
-
-
-})
