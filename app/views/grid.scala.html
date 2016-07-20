@@ -15,7 +15,7 @@
     <div class="item  col-xs-4 col-lg-4" >
         <div class="thumbnail">
             <a href="@routes.ProductViewController.viewProduct(p.pid)">
-                <img class="group list-group-image" src="@p.URL" alt="" />
+                <img class="group list-group-image" src="@p.urlList" alt="" />
 
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
@@ -23,24 +23,22 @@
                 </div>
             </a>
 
-            <p id = "grid-p" class="group inner list-group-item-text">
-            @p.description
-            </p>
-            <p class="group inner list-group-item-text">
+                <p id = "grid-p" class="group inner list-group-item-text">
+                @p.description
+                </p>
+                <p class="group inner list-group-item-text">
                     We have <strong><em>@p.stock</em></strong> in stock</p>
-            <div class="row">
-                <div class="col-xs-20 col-md-6">
-                    <p class="lead">
+                <div class="row">
+                    <div class="col-xs-20 col-md-6">
+                        <p class="lead">
                                 £@p.price</p>
-                </div>
-                @helper.form(routes.BasketController.add){
-                    <input type="hidden" name="pid" value="@p.pid">
-                <div class="col-xs-12 col-md-6">
-                    <input type="submit" class="btn btn-success" href="#" value ="Add to basket">
-                </div>
-                }
+                    </div>
 
+                    <div class="col-xs-12 col-md-6">
+                        <a type="submit" class="btn btn-success" href="@routes.BasketController.add(p.pid)">Add to basket</a>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
