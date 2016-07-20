@@ -62,6 +62,8 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
       val time = Order.today
 
       val o = Order(cust, ol, price, status, payMthd, time)
+
+      //TODO Direct to the card payment page
       Ok(views.html.payment(o)(cardForm)(request.session))
 
   }

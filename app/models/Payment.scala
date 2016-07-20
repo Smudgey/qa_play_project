@@ -16,10 +16,6 @@ object Payment {
     Payment("Mark Kelly", "9485777685645321", 789, "02", "2017")
   )
 
-  def setPaymentMethod(payment: Payment): Unit ={
-
-  }
-
   /* Create a new payment */
   def createPayment(cardHolderName: String, cardNumber: String, cv: Int, expirationMonth: String, expirationYear: String): Boolean = {
     if(findCardNumber(cardNumber).isEmpty) {
