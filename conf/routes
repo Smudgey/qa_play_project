@@ -1,15 +1,8 @@
 GET         /                         controllers.HomeController.index
 
-GET         /MyAccount                controllers.MyAccountController.MyAccount
-
-
-
 POST        /manageAccount            controllers.ManageAccountController.updateAccount
 GET         /manageAccount            controllers.ManageAccountController.ManageAccounts
 
-
-
-GET         /viewAccount              controllers.ViewAccountController.ViewAccounts
 GET         /purchaseHistory          controllers.PurchaseHistoryController.showPurchase
 
 
@@ -31,7 +24,7 @@ GET         /register/bank            controllers.RegisterController.bank
 POST        /                         controllers.RegisterController.createCard
 
 POST        /payment                  controllers.PaymentController.registerPayment
-GET         /payment                  controllers.PaymentController.payment
+
 POST        /payment/confirmed        controllers.PaymentController.paymentProcessed(orderID: String)
 
 GET         /aboutContact             controllers.AboutContactController.aboutAndContact
@@ -42,7 +35,11 @@ GET         /basket/removed           controllers.BasketController.removeItem(pi
 GET         /basket/0                 controllers.BasketController.clear
 POST        /basket/update            controllers.BasketController.update
 
-GET         /checkout                 controllers.BasketController.checkout
+GET         /checkout                 controllers.PaymentController.checkout
+POST        /checkout                 controllers.PaymentController.checkoutBasket
+
+GET         /satisfactionForm         controllers.CustomerSatisfactionController.show
+POST        /satisfactionForm         controllers.CustomerSatisfactionController.submitForm
 
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 

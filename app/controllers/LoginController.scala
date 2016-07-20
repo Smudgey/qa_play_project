@@ -1,12 +1,10 @@
 package controllers
 
 import com.google.inject.Inject
-import models.{Login, LoginSession}
+import models.Login
 import play.api.data.Form
-import play.api.data.Forms.{mapping, nonEmptyText, number, text}
+import play.api.data.Forms.{mapping, nonEmptyText, text}
 import play.api.mvc.{Action, Controller}
-import play.api.mvc.Cookie
-import play.api.mvc.DiscardingCookie
 
 /**
   * Created by rytis on 07/07/16.
@@ -17,7 +15,7 @@ class LoginController @Inject extends Controller {
     mapping(
       "" -> text,
       "" -> text,
-      "username" -> nonEmptyText,
+      "email" -> nonEmptyText,
       "password" -> nonEmptyText
     )
     (Login.apply)

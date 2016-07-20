@@ -9,8 +9,6 @@ case class Login(lid: String, name: String, pass: String, email: String) {}
 
 object Login {
 
-  private var loggedIn = true
-
   // dummy data
   private var list = ArrayBuffer[Login](
     Login("101", "dave", "1234", ""),
@@ -33,16 +31,4 @@ object Login {
 
   def findLogin(email: String) = list.find(_.email == email.toLowerCase)
 
-  def toggleLogin(): Unit = {
-    if (loggedIn) {
-      loggedIn = false
-      // TODO logout message
-    }  else {
-      loggedIn = true
-    }
-  }
-
-  def getStatus() = {
-    loggedIn
-  }
 }
