@@ -1,4 +1,4 @@
-@(form: Form[Int])(p: Product)(implicit session: Session)
+@(p: Product)(implicit session: Session)
 
 @main("ProductView"){
 
@@ -40,16 +40,7 @@
             <p>
                 @p.description</p>
         </div>
-        <div class="col-sm-2 col-sm-4 col-md-4"> <!-- style="margin-top:15%" -->
-                <p>We have <strong><em>@p.stock</em></strong> in stock.</p>
-                <p>£@p.price</p>
-                @helper.form(routes.BasketController.add){
-                    <input type="hidden" name="pid" value="@p.pid">
-                    <div class="col-xs-12 col-md-6">
-                        <input type="submit" class="btn btn-success" href="#" value ="Add to basket">
-                    </div>
-                }
-        </div>
+
     </div>
 
 
