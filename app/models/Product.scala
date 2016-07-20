@@ -11,7 +11,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Administrator on 06/07/2016.
   */
 
-case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL {
 
 
   def decrementStock(quantity: Int, pwareQuantity: Int): Unit = {
@@ -82,6 +82,10 @@ object Product {
     this.add(Product(740, "Deck Chair", "Perfect for raking", 5, 0, 8.99, 8.99, 0, Category.Furniture))
     this.add(Product(741, "Table", "Perfect for raking", 5, 0, 8.99, 8.99, 0, Category.Furniture))
     this.add(Product(742, "Normal Chair", "Perfect for raking", 5, 0, 8.99, 6.0, 0, Category.Furniture))
+
+    Product.findProduct(701).get.UrlList += "https://upload.wikimedia.org/wikipedia/commons/7/72/German_garden_gnome.jpg"
+    Product.findProduct(702).get.UrlList += "http://kingofwallpapers.com/gnome/image-002.php?pic=/gnome/gnome-002.jpg"
+
 
   }
 
