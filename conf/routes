@@ -38,6 +38,9 @@ POST        /basket/update            controllers.BasketController.update
 GET         /checkout                 controllers.PaymentController.checkout
 POST        /checkout                 controllers.PaymentController.checkoutBasket
 
+GET         /satisfactionForm         controllers.CustomerSatisfactionController.show
+POST        /satisfactionForm         controllers.CustomerSatisfactionController.submitForm
+
 GET         /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
 GET         /aboutContact             controllers.AboutContactController.aboutAndContact
