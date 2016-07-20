@@ -5,8 +5,8 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Marko on 20/07/2016.
   */
-object URL {
+trait URL {
 
-  var UrlList = new ArrayBuffer[String]()
+  var urlList = new ArrayBuffer[String]()
 
 }

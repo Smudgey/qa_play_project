@@ -90,7 +90,7 @@ object Product {
     Product.findProduct(704).get.urlList += "http://cdn.thisiswhyimbroke.com/images/military-lawn-gnomes.jpg"
     Product.findProduct(705).get.urlList += "https://img1.etsystatic.com/040/0/9374951/il_570xN.638630311_1f17.jpg"
     Product.findProduct(706).get.urlList += "http://ep.yimg.com/ay/gadgetbargains/gnominator-gnome-4.jpg"
-    Product.findProduct(707).get.urlList += "http://farm3.staticflickr.com/2833/9495989170_6d9cd470c6.jpg"))
+    Product.findProduct(707).get.urlList += "http://farm3.staticflickr.com/2833/9495989170_6d9cd470c6.jpg"
     Product.findProduct(708).get.urlList += "http://i.ebayimg.com/00/s/MTYwMFgxMDcw/z/XUQAAOSwnLdWslS-/$_1.JPG"
     Product.findProduct(709).get.urlList += "http://cdn.miniaturemarket.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/d/d/ddee-002i.jpg"
     Product.findProduct(710).get.urlList += "https://s-media-cache-ak0.pinimg.com/564x/85/ba/f3/85baf35b3dab24c2c01627f3528eff53.jpg"
