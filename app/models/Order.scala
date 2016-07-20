@@ -16,6 +16,8 @@ case class Order(customerID: String, orderLines: ArrayBuffer[OrderLine], var tot
 object Order {
   val today = new SimpleDateFormat("hh:mm aa d-M-y").format(Calendar.getInstance().getTime)
 
+
+
   private val orderList = ArrayBuffer[Order](
     Order("000",
       ArrayBuffer[OrderLine](

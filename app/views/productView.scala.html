@@ -20,12 +20,11 @@
 
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                    <img class="margin" src="http://placehold.it/400/000000">
+                    <img height="400" width="400" class="margin" src="@p.urlList(0)">
                     <div>
-                        <img src="http://placehold.it/100">
-                        <img src="http://placehold.it/100">
-                        <img src="http://placehold.it/100">
-                        <img src="http://placehold.it/100">
+                        @for(i <- 1 to p.urlList.length - 1) {
+                            <img height="100" width="100" src="@p.urlList(i)">
+                        }
                     </div>
                 </div>
 
