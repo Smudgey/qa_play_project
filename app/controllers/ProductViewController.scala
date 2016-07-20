@@ -3,8 +3,6 @@ package controllers
 import javax.inject._
 
 import models.Product
-import play.api.data.Form
-import play.api.data.Forms._
 import play.api.mvc._
 
 @Singleton
