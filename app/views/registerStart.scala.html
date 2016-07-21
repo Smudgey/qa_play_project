@@ -1,65 +1,64 @@
 @(implicit session: Session)
-@main("Register") {
-    <style>
-    .input-group-addon {
-        min-width: 150px;
-        text-align: center;
-    }
+    @main("Register") {
+        <style>
+        .input-group-addon {
+            min-width: 150px;
+            text-align: center;
+        }
 
-    .vcenter {
-        margin: 5% 25%;
-    }
-    </style>
+        .vcenter {
+            margin: 5% 25%;
+        }
+        </style>
 
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-12 col-lg-12">
-                <div class="vcenter">
-                    <img src="" class="img-circle form-group" width="100" height="100">
-                    @helper.form(routes.RegisterController.createUser()) {
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Full name</span>
-                            <input name="fullName" type="text" class="form-control">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12 col-lg-12">
+                    <div class="vcenter">
+                        @helper.form(routes.RegisterController.createUser()) {
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Full name</span>
+                                <input name="fullName" type="text" class="form-control">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Email</span>
+                                <input name="email" type="text" class="form-control">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Password</span>
+                                <input name="password" type="password" class="form-control">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Confirm Password</span>
+                                <input type="password" class="form-control">
+                            </div>
+
+                            <div class="form-group text-center">
+                                <input id="btnRegister" type="submit" class="btn btn-default" value="Register">
+                            </div>
+
+                        }
+                        <hr>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <a href="@routes.LoginController.login()" class="btn btn-default">Login</a>
+                            </div>
+                            <div class="form-group">
+                                <a class="label label-default">Already registered?</a>
+                            </div>
                         </div>
 
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Email</span>
-                            <input name="email" type="text" class="form-control">
-                        </div>
 
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Password</span>
-                            <input name="password" type="password" class="form-control">
-                        </div>
-
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Confirm Password</span>
-                            <input type="password" class="form-control">
-                        </div>
-
-                        <div class="form-group text-center">
-                            <input id="btnRegister" type="submit" class="btn btn-default" value="Register">
-                        </div>
-
-                    }
-                    <hr>
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <a href="@routes.LoginController.login()" class="btn btn-default">Login</a>
-                        </div>
-                        <div class="form-group">
-                            <a class="label label-default">Already registered?</a>
-                        </div>
                     </div>
 
-
                 </div>
-
             </div>
-        </div>
 
-    </div>
-}
+        </div>
+    }
 
 
