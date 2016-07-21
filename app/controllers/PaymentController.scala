@@ -46,23 +46,31 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   def checkoutBasket = Action {
     implicit request =>
-      val in = checkoutForm.bindFromRequest().data("payment")
-      var payMthd : PaymentMethod.Value = null
-      if(in == "payNow"){
-        payMthd = PaymentMethod.PayNow
-      } else if(in == "payLater"){
-        payMthd = PaymentMethod.PayLater
-      } else {
-        payMthd = PaymentMethod.Other
+      if(request.session.get("connected").isEmpty){
+        Redirect(routes.LoginController.login())
       }
-      val cust = Login.findLogin(request.session.data("connected")).get.lid
-      val ol = OrderLine.basket
-      val price = OrderLine.totalPrice(ol)
-      val status = OrderStatus.Ordered
-      val time = Order.today
+      else{
+        val in = checkoutForm.bindFromRequest().data("payment")
+        var payMthd : PaymentMethod.Value = null
+        if(in == "payNow"){
+          payMthd = PaymentMethod.PayNow
+        } else if(in == "payLater"){
+          payMthd = PaymentMethod.PayLater
+        } else {
+          payMthd = PaymentMethod.Other
+        }
+        val cust = Login.findLogin(request.session.data("connected")).get.lid
+        val ol = OrderLine.basket
+        val price = OrderLine.totalPrice(ol)
+        val status = OrderStatus.Ordered
+        val time = Order.today
 
-      val o = Order(cust, ol, price, status, payMthd, time)
-      Ok(views.html.payment(o)(cardForm)(request.session))
+        val o = Order(cust, ol, price, status, payMthd, time)
+
+        //TODO Direct to the card payment page
+        Ok(views.html.payment(o)(cardForm)(request.session))
+
+      }
 
   }
 
