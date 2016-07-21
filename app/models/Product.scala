@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 
 
-case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL with Formatter {
 
 
 // URL: String
@@ -33,7 +33,7 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
   }
 }
 
-object Product {
+object Product extends Formatter {
 
   var list = new ArrayBuffer[Product]()
 
@@ -82,9 +82,9 @@ object Product {
     this.add(Product(739, "Mini Gazebo", "A gazebo for ants.", 5, 0, 8.99, 8.99, 0, Category.Furniture))
     this.add(Product(740, "Deck Chair", "Sit on a flag", 5, 0, 8.99, 8.99, 0, Category.Furniture))
     this.add(Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99, 8.99, 0, Category.Furniture))
-    this.add(Product(742, "Normal Chair", "An avergae chair with a fancy cover", 5, 0, 8.99, 6.0, 0, Category.Furniture))
+    this.add(Product(742, "Normal Chair", "An average chair with a fancy cover", 5, 0, 8.99, 6.0, 0, Category.Furniture))
 
-    Product.findProduct(701).get.urlList += "http://globe-views.com/dcim/dreams/gnome/gnome-02.jpg"
+    Product.findProduct(701).get.urlList += "https://thumbs.dreamstime.com/x/ugly-gnome-15606748.jpg"
     Product.findProduct(702).get.urlList += "http://www.gardengnomesetc.com/images/products/Snerdley_Shell_Seeking_Gnomes.jpg"
     Product.findProduct(703).get.urlList += "http://cf.ltkcdn.net/garden/images/std/109913-277x425-History_gnomes.jpg"
     Product.findProduct(704).get.urlList += "http://cdn.thisiswhyimbroke.com/images/military-lawn-gnomes.jpg"
@@ -104,7 +104,7 @@ object Product {
     Product.findProduct(718).get.urlList += "https://res-2.cloudinary.com/ezvid-inc/image/upload/c_pad,f_auto,h_210,w_322,q_auto/sopjh606m7snale0jtxv"
     Product.findProduct(719).get.urlList += "http://thumbs2.ebaystatic.com/d/l225/m/m79fDnft9EjVGjveIgyZa1g.jpg"
     Product.findProduct(720).get.urlList += "http://www.robin-wood.co.uk/wp-content/uploads/2010/07/gransfors-bruks-wildlife-hatchet-73-p.jpg"
-    Product.findProduct(721).get.urlList +="http://airtoolguy.com/wp-content/uploads/2016/02/21QtK7L02lL.jpg"
+    Product.findProduct(721).get.urlList += "http://airtoolguy.com/wp-content/uploads/2016/02/21QtK7L02lL.jpg"
     Product.findProduct(722).get.urlList += "https://s-media-cache-ak0.pinimg.com/236x/98/31/88/983188a8982e2640012890eb6d799f1b.jpg"
     Product.findProduct(723).get.urlList += "http://www.caramel-shop.co.uk/media/catalog/product/cache/1/small_image/341x479/9df78eab33525d08d6e5fb8d27136e95/c/a/caramel_ss16_aniseedbabytrouser_brownstar_s16bs_01.jpg"
     Product.findProduct(724).get.urlList += "http://www.zappos.com/images/z/1/4/0/5/9/4/1405942-3-4x.jpg"
@@ -112,14 +112,14 @@ object Product {
     Product.findProduct(726).get.urlList += "http://i.ebayimg.com/images/g/K7wAAOxy0bRTDAqM/s-l300.jpg"
     Product.findProduct(727).get.urlList += "http://s4.thisnext.com/media/largest_dimension/DB556802.jpg"
     Product.findProduct(728).get.urlList += "https://image.spreadshirtmedia.net/image-server/v1/products/22223847/views/2,width=378,height=378,appearanceId=1,version=1450089781/Sweet-little-garden-gnome-Underwear.png"
-    Product.findProduct(729).get.urlList +=  "http://www.ikea.com/ms/en_GB/img/site_images/seo/artificial_plants_fejka_seo.jpg"
+    Product.findProduct(729).get.urlList += "http://www.ikea.com/ms/en_GB/img/site_images/seo/artificial_plants_fejka_seo.jpg"
 
     Product.findProduct(730).get.urlList += "https://images-na.ssl-images-amazon.com/images/I/31CnsUm9NtL.jpg"
     Product.findProduct(731).get.urlList += "https://www.plantart.co.uk/articles_gallery/images/artificial_trees.jpg"
     Product.findProduct(732).get.urlList += "https://knoji.com/images/user/forest1.JPG"
     Product.findProduct(733).get.urlList += "http://www.yardenvy.com/images/pz/23766/decorative-purple-martin-club-house-birdhouse-HB-2048L.jpg"
     Product.findProduct(734).get.urlList += "http://shopping.rspb.org.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/4/R401636_2.jpg"
-    Product.findProduct(735).get.urlList +=  "http://homebase.scene7.com/is/image/homebase/157670_R_Z001?$LISTER$&wid=420&hei=420"
+    Product.findProduct(735).get.urlList += "http://homebase.scene7.com/is/image/homebase/157670_R_Z001?$LISTER$&wid=420&hei=420"
     Product.findProduct(736).get.urlList += "http://st.hzcdn.com/simgs/dbc1a5780f60badc_4-0262/contemporary-indoor-pots-and-planters.jpg"
     Product.findProduct(737).get.urlList += "http://www.mastersoutdoorleisure.co.uk/wp-content/uploads/2015/08/Masters-Regent-Gazebo.jpg"
     Product.findProduct(738).get.urlList += "http://gazeboideas.xyz/wp-content/uploads/2016/04/party-gazebo-party-gazebo-wedding-tents-for-sale-big-gazebos-for-sale-big-gazebos-for-sale-1.jpg"
@@ -129,6 +129,22 @@ object Product {
     Product.findProduct(741).get.urlList += "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"
 
+    Product.markExistingProductAsClearance(701, 2.50, 4)
+
+  }
+
+  def markExistingProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
+
+    ClearanceProduct(pid, priceFormat(newPrice), quantity)
+    Product.findProduct(pid).get.decrementStock(quantity, 0)
+  }
+
+  def markAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
+
+    /**Doesnt take into account porousware stock like the other methods, would need to implement when adding this functionality
+      */
+    Product.findProduct(pid).get.decrementStock(quantity, 0)
+    ClearanceProduct(pid, newPrice, quantity)
   }
 
   def searchByName(query: String) =  list.filter(_.name.toLowerCase.contains(query.toLowerCase()))
