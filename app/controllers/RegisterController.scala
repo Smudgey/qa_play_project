@@ -74,7 +74,7 @@ class RegisterController @Inject extends Controller {
     */
   def bank = Action {
     implicit request =>
-    Ok(views.html.registerBank(request.session))
+    Ok(views.html.payment(request.session))
   }
 
 

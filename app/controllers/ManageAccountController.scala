@@ -1,13 +1,10 @@
 package controllers
 
 import com.google.inject.Inject
-import play.api.mvc.{Action, Controller, Flash}
-import play.api._
-import play.api.mvc
-import play.api.mvc.Controller
-import play.api.data._
+import models.CustomerDetails
 import play.api.data.Forms._
-import models.{CustomerDetails, LoginSession}
+import play.api.data._
+import play.api.mvc.{Action, Controller}
 
 class ManageAccountController @Inject extends Controller {
   private val manageAccountForm: Form[CustomerDetails] = Form(
@@ -30,7 +27,7 @@ class ManageAccountController @Inject extends Controller {
   def ManageAccounts() = Action {
     implicit request =>
 
-      Ok(views.html.ManageAccount(manageAccountForm)(request.session))
+      Ok(views.html.manageAccount(manageAccountForm)(request.session))
 
 
 

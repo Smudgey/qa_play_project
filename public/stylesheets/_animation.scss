@@ -1,0 +1,5 @@
+@mixin customTransition($time, $property) {
+  -webkit-transition: $property $time ease-in-out;
+  -moz-transition: $property $time ease-in-out;
+  transition: $property $time ease-in-out;
+}
