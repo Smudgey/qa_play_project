@@ -24,8 +24,8 @@ class BasketController @Inject() extends Controller {
 
   private val updateFor = Form(
     tuple(
-      "quant"  -> list(number),
-      "pid"       -> list(number)
+      "quant" -> list(number),
+      "pid" -> list(number)
     )
   )
 
@@ -34,10 +34,11 @@ class BasketController @Inject() extends Controller {
       Ok(views.html.basket(updateFor)(request.session))
   }
 
-  def add = Action {
+  def add(pid: Int) = Action {
     implicit request =>
       //Load this product into value for ease
-      val p = Product.findProduct(prodFor.bindFromRequest().get).get
+      println(pid)
+      val p = Product.findProduct(pid).get
 
       //If product is available, add to basket.  Otherwise show appropriate error message
       if (p.hasXAvailable(1)) {
@@ -45,7 +46,7 @@ class BasketController @Inject() extends Controller {
       } else {
         //TODO Add some user feedback here
       }
-      Redirect(routes.BasketController.basket)
+      Redirect(routes.BasketController.basket())
   }
 
   def clear = Action {
@@ -78,10 +79,11 @@ class BasketController @Inject() extends Controller {
       }
   }
 
-//  def checkout() = Action {
-//    implicit request =>
-//      Ok(views.html.checkout()(request.session))
-//
-//  }
+
+  //  def checkout() = Action {
+  //    implicit request =>
+  //      Ok(views.html.checkout()(request.session))
+  //
+  //  }
 
 }
