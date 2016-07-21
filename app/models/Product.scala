@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 
 
-case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL with Formatter {
 
 
 // URL: String
@@ -33,7 +33,7 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
   }
 }
 
-object Product {
+object Product extends Formatter {
 
   var list = new ArrayBuffer[Product]()
 
@@ -84,7 +84,7 @@ object Product {
     this.add(Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99, 8.99, 0, Category.Furniture))
     this.add(Product(742, "Normal Chair", "An avergae chair with a fancy cover", 5, 0, 8.99, 6.0, 0, Category.Furniture))
 
-    Product.findProduct(701).get.urlList += "http://globe-views.com/dcim/dreams/gnome/gnome-02.jpg"
+    Product.findProduct(701).get.urlList += "https://thumbs.dreamstime.com/x/ugly-gnome-15606748.jpg"
     Product.findProduct(702).get.urlList += "http://www.gardengnomesetc.com/images/products/Snerdley_Shell_Seeking_Gnomes.jpg"
     Product.findProduct(703).get.urlList += "http://cf.ltkcdn.net/garden/images/std/109913-277x425-History_gnomes.jpg"
     Product.findProduct(704).get.urlList += "http://cdn.thisiswhyimbroke.com/images/military-lawn-gnomes.jpg"
@@ -129,6 +129,14 @@ object Product {
     Product.findProduct(741).get.urlList += "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"
 
+    Product.markExistingProductAsClearance(701, 2.50, 4)
+
+  }
+
+  def markExistingProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
+
+    ClearanceProduct(pid, priceFormat(newPrice), quantity)
+    Product.findProduct(pid).get.decrementStock(quantity, 0)
   }
 
   def searchByName(query: String) =  list.filter(_.name.toLowerCase.contains(query.toLowerCase()))
