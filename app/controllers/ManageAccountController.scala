@@ -8,6 +8,7 @@ import play.api.mvc.Controller
 import play.api.data._
 import play.api.data.Forms._
 import models.{CustomerDetails, LoginSession}
+import scala.collection.mutable.ArrayBuffer
 
 class ManageAccountController @Inject extends Controller {
   private val manageAccountForm: Form[CustomerDetails] = Form(
@@ -29,11 +30,7 @@ class ManageAccountController @Inject extends Controller {
 
   def ManageAccounts() = Action {
     implicit request =>
-
       Ok(views.html.ManageAccount(manageAccountForm)(request.session))
-
-
-
   }
 
   def updateAccount() = Action {
