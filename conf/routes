@@ -27,8 +27,6 @@ POST        /payment                  controllers.PaymentController.registerPaym
 
 POST        /payment/confirmed        controllers.PaymentController.paymentProcessed(orderID: String)
 
-GET         /aboutContact             controllers.AboutContactController.aboutAndContact
-
 GET         /basket                   controllers.BasketController.basket
 GET         /basket/item              controllers.BasketController.add(pid:Int)
 GET         /basket/removed           controllers.BasketController.removeItem(pid: Int)
@@ -45,3 +43,5 @@ GET         /assets/*file             controllers.Assets.versioned(path="/public
 
 GET         /aboutContact             controllers.AboutContactController.aboutAndContact
 POST        /aboutContact             controllers.AboutContactController.createEnquiry
+
+GET         /adminEnquiries           controllers.AboutContactController.printEnquiries
