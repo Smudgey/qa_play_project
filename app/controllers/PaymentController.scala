@@ -35,7 +35,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   private val checkoutForm = Form(
     single(
-      "Payment" -> nonEmptyText
+      "payment" -> nonEmptyText
     )
   )
 

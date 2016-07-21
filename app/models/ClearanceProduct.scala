@@ -17,11 +17,8 @@ object ClearanceProduct {
 
   var clearanceList = new ArrayBuffer[ClearanceProduct]()
 
-  def markExistingProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
-
-    ClearanceProduct(pid, newPrice, quantity)
+  def markProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
     Product.findProduct(pid).get.decrementStock(quantity, 0)
   }
-
 
 }

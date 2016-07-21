@@ -51,18 +51,20 @@ object OrderLine extends Formatter {
     basket.remove(basket.indexOf(findOrderLine(pid).get))
   }
 
-  def updateBasket(oli: OrderLine): Unit = {
-    if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
-
-    } else {
-
-    }
-
-  }
+//  def updateBasket(oli: OrderLine): Unit = {
+//    if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
+//
+//    } else {
+//
+//    }
+//
+//  }
 
   def addToBasket(oli: OrderLine): Unit = {
     //Do product stock validation here
     if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
+
+      //TODO send some response that request cant be fulfilled
 
     } else {
       oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
@@ -80,8 +82,6 @@ object OrderLine extends Formatter {
       }
       addOrIncrease(basket, oli)
     }
-
-
   }
 
   def findOrderLine(pid:Int) = basket.find(_.prod.pid == pid)
