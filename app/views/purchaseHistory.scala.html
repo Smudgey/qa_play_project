@@ -1,29 +1,18 @@
 @(list: Array[Order])(implicit session: Session)
 @main("PurchaseHistory") {
 
-    <div id="container" class="row">
+    <div class="container">
 
         <table class="table">
         @if(!list.isEmpty) {
 
             @for(o <- list) {
                 <tr>
-                    <td>
-               Order ID: @o.orderID
-            </td>
-                    <td>
-                Order Status: @o.status
-            </td>
-                    <td>
-                Order Payment: @o.paymentMethod
-            </td>
-                    <td>
-                Date Ordered: @o.time
-            </td>
+                    <td>Order ID: @o.orderID</td>
+                    <td>Order Status: @o.status</td>
+                    <td>Order Payment: @o.paymentMethod</td>
+                    <td>Date Ordered: @o.time</td>
 
-                    <td>
-
-            </td>
                 </tr>
 
                 <tr>
@@ -40,40 +29,21 @@
                                     <div class="panel-body">
                                         <table class="table">
                                             <tr>
-                                                <td>
-                                            Product Name
-                                                </td>
-                                                <td>
-                                            Cost
-                                                </td>
-                                                <td>
-                                            Quantity
-                                                </td>
-                                                <td>
-                                            Porusware Quantity
-                                                </td>
+                                                <td>Product Name</td>
+                                                <td>Cost</td>
+                                                <td>Quantity</td>
+                                                <td>Porusware Quantity</td>
                                             </tr>
                                             @for(ol <- o.orderLines) {
                                                 <tr>
-                                                    <td>
-                                                    @ol.prod.name
-                                                    </td>
-                                                    <td>
-                                            £@ol.prod.price
-                                        </td>
-                                                    <td>
-                                                    @ol.quantity
-                                                    </td>
-                                                    <td>
-                                                    @ol.pwareQuantity
-                                                    </td>
+                                                    <td> @ol.prod.name</td>
+                                                    <td>£@ol.prod.price</td>
+                                                    <td> @ol.quantity</td>
+                                                    <td> @ol.pwareQuantity</td>
                                                 </tr>
                                             }
                                             <tr>
-                                                <td colspan="4">
-                                            Total Price: £@o.totalPrice
-                                        </td>
-
+                                                <td colspan="4">Total Price: £@o.totalPrice</td>
                                             </tr>
 
                                         </table>
@@ -85,12 +55,8 @@
 
                     </td>
                 </tr>
-
             }
-
         }
-
-
         </table>
 
     </div>

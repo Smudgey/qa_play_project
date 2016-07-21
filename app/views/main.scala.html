@@ -21,7 +21,6 @@
             <!-- Bootstrap theme -->
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.min.css")">
             <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/catalogue.css")"/>
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme.css")">
 
         <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
@@ -53,7 +52,8 @@
                         <li id="catalogueCategory"><a href="@routes.CatalogueController.show("")">Catalogue</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Gnomes <span class="caret"></span></a>
+                                Gnomes <span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">All Gnomes</a></li>
                                 <li role="separator" class="divider"></li>
@@ -92,60 +92,67 @@
                     </ul>
 
                     <div class="navbar-form navbar-right">
-                    @if(session.get("connected").isEmpty) {
-                        <div class="btn-group">
-                        @helper.form(routes.LoginController.validateLogin) {
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Login
-                            </button>
 
-                            <ul class="dropdown-menu loginDropdown">
-                                <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
-                                <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
-                                <li><span href="" class="label label-danger">Forgot password?</span></li>
-                                <li>
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-default">Login</button>
-                                        <a type="button" href="@routes.RegisterController.register" class="btn btn-default">
-                                            Register</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        }
-                        </div>
+                        <a class="btn btn-success" href="@routes.BasketController.basket()">
+                            Cart
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                <span class="badge">@session.get("basketItemCount")</span>
+                        </a>
 
-                    } else {
-                        <div>
+                        @if(session.get("connected").isEmpty) {
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Manage Account
+                            @helper.form(routes.LoginController.validateLogin) {
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Login
                                 </button>
 
-                                <ul class="dropdown-menu">
-                                    <li><a href="@routes.ManageAccountController.updateAccount()">My Account</a></li>
-                                    <li><a href="@routes.PurchaseHistoryController.showPurchase">Purchase History</a></li>
+                                <ul class="dropdown-menu loginDropdown">
+                                    <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
+                                    <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
+                                    <li><span href="" class="label label-danger">Forgot password?</span></li>
+                                    <li>
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-default">Login</button>
+                                            <a type="button" href="@routes.RegisterController.register" class="btn btn-default">
+                                                Register</a>
+                                        </div>
+                                    </li>
                                 </ul>
-
-                                <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
-
+                            }
                             </div>
-                        </div>
-                    }
+
+                        } else {
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Manage Account
+                                    </button>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@routes.ManageAccountController.updateAccount()">My Account</a></li>
+                                        <li><a href="@routes.PurchaseHistoryController.showPurchase">
+                                            Purchase History</a></li>
+                                    </ul>
+
+                                    <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
-            </div>
+
         </nav>
 
         @helper.form(routes.SearchController.search) {
-            <div class="col-md-12 col-lg-12">
-                <div class="searchBar input-group">
-                    <input name="searchQuery" type="text" class="search-query form-control" placeholder="Search">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="input-group searchBar">
+                    <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="submit">
+                        <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
-
                 </div>
             </div>
         }

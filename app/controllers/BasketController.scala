@@ -43,16 +43,17 @@ class BasketController @Inject() extends Controller {
       //If product is available, add to basket.  Otherwise show appropriate error message
       if (p.hasXAvailable(1)) {
         OrderLine.addToBasket(OrderLine(p))
+
       } else {
         //TODO Add some user feedback here
       }
-      Redirect(routes.BasketController.basket())
+      Redirect(routes.BasketController.basket()).withSession("basketItemCount" -> OrderLine.getSize.toString)
   }
 
   def clear = Action {
     implicit request =>
       OrderLine.clear()
-      Redirect(routes.BasketController.basket)
+      Redirect(routes.BasketController.basket).withSession("basketItemCount" -> "")
   }
 
   def update = Action {
