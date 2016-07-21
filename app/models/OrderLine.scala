@@ -10,7 +10,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 case class OrderLine(prod: Product, var quantity: Int = 1, var pwareQuantity: Int = 0) {}
 
-object OrderLine {
+object OrderLine extends Formatter {
 
   var basket = new ArrayBuffer[OrderLine]
   var size = getSize
@@ -18,7 +18,7 @@ object OrderLine {
   def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
     def addToTot(bsk: ArrayBuffer[OrderLine], total: Double): Double = {
       if (bsk.isEmpty)
-        BigDecimal(total).setScale(2, BigDecimal.RoundingMode.UP).toDouble
+        priceFormat(total)
       else
         addToTot(bsk.tail, total + bsk.head.prod.price * bsk.head.quantity)
     }

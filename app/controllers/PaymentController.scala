@@ -49,12 +49,12 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
       if(request.session.get("connected").isEmpty){
         Redirect(routes.LoginController.login())
       }
-      else{
+      else {
         val in = checkoutForm.bindFromRequest().data("payment")
-        var payMthd : PaymentMethod.Value = null
-        if(in == "payNow"){
+        var payMthd: PaymentMethod.Value = null
+        if (in == "payNow") {
           payMthd = PaymentMethod.PayNow
-        } else if(in == "payLater"){
+        } else if (in == "payLater") {
           payMthd = PaymentMethod.PayLater
         } else {
           payMthd = PaymentMethod.Other
@@ -67,8 +67,10 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
         val o = Order(cust, ol, price, status, payMthd, time)
 
-      //TODO Direct to a card payment page
-      Ok(views.html.payment(o)(cardForm)(request.session))
+        /*//TODO Direct to the card payment pag*/
+        Ok(views.html.payment(o)(cardForm)(request.session))
+      }
+
   }
 
   /**

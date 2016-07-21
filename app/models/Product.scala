@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 
 
-case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL with Formatter {
 
 
 // URL: String
@@ -33,7 +33,7 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
   }
 }
 
-object Product {
+object Product extends Formatter {
 
   var list = new ArrayBuffer[Product]()
 
@@ -129,6 +129,14 @@ object Product {
     Product.findProduct(741).get.urlList += "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"
 
+    Product.markExistingProductAsClearance(701, 2.50, 4)
+
+  }
+
+  def markExistingProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
+
+    ClearanceProduct(pid, priceFormat(newPrice), quantity)
+    Product.findProduct(pid).get.decrementStock(quantity, 0)
   }
 
   def markAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {

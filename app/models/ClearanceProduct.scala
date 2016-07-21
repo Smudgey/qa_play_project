@@ -8,14 +8,14 @@ import scala.collection.mutable.ArrayBuffer
 case class ClearanceProduct(pid: Int, clearancePrice: Double, quantity: Int) {
 
   {
-    ClearanceProduct.clearanceList += Product.findProduct(pid).get
+    ClearanceProduct.clearanceList += this
   }
 
 }
 
 object ClearanceProduct {
 
-  var clearanceList = new ArrayBuffer[Product]()
+  var clearanceList = new ArrayBuffer[ClearanceProduct]()
 
   def markProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
     Product.findProduct(pid).get.decrementStock(quantity, 0)
