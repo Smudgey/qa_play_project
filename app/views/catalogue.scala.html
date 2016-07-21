@@ -1,6 +1,12 @@
 @import scala.collection.mutable.ArrayBuffer
 @(form: Form[Int])(products: Array[Product])(implicit session: Session)
     @main("Catalogue") {
+      <style>
+      .product {
+  display: flex;
+  flex-wrap: wrap;
+}
+      </style>
         <script>changePage("catalogue")</script>
         <div class="container">
             <div class="well well-sm">
@@ -38,12 +44,13 @@
                     </li>
 
                 </ul>
-            </div>
 
-            <div id="products" class="row list-group">
-            @grid(form)(products)
+            </div>
+<section class="Product">
+            <div id="products">
+              <img src="@grid(form)(products)" class="img-thumbnail" width="300" height="300">
+
             </div>
         </div>
-
+</section>
 }
-
