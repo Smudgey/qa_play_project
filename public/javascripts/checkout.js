@@ -1,6 +1,6 @@
 //plugin bootstrap minus and plus
 //http://jsfiddle.net/laelitenetwork/puJ6G/
-
+$(document).ready(function(){
 $('.btn-number').click(function(e){
     e.preventDefault();
     console.log("click")
@@ -77,3 +77,5 @@ $(".input-number").keydown(function (e) {
             e.preventDefault();
         }
     });
+
+});
