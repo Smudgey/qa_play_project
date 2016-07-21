@@ -1,0 +1,62 @@
+$main-colour: #a80314;
+$secondary-colour: #000000;
+$margin: 5px;
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: #5d0311;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $main-colour;
+  outline: 0 none;
+}
+
+@font-face {
+  font-family: logoFont;
+  src: url("/assets/fonts/BADABB__.TTF");
+}
+
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.small-margin {
+  margin: $margin;
+}
+
+.medium-margin {
+  margin: $margin + 5;
+}
+
+.vcenter {
+  margin: 5% 25%;
+}
+
+.input-group-addon {
+  min-width: 150px;
+  max-width: 250px;
+}
+
+.payment {
+  padding: 150px;
+}
+
+@import "animation";
+@import "main";
+@import "index";
+@import "catalogue";
+@import "customer_satisfaction_form";
+@import "checkout";
