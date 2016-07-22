@@ -30,6 +30,7 @@
         <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
         <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
         <script src="@routes.Assets.versioned("javascripts/pageChanger.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/formValidation.js")"></script>
 
     </head>
 
@@ -97,8 +98,8 @@
 
                         <a class="btn btn-success" href="@routes.BasketController.basket()">
                             Cart
-                                <span class="glyphicon glyphicon-shopping-cart"></span>
-                                <span class="badge">@session.get("basketItemCount")</span>
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <span class="badge">@session.get("basketItemCount")</span>
                         </a>
 
                         @if(session.get("connected").isEmpty) {
@@ -111,7 +112,12 @@
                                 <ul class="dropdown-menu loginDropdown">
                                     <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
                                     <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
-                                    <li><span href="" class="label label-danger">Forgot password?</span></li>
+                                    <li>
+                                        <div class="vcenter">
+                                            <a href="@routes.AboutContactController.aboutAndContact" class="label label-default">
+                                                Forgot password?</a>
+                                        </div>
+                                    </li>
                                     <li>
                                         <div class="btn-group">
                                             <button type="submit" class="btn btn-default">Login</button>
@@ -125,24 +131,24 @@
 
                         } else {
 
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Manage Account
-                                    </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Account
+                                </button>
 
-                                    <ul class="dropdown-menu">
-                                        <li><a href="@routes.ManageAccountController.updateAccount()">My Account</a></li>
-                                        <li><a href="@routes.PurchaseHistoryController.showPurchase">
-                                            Purchase History</a></li>
-                                    </ul>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@routes.ManageAccountController.updateAccount()">My Account</a></li>
+                                    <li><a href="@routes.PurchaseHistoryController.showPurchase">
+                                        Purchase History</a></li>
+                                </ul>
 
-                                    <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+                                <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
 
-                                </div>
                             </div>
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
+            </div>
 
         </nav>
 
