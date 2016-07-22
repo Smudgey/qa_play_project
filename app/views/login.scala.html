@@ -1,42 +1,40 @@
 @(implicit session: Session)
-@main("Login") {
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-12 col-lg-12">
-                <div class="vcenter">
-                    @helper.form(routes.LoginController.validateLogin()) {
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Username</span>
-                            <input name="email" type="text" class="form-control">
+    @main("Login") {
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12 col-lg-12">
+                    <div class="vcenter">
+                        @helper.form(routes.LoginController.validateLogin()) {
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Username</span>
+                                <input name="email" type="text" class="form-control">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Password</span>
+                                <input name="password" type="password" class="form-control">
+                            </div>
+
+                            <div class="form-group text-center">
+                                <input id="btnLogin" type="submit" class="btn btn-default" value="Login">
+                            </div>
+                            <div class="form-group">
+                                <a href="@routes.AboutContactController.aboutAndContact" class="label label-default">
+                                    Forgot password?</a>
+                            </div>
+                        }
+                        <hr>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <a class="label label-default">Don't have an account?</a>
+                            </div>
                         </div>
 
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Password</span>
-                            <input name="password" type="password" class="form-control">
-                        </div>
-
-                        <div class="form-group text-center">
-                            <input id="btnLogin" type="submit" class="btn btn-default" value="Login">
-                        </div>
-                        <div class="form-group">
-                            <a class="label label-default">Forgot password?</a>
-                        </div>
-                    }
-                    <hr>
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <a href="@routes.RegisterController.register" class="btn btn-default">Register</a>
-                        </div>
-                        <div class="form-group">
-                            <a class="label label-default">Don't have an account?</a>
-                        </div>
                     </div>
 
                 </div>
-
             </div>
-        </div>
 
-    </div>
-}
+        </div>
+    }
