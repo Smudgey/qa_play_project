@@ -4,7 +4,16 @@
 * two arguments, a `String` for the title of the page and an `Html`
 * object to insert into the body of the page.
 *@
+@import models.Category
+
 @(title: String)(content: Html)(implicit session: Session)
+
+<!-- TODO Swap this generate method with a database call.-->
+@if(Product.list.isEmpty){
+    @Product.dummyConnection()
+    @println("Connection created")
+}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -56,10 +65,13 @@
                                 Gnomes <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">All Gnomes</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.Gnome.toString)">All Gnomes</a></li>
+
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Gnome Accessories</li>
-                                <li><a href="#">Gnome Clothing</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingItem.toString)">Gnome Clothing</a></li>
 
                             </ul>
                         </li>
@@ -67,17 +79,22 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gardening <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Tools</a></li>
-                                <li><a href="#">Artificial Plants</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.Tool.toString)">Tools</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantItem.toString)">Plants</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Miscellaneous <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Bird Items</a></li>
-                                <li><a href="#">Furniture</a></li>
-                                <li><a href="#">Gazebos</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)">Bird Items</a></li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.Furniture.toString)">Furniture</a></li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantPot.toString)">Plant Pots</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">

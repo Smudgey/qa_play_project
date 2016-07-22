@@ -13,6 +13,7 @@ object Category extends Enumeration{
   val PlantPot      = Value("Plant Pot")
   val Furniture     = Value("Furniture")
   val Tool          = Value("Tool")
+
 }
 
 
