@@ -4,7 +4,16 @@
 * two arguments, a `String` for the title of the page and an `Html`
 * object to insert into the body of the page.
 *@
+@import models.Category
+
 @(title: String)(content: Html)(implicit session: Session)
+
+<!-- TODO Swap this generate method with a database call.-->
+@if(Product.list.isEmpty){
+    @Product.dummyConnection()
+    @println("Connection created")
+}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -58,10 +67,13 @@
                                 Gnomes <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">All Gnomes</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.Gnome.toString)">All Gnomes</a></li>
+
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Gnome Accessories</li>
-                                <li><a href="#">Gnome Clothing</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingItem.toString)">Gnome Clothing</a></li>
 
                             </ul>
                         </li>
@@ -69,17 +81,22 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gardening <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Tools</a></li>
-                                <li><a href="#">Artificial Plants</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.Tool.toString)">Tools</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantItem.toString)">Plants</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Miscellaneous <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Bird Items</a></li>
-                                <li><a href="#">Furniture</a></li>
-                                <li><a href="#">Gazebos</a></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)">Bird Items</a></li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.Furniture.toString)">Furniture</a></li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantPot.toString)">Plant Pots</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -139,8 +156,8 @@
                                 </button>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="@routes.ViewAccountController.ViewAccount()">My Account</a></li>
-                                    <li><a href="@routes.ManageAccountController.updateAccount()">Edit Account</a></li>
+                                    <li><a href="@routes.AccountController.viewAccount()">My Account</a></li>
+                                    <li><a href="@routes.AccountController.updateAccount()">Edit Account</a></li>
                                     <li><a href="@routes.PurchaseHistoryController.showPurchase">
                                         Purchase History</a></li>
                                 </ul>
@@ -169,52 +186,40 @@
         }
 
         <div class="container text-center">
-            @content
+        @content
 
-            <div class="container text-center">
-                <hr>
-                <a href="http://bluebirdexperience.com/wp-content/uploads/2013/04/Download-button-small3.jpg">
-                    <h2>Download our 2016 brochure now!</h2>
-                </a>
+
+        </div>
+        <div class="container text-center">
+            <hr>
+            <a href="http://bluebirdexperience.com/wp-content/uploads/2013/04/Download-button-small3.jpg">
+                <h2>Download our 2016 brochure now!</h2>
+            </a>
+        </div>
+        <hr/>
+        <div class="container text-center">
+            <h4>Contact Us</h4>
+            <div class="row" align="left" style="display: inline-block">
+                <div class="col-sm-12 col-md-12">
+                    <p id="address">NB Gardens, Head Office<br/>
+                        Gnome Road<br/>
+                        Stockport<br/>
+                        Greater Manchester<br/>
+                        M50 3UB<br/></p>
+                </div>
             </div>
-            <hr/>
-            <div class="container text-center">
-                <h4>Contact Us</h4>
-                <div class="row" align="left" style="display: inline-block">
-                    <div class="col-sm-12 col-md-12">
-                        <p id="address">NB Gardens, Head Office<br/>
-                            Gnome Road<br/>
-                            Stockport<br/>
-                            Greater Manchester<br/>
-                            M50 3UB<br/></p>
-                    </div>
-                </div>
-                <div class="row" align="center" style="display: inline-block;">
-                    <div class="col-sm-12 col-md-12">
-                        <p id="Telephone">0738201883</p>
-                        <p id="Email">enquiriesnbgardens.com</p>
-
-
-
-                        <ul class="nav nav-pills nav-justified">
-
-                        <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
-
-                    </ul>
-
-                    </div>
-                </div>
-
-
-
-
+            <div class="row" align="center" style="display: inline-block;">
+                <div class="col-sm-12 col-md-12">
+                    <p id="Telephone">0738201883</p>
+                    <p id="Email">enquiriesnbgardens.com</p>
+</div>
             </div>
-                </div>
+        </div>
 
 
 
 
-            <a style="border:0px; background-color: transparent;" class="btn btn-default btn-xs" href="https://www.youtube.com/watch?v=_FLhO7ZnKHs" role="button"></a>
+
 
 
 <div align="center" class="row"  >
@@ -223,9 +228,6 @@
 <a style="color: #FF0000" href="https://plus.google.com/111293658324555647065" role="button"> <i style="font-size:64px" class="fa fa-google-plus row-xs-12 row-md-8"> </i> </a>
 <a style="color: ##35465c" href="http://landscapefocused.tumblr.com/" role="button"> <i style="font-size:64px" class="fa fa-tumblr row-xs-12 row-md-8"> </i> </a>
  <a style="color: #8B0000" href="http://www.starwars.com/databank/rebel-alliance" role="button"> <i style="font-size:64px" class="fa fa-rebel row-xs-12 row-md-8"> </i> </a> </div>
-
-
-
 
 
 

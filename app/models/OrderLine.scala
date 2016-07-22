@@ -15,7 +15,7 @@ object OrderLine extends Formatter {
   var basket = new ArrayBuffer[OrderLine]
   var size = getSize
 
-  def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
+    def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
     def addToTot(bsk: ArrayBuffer[OrderLine], total: Double): Double = {
       if (bsk.isEmpty)
         priceFormat(total)
