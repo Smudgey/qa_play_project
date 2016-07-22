@@ -4,6 +4,8 @@
 * two arguments, a `String` for the title of the page and an `Html`
 * object to insert into the body of the page.
 *@
+@import models.Category
+
 @(title: String)(content: Html)(implicit session: Session)
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +57,7 @@
                                 Gnomes <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">All Gnomes</a></li>
+                                <li><a href="@routes.CatalogueController.showCategory()">All Gnomes</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Gnome Accessories</li>
                                 <li><a href="#">Gnome Clothing</a></li>

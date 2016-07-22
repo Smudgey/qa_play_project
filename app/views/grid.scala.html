@@ -1,3 +1,5 @@
+@import _root_.models.ClearanceProduct
+
 @(form: Form[Int])(products: Array[Product])(implicit session: Session)
 
 @for(p <- products) {
@@ -31,3 +33,4 @@
         </div>
     </div>
 }
+    <p>@ClearanceProduct.clearanceList</p>

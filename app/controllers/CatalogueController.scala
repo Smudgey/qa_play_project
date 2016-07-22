@@ -1,4 +1,5 @@
 package controllers
+import _root_.models.Category
 
 import javax.inject._
 
@@ -27,5 +28,12 @@ class CatalogueController @Inject() extends Controller {
     println(query)
     println(Product.searchByName(query).isEmpty)
     Ok(views.html.catalogue(prodFor)(Product.searchByName(query).toArray)(request.session))
+  }
+
+  def showCategory(cat: Category.Value) = Action {
+    implicit request =>
+
+
+      Ok(views.html.catalogue(prodFor)(Product.list.toArray)(request.session))
   }
 }
