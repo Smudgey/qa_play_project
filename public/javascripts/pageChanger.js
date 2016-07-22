@@ -14,3 +14,19 @@ function changePage(page) {
             break;
     }
 }
+
+function changeTab(tab) {
+    $('#tabGroup').find("a[class='active']").removeClass('active');
+    switch (tab) {
+        case "editAccount":
+            $('#editAccountTab').addClass("active");
+            break;
+        case "viewAccount":
+            $('#viewAccountTab').addClass("active");
+            break;
+        case "viewPurchaseHistory":
+            $('#viewPurchaseHistoryTab').addClass("active");
+            break;
+
+    }
+}

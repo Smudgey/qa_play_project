@@ -8,7 +8,7 @@ import play.api.data._
 import play.api.mvc.{Action, Controller}
 
 
-class ManageAccountController @Inject extends Controller {
+class AccountController @Inject extends Controller {
   private val manageAccountForm: Form[CustomerDetails] = Form(
     mapping(
       "eMail" -> nonEmptyText,
@@ -26,9 +26,9 @@ class ManageAccountController @Inject extends Controller {
     (CustomerDetails.unapply)
   )
 
-  def ManageAccounts() = Action {
+  def manageAccounts = Action {
     implicit request =>
-      Ok(views.html.manageAccount(manageAccountForm)(request.session))
+      Ok(views.html.manageAccount(request.session))
   }
 
   def updateAccount() = Action {
@@ -77,8 +77,21 @@ class ManageAccountController @Inject extends Controller {
           CustomerDetails.updateAccount(temp)
         }
       }
-      Redirect(routes.ManageAccountController.ManageAccounts())
+
+      Redirect(routes.AccountController.manageAccounts())
     }
   }
-}
 
+  def viewAccount = Action {
+    implicit request =>
+
+      //Temporary check statement whilst suing dummy data
+      if (request.session.get("connected").isEmpty) {
+        Redirect(routes.HomeController.index())
+      } else {
+        Ok(views.html.viewAccount(CustomerDetails.findCustomerEmail(request.session.data("connected")))(request.session))
+
+      }
+  }
+
+}
