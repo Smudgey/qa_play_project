@@ -1,37 +1,39 @@
-
 @(enquiryForm: Form[EnquiryDescription])(implicit session: Session)
 
-@main("AboutContact"){
-<div class ="row">
-    <div class="col-sm-4 col-md-4">
-        <h1>About Us</h1>
-    </div>
+@main("AboutContact") {
+    <script>changePage("aboutcontact")</script>
+    <div class ="row">
+        <div class="col-sm-4 col-md-4">
+            <h1>About Us</h1>
+        </div>
 
-    <div class="col-sm-8 col=md-8">
-        <h1>Welcome to NBGardens</h1>
+        <div class="col-sm-8 col=md-8">
+            <h1>Welcome to NBGardens</h1>
+        </div>
     </div>
-</div>
 
     <div class="row">
         <div class="col-sm-4 col-md-4">
 
-            <div style="width:200px;height:200px;border:1px solid #000;">
+            <div style="width: 200px;
+                height: 200px;
+                border: 1px solid #000;">
                 <img class="image-reponsive" src="http://pixel.nymag.com/imgs/daily/vulture/2012/12/19/19_anchorman.w190.h190.2x.jpg">
             </div>
         </div>
 
         <div class="col-sm-8 col-md-8">
             <p>We are a traditional catalogue company, located in England, that specialises in selling garden gnomes and accessories. Our primary objective is to deliver great quality products to YOU, and we aim to achieve this by offering
-            many incentives to shop with us, such as a 'get now pay later' policy, and the option of Porousware on all of our gnome stock. If you have any queries, please use the query form below.</p>
+                many incentives to shop with us, such as a 'get now pay later' policy, and the option of Porousware on all of our gnome stock. If you have any queries, please use the query form below.</p>
 
         </div>
     </div>
 
-<div class="row">
-    <div class="col-sm-12 col-md-12">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
 
+        </div>
     </div>
-</div>
 
     <div class="row">
         <div class="col-sm-12 col-md-12">
@@ -47,41 +49,41 @@
     </div>
 
 
-@helper.form(routes.AboutContactController.createEnquiry()) {
-<div class="row">
-        <div class="col-sm-12 col-md-12">
-        <h2>Enquire</h2>
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="vcenter">
-                            <img src="" class="img-circle form-group" width="100" height="100">
+    @helper.form(routes.AboutContactController.createEnquiry()) {
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h2>Enquire</h2>
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="vcenter">
+                                <img src="" class="img-circle form-group" width="100" height="100">
 
-                            <div class="input-group form-group">
-                                <span class="input-group-addon">Fullname</span>
-                                <input name="name" class="form-control" type="text">
-                            </div>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon">Fullname</span>
+                                    <input name="name" class="form-control" type="text">
+                                </div>
 
-                            <div class="input-group form-group">
-                                <span class="input-group-addon">Email</span>
-                                <input name="email" class="form-control" type="text">
-                            </div>
-                            <div class="input-group form-group">
-                                <span class="input-group-addon">Enquiry</span>
-                                <input name="enquiry" class="form-control" type="text">
-                            </div>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon">Email</span>
+                                    <input name="email" class="form-control" type="text">
+                                </div>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon">Enquiry</span>
+                                    <input name="enquiry" class="form-control" type="text">
+                                </div>
 
-                            <div class="form-group text-center">
-                                <input id="btnLogin" type="submit" class="btn btn-default" value="Submit">
-                            </div>
+                                <div class="form-group text-center">
+                                    <input id="btnLogin" type="submit" class="btn btn-default" value="Submit">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
 
-    </div>
-}
+        </div>
+    }
 }
 
 

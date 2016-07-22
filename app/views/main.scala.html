@@ -90,6 +90,8 @@
                                 <li><a href="#">All Discounts</a></li>
                             </ul>
                         </li>
+                        <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
+                            About Us</a></li>
                     </ul>
 
                     <div class="navbar-form navbar-right">
@@ -135,7 +137,8 @@
                                 </button>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="@routes.ManageAccountController.updateAccount()">My Account</a></li>
+                                    <li><a href="@routes.ViewAccountController.ViewAccount()">My Account</a></li>
+                                    <li><a href="@routes.ManageAccountController.updateAccount()">Edit Account</a></li>
                                     <li><a href="@routes.PurchaseHistoryController.showPurchase">
                                         Purchase History</a></li>
                                 </ul>
@@ -175,7 +178,6 @@
             <hr/>
             <div class="container text-center">
                 <h4>Contact Us</h4>
-                <hr />
                 <div class="row" align="left" style="display: inline-block">
                     <div class="col-sm-12 col-md-12">
                         <p id="address">NB Gardens, Head Office<br/>
@@ -185,19 +187,31 @@
                             M50 3UB<br/></p>
                     </div>
                 </div>
-                <div class="row" align="right" style="display: inline-block;">
+                <div class="row" align="center" style="display: inline-block;">
                     <div class="col-sm-12 col-md-12">
-                        <p id="Telephone">#0738201883</p>
+                        <p id="Telephone">0738201883</p>
                         <p id="Email">enquiriesnbgardens.com</p>
+
+
+
+                        <ul class="nav nav-pills nav-justified">
+
+                        <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
+
+                    </ul>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="@routes.AboutContactController.aboutAndContact">About us</a></li>
-                    </ul>
+
+
+                    </div>
                 </div>
-            </div>
-        </div>
+<div>
+                <a class="btn btn-default btn-xs" href="https://www.youtube.com/watch?v=_FLhO7ZnKHs" role="button">Link</a>
+
+                    </div>
+
+
+
     </body>
 
 </html>
