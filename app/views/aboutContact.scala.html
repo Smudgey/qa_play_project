@@ -3,50 +3,61 @@
 @main("AboutContact") {
     <script>changePage("aboutcontact")</script>
     <div class ="row">
-        <div class="col-sm-4 col-md-4">
-            <h1>About Us</h1>
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h1 style="padding-bottom:50px"; class="bg-primary">Welcome to NBGardens</h1>
+
+                        <div class="row">
+                            <div class="col-xs-18 col-sm-18">
+                                <div class="col-md-4"> <img class="image-reponsive" float = left src="http://pixel.nymag.com/imgs/daily/vulture/2012/12/19/19_anchorman.w190.h190.2x.jpg">
+                                    <p class="text-primary">CEO David Rose</p>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 bg-info" style="font-family:Times New Roman Italic size=6;">
+                                <em align="left">
+
+                                    I founded NB Gardens in The Old Brewery in Burford in 1994, after spending 10 years designing  and developing products for leading Retailers including: John Lewis, Habitat, Habitat France, Conran, Boots, Heal’s, Next Interiors and Williams Sonoma, Restoration Hardware, Crate & Barrel, Pottery Barn and Smith and Hawken in the USA.
+                                <h1 style="padding-bottom:20px";></h1>
+                                    I had recently returned from a business trip to the West Coast of the United States which made me realise that there was a gap in the retail garden and interiors market in the UK, for products that were well designed and practical but not overly contemporary- Classic with clean lines.
+                                <h1 style="padding-bottom:20px";></h1>
+                                    I love the feel and uniqueness of rural houses , they can look wonderful with uncluttered modern or vintage furniture, lighting and accessories, soothing colour tones, modern wood burners or open fires, painted floor boards and sisal. Kitchens and bathrooms can be very simple but always using high quality fittings and materials.
+                                <h1 style="padding-bottom:20px";></h1>
+                                    This look and feel can of course also be applied to Town Houses and contemporary homes too, it is just a matter of taste!
+                                <h1 style="padding-bottom:20px";></h1>
+                                    I think that with the pace of modern life we need an environment that is easy to use, clean and store in. I would admit that clutter is my pet hate but I am definitely not alone judging by our ever growing business and following and most of our products offer a practical solution.
+                                <h1 style="padding-bottom:20px";></h1>
+                                    Always ethically aware, we strive to use responsibly sourced materials from within the EU where possible and only from factories that we have physically visited and audited. Our products are built to stand the test of time.
+                                <h1 style="padding-bottom:20px";></h1>
+                                    We have a great team of people who share my passion and I am very proud of what we have achieved. We may have only physically moved 3 miles to our existing premises next to the RAF base in Brize Norton, but we have come a long way.
+                                <h1 style="padding-bottom:20px";></h1>
+                                    We are growing Garden Trading to give our returning and new customers even more choice and the service and standards that they should expect.
+                                <h1 style="padding-bottom:40px";></h1>
+
+
+                                    We hope that you enjoy NB Gardens and we always welcome your comments.
+
+                                <img style="padding-bottom:40px";> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Accession_Treaty_2011_David_Cameron_signature.svg/337px-Accession_Treaty_2011_David_Cameron_signature.svg.png"> </img>
+
+
+
+                                <h1 style="padding-bottom:10px";></h1>
+                                    David Rose
+                                    <h1 style="padding-bottom:2px";></h1>
+                                    Founder & Managing Director</em>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
         </div>
 
-        <div class="col-sm-8 col=md-8">
-            <h1>Welcome to NBGardens</h1>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-4 col-md-4">
-
-            <div style="width: 200px;
-                height: 200px;
-                border: 1px solid #000;">
-                <img class="image-reponsive" src="http://pixel.nymag.com/imgs/daily/vulture/2012/12/19/19_anchorman.w190.h190.2x.jpg">
-            </div>
-        </div>
-
-        <div class="col-sm-8 col-md-8">
-            <p>We are a traditional catalogue company, located in England, that specialises in selling garden gnomes and accessories. Our primary objective is to deliver great quality products to YOU, and we aim to achieve this by offering
-                many incentives to shop with us, such as a 'get now pay later' policy, and the option of Porousware on all of our gnome stock. If you have any queries, please use the query form below.</p>
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12 col-md-12">
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12 col-md-12">
-            <h1>Our Business</h1>
-            <p>
-                Vestibulum in enim ac lacus blandit ultrices finibus eget dui. Mauris tincidunt accumsan orci, suscipit tristique massa maximus eget.
-                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam et lacus consequat, gravida eros eu, facilisis mi.
-                In rutrum urna sit amet justo rhoncus, ut gravida augue iaculis. Pellentesque non congue metus. Ut nisl augue, accumsan eget lorem nec, viverra
-                lacinia lectus. In ut nisi mattis arcu feugiat suscipit ut at erat. Praesent rutrum venenatis quam vitae aliquet. Vivamus pellentesque
-                ligula vitae bibendum ultrices. Duis placerat convallis velit, vitae dapibus ipsum dignissim ac. Integer eu feugiat lorem.
-            </p>
-        </div>
-    </div>
 
 
     @helper.form(routes.AboutContactController.createEnquiry()) {
