@@ -1,7 +1,7 @@
 @(form: Form[Int])(products: Array[Product])(implicit session: Session)
 
 @for(p <- products) {
-    <div class="item  col-xs-4 col-lg-4" >
+    <div class="item col-xs-12 col-sm-12 col-md-3 col-lg-3" >
         <div class="thumbnail">
             <a href="@routes.ProductViewController.viewProduct(p.pid)">
                 <img class="group list-group-image" src="@p.urlList" alt="" />
@@ -16,11 +16,13 @@
             @p.description
             </p>
             <p class="group inner list-group-item-text">
-                    We have <strong><em>@p.stock</em></strong> in stock</p>
+                    We have <strong><em>@p.stock</em></strong> in stock
+            </p>
             <div class="row">
                 <div class="col-xs-20 col-md-6">
                     <p class="lead">
-                                £@p.price</p>
+                                £@p.price
+                    </p>
                 </div>
 
                 <div class="col-xs-12 col-md-6">
