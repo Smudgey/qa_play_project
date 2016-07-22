@@ -9,7 +9,7 @@
 @(title: String)(content: Html)(implicit session: Session)
 
 <!-- TODO Swap this generate method with a database call.-->
-@if(Product.list.isEmpty){
+@if(Product.inventory.isEmpty) {
     @Product.dummyConnection()
     @println("Connection created")
 }
@@ -103,8 +103,8 @@
                                 Clearance <span class="caret"></span></a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">All clearance</a></li>
-                                <li><a href="#">All Discounts</a></li>
+                                <li><a href="@routes.CatalogueController.showClearance">All clearance</a></li>
+                                <li><a href="@routes.CatalogueController.showClearance">All Discounts</a></li>
                             </ul>
                         </li>
                         <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
