@@ -4,9 +4,12 @@
     <h1>@title</h1>
     <div class="col-md-3">
         <div id="tabGroup" class="list-group">
-            <a id="viewAccountTab" href="#" class="list-group-item">View My Account</a>
-            <a id="editAccountTab" href="#" class="list-group-item">Edit Account</a>
-            <a id="viewPurchaseHistoryTab" href="@routes.PurchaseHistoryController.showPurchase()" class="list-group-item">View Purchase History</a>
+            <a id="viewAccountTab" href="@routes.AccountController.viewAccount()" class="list-group-item">
+                View My Account</a>
+            <a id="editAccountTab" href="@routes.AccountController.updateAccount()" class="list-group-item">
+                Edit Account</a>
+            <a id="viewPurchaseHistoryTab" href="@routes.PurchaseHistoryController.showPurchase()" class="list-group-item">
+                View Purchase History</a>
         </div>
     </div>
     <div class="col-md-9">
