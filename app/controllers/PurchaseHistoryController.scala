@@ -11,7 +11,6 @@ class PurchaseHistoryController @Inject extends Controller {
 
   def showPurchase = Action {
     implicit request =>
-      Product.generate()
 
       if (request.session.get("connected").isEmpty) {
         Redirect(routes.LoginController.login())

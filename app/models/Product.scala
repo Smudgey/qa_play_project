@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 
 
-case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL with Formatter {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, price: Double, clearance: Double, special: Double, category: Category.Value) extends URL {
 
 
 // URL: String
@@ -37,9 +37,8 @@ object Product extends Formatter {
 
   var list = new ArrayBuffer[Product]()
 
-  //special price will be a negative int, minus from normal price on front end
-  //clearance price will replace normal price if different, will be displayed in clearance section
-  def generate(): Unit = {
+  //TODO remove all calls to this method and replace with database connection
+  def dummyConnection(): Unit = {
     list.clear()
     this.add(Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 99.99, 99.99, 0, Category.Gnome))
     this.add(Product(702, "Beach Gnome", "This gnome is always ready for the beach, whatever the weather", 87, 58, 11.99, 11.99, 0, Category.Gnome))
@@ -94,6 +93,7 @@ object Product extends Formatter {
     Product.findProduct(708).get.urlList += "http://i.ebayimg.com/00/s/MTYwMFgxMDcw/z/XUQAAOSwnLdWslS-/$_1.JPG"
     Product.findProduct(709).get.urlList += "http://cdn.miniaturemarket.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/d/d/ddee-002i.jpg"
     Product.findProduct(710).get.urlList += "https://s-media-cache-ak0.pinimg.com/564x/85/ba/f3/85baf35b3dab24c2c01627f3528eff53.jpg"
+
     Product.findProduct(711).get.urlList += "http://www.menkind.co.uk/media/catalog/product/cache/1/image/800x/9df78eab33525d08d6e5fb8d27136e95/n/i/ninja-garden-gnome-24b.jpg"
     Product.findProduct(712).get.urlList += "http://i.imgur.com/jgEhW7H.jpg?fb"
     Product.findProduct(713).get.urlList += "http://d1qjc4s8f3m2zr.cloudfront.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/r/u/rud01-hay-rake-800-6.jpg"
@@ -103,6 +103,7 @@ object Product extends Formatter {
     Product.findProduct(717).get.urlList += "http://nt.greenfingers.com/images/product_images/extra_images/LS9530D/10_Square_Mouth_Shovel.jpg"
     Product.findProduct(718).get.urlList += "https://res-2.cloudinary.com/ezvid-inc/image/upload/c_pad,f_auto,h_210,w_322,q_auto/sopjh606m7snale0jtxv"
     Product.findProduct(719).get.urlList += "http://thumbs2.ebaystatic.com/d/l225/m/m79fDnft9EjVGjveIgyZa1g.jpg"
+
     Product.findProduct(720).get.urlList += "http://www.robin-wood.co.uk/wp-content/uploads/2010/07/gransfors-bruks-wildlife-hatchet-73-p.jpg"
     Product.findProduct(721).get.urlList += "http://airtoolguy.com/wp-content/uploads/2016/02/21QtK7L02lL.jpg"
     Product.findProduct(722).get.urlList += "https://s-media-cache-ak0.pinimg.com/236x/98/31/88/983188a8982e2640012890eb6d799f1b.jpg"
@@ -129,22 +130,21 @@ object Product extends Formatter {
     Product.findProduct(741).get.urlList += "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"
 
-    Product.markExistingProductAsClearance(701, 2.50, 4)
+    Product.markProductAsClearance(701, 2.50, 4)
 
   }
 
-  def markExistingProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
-
+  def markProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
     ClearanceProduct(pid, priceFormat(newPrice), quantity)
     Product.findProduct(pid).get.decrementStock(quantity, 0)
   }
 
   def markAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
 
-    /**Doesnt take into account porousware stock like the other methods, would need to implement when adding this functionality
+    /**Doesnt take into account porousware stock like the other methods, would need to implement if adding this functionality
       */
     Product.findProduct(pid).get.decrementStock(quantity, 0)
-    ClearanceProduct(pid, newPrice, quantity)
+    ClearanceProduct(pid, priceFormat(newPrice), quantity)
   }
 
   def searchByName(query: String) =  list.filter(_.name.toLowerCase.contains(query.toLowerCase()))
@@ -153,7 +153,15 @@ object Product extends Formatter {
 
   def searchByPrice(price: Int) = list.filter(_.price <= price)
 
-  def searchByCat(categoryAttributes: Category.Value) = list.filter(_.category == categoryAttributes)
+  def listByCat(category: Category.Value): ArrayBuffer[Product] = {
+    var ret =  ArrayBuffer[Product]()
+    for (p <- list) {
+      if (p.category == category) {
+        ret += p
+      }
+    }
+    ret
+  }
 
   def findProduct(pid: Int) = list.find(_.pid == pid)
 
