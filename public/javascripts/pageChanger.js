@@ -7,5 +7,7 @@ function changePage(page) {
         case "catalogue":
             $('#catalogueCategory').addClass('active');
             break;
+        case _:
+            break;
     }
 }

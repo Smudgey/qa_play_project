@@ -1,9 +1,8 @@
 //plugin bootstrap minus and plus
 //http://jsfiddle.net/laelitenetwork/puJ6G/
-
+$(document).ready(function(){
 $('.btn-number').click(function(e){
     e.preventDefault();
-    console.log("click")
 
     fieldName = $(this).attr('data-field');
     type      = $(this).attr('data-type');
@@ -35,11 +34,9 @@ $('.btn-number').click(function(e){
     }
 });
 $('.input-number').focusin(function(){
-    console.log("focus")
    $(this).data('oldValue', $(this).val());
 });
 $('.input-number').change(function() {
-    console.log("change")
     minValue =  parseInt($(this).attr('min'));
     maxValue =  parseInt($(this).attr('max'));
     valueCurrent = parseInt($(this).val());
@@ -62,7 +59,6 @@ $('.input-number').change(function() {
 
 });
 $(".input-number").keydown(function (e) {
-        console.log("keydown")
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
              // Allow: Ctrl+A
@@ -77,3 +73,5 @@ $(".input-number").keydown(function (e) {
             e.preventDefault();
         }
     });
+
+});
