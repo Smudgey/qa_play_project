@@ -1,9 +1,9 @@
 GET         /                         controllers.HomeController.index
 
-POST        /manageAccount            controllers.ManageAccountController.updateAccount
-GET         /manageAccount            controllers.ManageAccountController.ManageAccounts
+POST        /manageAccount            controllers.AccountController.updateAccount
+GET         /manageAccount            controllers.AccountController.manageAccounts
+GET         /viewAccount              controllers.AccountController.viewAccount
 
-GET         /viewAccount              controllers.ViewAccountController.ViewAccount
 GET         /purchaseHistory          controllers.PurchaseHistoryController.showPurchase
 
 
