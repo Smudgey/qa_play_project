@@ -1,54 +1,52 @@
 @(implicit session: Session)
-<<<<<<< HEAD
-@main("Register") {
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-12 col-lg-12">
-                <div class="vcenter">
-                    <img src="" class="img-circle form-group" width="100" height="100">
-                    @helper.form(routes.RegisterController.createUser()) {
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Full name</span>
-                            <input name="fullName" type="text" class="form-control">
-                        </div>
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Email</span>
-                            <input name="email" type="text" class="form-control">
+    @main("Register") {
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12 col-lg-12">
+                    <div class="vcenter">
+                        <form id="registerForm" action="@routes.RegisterController.createUser()" method="post">
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Full name</span>
+                                <input name="fullName" type="text" class="form-control">
+                            </div>
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Email</span>
+                                <input name="email" type="text" class="form-control">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Password</span>
+                                <input name="password" type="password" class="form-control">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Confirm Password</span>
+                                <input name="confirm" type="password" class="form-control">
+                            </div>
+
+                            <div class="form-group text-center">
+                                <input onclick="validateRegister()" id="btnRegister" type="button" class="btn btn-default" value="Register">
+                            </div>
+
+
+                        </form>
+                        <hr>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <a href="@routes.LoginController.login" class="label label-default">
+                                    Already registered?</a>
+                            </div>
                         </div>
 
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Password</span>
-                            <input name="password" type="password" class="form-control">
-                        </div>
 
-                        <div class="input-group form-group">
-                            <span class="input-group-addon">Confirm Password</span>
-                            <input type="password" class="form-control">
-                        </div>
-
-                        <div class="form-group text-center">
-                            <input id="btnRegister" type="submit" class="btn btn-default" value="Register">
-                        </div>
-
-                    }
-                    <hr>
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <a href="@routes.LoginController.login" class="btn btn-default">Login</a>
-                        </div>
-                        <div class="form-group">
-                            <a href="@routes.LoginController.login" class="label label-default">Already registered?</a>
-                        </div>
                     </div>
 
-
                 </div>
-
             </div>
-        </div>
 
-    </div>
-}
+        </div>
+    }
 
 
