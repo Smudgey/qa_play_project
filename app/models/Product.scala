@@ -37,9 +37,8 @@ object Product extends Formatter {
 
   var list = new ArrayBuffer[Product]()
 
-  //special price will be a negative int, minus from normal price on front end
-  //clearance price will replace normal price if different, will be displayed in clearance section
-  def generate(): Unit = {
+  //TODO remove all calls to this method and replace with database connection
+  def dummyConnection(): Unit = {
     list.clear()
     this.add(Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 99.99, 99.99, 0, Category.Gnome))
     this.add(Product(702, "Beach Gnome", "This gnome is always ready for the beach, whatever the weather", 87, 58, 11.99, 11.99, 0, Category.Gnome))
@@ -154,7 +153,15 @@ object Product extends Formatter {
 
   def searchByPrice(price: Int) = list.filter(_.price <= price)
 
-  def searchByCat(categoryAttributes: Category.Value) = list.filter(_.category == categoryAttributes)
+  def listByCat(category: Category.Value): ArrayBuffer[Product] = {
+    var ret =  ArrayBuffer[Product]()
+    for (p <- list) {
+      if (p.category == category) {
+        ret += p
+      }
+    }
+    ret
+  }
 
   def findProduct(pid: Int) = list.find(_.pid == pid)
 

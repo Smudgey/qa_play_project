@@ -10,6 +10,8 @@ GET         /purchaseHistory          controllers.PurchaseHistoryController.show
 GET         /catalogue                controllers.CatalogueController.show(query:String)
 POST        /catalogue                controllers.SearchController.search
 
+GET         /category/*cat            controllers.CatalogueController.showCategory(cat: String)
+
 GET         /view-product             controllers.ProductViewController.viewProduct(pid: Int)
 
 POST        /login                    controllers.LoginController.validateLogin

@@ -10,7 +10,6 @@ class ProductViewController @Inject() extends Controller {
 
   def viewProduct(pid: Int) = Action {
     implicit request =>
-      Product.generate()
       Ok(views.html.productView(Product.findProduct(pid).get)(request.session))
   }
 }
