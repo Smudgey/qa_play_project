@@ -1,0 +1,114 @@
+@(content: Html)
+
+<div class="navbar navbar-default visible-xs">
+    <div class="container-fluid">
+        <button class="btn btn-default navbar-btn" data-toggle="collapse" data-target="#filter-sidebar">
+            <i class="fa fa-tasks"></i> Toggle Sidebar
+        </button>
+    </div>
+</div>
+
+<div class="">
+
+    <div class="row">
+
+            <!-- filter sidebar -->
+        <div id="filter-sidebar" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 visible-sm visible-md visible-lg collapse sliding-sidebar">
+
+            <div>
+                <h4 data-toggle="collapse" data-target="#group-1">
+                    <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+                    <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+                    Artist
+                </h4>
+                <div id="group-1" class="list-group collapse in">
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 data-toggle="collapse" data-target="#group-2">
+                    <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+                    <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+                    Artist
+                </h4>
+                <div id="group-2" class="list-group collapse in">
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 data-toggle="collapse" data-target="#group-3">
+                    <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+                    <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+                    Artist
+                </h4>
+                <div id="group-3" class="list-group collapse in">
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 data-toggle="collapse" data-target="#group-4">
+                    <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+                    <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+                    Artist
+                </h4>
+                <div id="group-4" class="list-group collapse in">
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                    <a class="list-group-item" href="#">
+                        <span class="badge">3</span> John Lennon
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+            <!-- table container -->
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-9">
+            @content
+        </div>
+
+    </div>
+</div>
