@@ -4,37 +4,34 @@
             <div class="row text-center">
                 <div class="col-md-12 col-lg-12">
                     <div class="vcenter">
-                        @helper.form(routes.LoginController.validateLogin()) {
+                        <form id="loginForm" action="@routes.LoginController.validateLogin()" method="post">
                             <div class="input-group form-group">
                                 <span class="input-group-addon">Username</span>
                                 <input name="email" type="text" class="form-control">
                             </div>
-
                             <div class="input-group form-group">
                                 <span class="input-group-addon">Password</span>
                                 <input name="password" type="password" class="form-control">
                             </div>
 
                             <div class="form-group text-center">
-                                <input id="btnLogin" type="submit" class="btn btn-default" value="Login">
+                                <input onclick="validateLogin()" id="btnLogin" type="button" class="btn btn-default" value="Login">
                             </div>
+                            
                             <div class="form-group">
                                 <a href="@routes.AboutContactController.aboutAndContact" class="label label-default">
                                     Forgot password?</a>
                             </div>
-                        }
+                        </form>
                         <hr>
-
                         <div class="col-md-12">
                             <div class="form-group">
-                                <a href="@routes.RegisterController.register" class="label label-default">Don't have an account?</a>
+                                <a href="@routes.RegisterController.register" class="label label-default">
+                                    Don't have an account?</a>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
         </div>
     }
