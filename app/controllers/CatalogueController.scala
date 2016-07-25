@@ -25,6 +25,11 @@ class CatalogueController @Inject() extends Controller with Formatter {
       Ok(views.html.catalogue(prodFor)(Product.listByCat(Category.withName(decodeUri(cat))).toArray)(request.session))
   }
 
+  def showSuperCategory(cat: String) = Action {
+    implicit request =>
+      Ok(views.html.catalogue(prodFor)(Product.searchByCategory(cat).toArray)(request.session) )
+  }
+
   def show(query: String) = Action {
     implicit request =>
     Ok(views.html.catalogue(prodFor)(Product.searchByName(query).toArray)(request.session))

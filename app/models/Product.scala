@@ -36,48 +36,49 @@ object Product extends Formatter{
   //TODO remove calls to this method and replace with database connection
   def dummyConnection(): Unit = {
     inventory.clear()
-    this.add(inventory, Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 99.99, 99.99, 0, Category.Gnome))
-    this.add(inventory, Product(702, "Beach Gnome", "This gnome is always ready for the beach, whatever the weather", 87, 58, 11.99, 11.99, 0, Category.Gnome))
-    this.add(inventory, Product(703, "Supportive Gnome", "His supportive face will support you in your times of need.", 14, 2, 6.99, 6.99, 0, Category.Gnome))
-    this.add(inventory, Product(704, "Evil Gnome", "Possessed by evil demons, do not let inside your house.", 2, 1, 5.98, 5.98, 0, Category.Gnome))
-    this.add(inventory, Product(705, "Harry Potter Gnome", "Looks exactly like Daniel Radcliffe", 23, 4, 3.58, 3.58, 0, Category.Gnome))
-    this.add(inventory, Product(706, "Terminator", "I'll be back!", 23, 4, 9.99, 9.99, 0, Category.Gnome))
-    this.add(inventory, Product(707, "Dictator Gnome", "Your favorite dictator is now available as a garden gnome!", 11, 11, 6.66, 6.66, 0, Category.Gnome))
-    this.add(inventory, Product(708, "Donald Gnome", "Amazing hair.", 12, 1, 5.99, 5.99, 0, Category.Gnome))
-    this.add(inventory, Product(709, "Invisible Gnome", "It's an invisible gnome.", 5, 0, 10.05, 10.05, 0, Category.Gnome))
-    this.add(inventory, Product(710, "Super Gnome", "Your very own superhero gnome.", 25, 0, 10.99, 10.99, 0, Category.Gnome))
-    this.add(inventory, Product(711, "Ninja Gnome", "Much stealth, very silent, wow.", 12, 0, 58.99, 58.99, 0, Category.Gnome))
-    this.add(inventory, Product(712, "Thug Gnome", "Beware of Tyrone the gnome.", 12, 0, 58.99, 58.99, 0, Category.Gnome))
-    this.add(inventory, Product(713, "Wooden Rake", "A perfect classic feeling wooden rake for all of your raking needs.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(714, "Metal Rake", "If you need a more rugged versatile rake, then this hardy rake is perfect for you.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(715, "Hard Spade", "A spade for general use made to last a lifetime of normal wear.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(716, "Spetsnaz shovel", "If you need to dig the hole and kill your neighbour this is tools for you", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(717, "Nice Spade", "The perfect pink shovel, as fabulous as you are.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(718, "Nice Rake", "The ideal premium rake for the advanced usser.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(719, "Pickaxe", "Weather you're using it to break tough ground on a project or tunnelling your way into your local branch this axe will serve you well.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(720, "Wooden Axe", "Looking for a well made traditional axe? Look no further this classic is perfect for felling, chopping and everything else..", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(721, "Metal Axe", "A versatile axe with a weather proof metal handle for longer lasting use.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(722, "Fishing gnome", "This little fella ", 5, 0, 8.99, 8.99, 0, Category.Gnome))
-    this.add(inventory, Product(723, "Gnome Trousers", "Does your favourite gnome need a new get up? These trousers will add a whole new level of style and sophistication", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
-    this.add(inventory, Product(724, "Gnome Shoes", "These stylish shoes will keep your gnomes base protected as well as keeping them stylish under your favourite tree. ", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
-    this.add(inventory, Product(725, "Gnome Hat", "Will keep the rain off your favourite little friends head in all conditions.", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
-    this.add(inventory, Product(726, "Gnome Bikini", "From Highgate to Honolulu transform your garden into a tropical paradise with the quintessential two piece. ", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
-    this.add(inventory, Product(727, "Classic gnome", "The classic garden gnome, this cheeky little chap will bring character to any garden.", 5, 0, 8.99, 8.99, 0, Category.Gnome))
-    this.add(inventory, Product(728, "Gnome Underwear", "Gnome themed underwear.", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
-    this.add(inventory, Product(729, "Fake Plant", "This bright little pot plant adds a touch of the outdoors to the indoors requiring absolutely no effort.", 5, 0, 8.99, 8.99, 0, Category.PlantItem))
-    this.add(inventory, Product(730, "Fake Bush", "Shrug at real shrubs? Fake it until you make it, this spiral shaped plant will make you look like a garden master.", 5, 0, 8.99, 8.99, 0, Category.PlantItem))
-    this.add(inventory, Product(731, "Fake Tree", "No waiting time to grow required this large artificial tree can instantly be used to shelter under.", 5, 0, 8.99, 8.99, 0, Category.PlantItem))
-    this.add(inventory, Product(732, "Fake Forest", "A package of fake trees to give you land the desired theme", 5, 0, 8.99, 8.99, 0, Category.PlantItem))
-    this.add(inventory, Product(733, "Bird House", "A large bird house to accommodate a whole flock if need be", 5, 0, 8.99, 8.99, 0, Category.BirdItem))
-    this.add(inventory, Product(734, "Bird Feeder", "The classic bird feeder can accommodate up to four birds at a time.", 5, 0, 8.99, 8.99, 0, Category.BirdItem))
+    this.add(inventory, Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 99.99, 99.99, 0, Category.GnomeSmall))
+    this.add(inventory, Product(702, "Beach Gnome", "This gnome is always ready for the beach, whatever the weather", 87, 58, 11.99, 11.99, 0, Category.GnomeSmall))
+    this.add(inventory, Product(703, "Supportive Gnome", "His supportive face will support you in your times of need.", 14, 2, 6.99, 6.99, 0, Category.GnomeBig))
+    this.add(inventory, Product(704, "Evil Gnome", "Possessed by evil demons, do not let inside your house.", 2, 1, 5.98, 5.98, 0, Category.GnomeBig))
+    this.add(inventory, Product(705, "Harry Potter Gnome", "Looks exactly like Daniel Radcliffe", 23, 4, 3.58, 3.58, 0, Category.GnomeMedium))
+    this.add(inventory, Product(706, "Terminator", "I'll be back!", 23, 4, 9.99, 9.99, 0, Category.GnomeBig))
+    this.add(inventory, Product(707, "Dictator Gnome", "Your favorite dictator is now available as a garden gnome!", 11, 11, 6.66, 6.66, 0, Category.GnomeMedium))
+    this.add(inventory, Product(708, "Donald Gnome", "Amazing hair.", 12, 1, 5.99, 5.99, 0, Category.GnomeMedium))
+    this.add(inventory, Product(709, "Invisible Gnome", "It's an invisible gnome.", 5, 0, 10.05, 10.05, 0, Category.GnomeSmall))
+    this.add(inventory, Product(710, "Super Gnome", "Your very own superhero gnome.", 25, 0, 10.99, 10.99, 0, Category.GnomeBig))
+    this.add(inventory, Product(711, "Ninja Gnome", "Much stealth, very silent, wow.", 12, 0, 58.99, 58.99, 0, Category.GnomeSmall))
+    this.add(inventory, Product(712, "Thug Gnome", "Beware of Tyrone the gnome.", 12, 0, 58.99, 58.99, 0, Category.GnomeMedium))
+
+    this.add(inventory, Product(713, "Wooden Rake", "A perfect classic feeling wooden rake for all of your raking needs.", 5, 0, 8.99, 8.99, 0, Category.ToolRake))
+    this.add(inventory, Product(714, "Metal Rake", "If you need a more rugged versatile rake, then this hardy rake is perfect for you.", 5, 0, 8.99, 8.99, 0, Category.ToolRake))
+    this.add(inventory, Product(715, "Hard Spade", "A spade for general use made to last a lifetime of normal wear.", 5, 0, 8.99, 8.99, 0, Category.ToolSpade))
+    this.add(inventory, Product(716, "Spetsnaz shovel", "If you need to dig the hole and kill your neighbour this is tools for you", 5, 0, 8.99, 8.99, 0, Category.ToolSpade))
+    this.add(inventory, Product(717, "Nice Spade", "The perfect pink shovel, as fabulous as you are.", 5, 0, 8.99, 8.99, 0, Category.ToolSpade))
+    this.add(inventory, Product(718, "Nice Rake", "The ideal premium rake for the advanced usser.", 5, 0, 8.99, 8.99, 0, Category.ToolRake))
+    this.add(inventory, Product(719, "Pickaxe", "Weather you're using it to break tough ground on a project or tunnelling your way into your local branch this axe will serve you well.", 5, 0, 8.99, 8.99, 0, Category.ToolAxe))
+    this.add(inventory, Product(720, "Wooden Axe", "Looking for a well made traditional axe? Look no further this classic is perfect for felling, chopping and everything else..", 5, 0, 8.99, 8.99, 0, Category.ToolAxe))
+    this.add(inventory, Product(721, "Metal Axe", "A versatile axe with a weather proof metal handle for longer lasting use.", 5, 0, 8.99, 8.99, 0, Category.ToolAxe))
+    this.add(inventory, Product(722, "Fishing gnome", "This little fella ", 5, 0, 8.99, 8.99, 0, Category.GnomeSmall))
+    this.add(inventory, Product(723, "Gnome Trousers", "Does your favourite gnome need a new get up? These trousers will add a whole new level of style and sophistication", 5, 0, 8.99, 8.99, 0, Category.ClothingTrouser))
+    this.add(inventory, Product(724, "Gnome Shoes", "These stylish shoes will keep your gnomes base protected as well as keeping them stylish under your favourite tree. ", 5, 0, 8.99, 8.99, 0, Category.ClothingShoe))
+    this.add(inventory, Product(725, "Gnome Hat", "Will keep the rain off your favourite little friends head in all conditions.", 5, 0, 8.99, 8.99, 0, Category.ClothingHat))
+    this.add(inventory, Product(726, "Gnome Bikini", "From Highgate to Honolulu transform your garden into a tropical paradise with the quintessential two piece. ", 5, 0, 8.99, 8.99, 0, Category.ClothingUnderwear))
+    this.add(inventory, Product(727, "Classic gnome", "The classic garden gnome, this cheeky little chap will bring character to any garden.", 5, 0, 8.99, 8.99, 0, Category.GnomeMedium))
+    this.add(inventory, Product(728, "Gnome Underwear", "Gnome themed underwear.", 5, 0, 8.99, 8.99, 0, Category.ClothingUnderwear))
+    this.add(inventory, Product(729, "Fake Plant", "This bright little pot plant adds a touch of the outdoors to the indoors requiring absolutely no effort.", 5, 0, 8.99, 8.99, 0, Category.PlantPotted))
+    this.add(inventory, Product(730, "Fake Bush", "Shrug at real shrubs? Fake it until you make it, this spiral shaped plant will make you look like a garden master.", 5, 0, 8.99, 8.99, 0, Category.PlantPotted))
+    this.add(inventory, Product(731, "Fake Tree", "No waiting time to grow required this large artificial tree can instantly be used to shelter under.", 5, 0, 8.99, 8.99, 0, Category.PlantTree))
+    this.add(inventory, Product(732, "Fake Forest", "A package of fake trees to give you land the desired theme", 5, 0, 8.99, 8.99, 0, Category.PlantTree))
+    this.add(inventory, Product(733, "Bird House", "A large bird house to accommodate a whole flock if need be", 5, 0, 8.99, 8.99, 0, Category.BirdHouse))
+    this.add(inventory, Product(734, "Bird Feeder", "The classic bird feeder can accommodate up to four birds at a time.", 5, 0, 8.99, 8.99, 0, Category.BirdFeeder))
     this.add(inventory, Product(735, "Plant Pot", "A clay plant pot with a small hole in the  base to stop your plants from drowning when it rains.", 5, 0, 8.99, 8.99, 0, Category.PlantPot))
     this.add(inventory, Product(736, "Tree Pot", "A tree trunk themed pot to grow your plants in.", 5, 0, 8.99, 8.99, 0, Category.PlantPot))
-    this.add(inventory, Product(737, "Nice Gazebo", "A wicker framed gazebo for the fanciest of fancy garden parties, or when it rains on your parade.", 5, 0, 8.99, 8.99, 0, Category.Furniture))
-    this.add(inventory, Product(738, "Big Gazebo", "Gigantic gazebo you could use as a hangar if you really wanted. More than enough room to swing a cat.", 5, 0, 8.99, 8.99, 0, Category.Furniture))
-    this.add(inventory, Product(739, "Mini Gazebo", "A gazebo for ants.", 5, 0, 8.99, 8.99, 0, Category.Furniture))
-    this.add(inventory, Product(740, "Deck Chair", "Sit on a flag", 5, 0, 8.99, 8.99, 0, Category.Furniture))
-    this.add(inventory, Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99, 8.99, 0, Category.Furniture))
-    this.add(inventory, Product(742, "Normal Chair", "An average chair with a fancy cover", 5, 0, 8.99, 6.0, 0, Category.Furniture))
+    this.add(inventory, Product(737, "Nice Gazebo", "A wicker framed gazebo for the fanciest of fancy garden parties, or when it rains on your parade.", 5, 0, 8.99, 8.99, 0, Category.FurnitureGazebo))
+    this.add(inventory, Product(738, "Big Gazebo", "Gigantic gazebo you could use as a hangar if you really wanted. More than enough room to swing a cat.", 5, 0, 8.99, 8.99, 0, Category.FurnitureGazebo))
+    this.add(inventory, Product(739, "Mini Gazebo", "A gazebo for ants.", 5, 0, 8.99, 8.99, 0, Category.FurnitureGazebo))
+    this.add(inventory, Product(740, "Deck Chair", "Sit on a flag", 5, 0, 8.99, 8.99, 0, Category.FurnitureChair))
+    this.add(inventory, Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99, 8.99, 0, Category.FurnitureTable))
+    this.add(inventory, Product(742, "Normal Chair", "An average chair with a fancy cover", 5, 0, 8.99, 6.0, 0, Category.FurnitureChair))
 
     Product.findProduct(701).get.urlList += "https://thumbs.dreamstime.com/x/ugly-gnome-15606748.jpg"
     Product.findProduct(702).get.urlList += "http://www.gardengnomesetc.com/images/products/Snerdley_Shell_Seeking_Gnomes.jpg"
@@ -126,10 +127,20 @@ object Product extends Formatter{
     Product.findProduct(741).get.urlList += "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"
 
-    println(Product.findProduct(701).get.category)
-    println(Product.findProduct(701))
+
+    for (p <- inventory) {
+
+      if (p.category)) {
+        println(p.name)
+      }
+
+    }
 
     Product.markProductAsClearance(701, 2.50, 4)
+
+//    val query = "Gnome"
+//    println(Category.Gnome)
+//    println(Product.inventory.filter(_.category.toString.toLowerCase.contains(Category.Gnome.toString)))
   }
 
   def markProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
@@ -163,9 +174,11 @@ object Product extends Formatter{
 
   def searchByName(query: String) =  inventory.filter(_.name.toLowerCase.contains(query.toLowerCase()))
 
-  def searchByCategory(query: String) = inventory.filter(_.description.toLowerCase.contains(query.toLowerCase()))
+  def searchDescription(query: String) = inventory.filter(_.description.toLowerCase.contains(query.toLowerCase()))
 
   def searchByPrice(price: Int) = inventory.filter(_.price <= price)
+
+  def searchByCategory(query: String) = inventory.filter(_.category.toString.toLowerCase.contains(query.toLowerCase()))
 
   def listByCat(category: Category.Value): ArrayBuffer[Product] = {
     var ret =  ArrayBuffer[Product]()
@@ -175,6 +188,17 @@ object Product extends Formatter{
       }
     }
     ret
+  }
+
+  def listByParentClass(string: String): ArrayBuffer[Product] = {
+
+      var ret = ArrayBuffer[Product]()
+      for (p <- inventory) {
+        if (p.category.toString.toLowerCase.contains(string)) {
+          ret += p
+        }
+      }
+      ret
   }
 
   def findProduct(pid: Int) = inventory.find(_.pid == pid)
