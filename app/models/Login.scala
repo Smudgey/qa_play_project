@@ -14,7 +14,8 @@ object Login {
     Login("101", "dave", "1234", ""),
     Login("102", "betty", "1235", ""),
     Login("103", "bob", "pass", "bob@bob.com"),
-    Login("000", "a", "a", "a")
+    Login("000", "a", "a", "a"),
+    Login("0423", "Paul", "pass", "paul.tan@qa.com")
   )
 
   def createUser(name: String, password: String, email: String): Boolean = {
