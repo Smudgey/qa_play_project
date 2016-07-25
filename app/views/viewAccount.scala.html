@@ -1,0 +1,266 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+@thelemens
+Unwatch 9
+Star 0
+Fork 0 RytisJ/qa_play_project
+Code  Issues 26  Pull requests 0  Wiki  Pulse  Graphs
+Tree: 52f9222b3f Find file Copy pathqa_play_project/app/views/viewAccount.scala.html
+111275e  3 days ago
+@RytisJ RytisJ weird test
+1 contributor
+RawBlameHistory     251 lines (196 sloc)  8.18 KB
+@import scala.collection.mutable.ArrayBuffer
+@(customerDetails: ArrayBuffer[CustomerDetails])(implicit session: Session)
+@main("") {
+
+@manageAccountsSidebar("Manage Account") {
+
+<script>changeTab("viewAccount")</script>
+<style>
+            .input-group-addon {
+                min-width: 180px;
+            }
+            .center-text {
+                margin-left: 40%;
+            }
+            .center {
+                margin-left: 36%;
+            }
+            </style>
+<div class="left">
+    <h1>My Account</h1>
+</div>
+<div class="left">
+    <h2>View personal details</h2>
+</div>
+<div>
+</div>
+
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<div id="viewAccountDetails">
+    <div class="text-center">
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            Username:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.eMail
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            Phone number:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.phoneNumber
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            First name:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.fName
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            Last name:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.lName
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            Address line 1:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.addressLine1
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            Address line 2:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.addressLine2
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            City:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.city
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            County:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.county
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div>
+                        <h3
+                                class="col-xs-8 col-sm-6 success">
+                            Postcode:
+                        </h3>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-6">
+                        <h3
+                                class="col-xs-8 col-sm-6">
+                            @customerDetails.head.postCode
+                        </h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+}
+}
+Contact GitHub API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Status Help
