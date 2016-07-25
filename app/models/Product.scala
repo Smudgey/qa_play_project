@@ -126,19 +126,16 @@ object Product extends Formatter {
     Product.findProduct(741).get.urlList += "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"
 
-    println("Inventory: " + sizeOf(inventory) + "\nClearance: " + sizeOf(clearanceStock))
 
     Product.markProductAsClearance(701, 2.50, 4)
-
-    println("Inventory: " + sizeOf(inventory) + "\nClearance: " + sizeOf(clearanceStock))
-
   }
 
   def markProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
 
-    var p = findProduct(pid).get.copy(price = priceFormat(newPrice), stock = quantity)
+    val p = findProduct(pid).get.copy(price = priceFormat(newPrice), stock = quantity)
+    p.urlList = findProduct(pid).get.urlList
 
-    add(clearanceStock, findProduct(pid).get.copy(price = priceFormat(newPrice), stock = quantity))
+    add(clearanceStock, p)
     Product.findProduct(pid).get.decrementStock(quantity, 0)
   }
 
