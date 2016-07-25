@@ -53,6 +53,7 @@ class BasketController @Inject() extends Controller {
   def clear = Action {
     implicit request =>
       OrderLine.clear()
+      println("Basket: " + Product.inventory.size + "\nClearance" + Product.clearanceStock.size )
       Redirect(routes.BasketController.basket).withSession("basketItemCount" -> "")
   }
 

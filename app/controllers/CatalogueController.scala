@@ -6,6 +6,8 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
   * Created by Marko on 08/07/2016.
   */
@@ -26,6 +28,11 @@ class CatalogueController @Inject() extends Controller with Formatter {
   def show(query: String) = Action {
     implicit request =>
     Ok(views.html.catalogue(prodFor)(Product.searchByName(query).toArray)(request.session))
+  }
+
+  def showClearance = Action {
+    implicit request =>
+      Ok(views.html.catalogue(prodFor)(Product.clearanceStock.toArray)(request.session))
   }
 
 
