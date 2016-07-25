@@ -134,26 +134,28 @@ function validateCard(){
 
 }
 
+//Validate Edit Account Fields
 function editAccount(){
 
     var aForm = $('#accountEdit');
     var aUserName = aForm.find("input[name=eMail]");
-    var aTelephone = aForm.find("input[name=telephoneNumber");
+    var aTelephone = aForm.find("input[name=telephoneNumber]");
     var fName = aForm.find("input[name=fName]");
-    var lName = aForm.find("input[name=lName");
-    var addrLine1 = aForm.find("input[name=addrLine1");
-    var addrLine2 = aForm.find("input[name=addreLine2");
-    var city = aForm.find("input[name=city");
-    var county = aForm.find("input[name=county");
-    var postcode = aForm.find("input[name=postCode");
-    var currentPwd = aForm.find("input[name=currentPwd");
-    var newPwd = aForm.find("input[name=newPwd");
+    var lName = aForm.find("input[name=lName]");
+    var addrLine1 = aForm.find("input[name=addrLine1]");
+    var addrLine2 = aForm.find("input[name=addreLine2]");
+    var city = aForm.find("input[name=city]");
+    var county = aForm.find("input[name=county]");
+    var postcode = aForm.find("input[name=postCode]");
+    var currentPwd = aForm.find("input[name=currentPwd]");
+    var newPwd = aForm.find("input[name=newPwd]");
+    var confirmPwd = aForm.find("input[name=confirmPwd]")
 
     var aBool = true;
 
     var aNameRegex = new RegExp("[A-Za-z]");
     var aNumberRegex = new RegExp("[0-9]");
-    var aTextANumber = new RegExp("[A-Za-z0-9");
+    var aTextANumber = new RegExp("[A-Za-z0-9]");
 
 
     if(!aNameRegex.test(aUserName.val()) || aUserName.val() == null || aUserName.val().length == 0){
@@ -166,31 +168,82 @@ function editAccount(){
     if(!aNumberRegex.test(aTelephone.val()) || aTelephone.val() == null || aTelephone.val().length == 0){
 
         aTelephone.parent().addClass("has-error");
-        alert("Incorrect Telephone");
+        alert("Incorrect Telephone Number");
         aBool = false;
 
     }
     if(!aNameRegex.test(fName.val()) || fName.val() == null || fName.val().length == 0){
 
         fName.parent().addClass("has-error");
-        alert("Incorrect FirstName");
+        alert("Incorrect First Name");
         aBool = false;
 
     }
     if(!aNameRegex.test(lName.val()) || lName.val() == null || lName.val().length == 0){
 
         lName.parent().addClass("has-error");
-        alert("Incorrect Expiration Month");
+        alert("Incorrect Last Name");
         aBool = false;
 
     }
     if(!aTextANumber.test(addrLine1.val()) || addrLine1.val() == null || addrLine1.val().length == 0){
 
         addrLine1.parent().addClass("has-error");
-        alert("Incorrect Expiration Year");
+        alert("Incorrect Address Line 1");
         aBool = false;
 
     }
+    if(!aTextANumber.test(addrLine2.val()) || addrLine2.val() == null || addrLine2.val().length == 0){
+
+        addrLine2.parent().addClass("has-error");
+        alert("Incorrect Address Line 2");
+        aBool = false;
+
+    }
+    if(!aNameRegex.test(city.val()) || city.val() == null || city.val().length == 0){
+
+        city.parent().addClass("has-error");
+        alert("Incorrect City");
+        aBool = false;
+
+    }
+    if(!aNameRegex.test(county.val()) || county.val() == null || county.val().length == 0){
+
+        county.parent().addClass("has-error");
+        alert("Incorrect County");
+        aBool = false;
+
+    }
+    if(!aTextANumber.test(postcode.val()) || postcode.val() == null || postcode.val().length == 0){
+
+        postcode.parent().addClass("has-error");
+        alert("Incorrect Post Code");
+        aBool = false;
+
+    }
+    if(!aTextANumber.test(currentPwd.val()) || currentPwd.val() == null || currentPwd.val().length == 0){
+
+        currentPwd.parent().addClass("has-error");
+        alert("Incorrect Current Password");
+        aBool = false;
+
+    }
+
+    if(!aTextANumber.test(newPwd.val()) || newPwd.val() == null || newPwd.val().length == 0){
+
+        newPwd.parent().addClass("has-error");
+        alert("Incorrect New Password");
+        aBool = false;
+
+    }
+
+    if(!aTextANumber.test(confirmPwd.val()) || confirmPwd.val() == null || confirmPwd.val().length == 0 && (confirmPwd == newPwd)){
+        confirmPwd.parent().addClass("has-error");
+        alert("Password does not Match");
+        aBool = false;
+
+    }
+
 
     if(aBool){
 
