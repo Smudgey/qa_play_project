@@ -2,17 +2,39 @@
 @main("") {
     @manageAccountsSidebar("Purchase History") {
         <script>changeTab("viewPurchaseHistory")</script>
-        <div class="container">
+        <div class="container purchaseHistory">
 
             <table class="table">
             @if(!list.isEmpty) {
 
                 @for(o <- list) {
                     <tr>
-                        <td>Order ID: @o.orderID</td>
-                        <td>Order Status: @o.status</td>
-                        <td>Order Payment: @o.paymentMethod</td>
-                        <td>Date Ordered: @o.time</td>
+                        <td>Order ID: <br> @o.orderID</td>
+                        <td>Order Status: <br> @o.status</td>
+                        <td>Order Payment: <br> @o.paymentMethod</td>
+                        <td>Date Ordered: <br> @o.time</td>
+                        <td>Star Rating:
+                            <form action="@routes.PurchaseHistoryController.orderRating()" method="post">
+
+                                @if(o.rating != 0) {
+                                    <script>
+
+                                    </script>
+                                }
+                            <div class="rytis-star">
+
+                            @for(i <- 0 to 4) {
+                                @if(i <= o.rating - 1) {
+                                    <div class="star glyphicon glyphicon-star"></div>
+                                } else {
+                                    <div class="star glyphicon glyphicon-star-empty"></div>
+                                }
+                            }
+                            </div>
+                            <input type="hidden" value="" name="rating">
+                            <input type="hidden" value="@o.orderID" name="oid">
+                            </form>
+                        </td>
 
                     </tr>
 
