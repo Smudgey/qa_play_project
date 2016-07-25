@@ -19,8 +19,7 @@ object Login {
 
   def createUser(name: String, password: String, email: String): Boolean = {
     if (findLogin(email).isEmpty) {
-      val randomUID = Random.nextString(10)
-      LoginSession.setUser(randomUID)
+      val randomUID = Order.randomOID
       list += Login(randomUID, name, password, email)
       true
     } else {

@@ -5,46 +5,12 @@
 
             <h2>Enter Payment Details</h2>
             <form id="card" action="@routes.PaymentController.registerPayment()" method="post">
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class='form-group'>
-                        <label class='control-label'>Cardholder Name</label>
-                        <input name="cardholder" class='form-control' type='text'>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class='form-group'>
-                        <label class='control-label'>Card Number</label>
-                        <input name="cardNumber" autocomplete='off' class='form-control card-number' type='text'>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class='form-group'>
-                        <label class='control-label'>CV</label>
-                        <input name="cv" autocomplete='off' class='form-control' type='text'>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class='form-group'>
-                        <label class='control-label'>Expiration Month</label>
-                        <input name="expirationMonth" class='form-control' type='text'>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class='form-group'>
-                        <label class='control-label'>Expiration Year</label>
-                        <input name="expirationYear" class='form-control' type='text'>
-                    </div>
-                </div>
-
+                @cardTemplate()
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
                         <input class="btn btn-default" type="button" onclick="validateCard()" value ="Submit">
                     </div>
                 </div>
-
-
             </form>
         </div>
     </div>

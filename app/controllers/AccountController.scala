@@ -1,12 +1,17 @@
 package controllers
 
 import com.google.inject.Inject
-import models.CustomerDetails
+import models.{CardDetails, CustomerDetails, Login}
 import play.api.data.Forms._
-
 import play.api.data._
 import play.api.mvc.{Action, Controller}
 
+
+/**
+  * Created by Rytis
+  *
+  * Last worked on by Rytis & Yang on 25/07/2016
+  */
 
 class AccountController @Inject extends Controller {
   private val manageAccountForm: Form[CustomerDetails] = Form(
@@ -24,6 +29,19 @@ class AccountController @Inject extends Controller {
     )
     (CustomerDetails.apply)
     (CustomerDetails.unapply)
+  )
+
+  private val cardForm: Form[CardDetails] = Form(
+    mapping(
+      "" -> text,
+      "cardholder" -> nonEmptyText,
+      "cardNumber" -> nonEmptyText,
+      "cv" -> nonEmptyText,
+      "expirationMonth" -> nonEmptyText,
+      "expirationYear" -> nonEmptyText
+    )
+    (CardDetails.apply)
+    (CardDetails.unapply)
   )
 
   def manageAccounts = Action {
@@ -94,4 +112,32 @@ class AccountController @Inject extends Controller {
       }
   }
 
+  def viewCard = Action {
+    implicit request =>
+      Ok(views.html.viewCard(CardDetails.getCard(Login.findLogin(request.session.data("connected")).get.lid).toArray)(request.session))
+  }
+
+  def registerCard = Action {
+    implicit request =>
+      Ok(views.html.registerCard(request.session))
+  }
+
+  def addCard() = Action {
+    implicit request =>
+      CardDetails.addCard(
+        Login.findLogin(request.session.data("connected")).get.lid,
+        cardForm.bindFromRequest().data("cardholder"),
+        cardForm.bindFromRequest().data("cardNumber"),
+        cardForm.bindFromRequest().data("cv"),
+        cardForm.bindFromRequest().data("expirationMonth"),
+        cardForm.bindFromRequest().data("expirationYear")
+      )
+      Redirect(routes.AccountController.registerCard())
+  }
+
+  def removeCard(cardNumber: String) = Action {
+    implicit request =>
+      CardDetails.removeCard(cardNumber)
+      Redirect(routes.AccountController.viewCard())
+  }
 }

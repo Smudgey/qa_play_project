@@ -1,0 +1,14 @@
+@(implicit session: Session)
+@main("") {
+    @manageAccountsSidebar("Add cards") {
+        <script> changeTab("registerCard")</script>
+        <form id="card" action="@routes.AccountController.addCard()" method="post">
+            @cardTemplate()
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <input class="btn btn-default" type="button" onclick="validateCard()" value ="Submit">
+                </div>
+            </div>
+        </form>
+    }
+}

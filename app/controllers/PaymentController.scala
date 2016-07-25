@@ -96,7 +96,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
   def registerPayment() = Action {
     implicit request => {
       CardDetails.addCard(
-        LoginSession.getCurrentUser,
+        request.session.data("connected"),
         cardForm.bindFromRequest().data("cardholder"),
         cardForm.bindFromRequest().data("cardNumber"),
         cardForm.bindFromRequest().data("cv"),

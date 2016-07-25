@@ -27,6 +27,12 @@ function changeTab(tab) {
         case "viewPurchaseHistory":
             $('#viewPurchaseHistoryTab').addClass("active");
             break;
+        case "viewCard":
+            $('#viewCardTab').addClass("active");
+            break;
+        case "registerCard":
+            $('#registerCardTab').addClass("active");
+            break;
 
     }
 }

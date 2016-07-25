@@ -6,8 +6,6 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
 
-import scala.util.Random
-
 
 /**
   * Created by rytis on 07/07/16.
@@ -58,7 +56,7 @@ class RegisterController @Inject extends Controller {
     */
   def register = Action {
     implicit request =>
-    Ok(views.html.registerStart(request.session))
+      Ok(views.html.registerStart(request.session)).withSession("connected" -> Order.randomOID)
   }
 
   /**
@@ -66,7 +64,7 @@ class RegisterController @Inject extends Controller {
     */
   def address = Action {
     implicit request =>
-    Ok(views.html.registerAddress(request.session))
+      Ok(views.html.registerAddress(request.session))
   }
 
   /**
@@ -74,7 +72,7 @@ class RegisterController @Inject extends Controller {
     */
   def bank = Action {
     implicit request =>
-    Ok(views.html.payment(request.session))
+      Ok(views.html.payment(request.session))
   }
 
 
@@ -103,7 +101,7 @@ class RegisterController @Inject extends Controller {
     implicit request => {
 
       Address.addAddress(
-        LoginSession.getCurrentUser,
+        request.session.data("connected"),
         addressForm.bindFromRequest().data("houseNumber"),
         addressForm.bindFromRequest().data("streetName"),
         addressForm.bindFromRequest().data("town"),
@@ -123,7 +121,7 @@ class RegisterController @Inject extends Controller {
   def createCard() = Action {
     implicit request => {
       CardDetails.addCard(
-        LoginSession.getCurrentUser,
+        request.session.data("connected"),
         cardForm.bindFromRequest().data("cardholder"),
         cardForm.bindFromRequest().data("cardNumber"),
         cardForm.bindFromRequest().data("cv"),

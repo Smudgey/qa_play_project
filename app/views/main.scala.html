@@ -9,229 +9,227 @@
 @(title: String)(content: Html)(implicit session: Session)
 
 <!-- TODO Swap this generate method with a database call.-->
-@if(Product.inventory.isEmpty) {
-    @Product.dummyConnection()
-    @println("Connection created")
-}
+    @if(Product.inventory.isEmpty) {
+        @Product.dummyConnection()
+        @println("Connection created")
+    }
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <html lang="en">
+        <head>
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
-        <title>@title</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="Template">
-        <meta name="author" content="MVP Consulting, Emma">
-        <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
-            <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
-            <!-- Bootstrap theme -->
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.min.css")">
-            <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme.css")">
+            <title>@title</title>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+            <meta name="description" content="Template">
+            <meta name="author" content="MVP Consulting, Emma">
+            <link rel="icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+                <!-- Bootstrap core CSS -->
+            <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+                <!-- Bootstrap theme -->
+            <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.min.css")">
+                <!-- Custom styles for this template -->
+            <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme.css")">
 
-        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/pageChanger.js")"></script>
-        <script src="@routes.Assets.versioned("javascripts/formValidation.js")"></script>
+            <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
+            <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+            <script src="@routes.Assets.versioned("javascripts/catalogue.js")"></script>
+            <script src="@routes.Assets.versioned("javascripts/checkout.js")"></script>
+            <script src="@routes.Assets.versioned("javascripts/pageChanger.js")"></script>
+            <script src="@routes.Assets.versioned("javascripts/formValidation.js")"></script>
 
-    </head>
+        </head>
 
-    <body role="document">
+        <body role="document">
 
-            <!-- Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="@routes.HomeController.index">NBG</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li id="homePageCategory"><a href="@routes.HomeController.index">Home</a></li>
-                        <li id="catalogueCategory"><a href="@routes.CatalogueController.show("")">Catalogue</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <!-- Fixed navbar -->
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="@routes.HomeController.index">NBG</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li id="homePageCategory"><a href="@routes.HomeController.index">Home</a></li>
+                            <li id="catalogueCategory"><a href="@routes.CatalogueController.show("")">Catalogue</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gnomes <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu">
+                                <ul class="dropdown-menu">
 
-                                <li><a href="@routes.CatalogueController.showCategory(Category.Gnome.toString)">All Gnomes</a></li>
+                                    <li><a href="@routes.CatalogueController.showCategory(Category.Gnome.toString)">All Gnomes</a></li>
 
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Gnome Accessories</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Gnome Accessories</li>
 
-                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingItem.toString)">Gnome Clothing</a></li>
+                                    <li><a href="@routes.CatalogueController.showCategory(Category.ClothingItem.toString)">Gnome Clothing</a></li>
 
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gardening <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                                <ul class="dropdown-menu">
 
-                                <li><a href="@routes.CatalogueController.showCategory(Category.Tool.toString)">Tools</a></li>
+                                    <li><a href="@routes.CatalogueController.showCategory(Category.Tool.toString)">Tools</a></li>
 
-                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantItem.toString)">Plants</a></li>
+                                    <li><a href="@routes.CatalogueController.showCategory(Category.PlantItem.toString)">Plants</a></li>
 
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Miscellaneous <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                                <ul class="dropdown-menu">
 
-                                <li><a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)">Bird Items</a></li>
-                                <li><a href="@routes.CatalogueController.showCategory(Category.Furniture.toString)">Furniture</a></li>
-                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantPot.toString)">Plant Pots</a></li>
+                                    <li><a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)">Bird Items</a></li>
+                                    <li><a href="@routes.CatalogueController.showCategory(Category.Furniture.toString)">Furniture</a></li>
+                                    <li><a href="@routes.CatalogueController.showCategory(Category.PlantPot.toString)">Plant Pots</a></li>
 
-                            </ul>
-                        </li>
-                        <li class="dropdown">
+                                </ul>
+                            </li>
+                            <li class="dropdown">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Clearance <span class="caret"></span></a>
 
-                            <ul class="dropdown-menu">
-                                <li><a href="@routes.CatalogueController.showClearance">All clearance</a></li>
-                                <li><a href="@routes.CatalogueController.showClearance">All Discounts</a></li>
-                            </ul>
-                        </li>
-                        <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
-                            About Us</a></li>
-                    </ul>
-
-                    <div class="navbar-form navbar-right">
-
-                        <a class="btn btn-success" href="@routes.BasketController.basket()">
-                            Cart
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                            <span class="badge">@session.get("basketItemCount")</span>
-                        </a>
-
-                        @if(session.get("connected").isEmpty) {
-                            <div class="btn-group">
-                            @helper.form(routes.LoginController.validateLogin) {
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Login
-                                </button>
-
-                                <ul class="dropdown-menu loginDropdown">
-                                    <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
-                                    <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
-                                    <li>
-                                        <div class="vcenter">
-                                            <a href="@routes.AboutContactController.aboutAndContact" class="label label-default">
-                                                Forgot password?</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="btn-group">
-                                            <button type="submit" class="btn btn-default">Login</button>
-                                            <a type="button" href="@routes.RegisterController.register" class="btn btn-default">
-                                                Register</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            }
-                            </div>
-
-                        } else {
-
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Manage Account
-                                </button>
-
                                 <ul class="dropdown-menu">
-                                    <li><a href="@routes.AccountController.viewAccount()">My Account</a></li>
-                                    <li><a href="@routes.AccountController.updateAccount()">Edit Account</a></li>
-                                    <li><a href="@routes.PurchaseHistoryController.showPurchase">
-                                        Purchase History</a></li>
+                                    <li><a href="@routes.CatalogueController.showClearance">All clearance</a></li>
+                                    <li><a href="@routes.CatalogueController.showClearance">All Discounts</a></li>
                                 </ul>
+                            </li>
+                            <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
+                            About Us</a>
+                            </li>
+                        </ul>
 
-                                <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+                        <div class="navbar-form navbar-right">
 
+                            <a class="btn btn-success" href="@routes.BasketController.basket()">
+                            Cart
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                <span class="badge">@session.get("basketItemCount")</span>
+                            </a>
+
+                            @if(session.get("connected").isEmpty) {
+                                <div class="btn-group">
+                                @helper.form(routes.LoginController.validateLogin) {
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Login
+                                    </button>
+
+                                    <ul class="dropdown-menu loginDropdown">
+                                        <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
+                                        <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
+                                        <li>
+                                            <div class="vcenter">
+                                                <a href="@routes.AboutContactController.aboutAndContact" class="label label-default">
+                                                    Forgot password?</a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="btn-group">
+                                                <button type="submit" class="btn btn-default">Login</button>
+                                                <a type="button" href="@routes.RegisterController.register" class="btn btn-default">
+                                                    Register</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                }
+                                </div>
+
+                            } else {
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Manage Account
+                                    </button>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@routes.AccountController.viewAccount()">My Account</a></li>
+                                        <li><a href="@routes.AccountController.updateAccount()">Edit Account</a></li>
+                                        <li><a href="@routes.PurchaseHistoryController.showPurchase">Purchase History</a></li>
+                                        <li><a href="@routes.AccountController.viewCard()">View Card</a></li>
+                                        <li><a href="@routes.AccountController.registerCard()">Register Card</a></li>
+                                    </ul>
+
+                                    <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
+
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
+                </div>
+
+            </nav>
+
+            @helper.form(routes.SearchController.search) {
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group searchBar">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            }
+
+            <div class="container text-center">
+            @content
+
+            </div>
+            <div class="container text-center">
+                <hr>
+                <a href="http://bluebirdexperience.com/wp-content/uploads/2013/04/Download-button-small3.jpg">
+                    <h2>Download our 2016 brochure now!</h2>
+                </a>
+            </div>
+            <hr/>
+            <div class="container text-center">
+                <h4>Contact Us</h4>
+                <div class="row" align="left" style="display: inline-block">
+                    <div class="col-sm-12 col-md-12">
+                        <p id="address">NB Gardens, Head Office<br/>
+                            Gnome Road<br/>
+                            Stockport<br/>
+                            Greater Manchester<br/>
+                            M50 3UB<br/></p>
+                    </div>
+                </div>
+                <div class="row" align="center" style="display: inline-block;">
+                    <div class="col-sm-12 col-md-12">
+                        <p id="Telephone">0738201883</p>
+                        <p id="Email">enquiriesnbgardens.com</p>
+                    </div>
                 </div>
             </div>
 
-        </nav>
-
-        @helper.form(routes.SearchController.search) {
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="input-group searchBar">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        }
-
-        <div class="container text-center">
-        @content
-
-
-        </div>
-        <div class="container text-center">
-            <hr>
-            <a href="http://bluebirdexperience.com/wp-content/uploads/2013/04/Download-button-small3.jpg">
-                <h2>Download our 2016 brochure now!</h2>
-            </a>
-        </div>
-        <hr/>
-        <div class="container text-center">
-            <h4>Contact Us</h4>
-            <div class="row" align="left" style="display: inline-block">
-                <div class="col-sm-12 col-md-12">
-                    <p id="address">NB Gardens, Head Office<br/>
-                        Gnome Road<br/>
-                        Stockport<br/>
-                        Greater Manchester<br/>
-                        M50 3UB<br/></p>
-                </div>
-            </div>
-            <div class="row" align="center" style="display: inline-block;">
-                <div class="col-sm-12 col-md-12">
-                    <p id="Telephone">0738201883</p>
-                    <p id="Email">enquiriesnbgardens.com</p>
-</div>
-            </div>
-        </div>
 
 
 
 
 
 
+            <div align="center" class="row" >
+                <a style="color: #3b5998" href="https://www.facebook.com/NBGardens/" role="button"> <i style="font-size: 64px" class="fa fa-facebook-square row-xs-12 row-md-8"> </i> </a>
+                <a style="color: #4099FF" href="https://twitter.com/nbgbrooklyn" role="button"> <i style="font-size: 64px" class="fa fa-twitter-square row-xs-12 row-md-8"> </i> </a>
+                <a style="color: #FF0000" href="https://plus.google.com/111293658324555647065" role="button"> <i style="font-size: 64px" class="fa fa-google-plus row-xs-12 row-md-8"> </i> </a>
+                <a style="color: # #35465c" href="http://landscapefocused.tumblr.com/" role="button"> <i style="font-size: 64px" class="fa fa-tumblr row-xs-12 row-md-8"> </i> </a>
+                <a style="color: #8B0000" href="http://www.starwars.com/databank/rebel-alliance" role="button"> <i style="font-size: 64px" class="fa fa-rebel row-xs-12 row-md-8"> </i> </a> </div>
 
-<div align="center" class="row"  >
-    <a style="color: #3b5998" href="https://www.facebook.com/NBGardens/" role="button"> <i style="font-size:64px" class="fa fa-facebook-square row-xs-12 row-md-8"> </i> </a>
-<a style="color: #4099FF" href="https://twitter.com/nbgbrooklyn" role="button"> <i style="font-size:64px" class="fa fa-twitter-square row-xs-12 row-md-8"> </i> </a>
-<a style="color: #FF0000" href="https://plus.google.com/111293658324555647065" role="button"> <i style="font-size:64px" class="fa fa-google-plus row-xs-12 row-md-8"> </i> </a>
-<a style="color: ##35465c" href="http://landscapefocused.tumblr.com/" role="button"> <i style="font-size:64px" class="fa fa-tumblr row-xs-12 row-md-8"> </i> </a>
- <a style="color: #8B0000" href="http://www.starwars.com/databank/rebel-alliance" role="button"> <i style="font-size:64px" class="fa fa-rebel row-xs-12 row-md-8"> </i> </a> </div>
+        </body>
 
-
-
-
-    </body>
-
-</html>
+    </html>
