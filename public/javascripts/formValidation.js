@@ -199,5 +199,3 @@ function editAccount(){
     }
 
 }
-
-function
