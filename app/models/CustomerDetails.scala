@@ -18,6 +18,7 @@ object CustomerDetails {
   detailsList += CustomerDetails("pgp", " ", " ", " ", " ", " ", " ", " ", " ")
   detailsList += CustomerDetails("pop", " ", " ", " ", " ", " ", " ", " ", " ")
   detailsList += CustomerDetails("a", "07981918209", "Yang", "Wong", "1 road", "2 place", "Gungan city", "Middle-earth", "f6 911")
+  detailsList += CustomerDetails("paul.tan@qa.com", "07557414632", "Paul", "Tan", "7", "HK Stars", "Hong Kong", "Hong Kong", "HK23 4EH")
 
 
   def updateAccount(details: CustomerDetails): Unit = {
