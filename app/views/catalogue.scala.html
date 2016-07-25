@@ -17,38 +17,16 @@ max-width: 100px; max-height: 100px;
                 class="glyphicon glyphicon-th"></span>Grid</a>
                 </div>
             </div>
-
-            <div class ="sidebar-wrapper">
-
-                <ul class="sidebar-nav">
-                    <li class="sidebar-first"><h4 class="sidebar-brand">View By</br> Category</h4></li>
-                    <li>
-                        <a class="sidebar-brand" href='#'>
-                            Big Gnomes&nbsp;<span>(0)</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="sidebar-brand" href='#'>
-                            Small Gnomes&nbsp; <span>(0)</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="sidebar-brand" href='#'>
-                            Garden Accessories&nbsp; <span>(0)</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="sidebar-brand" href='#'>
-                            Sexy Gnomeware&nbsp; <span>(0)</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-
-            <div id="products" class="row list-group">
-          <img src="@grid(form)(products)" />
-            </div>
         </div>
 
-}
+
+
+
+
+        <div id="products">
+        @sidebar {
+            @grid(form)(products)
+        }
+        </div>
+
+    }

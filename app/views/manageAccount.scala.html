@@ -1,0 +1,77 @@
+@(implicit session: Session)
+    @main("") {
+        @manageAccountsSidebar("Manage Account") {
+            <script>changeTab("editAccount")</script>
+            @helper.form(routes.AccountController.updateAccount) {
+                <div class="center-text">
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="email">Username</span>
+                        <input type="text" name="eMail" class="form-control" placeholder="Username*">
+                    </div>
+
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="telephoneNumber">Telephone Number</span>
+                        <input type="tel" name="telephoneNumber" class="form-control" placeholder="Telephone Number*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="fName">First Name</span>
+                        <input type="text" name="fName" class="form-control" placeholder="First Name*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="lName">Last Name</span>
+                        <input type="text" name="lName" class="form-control" placeholder="Last Name*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="addrLine1">Address Line 1</span>
+                        <input type="text" name="addrLine1" class="form-control" placeholder="Address Line 1*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="addrLine2">Address Line 2</span>
+                        <input type="text" name="addrLine2" class="form-control" placeholder="Address Line 2*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="city">City</span>
+                        <input type="text" name="city" class="form-control" placeholder="City*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="county">County</span>
+                        <input type="text" name="county" class="form-control" placeholder="County*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="postCode">Post Code</span>
+                        <input type="text" name="postCode" class="form-control" placeholder="Post Code*">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="currentPwd">Current Password</span>
+                        <input type="password" name="currentPwd" class="form-control" placeholder="Current Password">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="newPwd">New Password</span>
+                        <input type="text" name="newPwd" class="form-control" placeholder="New Password">
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" id="confirmPwd">Confirm New Password</span>
+                        <input type="text" name="confirmPwd" class="form-control" placeholder="Confirm New Password">
+                    </div>
+
+                    <div >
+                        <input class="btn btn-default" type="submit" value="Save">
+                    </div>
+
+                </div>
+            }
+
+        }
+    }

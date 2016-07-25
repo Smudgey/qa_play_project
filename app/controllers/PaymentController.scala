@@ -2,15 +2,11 @@ package controllers
 
 import javax.inject._
 
-import play.api._
-import play.api.mvc._
-import play.api.data.{Form, _}
-import play.api.data.Forms._
 import models._
-import play.api.i18n.I18nSupport
+import play.api.data.Form
+import play.api.data.Forms._
 import play.api.i18n.MessagesApi
-
-import scala.collection.mutable.ArrayBuffer
+import play.api.mvc._
 
 /**
   * Created by Luke on 07/07/2016.
@@ -46,7 +42,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   def checkoutBasket = Action {
     implicit request =>
-      if(request.session.get("connected").isEmpty){
+      if (request.session.get("connected").isEmpty) {
         Redirect(routes.LoginController.login())
       }
       else {
@@ -67,10 +63,10 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
         val o = Order(cust, ol, price, status, payMthd, time)
 
-        /*//TODO Direct to the card payment pag*/
-        Ok(views.html.payment(o)(cardForm)(request.session))
-      }
+        //TODO Direct to the card payment page
+        Ok(views.html.payment(request.session))
 
+      }
   }
 
   /**
@@ -78,9 +74,9 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
     *
     * @return
     */
-//  def payment = Action {
-//    implicit request =>
-//    Ok(views.html.payment(order)(cardForm)(request.session))  }
+  //  def payment = Action {
+  //    implicit request =>
+  //    Ok(views.html.payment(order)(cardForm)(request.session))  }
 
   /**
     * Payment is confirmed, redirect of payment confirmation screen
@@ -90,7 +86,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
     */
   def paymentProcessed(orderID: String) = Action {
     implicit request =>
-    Ok(views.html.paymentConfirmed(orderID)(request.session))
+      Ok(views.html.paymentConfirmed(orderID)(request.session))
   }
 
   //TODO
@@ -111,27 +107,29 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
       )
       Redirect(routes.HomeController.index())
 
-/*      //Check if any fields were left empty
-      if (paymentForm.bindFromRequest().data("cardholderName").length != 0 ||
-        paymentForm.bindFromRequest().data("cardNumber").length != 0 ||
-        paymentForm.bindFromRequest().data("cv").length != 0 ||
-        paymentForm.bindFromRequest().data("expirationMonth").length != 0 ||
-        paymentForm.bindFromRequest().data("expirationYear").length != 0) {
-        //Search to see if card exists, using card number input from form
-        if (Payment.findCardNumber(paymentForm.bindFromRequest().data("cardNumber")).isEmpty) {
-          //Did not find existing card
-          println("Did not find existing card")
-          Redirect(routes.PaymentConfirmedController.paymentProcessed(orderID))
-        } else {
-          //Found existing card
-          println("Found existing card")
-          //Redirect(routes.PaymentController.payment())
-          Redirect(routes.PaymentConfirmedController.paymentProcessed(orderID))
-        }
-      } else {
-        println("Fields were left blank")
-        Redirect(routes.PaymentController.payment())
-      }*/
+      /*      //Check if any fields were left empty
+            if (paymentForm.bindFromRequest().data("cardholderName").length != 0 ||
+              paymentForm.bindFromRequest().data("cardNumber").length != 0 ||
+              paymentForm.bindFromRequest().data("cv").length != 0 ||
+              paymentForm.bindFromRequest().data("expirationMonth").length != 0 ||
+              paymentForm.bindFromRequest().data("expirationYear").length != 0) {
+              //Search to see if card exists, using card number input from form
+              if (Payment.findCardNumber(paymentForm.bindFromRequest().data("cardNumber")).isEmpty) {
+                //Did not find existing card
+                println("Did not find existing card")
+                Redirect(routes.PaymentConfirmedController.paymentProcessed(orderID))
+              } else {
+                //Found existing card
+                println("Found existing card")
+                //Redirect(routes.PaymentController.payment())
+                Redirect(routes.PaymentConfirmedController.paymentProcessed(orderID))
+              }
+            } else {
+              println("Fields were left blank")
+              Redirect(routes.PaymentController.payment())
+            }*/
     }
   }
 }
+
+

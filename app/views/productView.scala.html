@@ -1,48 +1,39 @@
 @(p: Product)(implicit session: Session)
 
-    @main("ProductView") {
+@main("ProductView") {
+    <div class="container">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 
-        <style>
-        .margin {
-            margin: 10px 0;
-        }
-
-        .left-align {
-            text-align: left;
-        }
-        </style>
-
-        <div class="container vcenter">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                    <img src="@p.urlList(0)" height="236" width="236" class="img-thumbnail" >
-                  
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 left-align">
-
-                    <h1>@p.name</h1>
-                    <h2>Product ID: @p.pid</h2>
-                    <h3>In stock: <em><b>@p.stock</b></em></h3>
-                    <h3>Price: <em><b>£@p.price</b></em></h3>
-
-                    <a type="submit" class="btn btn-success" href="@routes.BasketController.add(p.pid)">Add to basket</a>
-
-                    <h3>Description</h3>
-                    <p> @p.description</p>
-
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                </div>
-
-
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <img height="400" width="400" class="small-margin" src="@p.urlList(0)">
+            <div>
+            @for(i <- 1 to p.urlList.length - 1) {
+                <img height="100" width="100" src="@p.urlList(i)">
+                }
             </div>
         </div>
-    }
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 text-left">
+
+            <h1>@p.name</h1>
+            <h2>Product ID: @p.pid</h2>
+            <h3>In stock: <em><b>@p.stock</b></em></h3>
+            <h3>Price: <em><b>£@p.price</b></em></h3>
+
+            <a type="submit" class="btn btn-success medium-margin" href="@routes.BasketController.add(p.pid)">Add to basket</a>
+
+            <h3>Description</h3>
+            <p> @p.description</p>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        </div>
+
+
+    </div>
+}

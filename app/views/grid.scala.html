@@ -1,19 +1,9 @@
-@import scala.collection.mutable.ArrayBuffer
 @import _root_.models.ClearanceProduct
-
 
 @(form: Form[Int])(products: Array[Product])(implicit session: Session)
 
-<style>
-#grid-p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-</style>
-
 @for(p <- products) {
-    <div class="item  col-xs-4 col-lg-4" >
+    <div class="item col-xs-12 col-sm-12 col-md-3 col-lg-3" >
         <div class="thumbnail">
             <a href="@routes.ProductViewController.viewProduct(p.pid)">
                 <img class="group list-group-image" src="@p.urlList" alt="" />
@@ -24,23 +14,25 @@
                 </div>
             </a>
 
-                <p id = "grid-p" class="group inner list-group-item-text">
-                @p.description
-                </p>
-                <p class="group inner list-group-item-text">
-                    We have <strong><em>@p.stock</em></strong> in stock</p>
-                <div class="row">
-                    <div class="col-xs-20 col-md-6">
-                        <p class="lead">
-                                £@p.price</p>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6">
-                        <a type="submit" class="btn btn-success" href="@routes.BasketController.add(p.pid)">Add to basket</a>
-                    </div>
-
+            <p id = "grid-p" class="group inner list-group-item-text">
+            @p.description
+            </p>
+            <p class="group inner list-group-item-text">
+                    We have <strong><em>@p.stock</em></strong> in stock
+            </p>
+            <div class="row">
+                <div class="col-xs-20 col-md-6">
+                    <p class="lead">
+                                £@p.price
+                    </p>
                 </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <a type="submit" class="btn btn-success" href="@routes.BasketController.add(p.pid)">Add to basket</a>
+                </div>
+
             </div>
         </div>
-    }
+    </div>
+}
     <p>@ClearanceProduct.clearanceList</p>

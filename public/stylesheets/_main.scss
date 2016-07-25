@@ -1,0 +1,66 @@
+.navbar-brand {
+  font-family: logoFont;
+}
+
+/* navbar */
+.navbar-default {
+  background-color: $main-colour;
+  border-bottom: $secondary-colour solid 1px;
+}
+
+/* title */
+.navbar-default .navbar-brand {
+  color: $main-colour;
+  border-color: transparent;
+  @include customTransition(0.5s, color);
+
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: $secondary-colour;
+  border-color: transparent;
+  @include customTransition(0.5s, color);
+}
+
+/* link */
+.navbar-default .navbar-nav > li > a {
+  color: $main-colour;
+  @include customTransition(0.5s, color);
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: $secondary-colour;
+  @include customTransition(0.5s, color);
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  @include customTransition(0.5s, color);
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: $secondary-colour;
+  background-color: $main-colour;
+}
+
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  @include customTransition(0.5s, color);
+}
+
+.loginDropdown > li {
+  text-align: center;
+  margin: 5px;
+}
+
+.searchBar {
+  max-width: 1000px;
+  margin: 30px 25% 40px;
+}

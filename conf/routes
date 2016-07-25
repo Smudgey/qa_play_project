@@ -1,14 +1,16 @@
 GET         /                         controllers.HomeController.index
 
-POST        /manageAccount            controllers.ManageAccountController.updateAccount
-GET         /manageAccount            controllers.ManageAccountController.ManageAccounts
+POST        /manageAccount            controllers.AccountController.updateAccount
+GET         /manageAccount            controllers.AccountController.manageAccounts
+GET         /viewAccount              controllers.AccountController.viewAccount
 
-GET         /viewAccount              controllers.ViewAccountController.ViewAccount
 GET         /purchaseHistory          controllers.PurchaseHistoryController.showPurchase
 
 
 GET         /catalogue                controllers.CatalogueController.show(query:String)
 POST        /catalogue                controllers.SearchController.search
+
+GET         /category/*cat            controllers.CatalogueController.showCategory(cat: String)
 
 GET         /view-product             controllers.ProductViewController.viewProduct(pid: Int)
 
