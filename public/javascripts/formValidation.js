@@ -133,3 +133,71 @@ function validateCard(){
         }
 
 }
+
+function editAccount(){
+
+    var aForm = $('#accountEdit');
+    var aUserName = aForm.find("input[name=eMail]");
+    var aTelephone = aForm.find("input[name=telephoneNumber");
+    var fName = aForm.find("input[name=fName]");
+    var lName = aForm.find("input[name=lName");
+    var addrLine1 = aForm.find("input[name=addrLine1");
+    var addrLine2 = aForm.find("input[name=addreLine2");
+    var city = aForm.find("input[name=city");
+    var county = aForm.find("input[name=county");
+    var postcode = aForm.find("input[name=postCode");
+    var currentPwd = aForm.find("input[name=currentPwd");
+    var newPwd = aForm.find("input[name=newPwd");
+
+    var aBool = true;
+
+    var aNameRegex = new RegExp("[A-Za-z]");
+    var aNumberRegex = new RegExp("[0-9]");
+    var aTextANumber = new RegExp("[A-Za-z0-9");
+
+
+    if(!aNameRegex.test(aUserName.val()) || aUserName.val() == null || aUserName.val().length == 0){
+
+        aUserName.parent().addClass("has-error");
+        alert("Incorrect UserName");
+        aBool = false;
+
+    }
+    if(!aNumberRegex.test(aTelephone.val()) || aTelephone.val() == null || aTelephone.val().length == 0){
+
+        aTelephone.parent().addClass("has-error");
+        alert("Incorrect Telephone");
+        aBool = false;
+
+    }
+    if(!aNameRegex.test(fName.val()) || fName.val() == null || fName.val().length == 0){
+
+        fName.parent().addClass("has-error");
+        alert("Incorrect FirstName");
+        aBool = false;
+
+    }
+    if(!aNameRegex.test(lName.val()) || lName.val() == null || lName.val().length == 0){
+
+        lName.parent().addClass("has-error");
+        alert("Incorrect Expiration Month");
+        aBool = false;
+
+    }
+    if(!aTextANumber.test(addrLine1.val()) || addrLine1.val() == null || addrLine1.val().length == 0){
+
+        addrLine1.parent().addClass("has-error");
+        alert("Incorrect Expiration Year");
+        aBool = false;
+
+    }
+
+    if(aBool){
+
+        aForm.submit()
+
+    }
+
+}
+
+function

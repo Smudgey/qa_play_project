@@ -2,6 +2,7 @@
     @main("") {
         @manageAccountsSidebar("Manage Account") {
             <script>changeTab("editAccount")</script>
+            <form id="accountEdit" action="@routes.AccountController.updateAccount()" method="post">
             @helper.form(routes.AccountController.updateAccount) {
                 <div class="center-text">
 
@@ -67,11 +68,12 @@
                     </div>
 
                     <div >
-                        <input class="btn btn-default" type="submit" value="Save">
+                        <input class="btn btn-default" type="button" value="Save" onclick="editAccount()">
                     </div>
 
                 </div>
             }
+            </form>
 
         }
     }
