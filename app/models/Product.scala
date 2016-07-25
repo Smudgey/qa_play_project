@@ -136,7 +136,7 @@ object Product extends Formatter {
 
   def markProductAsClearance(pid: Int, newPrice: Double, quantity: Int): Unit = {
 
-    var p = findProduct(pid).get.copy(price = priceFormat(newPrice), stock = quantity).urlList.a findProduct(pid).get.urlList
+    var p = findProduct(pid).get.copy(price = priceFormat(newPrice), stock = quantity)
 
     add(clearanceStock, findProduct(pid).get.copy(price = priceFormat(newPrice), stock = quantity))
     Product.findProduct(pid).get.decrementStock(quantity, 0)
