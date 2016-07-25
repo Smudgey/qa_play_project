@@ -54,6 +54,22 @@ body {
   padding: 150px;
 }
 
+.rytis-star {
+  .glyphicon-star-empty {
+    font-size: 2em;
+    color: yellow - 30;
+  }
+
+  .glyphicon-star {
+    font-size: 2em;
+    color: yellow - 30;
+  }
+
+  .glyphicon-star-empty:hover + .glyphicon-star {
+    font-size: 2em;
+  }
+}
+
 @import "animation";
 @import "main";
 @import "index";

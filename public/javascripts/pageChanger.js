@@ -30,3 +30,31 @@ function changeTab(tab) {
 
     }
 }
+
+$(document).ready(function () {
+    $('.star').on('click', function () {
+        clearStars($(this).parent());
+        var index = $(this).index() + 1;
+        var form = $(this).parent().parent();
+
+        $(this).parent().children().each(function () {
+            if ($(this).index() == index) {
+                return false;
+            } else {
+                $(this).removeClass('glyphicon-star-empty').addClass('glyphicon-star')
+            }
+        });
+
+        form.find('input[name="rating"]').val(index);
+        form.submit()
+    });
+
+
+    function clearStars(parent) {
+        parent.children().each(function () {
+            if ($(this).hasClass('glyphicon-star')) {
+                $(this).removeClass('glyphicon-star').addClass('glyphicon-star-empty')
+            }
+        })
+    }
+});
