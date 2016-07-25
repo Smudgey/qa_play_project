@@ -4,6 +4,7 @@ POST        /manageAccount            controllers.AccountController.updateAccoun
 GET         /manageAccount            controllers.AccountController.manageAccounts
 GET         /viewAccount              controllers.AccountController.viewAccount
 
+POST        /purchaseHistory          controllers.PurchaseHistoryController.orderRating
 GET         /purchaseHistory          controllers.PurchaseHistoryController.showPurchase
 
 
