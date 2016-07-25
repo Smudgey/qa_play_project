@@ -7,7 +7,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 
 
-case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, var price: Double, var clearance: Double, var special: Double, var category: Category.Value) extends URL {
+case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, var price: Double, var clearance: Double, var special: Double, var category: Category.Value ) extends URL {
 
 
 // URL: String
@@ -28,7 +28,7 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
   }
 }
 
-object Product extends Formatter {
+object Product extends Formatter{
 
   var inventory       = ArrayBuffer[Product]()
   var clearanceStock  = ArrayBuffer[Product]()
@@ -57,12 +57,12 @@ object Product extends Formatter {
     this.add(inventory, Product(719, "Pickaxe", "Weather you're using it to break tough ground on a project or tunnelling your way into your local branch this axe will serve you well.", 5, 0, 8.99, 8.99, 0, Category.Tool))
     this.add(inventory, Product(720, "Wooden Axe", "Looking for a well made traditional axe? Look no further this classic is perfect for felling, chopping and everything else..", 5, 0, 8.99, 8.99, 0, Category.Tool))
     this.add(inventory, Product(721, "Metal Axe", "A versatile axe with a weather proof metal handle for longer lasting use.", 5, 0, 8.99, 8.99, 0, Category.Tool))
-    this.add(inventory, Product(722, "Fishing gnome", "This little fella ", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
+    this.add(inventory, Product(722, "Fishing gnome", "This little fella ", 5, 0, 8.99, 8.99, 0, Category.Gnome))
     this.add(inventory, Product(723, "Gnome Trousers", "Does your favourite gnome need a new get up? These trousers will add a whole new level of style and sophistication", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
     this.add(inventory, Product(724, "Gnome Shoes", "These stylish shoes will keep your gnomes base protected as well as keeping them stylish under your favourite tree. ", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
     this.add(inventory, Product(725, "Gnome Hat", "Will keep the rain off your favourite little friends head in all conditions.", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
     this.add(inventory, Product(726, "Gnome Bikini", "From Highgate to Honolulu transform your garden into a tropical paradise with the quintessential two piece. ", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
-    this.add(inventory, Product(727, "Classic gnome", "The classic garden gnome, this cheeky little chap will bring character to any garden.", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
+    this.add(inventory, Product(727, "Classic gnome", "The classic garden gnome, this cheeky little chap will bring character to any garden.", 5, 0, 8.99, 8.99, 0, Category.Gnome))
     this.add(inventory, Product(728, "Gnome Underwear", "Gnome themed underwear.", 5, 0, 8.99, 8.99, 0, Category.ClothingItem))
     this.add(inventory, Product(729, "Fake Plant", "This bright little pot plant adds a touch of the outdoors to the indoors requiring absolutely no effort.", 5, 0, 8.99, 8.99, 0, Category.PlantItem))
     this.add(inventory, Product(730, "Fake Bush", "Shrug at real shrubs? Fake it until you make it, this spiral shaped plant will make you look like a garden master.", 5, 0, 8.99, 8.99, 0, Category.PlantItem))
@@ -126,6 +126,8 @@ object Product extends Formatter {
     Product.findProduct(741).get.urlList += "http://www.homebasics.net/wp-content/uploads/2012/05/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "http://www.thorns.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/P/l/Plastic-Patio-Chair---e114.jpg"
 
+    println(Product.findProduct(701).get.category)
+    println(Product.findProduct(701))
 
     Product.markProductAsClearance(701, 2.50, 4)
   }
