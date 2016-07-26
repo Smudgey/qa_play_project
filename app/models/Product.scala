@@ -183,4 +183,6 @@ object Product extends Formatter {
   def add(list: ArrayBuffer[Product], prod: Product): Unit = {
     list += prod
   }
+
+
 }
