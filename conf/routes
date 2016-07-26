@@ -1,10 +1,10 @@
 GET         /                          controllers.HomeController.index
 
 POST        /manageAccount             controllers.AccountController.updateAccount
-POST        /registerCard              controllers.AccountController.addCard
 GET         /manageAccount             controllers.AccountController.manageAccounts
 GET         /viewAccount               controllers.AccountController.viewAccount
 GET         /viewCards                 controllers.AccountController.viewCard
+POST        /registerCard              controllers.AccountController.addCard
 GET         /registerCard              controllers.AccountController.registerCard
 GET         /removeCard                controllers.AccountController.removeCard(cardNumber: String)
 

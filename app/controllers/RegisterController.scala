@@ -16,9 +16,8 @@ class RegisterController @Inject extends Controller {
   private val userForm: Form[Login] = Form(
     mapping(
       "" -> text,
-      "fullName" -> nonEmptyText,
-      "password" -> nonEmptyText,
-      "email" -> nonEmptyText
+      "email" -> nonEmptyText,
+      "password" -> nonEmptyText
     )
     (Login.apply)
     (Login.unapply)
@@ -56,7 +55,7 @@ class RegisterController @Inject extends Controller {
     */
   def register = Action {
     implicit request =>
-      Ok(views.html.registerStart(request.session)).withSession("connected" -> Order.randomOID)
+      Ok(views.html.registerStart(request.session))
   }
 
   /**
@@ -85,7 +84,9 @@ class RegisterController @Inject extends Controller {
     implicit request => {
       if (Login.findLogin(userForm.bindFromRequest().data("email")).isEmpty) {
         Login.createUser(userForm.bindFromRequest().data("fullName"), userForm.bindFromRequest().data("password"), userForm.bindFromRequest().data("email"))
-        Redirect(routes.RegisterController.address())
+
+        Redirect(routes.RegisterController.address()).withSession("tmp" -> userForm.bindFromRequest().data("email"))
+
       } else {
         Redirect(routes.RegisterController.register())
       }
@@ -99,9 +100,8 @@ class RegisterController @Inject extends Controller {
     */
   def createAddress() = Action {
     implicit request => {
-
       Address.addAddress(
-        request.session.data("connected"),
+        request.session.data("tmp"),
         addressForm.bindFromRequest().data("houseNumber"),
         addressForm.bindFromRequest().data("streetName"),
         addressForm.bindFromRequest().data("town"),
@@ -121,13 +121,15 @@ class RegisterController @Inject extends Controller {
   def createCard() = Action {
     implicit request => {
       CardDetails.addCard(
-        request.session.data("connected"),
+        request.session.data("tmp"),
         cardForm.bindFromRequest().data("cardholder"),
         cardForm.bindFromRequest().data("cardNumber"),
         cardForm.bindFromRequest().data("cv"),
         cardForm.bindFromRequest().data("expirationMonth"),
         cardForm.bindFromRequest().data("expirationYear")
       )
+
+
       Redirect(routes.HomeController.index())
     }
   }

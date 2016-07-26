@@ -5,27 +5,19 @@ import java.lang.ProcessBuilder.Redirect
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
-case class Login(lid: String, name: String, pass: String, email: String) {}
+case class Login(lid: String, email:String, pass: String) {}
 
 object Login {
 
   // dummy data
   private var list = ArrayBuffer[Login](
-    Login("101", "dave", "1234", ""),
-    Login("102", "betty", "1235", ""),
-    Login("103", "bob", "pass", "bob@bob.com"),
-    Login("000", "a", "a", "a")
+    Login("l0", "a", "a")
   )
 
-  def createUser(name: String, password: String, email: String): Boolean = {
-    if (findLogin(email).isEmpty) {
-      val randomUID = Order.randomOID
-      list += Login(randomUID, name, password, email)
-      true
-    } else {
-      false
-    }
+  def createUser(name: String, password: String, email: String): Unit = {
 
+    val randomUID = java.util.UUID.randomUUID.toString
+    list += Login(randomUID,  email, password)
   }
 
   def findLogin(email: String) = list.find(_.email == email.toLowerCase)
