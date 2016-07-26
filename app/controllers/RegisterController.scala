@@ -120,14 +120,7 @@ class RegisterController @Inject extends Controller {
     */
   def createCard() = Action {
     implicit request => {
-      CardDetails.addCard(
-        request.session.data("tmp"),
-        cardForm.bindFromRequest().data("cardholder"),
-        cardForm.bindFromRequest().data("cardNumber"),
-        cardForm.bindFromRequest().data("cv"),
-        cardForm.bindFromRequest().data("expirationMonth"),
-        cardForm.bindFromRequest().data("expirationYear")
-      )
+
 
 
       Redirect(routes.HomeController.index())

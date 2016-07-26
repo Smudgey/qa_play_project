@@ -12,4 +12,6 @@ trait Formatter {
   def decodeUri(str: String): String = {
     str.replace("%20", " ")
   }
+
+  def randomID : String = java.util.UUID.randomUUID.toString
 }

@@ -95,37 +95,9 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
     */
   def registerPayment() = Action {
     implicit request => {
-      CardDetails.addCard(
-        request.session.data("connected"),
-        cardForm.bindFromRequest().data("cardholder"),
-        cardForm.bindFromRequest().data("cardNumber"),
-        cardForm.bindFromRequest().data("cv"),
-        cardForm.bindFromRequest().data("expirationMonth"),
-        cardForm.bindFromRequest().data("expirationYear")
-      )
+
       Redirect(routes.HomeController.index())
 
-      /*      //Check if any fields were left empty
-            if (paymentForm.bindFromRequest().data("cardholderName").length != 0 ||
-              paymentForm.bindFromRequest().data("cardNumber").length != 0 ||
-              paymentForm.bindFromRequest().data("cv").length != 0 ||
-              paymentForm.bindFromRequest().data("expirationMonth").length != 0 ||
-              paymentForm.bindFromRequest().data("expirationYear").length != 0) {
-              //Search to see if card exists, using card number input from form
-              if (Payment.findCardNumber(paymentForm.bindFromRequest().data("cardNumber")).isEmpty) {
-                //Did not find existing card
-                println("Did not find existing card")
-                Redirect(routes.PaymentConfirmedController.paymentProcessed(orderID))
-              } else {
-                //Found existing card
-                println("Found existing card")
-                //Redirect(routes.PaymentController.payment())
-                Redirect(routes.PaymentConfirmedController.paymentProcessed(orderID))
-              }
-            } else {
-              println("Fields were left blank")
-              Redirect(routes.PaymentController.payment())
-            }*/
     }
   }
 }

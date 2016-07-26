@@ -1,7 +1,7 @@
 package controllers
 
 import com.google.inject.Inject
-import models.{Account, CardDetails, CustomerDetails, Login}
+import models._
 import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc.{Action, Controller}
@@ -13,20 +13,7 @@ import play.api.mvc.{Action, Controller}
   * Last worked on by Rytis & Yang on 25/07/2016
   */
 
-class AccountController @Inject extends Controller {
-  private val manageAccountForm: Form[CustomerDetails] = Form(
-    mapping(
-      "email" -> nonEmptyText,
-      "name" -> nonEmptyText,
-      "address" -> nonEmptyText,
-      "city" -> nonEmptyText,
-      "county" -> nonEmptyText,
-      "postcode" -> nonEmptyText
-
-    )
-    (CustomerDetails.apply)
-    (CustomerDetails.unapply)
-  )
+class AccountController @Inject extends Controller with Formatter {
 
   private val cardForm: Form[CardDetails] = Form(
     mapping(
@@ -40,6 +27,15 @@ class AccountController @Inject extends Controller {
     (CardDetails.apply)
     (CardDetails.unapply)
   )
+  private val updateDetailsForm: Form[CustomerDetails] = Form(
+    mapping(
+      "name" -> text,
+      "email" -> text,
+      "phone" -> text
+    )
+    (CustomerDetails.apply)
+    (CustomerDetails.unapply)
+  )
 
   def manageAccounts = Action {
     implicit request =>
@@ -48,7 +44,8 @@ class AccountController @Inject extends Controller {
 
   def updateAccount() = Action {
     implicit request => {
-      Redirect(routes.AccountController.manageAccounts())
+      CustomerDetails.updateDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.details, updateDetailsForm.bindFromRequest().data("name"), updateDetailsForm.bindFromRequest().data("phone"), updateDetailsForm.bindFromRequest().data("email"))
+      Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
     }
   }
 
@@ -59,6 +56,7 @@ class AccountController @Inject extends Controller {
       if (request.session.get("connected").isEmpty) {
         Redirect(routes.HomeController.index())
       } else {
+
         Ok(views.html.viewAccount(CustomerDetails.getDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.details).get)(request.session))
 
       }
@@ -66,7 +64,7 @@ class AccountController @Inject extends Controller {
 
   def viewCard = Action {
     implicit request =>
-      Ok(views.html.viewCard(CardDetails.getCard(Login.findLogin(request.session.data("connected")).get.lid).toArray)(request.session))
+      Ok(views.html.viewCard(CardDetails.getCards(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID).toArray)(request.session))
   }
 
   def registerCard = Action {
@@ -76,8 +74,10 @@ class AccountController @Inject extends Controller {
 
   def addCard() = Action {
     implicit request =>
+
       CardDetails.addCard(
-        Login.findLogin(request.session.data("connected")).get.lid,
+        Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID,
+        randomID,
         cardForm.bindFromRequest().data("cardholder"),
         cardForm.bindFromRequest().data("cardNumber"),
         cardForm.bindFromRequest().data("cv"),

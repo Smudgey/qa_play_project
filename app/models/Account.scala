@@ -13,4 +13,5 @@ object Account {
   )
 
   def getAccountViaEmail(lid: String) = accountList.find(_.lid == lid)
+  def getAccountViaDetailsID(detailsID: String) = accountList.find(_.details == detailsID)
 }
