@@ -120,7 +120,7 @@ object Product extends Formatter {
     Product.findProduct(736).get.urlList += "/assets/images/contemporary-indoor-pots-and-planters.jpg"
     Product.findProduct(737).get.urlList += "/assets/images/Masters-Regent-Gazebo.jpg"
     Product.findProduct(738).get.urlList += "/assets/images/party-gazebo-party-gazebo-wedding-tents-for-sale-big-gazebos-for-sale-big-gazebos-for-sale-1.jpg"
-    Product.findProduct(739).get.urlList += "/assets/images/inexpensive-small-outdoor-garden-curved-gable-roof-gazebo-ideas-with-solid-wood-framing-over-minimalist-black-grill-set-including-extendable-side-desks-as-well-as-patio-canopy-and-outdoor-living.jpg"
+    Product.findProduct(739).get.urlList += "/assets/images/inexpensive-small-outdoor-garden-curved-gable-roof-gazebo.jpg"
 
     Product.findProduct(740).get.urlList += "/assets/images/Deckchairs-Online-UK_218175_image.jpg"
     Product.findProduct(741).get.urlList += "/assets/images/Hippo-Table-Design1.jpg"
