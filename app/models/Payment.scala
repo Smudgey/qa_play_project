@@ -16,19 +16,19 @@ object Payment {
     Payment("Mark Kelly", "9485777685645321", 789, "02", "2017")
   )
 
-  /* Create a new payment */
+  /* Create a new registerCard */
   def createPayment(cardHolderName: String, cardNumber: String, cv: Int, expirationMonth: String, expirationYear: String): Boolean = {
     if(findCardNumber(cardNumber).isEmpty) {
-      //Failed to find existing payment - create new
+      //Failed to find existing registerCard - create new
       list += Payment(cardHolderName, cardNumber, cv, expirationMonth, expirationYear)
       true //success
     } else {
-      //Find an existing payment
+      //Find an existing registerCard
       println("Card already exists")
       false //failure
     }
   }
 
-  /* Find an existing payment */
+  /* Find an existing registerCard */
   def findCardNumber(cardNumber: String) = list.find(_.cardNumber == cardNumber)
 }

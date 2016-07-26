@@ -14,7 +14,6 @@ class LoginController @Inject extends Controller {
   val loginForm: Form[Login] = Form(
     mapping(
       "" -> text,
-      "" -> text,
       "email" -> nonEmptyText,
       "password" -> nonEmptyText
     )
