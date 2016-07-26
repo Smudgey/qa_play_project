@@ -17,7 +17,6 @@ import scala.collection.mutable.ArrayBuffer
 case class CustomerDetails(cid: String, var name: String, var telephoneNumber: String) {}
 
 object CustomerDetails {
-
   //dummy data
   private val detailsList = ArrayBuffer[CustomerDetails](
     CustomerDetails("d0", "a", "000")
