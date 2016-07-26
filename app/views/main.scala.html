@@ -11,7 +11,7 @@
 <!-- TODO Swap this generate method with a database call.-->
 @if(Product.inventory.isEmpty) {
     @Product.dummyConnection()
-    @println("Connection created")
+<p>"Connection created"</p>
 }
 
 <!DOCTYPE html>
@@ -106,7 +106,7 @@
 
                             <ul class="dropdown-menu">
                                 <li><a href="@routes.CatalogueController.showClearance">All clearance</a></li>
-                                <li><a href="@routes.CatalogueController.showClearance">All Discounts</a></li>
+
                             </ul>
                         </li>
                         <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">

@@ -154,6 +154,7 @@ fieldset[disabled] .btn-primary.active {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
   border-color: #3e8f3e;
+  width: 25%;
 }
 .btn-success:hover,
 .btn-success:focus {
