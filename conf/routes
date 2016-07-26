@@ -4,9 +4,14 @@ POST        /manageAccount             controllers.AccountController.updateAccou
 GET         /manageAccount             controllers.AccountController.manageAccounts
 GET         /viewAccount               controllers.AccountController.viewAccount
 GET         /viewCards                 controllers.AccountController.viewCard
+GET         /viewAddress               controllers.AccountController.viewAddress
 POST        /registerCard              controllers.AccountController.addCard
-GET         /registerCard              controllers.AccountController.registerCard
+GET         /registerCard              controllers.AccountController.addNewCard
+POST        /addNewAddress             controllers.AccountController.addAddress()
+GET         /addNewAddress             controllers.AccountController.addNewAddress
+
 GET         /removeCard                controllers.AccountController.removeCard(cardNumber: String)
+GET         /removeAddress             controllers.AccountController.removeAddress(address: String)
 
 POST        /purchaseHistory           controllers.PurchaseHistoryController.orderRating
 GET         /purchaseHistory           controllers.PurchaseHistoryController.showPurchase
@@ -32,8 +37,6 @@ GET         /register/bank             controllers.RegisterController.bank
 POST        /                          controllers.RegisterController.createCard
 
 POST        /payment                   controllers.PaymentController.registerPayment
-
-POST        /payment/confirmed         controllers.PaymentController.paymentProcessed(orderID: String)
 
 GET         /basket                    controllers.BasketController.basket
 GET         /basket/item               controllers.BasketController.add(pid:Int)

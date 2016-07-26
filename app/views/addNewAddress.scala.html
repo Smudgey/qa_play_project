@@ -1,0 +1,15 @@
+@(implicit session: Session)
+@main("") {
+    @manageAccountsSidebar("New Address") {
+        <script>changeTab("registerAddress")</script>
+        <form action="@routes.AccountController.addAddress()" method="post">
+            @addressTemplate()
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <input class="btn btn-default" type="submit" value ="Submit">
+                </div>
+            </div>
+        </form>
+    }
+}

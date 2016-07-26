@@ -31,7 +31,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   private val checkoutForm = Form(
     single(
-      "payment" -> nonEmptyText
+      "registerCard" -> nonEmptyText
     )
   )
 
@@ -46,7 +46,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
         Redirect(routes.LoginController.login())
       }
       else {
-        val in = checkoutForm.bindFromRequest().data("payment")
+        val in = checkoutForm.bindFromRequest().data("registerCard")
         var payMthd: PaymentMethod.Value = null
         if (in == "payNow") {
           payMthd = PaymentMethod.PayNow
@@ -61,35 +61,24 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
         val status = OrderStatus.Ordered
         val time = Order.today
 
-        //TODO Direct to the card payment page
-        Ok(views.html.payment(request.session))
+        //TODO Direct to the card registerCard page
+        Ok(views.html.registerCard(request.session))
 
       }
   }
 
   /**
-    * Load the payment page, passing in the card form
+    * Load the registerCard page, passing in the card form
     *
     * @return
     */
-  //  def payment = Action {
+  //  def registerCard = Action {
   //    implicit request =>
-  //    Ok(views.html.payment(order)(cardForm)(request.session))  }
-
-  /**
-    * Payment is confirmed, redirect of payment confirmation screen
-    *
-    * @param orderID
-    * @return
-    */
-  def paymentProcessed(orderID: String) = Action {
-    implicit request =>
-      Ok(views.html.paymentConfirmed(orderID)(request.session))
-  }
+  //    Ok(views.html.registerCard(order)(cardForm)(request.session))  }
 
   //TODO
   /**
-    * Find if card already exists, if not register, if so confirm payment
+    * Find if card already exists, if not register, if so confirm registerCard
     *
     * @return
     */

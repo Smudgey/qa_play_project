@@ -7,20 +7,21 @@ import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
 
 
-/**
-  * Created by rytis on 07/07/16.
+/*
+  * Create By rytis
+  *
+  * Last worked on by Rytis on 26/07/2916
   */
-class RegisterController @Inject extends Controller {
+
+class RegisterController @Inject extends Controller with Formatter {
 
   // this will create register form
-  private val userForm: Form[Login] = Form(
-    mapping(
-      "" -> text,
+  private val userForm = Form(
+    tuple(
+      "fullName" -> nonEmptyText,
       "email" -> nonEmptyText,
       "password" -> nonEmptyText
     )
-    (Login.apply)
-    (Login.unapply)
   )
   // this will create address form
   private val addressForm: Form[Address] = Form(
@@ -41,7 +42,7 @@ class RegisterController @Inject extends Controller {
     mapping(
       "" -> text,
       "cardholder" -> nonEmptyText,
-      "cardNumber" -> nonEmptyText,
+      "cardnumber" -> nonEmptyText,
       "cv" -> nonEmptyText,
       "expirationMonth" -> nonEmptyText,
       "expirationYear" -> nonEmptyText
@@ -71,7 +72,7 @@ class RegisterController @Inject extends Controller {
     */
   def bank = Action {
     implicit request =>
-      Ok(views.html.payment(request.session))
+      Ok(views.html.registerCard(request.session))
   }
 
 
@@ -83,8 +84,12 @@ class RegisterController @Inject extends Controller {
   def createUser() = Action {
     implicit request => {
       if (Login.findLogin(userForm.bindFromRequest().data("email")).isEmpty) {
-        Login.createUser(userForm.bindFromRequest().data("fullName"), userForm.bindFromRequest().data("password"), userForm.bindFromRequest().data("email"))
 
+        val loginID = randomID
+        val detailsID = randomID
+        Login.createUser(loginID, userForm.bindFromRequest().data("email"), userForm.bindFromRequest().data("password"))
+        CustomerDetails.addDetails(detailsID, userForm.bindFromRequest().data("fullName"), "None")
+        Account.createAccount(randomID, loginID, detailsID)
         Redirect(routes.RegisterController.address()).withSession("tmp" -> userForm.bindFromRequest().data("email"))
 
       } else {
@@ -100,8 +105,12 @@ class RegisterController @Inject extends Controller {
     */
   def createAddress() = Action {
     implicit request => {
+
+      val randomAddressID = randomID
+      val account = Account.getAccountViaEmail(Login.findLogin(request.session.data("tmp")).get.lid).get
+      account.addressID = randomAddressID
       Address.addAddress(
-        request.session.data("tmp"),
+        account.accountID,
         addressForm.bindFromRequest().data("houseNumber"),
         addressForm.bindFromRequest().data("streetName"),
         addressForm.bindFromRequest().data("town"),
@@ -109,7 +118,6 @@ class RegisterController @Inject extends Controller {
         addressForm.bindFromRequest().data("county"),
         addressForm.bindFromRequest().data("postcode"))
       Redirect(routes.RegisterController.bank())
-
     }
   }
 
@@ -120,10 +128,18 @@ class RegisterController @Inject extends Controller {
     */
   def createCard() = Action {
     implicit request => {
-
-
-
-      Redirect(routes.HomeController.index())
+      val account = Account.getAccountViaEmail(Login.findLogin(request.session.data("tmp")).get.lid).get
+      val randomCardID = randomID
+      account.cardID = randomCardID
+      CardDetails.addCard(
+        account.cardID,
+        cardForm.bindFromRequest().data("cardholder"),
+        cardForm.bindFromRequest().data("cardnumber"),
+        cardForm.bindFromRequest().data("cv"),
+        cardForm.bindFromRequest().data("expirationMonth"),
+        cardForm.bindFromRequest().data("expirationMonth"))
+      val tmp = request.session.data("tmp")
+      Redirect(routes.HomeController.index()).withSession().withSession("connected" -> tmp.replaceAll(" ", ""))
     }
   }
 

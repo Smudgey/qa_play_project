@@ -6,20 +6,20 @@ import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc.{Action, Controller}
 
-
-/**
-  * Created by Rytis
+/*
+  * Create By rytis
   *
-  * Last worked on by Rytis & Yang on 25/07/2016
+  * Last worked on by Rytis on 26/07/2916
   */
 
 class AccountController @Inject extends Controller with Formatter {
 
+  //form for customer adding card details
   private val cardForm: Form[CardDetails] = Form(
     mapping(
       "" -> text,
       "cardholder" -> nonEmptyText,
-      "cardNumber" -> nonEmptyText,
+      "cardnumber" -> nonEmptyText,
       "cv" -> nonEmptyText,
       "expirationMonth" -> nonEmptyText,
       "expirationYear" -> nonEmptyText
@@ -27,6 +27,7 @@ class AccountController @Inject extends Controller with Formatter {
     (CardDetails.apply)
     (CardDetails.unapply)
   )
+  //form for updating customer details
   private val updateDetailsForm: Form[CustomerDetails] = Form(
     mapping(
       "name" -> text,
@@ -36,19 +37,49 @@ class AccountController @Inject extends Controller with Formatter {
     (CustomerDetails.apply)
     (CustomerDetails.unapply)
   )
+  //form form adding address
+  private val addressForm: Form[Address] = Form(
+    mapping(
+      "" -> text,
+      "houseNumber" -> nonEmptyText,
+      "streetName" -> nonEmptyText,
+      "town" -> nonEmptyText,
+      "city" -> nonEmptyText,
+      "county" -> nonEmptyText,
+      "postcode" -> nonEmptyText
+    )
+    (Address.apply)
+    (Address.unapply)
+  )
 
+
+  /**
+    * this function will display manage account details page
+    */
   def manageAccounts = Action {
     implicit request =>
       Ok(views.html.manageAccount(request.session))
   }
 
+
+  /**
+    * this function will update the customer details with new details
+    *
+    * @return
+    */
   def updateAccount() = Action {
     implicit request => {
-      CustomerDetails.updateDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.details, updateDetailsForm.bindFromRequest().data("name"), updateDetailsForm.bindFromRequest().data("phone"), updateDetailsForm.bindFromRequest().data("email"))
+      CustomerDetails.updateDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID, updateDetailsForm.bindFromRequest().data("name"), updateDetailsForm.bindFromRequest().data("phone"), updateDetailsForm.bindFromRequest().data("email"))
       Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
     }
   }
 
+
+  /**
+    * this function will display account details page
+    *
+    * @return
+    */
   def viewAccount = Action {
     implicit request =>
 
@@ -57,39 +88,108 @@ class AccountController @Inject extends Controller with Formatter {
         Redirect(routes.HomeController.index())
       } else {
 
-        Ok(views.html.viewAccount(CustomerDetails.getDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.details).get)(request.session))
-
+        Ok(views.html.viewAccount(CustomerDetails.getDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID).get)(request.session))
       }
   }
 
+  /**
+    * this function page will display all cards customer has added
+    *
+    * @return
+    */
   def viewCard = Action {
     implicit request =>
-      Ok(views.html.viewCard(CardDetails.getCards(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID).toArray)(request.session))
+      Ok(views.html.viewCard(CardDetails.getCards(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.cardID))(request.session))
   }
 
-  def registerCard = Action {
+  /**
+    * this function will display all address customer has added
+    *
+    * @return
+    */
+  def viewAddress = Action {
     implicit request =>
-      Ok(views.html.registerCard(request.session))
+      Ok(views.html.viewAddress(Address.getAddress(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.addressID))(request.session))
   }
 
+  /**
+    * this function will display page that will allow customer to add new cards
+    *
+    * @return
+    */
+  def addNewCard() = Action {
+    implicit request =>
+      Ok(views.html.addNewCard(request.session))
+  }
+
+  /**
+    * this function will display page that will allow customer to add new address
+    *
+    * @return
+    */
+  def addNewAddress() = Action {
+    implicit request =>
+      Ok(views.html.addNewAddress(request.session))
+  }
+
+  /**
+    * this function will allow the customer to add new cards
+    *
+    * @return
+    */
   def addCard() = Action {
     implicit request =>
 
       CardDetails.addCard(
-        Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID,
-        randomID,
+        Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.cardID,
         cardForm.bindFromRequest().data("cardholder"),
-        cardForm.bindFromRequest().data("cardNumber"),
+        cardForm.bindFromRequest().data("cardnumber"),
         cardForm.bindFromRequest().data("cv"),
         cardForm.bindFromRequest().data("expirationMonth"),
         cardForm.bindFromRequest().data("expirationYear")
       )
-      Redirect(routes.AccountController.registerCard())
+      Redirect(routes.AccountController.addNewCard())
   }
 
+  /**
+    * this function will remove customer card
+    *
+    * @param cardNumber Long card number
+    * @return
+    */
   def removeCard(cardNumber: String) = Action {
     implicit request =>
       CardDetails.removeCard(cardNumber)
       Redirect(routes.AccountController.viewCard())
+  }
+
+  /**
+    * this function will remove customer address
+    *
+    * @param addressID AddressID
+    * @return
+    */
+  def removeAddress(addressID: String) = Action {
+    implicit request =>
+      Address.removeAddress(addressID)
+      Redirect(routes.AccountController.viewAddress())
+  }
+
+  /**
+    * this function will allow the customer to add new address
+    *
+    * @return
+    */
+  def addAddress() = Action {
+    implicit request =>
+      Address.addAddress(
+        Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.addressID,
+        addressForm.bindFromRequest().data("houseNumber"),
+        addressForm.bindFromRequest().data("streetName"),
+        addressForm.bindFromRequest().data("town"),
+        addressForm.bindFromRequest().data("city"),
+        addressForm.bindFromRequest().data("county"),
+        addressForm.bindFromRequest().data("postcode"))
+      Redirect(routes.AccountController.addNewAddress())
   }
 }

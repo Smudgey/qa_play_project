@@ -1,3 +1,13 @@
+/*
+ * Created By Rytis
+ *
+ * Last worked on by Rytis on 26/07/2016
+ */
+
+/**
+ * this function will highlight selected links in navbar
+ * @param page
+ */
 function changePage(page) {
     $('#navbar').find("li[class='active']").removeClass('active');
     switch (page) {
@@ -15,6 +25,10 @@ function changePage(page) {
     }
 }
 
+/**
+ * this function will change highlight of the items in account sidebar
+ * @param tab
+ */
 function changeTab(tab) {
     $('#tabGroup').find("a[class='active']").removeClass('active');
     switch (tab) {
@@ -33,11 +47,21 @@ function changeTab(tab) {
         case "registerCard":
             $('#registerCardTab').addClass("active");
             break;
+        case "viewAddress":
+            $('#viewAddressTab').addClass("active");
+            break;
+        case "registerAddress":
+            $('#registerAddressTab').addClass("active");
+            break;
 
     }
 }
 
+/**
+ * this interacts with customer satisfaction star rating on purchase history
+ */
 $(document).ready(function () {
+
     $('.star').on('click', function () {
         clearStars($(this).parent());
         var index = $(this).index() + 1;
