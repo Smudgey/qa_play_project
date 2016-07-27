@@ -14,4 +14,5 @@ trait Formatter {
   }
 
   def randomID : String = java.util.UUID.randomUUID.toString
+
 }
