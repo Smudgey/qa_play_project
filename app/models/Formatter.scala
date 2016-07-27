@@ -13,5 +13,5 @@ trait Formatter {
     str.replace("%20", " ")
   }
 
-
+//  def formatCategory()
 }

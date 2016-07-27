@@ -12,7 +12,7 @@ GET         /catalogue                controllers.CatalogueController.show(query
 POST        /catalogue                controllers.SearchController.search
 GET         /category/clearance       controllers.CatalogueController.showClearance
 GET         /category/*cat            controllers.CatalogueController.showCategory(cat: String)
-GET         /categories/        controllers.CatalogueController.showSuperCategory(parent: String)
+GET         /categories/              controllers.CatalogueController.showSuperCategory(parent: String)
 
 GET         /view-product             controllers.ProductViewController.viewProduct(pid: Int)
 

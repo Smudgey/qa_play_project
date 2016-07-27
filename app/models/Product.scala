@@ -126,12 +126,6 @@ object Product extends Formatter{
     Product.findProduct(741).get.urlList += "/assets/images/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "/assets/images/Plastic-Patio-Chair---e114.jpg"
 
-//    for(key <- Category.categoryMap.keys) {
-//      println(key)
-//      val vals = Category.categoryMap.get(key)
-//
-//    }
-
     val map = Category.categoryMap
     map.keys.foreach { i =>
       println(i)
@@ -163,15 +157,24 @@ object Product extends Formatter{
     accumulate(l1, 0)
   }
 
-
   def searchByName(query: String) =  inventory.filter(_.name.toLowerCase.contains(query.toLowerCase()))
 
   def searchDescription(query: String) = inventory.filter(_.description.toLowerCase.contains(query.toLowerCase()))
 
   def searchByPrice(price: Int) = inventory.filter(_.price <= price)
 
-  def searchByCategory(query: String) = inventory.filter(_.category.toString.toLowerCase.contains(query.toLowerCase()))
+//  def searchByCategory(query: String) = inventory.filter(_.category.toString.toLowerCase.contains(query.toLowerCase()))
 
+  def searchByCategory(query: String) = {
+
+    var a = ArrayBuffer[Product]()
+    inventory.foreach( p =>
+      p.category.foreach( c =>
+        if (c.toString.toLowerCase.contains(query.toLowerCase) && !a.contains(p)) a += p
+      )
+    )
+    a
+  }
   /**
     * Returns a list of products with a particular category tag
     *

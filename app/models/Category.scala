@@ -8,39 +8,36 @@ import scala.collection.mutable.ArrayBuffer
 
 object Category extends Enumeration {
 
+  val Gnome           = Value("Gnome")
+  val GnomeSmall      = Value("Gnome/Small")
+  val GnomeBig        = Value("Gnome/Big")
+  val GnomeMedium     = Value("Gnome/Medium")
 
+  val Clothing        = Value("Clothing")
+  val ClothingShoe    = Value("Clothing/Shoe")
+  val ClothingJumper  = Value("Clothing/Jumper")
+  val ClothingTrouser = Value("Clothing/Trouser")
+  val ClothingUnderwear = Value("Clothing/Underwear")
+  val ClothingHat     = Value("Clothing/Hat")
 
+  val Plant           = Value("Plants")
+  val PlantTree       = Value("Plants/Tree")
+  val PlantPotted     = Value("Plants/Potted")
+  val PlantPot        = Value("Plants/Pot")
 
-  val Gnome           = Value
-  val GnomeSmall      = Value
-  val GnomeBig        = Value
-  val GnomeMedium     = Value
+  val BirdItem        = Value("Birds")
+  val BirdHouse       = Value("Birds/BirdHouse")
+  val BirdFeeder      = Value("Birds/Feeder")
 
-  val Clothing        = Value
-  val ClothingShoe    = Value
-  val ClothingJumper  = Value
-  val ClothingTrouser = Value
-  val ClothingUnderwear = Value
-  val ClothingHat     = Value
+  val Furniture       = Value("Furniture")
+  val FurnitureGazebo = Value("Furniture/Gazebo")
+  val FurnitureTable  = Value("Furniture/Table")
+  val FurnitureChair  = Value("Furniture/Chair")
 
-  val Plant           = Value
-  val PlantTree       = Value
-  val PlantPotted     = Value
-  val PlantPot        = Value
-
-  val BirdItem        = Value
-  val BirdHouse       = Value
-  val BirdFeeder      = Value
-
-  val Furniture       = Value
-  val FurnitureGazebo = Value
-  val FurnitureTable  = Value
-  val FurnitureChair  = Value
-
-  val Tool            = Value
-  val ToolRake        = Value
-  val ToolSpade       = Value
-  val ToolAxe         = Value
+  val Tool            = Value("Tool")
+  val ToolRake        = Value("Tool/Rake")
+  val ToolSpade       = Value("Tool/Spade")
+  val ToolAxe         = Value("Tool/Axe")
 
   val parentCats      = ArrayBuffer(Gnome, Clothing, Plant, BirdItem, Furniture, Tool)
   val categoryMap     = Map(
