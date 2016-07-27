@@ -127,14 +127,21 @@ object Product extends Formatter{
     Product.findProduct(742).get.urlList += "/assets/images/Plastic-Patio-Chair---e114.jpg"
 
     val map = Category.categoryMap
-    map.keys.foreach { i =>
-      println(i)
+//    map.keys.foreach { i =>
+//      println(i)
+//
+//      map(i).foreach(
+//        j => println("   "+formatCategory(j.toString))
+//      )
+//    }
 
-      map(i).foreach(
-        j => println("   "+formatCategory(j.toString))
-      )
+    for((parent, i) <- Category.parentCats.zipWithIndex) {
+      for(sub <- map(parent)) {
+        println(sub)
+      }
+
     }
-    println("\n\njsdfjkasd;lfjas;djklfasjkl;df")
+
 
     Product.markProductAsClearance(701, 2.50, 4)
 
