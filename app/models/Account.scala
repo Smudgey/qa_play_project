@@ -22,7 +22,8 @@ case class Account(accountID: String, var loginID: String, var detailsID: String
 object Account extends Formatter {
   //dummy data
   private val accountList = ArrayBuffer[Account](
-    Account("0", "l0", "d0", "a0", "c0")
+    Account("0", "l0", "d0", "a0", "c0"),
+    Account("1","4","d1","a1","c1")
   )
 
   /**
