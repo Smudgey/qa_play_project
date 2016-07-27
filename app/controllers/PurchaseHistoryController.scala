@@ -1,7 +1,7 @@
 package controllers
 
 import com.google.inject.Inject
-import models.{Login, Order}
+import models.{Account, Login, Order}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
@@ -15,6 +15,7 @@ class PurchaseHistoryController @Inject extends Controller {
 
   /**
     * this function will display customers order history
+    *
     * @return
     */
   def showPurchase = Action {
@@ -23,7 +24,7 @@ class PurchaseHistoryController @Inject extends Controller {
       if (request.session.get("connected").isEmpty) {
         Redirect(routes.LoginController.login())
       } else {
-        Ok(views.html.purchaseHistory(Order.getOrderHistory(Login.findLogin(request.session.data("connected")).get.lid).toArray)(request.session))
+        Ok(views.html.purchaseHistory(Order.getOrderHistory(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID).toArray)(request.session))
       }
   }
 
@@ -38,6 +39,7 @@ class PurchaseHistoryController @Inject extends Controller {
 
   /**
     * this function will add star rating to user order
+    *
     * @return
     */
   def orderRating = Action {
