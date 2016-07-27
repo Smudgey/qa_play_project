@@ -129,10 +129,12 @@ object Product extends Formatter{
     val map = Category.categoryMap
     map.keys.foreach { i =>
       println(i)
+
       map(i).foreach(
-        j => println("   "+j)
+        j => println("   "+formatCategory(j.toString))
       )
     }
+    println("\n\njsdfjkasd;lfjas;djklfasjkl;df")
 
     Product.markProductAsClearance(701, 2.50, 4)
 
