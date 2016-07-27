@@ -49,7 +49,7 @@
                                               </span>
                                             <!-- Removed disabled="disabled" as the form crashes if the input field is not edited. Add javascript to enable the input field on submit button click?-->
                                             <!-- TODO Max is returning n-1 rather than n. When item is updated the inoput form becomes buggy-->
-                                            <input type="text" name="quant[@i]" class="form-control input-number"  value="@oli.quantity" min="0" max="@oli.prod.stock">
+                                            <input type="text" name="quant[@i]" class="form-control input-number"  value="@oli.quantity" min="0" max="@Product.findProduct(oli.prod.pid).get.stock">
                                               <span class="input-group-btn">
                                                   <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@i]">
                                                       <span class="glyphicon glyphicon-plus"></span>
@@ -66,7 +66,7 @@
 
                                 <div  class="col-xs-3">
                                     <input type="hidden" name="pid[@i]" value="@oli.prod.pid">
-                                    <input type="submit" class="btn btn-warning btn-sm btn-block" href="#" value ="Update Item">a
+                                    <input type="submit" class="btn btn-warning btn-sm btn-block" href="#" value ="Update Item">
                                 </div>
 
                             </div>
