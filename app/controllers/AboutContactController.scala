@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject._
 
-import models.{Enquiry, EnquiryDescription}
+import models.{Enquiry, EnquiryDescription, MongoConnection}
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms.{mapping, nonEmptyText}
@@ -35,6 +35,8 @@ class AboutContactController @Inject() extends Controller {
         enquiryForm.bindFromRequest().data("email"),
         enquiryForm.bindFromRequest().data("enquiry")
       )
+      //MongoConnection.end
+      MongoConnection.findLuke
       Redirect(routes.AboutContactController.aboutAndContact())
     }
   }

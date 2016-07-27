@@ -4,22 +4,20 @@ import com.typesafe.config.ConfigFactory
 import reactivemongo.api.{FailoverStrategy, MongoDriver}
 import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.WriteResult
-import reactivemongo.bson.BSONDocument
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
 import reactivemongo.core.nodeset.Authenticate
 
-import scala.concurrent.ExecutionContext._
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
-
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by Luke on 25/07/2016.
   */
 object MongoConnection {
-  val dbn = "scalaplay"
-  val user = "appaccess"
-  val pass = "appaccess"
+  val dbn = "test"
+  val user = "testuser"
+  val pass = "testuser"
   val credentials = List(Authenticate(dbn, user, pass))
   val conn = driver.connection(servs, authentications = credentials)
   val coll = db.collection[BSONCollection]("collN")
@@ -32,6 +30,21 @@ object MongoConnection {
   def driver = new MongoDriver(Some(config))
 
   def db = conn.db(dbn, strat)
+
+  //Read data
+  def findPerson(coll: BSONCollection)
+                (implicit ec: ExecutionContext, reader: BSONDocumentReader[String]) : Future[List[String]] ={
+    val query = BSONDocument("fName" -> "Luke")
+
+    val ppl = coll.find(query).cursor[String].collect[List]()
+    ppl.map {
+      people => for (p <- people)
+        println(p)
+    }
+    ppl
+  }
+
+  val findLuke: Future[List[String]] = findPerson(coll)
 
   //Create new entry
   val doc = BSONDocument("fname" -> "Tom", "lName" -> "Bob", "age" -> 24)
