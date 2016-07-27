@@ -21,7 +21,9 @@ object Login extends Formatter {
 
   // dummy data
   private var list = ArrayBuffer[Login](
-    Login("l0", "a", "a")
+    Login("l0", "a", "a"),
+    Login("4", "paul.tan@qa.com", "pass")
+
   )
 
   /**

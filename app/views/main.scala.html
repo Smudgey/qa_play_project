@@ -160,7 +160,8 @@
 
                         @if(session.get("connected").isEmpty) {
                             <div class="btn-group">
-                            @helper.form(routes.LoginController.validateLogin) {
+                                <form id="loginForm" action="@routes.LoginController.validateLogin()" method="post">
+
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Login
                                 </button>
@@ -182,7 +183,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            }
+                                </form>
                             </div>
 
                         } else {

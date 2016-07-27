@@ -4,13 +4,13 @@
         <div class="row text-center">
             <div class="col-md-12 col-lg-12">
                 <div class="vcenter">
-                    @helper.form(routes.RegisterController.createAddress()) {
+                    <form id="addressForm" action="@routes.RegisterController.createAddress()" method="post">
                         @addressTemplate()
                         <div class="form-group text-center">
-                            <input type="submit" class="btn btn-default" value="Next">
+                            <input type="button" onclick="validateAddress()" class="btn btn-default" value="Next">
                         </div>
 
-                    }
+                    </form>
                     <hr>
 
                     <div class="col-md-12">
