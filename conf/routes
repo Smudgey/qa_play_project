@@ -57,3 +57,5 @@ POST        /aboutContact              controllers.AboutContactController.create
 
 
 GET         /adminEnquiries           controllers.AboutContactController.printEnquiries
+
+
