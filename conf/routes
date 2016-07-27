@@ -56,4 +56,5 @@ GET         /assets/*file              controllers.Assets.versioned(path="/publi
 GET         /aboutContact              controllers.AboutContactController.aboutAndContact
 POST        /aboutContact              controllers.AboutContactController.createEnquiry
 
-GET         /adminEnquiries            controllers.AboutContactController.printEnquiries
+
+GET         /adminEnquiries           controllers.AboutContactController.printEnquiries
