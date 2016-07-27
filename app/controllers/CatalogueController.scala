@@ -25,11 +25,6 @@ class CatalogueController @Inject() extends Controller with Formatter {
       Ok(views.html.catalogue(prodFor)(Product.searchByCategory(cat).toArray)(request.session))
   }
 
-  def showSuperCategory(cat: String) = Action {
-    implicit request =>
-      Ok(views.html.catalogue(prodFor)(Product.searchByCategory(cat).toArray)(request.session) )
-  }
-
   def show(query: String) = Action {
     implicit request =>
     Ok(views.html.catalogue(prodFor)(Product.searchByName(query).toArray)(request.session))
@@ -40,5 +35,8 @@ class CatalogueController @Inject() extends Controller with Formatter {
       Ok(views.html.catalogue(prodFor)(Product.clearanceStock.toArray)(request.session))
   }
 
-
+  def priceFilter(min: Double, max: Double) = Action {
+    implicit request =>
+      Ok(views.html.catalogue(prodFor)(Product.searchByPrice(min, max).toArray)(request.session))
+  }
 }

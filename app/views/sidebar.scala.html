@@ -27,17 +27,34 @@
                 <div id="group-@i" class="list-group collapse ">
                     @for(sub <- Category.categoryMap(parent)) {
                     <a class="list-group-item" href="@routes.CatalogueController.showCategory(sub.toString)">
-
                         <span class="badge">@Product.searchByCategory(sub.toString).size</span> @Category.formatCategory(sub.toString)
-
                     </a>
                     }
-
                 </div>
+            </div>
+            }
+            <div>
+                <h4 data-toggle="collapse" data-target="#group-filter">
+                    <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+                    <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+                    Advanced Filter
+                </h4>
+                @helper.form(routes.SearchController.filterSearch) {
+                <div id="group-filter" class="list-group collapse in">
+                    <div class="input-group form-group center-block">
+                        <label for="price-min">Min. Price</label>
+                        <input type="number" class="form-control" name="price-min" id="price-min" min="0">
+                    </div>
+                    <div class="input-group form-group center-block">
+                        <label for="price-max">Max. price</label>
+                        <input type="number" class="form-control" name ="price-max" id="price-max">
+                    </div>
+                    <button type="submit" class="btn btn-button">Refine
+                    </button>
+                </div>
+                }
 
             </div>
-
-            }
 
         </div><!-- END SIDEBAR-->
 

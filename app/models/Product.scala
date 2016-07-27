@@ -126,23 +126,6 @@ object Product extends Formatter{
     Product.findProduct(741).get.urlList += "/assets/images/Hippo-Table-Design1.jpg"
     Product.findProduct(742).get.urlList += "/assets/images/Plastic-Patio-Chair---e114.jpg"
 
-    val map = Category.categoryMap
-//    map.keys.foreach { i =>
-//      println(i)
-//
-//      map(i).foreach(
-//        j => println("   "+formatCategory(j.toString))
-//      )
-//    }
-
-    for((parent, i) <- Category.parentCats.zipWithIndex) {
-      for(sub <- map(parent)) {
-        println(sub)
-      }
-
-    }
-
-
     Product.markProductAsClearance(701, 2.50, 4)
 
   }
@@ -170,7 +153,9 @@ object Product extends Formatter{
 
   def searchDescription(query: String) = inventory.filter(_.description.toLowerCase.contains(query.toLowerCase()))
 
-  def searchByPrice(price: Int) = inventory.filter(_.price <= price)
+  //def searchByPrice(price: Double) = inventory.filter(_.price <= price)
+
+  def searchByPrice(min: Double, max: Double) = inventory.filter(_.price >= min).filter(_.price <= max).sortBy(_.price)
 
 //  def searchByCategory(query: String) = inventory.filter(_.category.toString.toLowerCase.contains(query.toLowerCase()))
 

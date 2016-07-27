@@ -21,7 +21,8 @@ GET         /catalogue                controllers.CatalogueController.show(query
 POST        /catalogue                controllers.SearchController.search
 GET         /category/clearance       controllers.CatalogueController.showClearance
 GET         /category/*cat            controllers.CatalogueController.showCategory(cat: String)
-GET         /categories/              controllers.CatalogueController.showSuperCategory(parent: String)
+POST        /catalogue/price           controllers.SearchController.filterSearch
+GET         /catalogue/*min&*max      controllers.CatalogueController.priceFilter(min: Double, max: Double)
 
 GET         /view-product              controllers.ProductViewController.viewProduct(pid: Int)
 
