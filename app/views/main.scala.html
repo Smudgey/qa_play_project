@@ -67,7 +67,6 @@
                                 Gnomes <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-
                                 <li><a href="@routes.CatalogueController.showSuperCategory(Category.Gnome.toString)">All Gnomes</a></li>
                                 <ul>
                                     <li><a href="@routes.CatalogueController.showCategory(Category.GnomeBig.toString)">Big Gnomes</a></li>
@@ -85,7 +84,6 @@
                                     <li><a href="@routes.CatalogueController.showCategory(Category.ClothingUnderwear.toString)">Underwear</a></li>
                                     <li><a href="@routes.CatalogueController.showCategory(Category.ClothingShoe.toString)">Shoes</a></li>
                                 </ul>
-
                             </ul>
                         </li>
 
@@ -189,8 +187,11 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="@routes.AccountController.viewAccount()">My Account</a></li>
                                     <li><a href="@routes.AccountController.updateAccount()">Edit Account</a></li>
-                                    <li><a href="@routes.PurchaseHistoryController.showPurchase">
-                                        Purchase History</a></li>
+                                    <li><a href="@routes.PurchaseHistoryController.showPurchase">Purchase History</a></li>
+                                    <li><a href="@routes.AccountController.viewCard()">View Card</a></li>
+                                    <li><a href="@routes.AccountController.addNewCard()">Register Card</a></li>
+                                    <li><a href="@routes.AccountController.viewAddress()">View Address</a></li>
+                                    <li><a href="@routes.AccountController.addNewAddress()">Register Address</a></li>
                                 </ul>
 
                                 <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
@@ -219,7 +220,6 @@
         <div class="container text-center">
         @content
 
-
         </div>
         <div class="container text-center">
             <hr>
@@ -243,25 +243,17 @@
                 <div class="col-sm-12 col-md-12">
                     <p id="Telephone">0738201883</p>
                     <p id="Email">enquiriesnbgardens.com</p>
-</div>
+                </div>
             </div>
         </div>
 
 
-
-
-
-
-
-<div align="center" class="row"  >
-    <a style="color: #3b5998" href="https://www.facebook.com/NBGardens/" role="button"> <i style="font-size:64px" class="fa fa-facebook-square row-xs-12 row-md-8"> </i> </a>
-<a style="color: #4099FF" href="https://twitter.com/nbgbrooklyn" role="button"> <i style="font-size:64px" class="fa fa-twitter-square row-xs-12 row-md-8"> </i> </a>
-<a style="color: #FF0000" href="https://plus.google.com/111293658324555647065" role="button"> <i style="font-size:64px" class="fa fa-google-plus row-xs-12 row-md-8"> </i> </a>
-<a style="color: ##35465c" href="http://landscapefocused.tumblr.com/" role="button"> <i style="font-size:64px" class="fa fa-tumblr row-xs-12 row-md-8"> </i> </a>
- <a style="color: #8B0000" href="http://www.starwars.com/databank/rebel-alliance" role="button"> <i style="font-size:64px" class="fa fa-rebel row-xs-12 row-md-8"> </i> </a> </div>
-
-
-
+        <div align="center" class="row" >
+            <a style="color: #3b5998" href="https://www.facebook.com/NBGardens/" role="button"> <i style="font-size: 64px" class="fa fa-facebook-square row-xs-12 row-md-8"> </i> </a>
+            <a style="color: #4099FF" href="https://twitter.com/nbgbrooklyn" role="button"> <i style="font-size: 64px" class="fa fa-twitter-square row-xs-12 row-md-8"> </i> </a>
+            <a style="color: #FF0000" href="https://plus.google.com/111293658324555647065" role="button"> <i style="font-size: 64px" class="fa fa-google-plus row-xs-12 row-md-8"> </i> </a>
+            <a style="color: # #35465c" href="http://landscapefocused.tumblr.com/" role="button"> <i style="font-size: 64px" class="fa fa-tumblr row-xs-12 row-md-8"> </i> </a>
+            <a style="color: #8B0000" href="http://www.starwars.com/databank/rebel-alliance" role="button"> <i style="font-size: 64px" class="fa fa-rebel row-xs-12 row-md-8"> </i> </a> </div>
 
     </body>
 
