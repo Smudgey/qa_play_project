@@ -16,19 +16,12 @@ GET         /removeAddress             controllers.AccountController.removeAddre
 POST        /purchaseHistory           controllers.PurchaseHistoryController.orderRating
 GET         /purchaseHistory           controllers.PurchaseHistoryController.showPurchase
 
-<<<<<<< HEAD
+
 GET         /catalogue                controllers.CatalogueController.show(query:String)
 POST        /catalogue                controllers.SearchController.search
 GET         /category/clearance       controllers.CatalogueController.showClearance
 GET         /category/*cat            controllers.CatalogueController.showCategory(cat: String)
 GET         /categories/              controllers.CatalogueController.showSuperCategory(parent: String)
-=======
->>>>>>> master
-
-GET         /catalogue                 controllers.CatalogueController.show(query:String)
-POST        /catalogue                 controllers.SearchController.search
-GET         /category/clearance        controllers.CatalogueController.showClearance
-GET         /category/*cat             controllers.CatalogueController.showCategory(cat: String)
 
 GET         /view-product              controllers.ProductViewController.viewProduct(pid: Int)
 

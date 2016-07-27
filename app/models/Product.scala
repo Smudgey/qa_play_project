@@ -130,7 +130,7 @@ object Product extends Formatter{
     map.keys.foreach { i =>
       println(i)
       map(i).foreach(
-        j => println("   "+j)
+        j => println("   "+formatCategory(j.toString))
       )
     }
 

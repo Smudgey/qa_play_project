@@ -13,6 +13,10 @@ trait Formatter {
     str.replace("%20", " ")
   }
 
+  def formatCategory(cat: String): String = {
+    cat.replaceAll("\\w*\\/","")
+  }
+
   def randomID : String = java.util.UUID.randomUUID.toString
 
 }
