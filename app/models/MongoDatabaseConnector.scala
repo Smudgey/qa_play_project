@@ -14,24 +14,28 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /**
   * Created by rytis on 28/07/16.
   */
-object Mongo {
+trait MongoDatabaseConnector {
+
+  object DatabaseNames extends Enumeration {
+    type DatabaseNames = Value
+    val ACCOUNT_DATABASE = "nb_gardens_accounts"
+    val ORDERS_DATABASE = "nb_gardens_orders"
+  }
+
+  object CollectionNames extends Enumeration {
+    type CollectionNames = Value
+    val ACCOUNT_COLLECTION = "accounts"
+    val ORDER_COLLECTION = "orders"
+    val PRODUCT_COLLECTION = "products"
+
+  }
 
   import reactivemongo.api.{MongoConnection, MongoDriver}
 
   import scala.concurrent.ExecutionContext.Implicits.global
   import scala.concurrent.Future
 
-  val mongoUri = "mongodb://192.168.1.15/rytis"
-  val dbn = "rytis"
-  val user = "testuser"
-  val pass = "testuser"
-  val credentials = List(Authenticate(dbn, user, pass))
 
-  val driver = new MongoDriver
-
-  def servs: List[String] = List("192.168.1.15:27017")
-
-  val conn = driver.connection(servs, authentications = credentials)
 
   /*
     val database = for {
@@ -42,18 +46,32 @@ object Mongo {
     } yield db
   */
 
-  def dbFromConnection(connection: MongoConnection): Future[BSONCollection] =
-    connection.database("rytis").
-      map(_.collection("account"))
+  def connectToDatabase(collectionName: String, databaseName: String): Future[BSONCollection] = {
 
 
-  dbFromConnection(conn).onComplete {
+    val credentials = List(Authenticate(databaseName, "appaccess", "appaccess"))
+
+    val driver = new MongoDriver
+
+    def servs: List[String] = List("192.168.1.15:27017")
+
+    val conn = driver.connection(servs, authentications = credentials)
+
+    /*if (collectionName == CollectionNames.ACCOUNT_COLLECTION && databaseName == DatabaseNames.ACCOUNT_DATABASE ||
+      collectionName == CollectionNames.ORDER_COLLECTION && databaseName == DatabaseNames.ORDERS_DATABASE ||
+      collectionName == CollectionNames.PRODUCT_COLLECTION && databaseName == DatabaseNames.ORDERS_DATABASE) {*/
+      conn.database(databaseName).map(_.collection(collectionName))
+
+  }
+
+
+  /*connectToDatabase(conn).onComplete {
     case Success(result) =>
       val query = BSONDocument(
         "name" -> "rytis"
       )
       println(result)
-  }
+  }*/
 
 
   /*database.onComplete {
@@ -102,9 +120,5 @@ object Mongo {
       println(resolution)
       driver.close()
   }*/
-
-  def main(args: Array[String]): Unit = {
-    Mongo
-  }
 
 }
