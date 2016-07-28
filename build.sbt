@@ -11,9 +11,10 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
-  "org.reactivemongo" % "reactivemongo_2.11" % "0.11.12"
+  "org.reactivemongo" %% "reactivemongo" % "0.11.14"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+resolvers += "Typesafe repository releases" at "http://repo.typesafe.com/typesafe/releases/"
 
 routesGenerator := InjectedRoutesGenerator
