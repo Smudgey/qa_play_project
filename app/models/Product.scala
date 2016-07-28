@@ -53,7 +53,7 @@ object Product extends Formatter{
     this.add(inventory, Product(715, "Hard Spade", "A spade for general use made to last a lifetime of normal wear.", 5, 0, 8.99,  Array[Category.Value](Category.ToolSpade)))
     this.add(inventory, Product(716, "Spetsnaz shovel", "If you need to dig the hole and kill your neighbour this is tools for you", 5, 0, 8.99,  Array[Category.Value](Category.ToolSpade)))
     this.add(inventory, Product(717, "Nice Spade", "The perfect pink shovel, as fabulous as you are.", 5, 0, 8.99,  Array[Category.Value](Category.ToolSpade)))
-    this.add(inventory, Product(718, "Nice Rake", "The ideal premium rake for the advanced usser.", 5, 0, 8.99,  Array[Category.Value](Category.ToolRake)))
+
     this.add(inventory, Product(719, "Pickaxe", "Weather you're using it to break tough ground on a project or tunnelling your way into your local branch this axe will serve you well.", 5, 0, 8.99,  Array[Category.Value](Category.ToolAxe)))
     this.add(inventory, Product(720, "Wooden Axe", "Looking for a well made traditional axe? Look no further this classic is perfect for felling, chopping and everything else..", 5, 0, 8.99,  Array[Category.Value](Category.ToolAxe)))
     this.add(inventory, Product(721, "Metal Axe", "A versatile axe with a weather proof metal handle for longer lasting use.", 5, 0, 8.99,  Array[Category.Value](Category.ToolAxe)))
@@ -79,7 +79,7 @@ object Product extends Formatter{
     this.add(inventory, Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99,  Array[Category.Value](Category.FurnitureTable)))
     this.add(inventory, Product(742, "Normal Chair", "An average chair with a fancy cover", 5, 0, 8.99, Array[Category.Value]( Category.FurnitureChair)))
 
-    Product.findProduct(701).get.urlList += "/assets/images/ugly-gnome-15606748.jpg"
+    Product.findProduct(701).get.urlList += "/assets/images/ugly-gnome-15606748new.jpg"
     Product.findProduct(702).get.urlList += "/assets/images/Snerdley_Shell_Seeking_Gnomes.png"
     Product.findProduct(703).get.urlList += "/assets/images/109913-277x425-History_gnomes.png"
     Product.findProduct(704).get.urlList += "/assets/images/military-lawn-gnomes.png"
@@ -97,7 +97,7 @@ object Product extends Formatter{
     Product.findProduct(715).get.urlList += "/assets/images/GL50.jpg"
     Product.findProduct(716).get.urlList += "/assets/images/51QE4ttqtdL._SL1000_.jpg"
     Product.findProduct(717).get.urlList += "/assets/images/10_Square_Mouth_Shovel.jpg"
-    Product.findProduct(718).get.urlList += "/assets/images/sopjh606m7snale0jtxv.webp"
+
     Product.findProduct(719).get.urlList += "/assets/images/m79fDnft9EjVGjveIgyZa1g.jpg"
 
     Product.findProduct(720).get.urlList += "/assets/images/gransfors-bruks-wildlife-hatchet-73-p.jpg"

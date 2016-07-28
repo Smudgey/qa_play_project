@@ -25,7 +25,7 @@
           "totalPrice": 11
         },
         {
-          "productID": null,
+          "productID": g02,
           "quantity": 2,
           "category": {
             "type": "gnome",
