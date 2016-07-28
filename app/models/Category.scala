@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Marko on 12/07/2016.
   */
 
-object Category extends Enumeration {
+object Category extends Enumeration with Formatter{
 
   val Gnome           = Value("Gnome")
   val GnomeSmall      = Value("Gnome/Small")
@@ -45,7 +45,8 @@ object Category extends Enumeration {
           Clothing  -> List(ClothingShoe, ClothingUnderwear, ClothingHat, ClothingJumper, ClothingTrouser),
           Plant     -> List(PlantTree, PlantPotted, PlantPot),
           Furniture -> List(FurnitureChair, FurnitureTable, FurnitureGazebo),
-          Tool      -> List(ToolAxe, ToolRake, ToolSpade)
+          Tool      -> List(ToolAxe, ToolRake, ToolSpade),
+          BirdItem  -> List(BirdHouse, BirdFeeder)
   )
 
 //  def categorise: Map[Category.Value, ArrayBuffer[Category.Value]] ={

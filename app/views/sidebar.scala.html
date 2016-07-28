@@ -1,4 +1,4 @@
-@import _root_.models.Category
+@import _root_.models.{Category, Product}
 @(content: Html)
 
 <div class="navbar navbar-default visible-xs">
@@ -16,32 +16,49 @@
             <!-- filter sidebar -->
         <div id="filter-sidebar" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 visible-sm visible-md visible-lg collapse sliding-sidebar">
 
+            @for((parent, i) <- Category.parentCats.zipWithIndex) {
+
             <div>
-                <h4 data-toggle="collapse" data-target="#group-1">
+                <h4 data-toggle="collapse" data-target="#group-@i">
                     <i class="fa fa-fw fa-caret-down parent-expanded"></i>
                     <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
-                    Artist
+                    @parent
                 </h4>
-                <div id="group-1" class="list-group collapse in">
-                    <a class="list-group-item" href="#">
-                        <span class="badge">3</span> John Lennon
+                <div id="group-@i" class="list-group collapse ">
+                    @for(sub <- Category.categoryMap(parent)) {
+                    <a class="list-group-item" href="@routes.CatalogueController.showCategory(sub.toString)">
+                        <span class="badge">@Product.searchByCategory(sub.toString).size</span> @Category.formatCategory(sub.toString)
                     </a>
-                    <a class="list-group-item" href="#">
-                        <span class="badge">3</span> John Lennon
-                    </a>
-                    <a class="list-group-item" href="#">
-                        <span class="badge">3</span> John Lennon
-                    </a>
-                    <a class="list-group-item" href="#">
-                        <span class="badge">3</span> John Lennon
-                    </a>
+                    }
                 </div>
             </div>
+            }
+            <div>
+                <h4 data-toggle="collapse" data-target="#group-filter">
+                    <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+                    <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+                    Advanced Filter
+                </h4>
+                @helper.form(routes.SearchController.filterSearch) {
+                <div id="group-filter" class="list-group collapse in">
+                    <div class="input-group form-group center-block">
+                        <label for="price-min">Min. Price</label>
+                        <input type="number" class="form-control" name="price-min" id="price-min" min="0">
+                    </div>
+                    <div class="input-group form-group center-block">
+                        <label for="price-max">Max. price</label>
+                        <input type="number" class="form-control" name ="price-max" id="price-max">
+                    </div>
+                    <button type="submit" class="btn btn-button">Refine
+                    </button>
+                </div>
+                }
+
+            </div>
+
+        </div><!-- END SIDEBAR-->
 
 
-
-
-        </div>
 
             <!-- table container -->
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-9">
