@@ -11,6 +11,8 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 
+import models.Person
+
 /**
   * Created by Luke on 25/07/2016.
   */
@@ -32,19 +34,23 @@ object MongoConnection {
   def db = conn.db(dbn, strat)
 
   //Read data
-  def findPerson(coll: BSONCollection)
-                (implicit ec: ExecutionContext, reader: BSONDocumentReader[String]) : Future[List[String]] ={
-    val query = BSONDocument("fName" -> "Luke")
+  def findPerson()
+                (implicit ec: ExecutionContext, reader: BSONDocumentReader[Person]) : Future[List[Person]] ={
+    val query = BSONDocument("fName" -> BSONDocument("$gt" -> 24))
 
-    val ppl = coll.find(query).cursor[String].collect[List]()
+    Thread.sleep(10000)
+
+    val ppl = coll.find(query).cursor[Person].collect[List]()
     ppl.map {
       people => for (p <- people)
-        println(p)
+        println(s"found $p")
     }
     ppl
   }
 
-  val findLuke: Future[List[String]] = findPerson(coll)
+  def callFindPerson(): Unit = findPerson()
+
+  //val findLukeAge: Future[List[Person]] = findPerson(coll)
 
   //Create new entry
   val doc = BSONDocument("fname" -> "Tom", "lName" -> "Bob", "age" -> 24)
