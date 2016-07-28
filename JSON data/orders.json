@@ -1,5 +1,4 @@
-{
-  "order": [
+[
     {
       "accountID": "108909200",
       "date": "2016-07-26T00:00:00.000Z",
@@ -25,7 +24,7 @@
           "totalPrice": 11
         },
         {
-          "productID": g02,
+          "productID": "g02",
           "quantity": 2,
           "category": {
             "type": "gnome",
@@ -139,4 +138,3 @@
       ]
     }
   ]
-}
