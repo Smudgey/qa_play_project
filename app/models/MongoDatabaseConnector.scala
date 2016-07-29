@@ -36,16 +36,6 @@ trait MongoDatabaseConnector {
   import scala.concurrent.Future
 
 
-
-  /*
-    val database = for {
-      uri <- Future.fromTry(MongoConnection.parseURI(mongoUri))
-      con = driver.connection(uri)
-      dn <- Future(uri.db.get)
-      db <- con
-    } yield db
-  */
-
   def connectToDatabase(collectionName: String, databaseName: String): Future[BSONCollection] = {
 
 
@@ -57,9 +47,6 @@ trait MongoDatabaseConnector {
 
     val conn = driver.connection(servs, authentications = credentials)
 
-    /*if (collectionName == CollectionNames.ACCOUNT_COLLECTION && databaseName == DatabaseNames.ACCOUNT_DATABASE ||
-      collectionName == CollectionNames.ORDER_COLLECTION && databaseName == DatabaseNames.ORDERS_DATABASE ||
-      collectionName == CollectionNames.PRODUCT_COLLECTION && databaseName == DatabaseNames.ORDERS_DATABASE) {*/
       conn.database(databaseName).map(_.collection(collectionName))
 
   }

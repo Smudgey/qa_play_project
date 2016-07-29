@@ -1,6 +1,9 @@
 package models
 
+import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID}
+
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
   * Created by rytis on 28/07/16.
@@ -24,9 +27,31 @@ object Account_New {
 
   }
 
-  /* implicit object AccountWritter extends BSONDocumentWriter[Account_New] {
-     def write(Account_New: Account_New): BSONDocument =
-       BSONDocument("name" -> person.name)
-   }
- */
+  implicit object AccountWriter extends BSONDocumentWriter[Account_New] {
+
+
+    def write(account_New: Account_New): BSONDocument = {
+
+
+      BSONDocument(
+        "ID" -> account_New.accountID,
+        "Username" -> account_New.username,
+        "Password" -> account_New.accountID,
+        "Name" -> account_New.accountID,
+        "Phone" -> account_New.accountID,
+        "Address" -> account_New.address,
+        "PaymentCards" -> account_New.paymentCards
+
+      )
+    }
+
+  }
+
+  def create(personCollection: BSONCollection, account: Account)(implicit ec: ExecutionContext): Future[Unit] = {
+    val writeResult = personCollection.insert(account)
+    writeResult.map(_ => {
+      /*once this is successful, just return successfully*/
+    })
+  }
+
 }

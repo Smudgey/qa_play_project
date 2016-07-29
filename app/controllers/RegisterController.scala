@@ -5,6 +5,10 @@ import models._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+
+import scala.concurrent.ExecutionContext
+import scala.util.Success
 
 
 /*
@@ -13,7 +17,7 @@ import play.api.mvc.{Action, Controller}
   * Last worked on by Rytis on 26/07/2916
   */
 
-class RegisterController @Inject extends Controller with Formatter {
+class RegisterController @Inject extends Controller with Formatter with MongoDatabaseConnector {
 
   // this will create register form
   private val userForm = Form(
@@ -83,6 +87,41 @@ class RegisterController @Inject extends Controller with Formatter {
     */
   def createUser() = Action {
     implicit request => {
+
+      var flag = false
+
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(result) =>
+
+          def findAccount()(implicit ec: ExecutionContext, reader: BSONDocumentReader[Account_New]): Unit = {
+            val query = BSONDocument(
+              "Username" -> userForm.bindFromRequest().data("email")
+            )
+
+            val ppl = result.find(query).cursor[Account_New].collect[List]()
+            ppl.map {
+              people => for (p <- people)
+                if (p.username == userForm.bindFromRequest().data("email") && p.password == userForm.bindFromRequest().data("password")) {
+                  flag = true
+                }else {
+                  Account_New.create(ppl, Account_New(
+                    randomID,
+                    userForm.bindFromRequest().data("email"),
+                    userForm.bindFromRequest().data("password")
+                  ))
+                }
+            }
+          }
+      }
+
+      if (flag) {
+
+        Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
+      } else {
+        Redirect(routes.RegisterController.register())
+
+      }
+
       if (Login.findLogin(userForm.bindFromRequest().data("email")).isEmpty) {
 
         val loginID = randomID
