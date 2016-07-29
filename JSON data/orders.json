@@ -1,16 +1,16 @@
 [
     {
       "accountID": "108909200",
-      "date": "2016-07-26T00:00:00.000Z",
+      "date": "26\/07\/2016",
       "orderStatus": "Dispatched",
       "paymentMethod": "PayLater",
-      "orderlines": [
+      "orderLines": [
         {
           "productID": "g01",
           "quantity": 3,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 33
         },
@@ -19,7 +19,7 @@
           "quantity": 1,
           "category": {
             "type": "gnome",
-            "porusware": true
+            "porousware": true
           },
           "totalPrice": 11
         },
@@ -28,7 +28,7 @@
           "quantity": 2,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 22
         }
@@ -36,16 +36,16 @@
     },
     {
       "accountID": "108909200",
-      "date": "2016-07-26T00:00:00.000Z",
+      "date": "26\/07\/2016",
       "orderStatus": "Dispatched",
       "paymentMethod": "PayLater",
-      "orderlines": [
+      "orderLines": [
         {
           "productID": "g03",
           "quantity": 2,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 28
         }
@@ -53,16 +53,16 @@
     },
     {
       "accountID": "108909989",
-      "date": "2016-08-22T00:00:00.000Z",
+      "date": "22\/08\/2016",
       "orderStatus": "Dispatched",
       "paymentMethod": "PayLater",
-      "orderlines": [
+      "orderLines": [
         {
           "productID": "g05",
           "quantity": 1,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 7
         }
@@ -70,16 +70,16 @@
     },
     {
       "accountID": "108921209",
-      "date": "2016-03-21T00:00:00.000Z",
+      "date": "21\/03\/2016",
       "orderStatus": "Dispatched",
       "paymentMethod": "PayLater",
-      "orderlines": [
+      "orderLines": [
         {
           "productID": "g12",
           "quantity": 4,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 240
         }
@@ -87,16 +87,16 @@
     },
     {
       "accountID": "108909276",
-      "date": "2016-05-21T00:00:00.000Z",
+      "date": "21\/05\/2016",
       "orderStatus": "Dispatched",
       "paymentMethod": "PayLater",
-      "orderlines": [
+      "orderLines": [
         {
           "productID": "g06",
           "quantity": 1,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 7
         },
@@ -105,7 +105,7 @@
           "quantity": 1,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 44
         }
@@ -113,16 +113,16 @@
     },
     {
       "accountID": "108909215",
-      "date": "2016-03-31T23:00:00.000Z",
+      "date": "31\/03\/2016",
       "orderStatus": "Dispatched",
       "paymentMethod": "PayLater",
-      "orderlines": [
+      "orderLines": [
         {
           "productID": "g09",
           "quantity": 1,
           "category": {
             "type": "gnome",
-            "porusware": false
+            "porousware": false
           },
           "totalPrice": 42
         },
@@ -131,7 +131,7 @@
           "quantity": 2,
           "category": {
             "type": "gnome",
-            "porusware": true
+            "porousware": true
           },
           "totalPrice": 42
         }
