@@ -6,6 +6,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+import scala.concurrent.ExecutionContext.Implicits.global
 
 import scala.concurrent.ExecutionContext
 import scala.util.Success
@@ -24,6 +25,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     tuple(
       "fullName" -> nonEmptyText,
       "email" -> nonEmptyText,
+      "phone" -> nonEmptyText,
       "password" -> nonEmptyText
     )
   )
@@ -60,7 +62,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def register = Action {
     implicit request =>
-      Ok(views.html.registerStart(request.session))
+      Ok(views.html.registerStart(request.session, request.flash))
   }
 
   /**
@@ -68,7 +70,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def address = Action {
     implicit request =>
-      Ok(views.html.registerAddress(request.session))
+      Ok(views.html.registerAddress(request.session, request.flash))
   }
 
   /**
@@ -76,7 +78,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def bank = Action {
     implicit request =>
-      Ok(views.html.registerCard(request.session))
+      Ok(views.html.registerCard(request.session, request.flash))
   }
 
 
@@ -87,51 +89,15 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def createUser() = Action {
     implicit request => {
-
-      var flag = false
-
-      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
-        case Success(result) =>
-
-          def findAccount()(implicit ec: ExecutionContext, reader: BSONDocumentReader[Account_New]): Unit = {
-            val query = BSONDocument(
-              "Username" -> userForm.bindFromRequest().data("email")
-            )
-
-            val ppl = result.find(query).cursor[Account_New].collect[List]()
-            ppl.map {
-              people => for (p <- people)
-                if (p.username == userForm.bindFromRequest().data("email") && p.password == userForm.bindFromRequest().data("password")) {
-                  flag = true
-                }else {
-                  Account_New.create(ppl, Account_New(
-                    randomID,
-                    userForm.bindFromRequest().data("email"),
-                    userForm.bindFromRequest().data("password")
-                  ))
-                }
-            }
-          }
-      }
-
-      if (flag) {
-
-        Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
-      } else {
-        Redirect(routes.RegisterController.register())
-
-      }
-
       if (Login.findLogin(userForm.bindFromRequest().data("email")).isEmpty) {
-
-        val loginID = randomID
-        val detailsID = randomID
-        Login.createUser(loginID, userForm.bindFromRequest().data("email"), userForm.bindFromRequest().data("password"))
-        CustomerDetails.addDetails(detailsID, userForm.bindFromRequest().data("fullName"), "None")
-        Account.createAccount(randomID, loginID, detailsID)
-        Redirect(routes.RegisterController.address()).withSession("tmp" -> userForm.bindFromRequest().data("email"))
-
+        //Redirect to next step, address, passing both the session and flash data
+        Redirect(routes.RegisterController.address()) withSession(
+          "Username" -> userForm.bindFromRequest().data("email"),
+          "Password" -> userForm.bindFromRequest().data("password"),
+          "Name" -> userForm.bindFromRequest().data("fullName"),
+          "Phone" -> userForm.bindFromRequest().data("phone"))
       } else {
+        //user already exists
         Redirect(routes.RegisterController.register())
       }
     }
@@ -144,19 +110,13 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def createAddress() = Action {
     implicit request => {
-
-      val randomAddressID = randomID
-      val account = Account.getAccountViaEmail(Login.findLogin(request.session.data("tmp")).get.lid).get
-      account.addressID = randomAddressID
-      Address.addAddress(
-        account.accountID,
-        addressForm.bindFromRequest().data("houseNumber"),
-        addressForm.bindFromRequest().data("streetName"),
-        addressForm.bindFromRequest().data("town"),
-        addressForm.bindFromRequest().data("city"),
-        addressForm.bindFromRequest().data("county"),
-        addressForm.bindFromRequest().data("postcode"))
-      Redirect(routes.RegisterController.bank())
+      Redirect(routes.RegisterController.bank()).withSession(
+        "AddressLine1" -> (addressForm.bindFromRequest().data("houseNumber") + " " + addressForm.bindFromRequest().data("streetName")),
+        "AddressLine2" -> addressForm.bindFromRequest().data("town"),
+        "AddressCity" -> addressForm.bindFromRequest().data("city"),
+        "AddressCounty" -> addressForm.bindFromRequest().data("county"),
+        "AddressPostcode" -> addressForm.bindFromRequest().data("postcode")
+      )
     }
   }
 
@@ -167,19 +127,61 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def createCard() = Action {
     implicit request => {
-      val account = Account.getAccountViaEmail(Login.findLogin(request.session.data("tmp")).get.lid).get
-      val randomCardID = randomID
-      account.cardID = randomCardID
-      CardDetails.addCard(
-        account.cardID,
-        cardForm.bindFromRequest().data("cardholder"),
-        cardForm.bindFromRequest().data("cardnumber"),
-        cardForm.bindFromRequest().data("cv"),
-        cardForm.bindFromRequest().data("expirationMonth"),
-        cardForm.bindFromRequest().data("expirationMonth"))
-      val tmp = request.session.data("tmp")
-      Redirect(routes.HomeController.index()).withSession().withSession("connected" -> tmp.replaceAll(" ", ""))
+      var flag = false
+
+      //TODO
+
+      if (!flag) {
+        //Create addresses
+        val addressArray: Array[Address_New] = Array.empty
+        addressArray :+ Address_New(
+          addressForm.bindFromRequest().data("houseNumber") + addressForm.bindFromRequest().data("streetName"),
+          addressForm.bindFromRequest().data("town"),
+          addressForm.bindFromRequest().data("city"),
+          addressForm.bindFromRequest().data("county"),
+          addressForm.bindFromRequest().data("postcode")
+        )
+        //create payment cards
+        val paymentCardsArray: Array[PaymentCards] = Array.empty
+        paymentCardsArray :+ PaymentCards(
+          cardForm.bindFromRequest().data("cardholder"),
+          cardForm.bindFromRequest().data("cardnumber"),
+          cardForm.bindFromRequest().data("expirationMonth") + cardForm.bindFromRequest().data("expirationYear")
+        )
+        //Create new Account in database
+        Account_New.create(result, Account_New(
+          randomID,
+          userForm.bindFromRequest().data("email"),
+          userForm.bindFromRequest().data("password"),
+          userForm.bindFromRequest().data("fullName"),
+          userForm.bindFromRequest().data("phone"),
+          addressArray,
+          paymentCardsArray
+        ))
+      }
+
+      Thread.sleep(3000)
+      if (flag) {
+        Redirect(routes.HomeController.index()).withSession("connected" -> request.flash.get("Username").toString)
+      } else {
+        Redirect(routes.RegisterController.register())
+      }
     }
+
+
+    /*val account = Account.getAccountViaEmail(Login.findLogin(request.session.data("tmp")).get.lid).get
+    val randomCardID = randomID
+    account.cardID = randomCardID
+    CardDetails.addCard(
+      account.cardID,
+      cardForm.bindFromRequest().data("cardholder"),
+      cardForm.bindFromRequest().data("cardnumber"),
+      cardForm.bindFromRequest().data("cv"),
+      cardForm.bindFromRequest().data("expirationMonth"),
+      cardForm.bindFromRequest().data("expirationYear"))
+    val tmp = request.session.data("tmp")
+    Redirect(routes.HomeController.index()).withSession().withSession("connected" -> tmp.replaceAll(" ", ""))*/
   }
+}
 
 }
