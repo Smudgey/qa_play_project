@@ -47,7 +47,6 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     tuple(
       "cardholder" -> nonEmptyText,
       "cardnumber" -> nonEmptyText,
-      "cv" -> nonEmptyText,
       "expirationMonth" -> nonEmptyText,
       "expirationYear" -> nonEmptyText
     )

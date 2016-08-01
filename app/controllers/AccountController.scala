@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import models._
 import play.api.data.Forms._
 import play.api.data._
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{Action, Controller, Session}
 
 /*
   * Create By rytis
@@ -12,7 +12,7 @@ import play.api.mvc.{Action, Controller}
   * Last worked on by Rytis on 26/07/2916
   */
 
-class AccountController @Inject extends Controller with Formatter {
+class AccountController @Inject extends Controller with Formatter with MongoDatabaseConnector {
 
   //form for customer adding card details
   private val cardForm: Form[CardDetails] = Form(
@@ -20,7 +20,6 @@ class AccountController @Inject extends Controller with Formatter {
       "" -> text,
       "cardholder" -> nonEmptyText,
       "cardnumber" -> nonEmptyText,
-      "cv" -> nonEmptyText,
       "expirationMonth" -> nonEmptyText,
       "expirationYear" -> nonEmptyText
     )
@@ -61,7 +60,6 @@ class AccountController @Inject extends Controller with Formatter {
       Ok(views.html.manageAccount(request.session))
   }
 
-
   /**
     * this function will update the customer details with new details
     *
@@ -73,7 +71,6 @@ class AccountController @Inject extends Controller with Formatter {
       Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
     }
   }
-
 
   /**
     * this function will display account details page
@@ -87,8 +84,7 @@ class AccountController @Inject extends Controller with Formatter {
       if (request.session.get("connected").isEmpty) {
         Redirect(routes.HomeController.index())
       } else {
-
-        Ok(views.html.viewAccount(CustomerDetails.getDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID).get)(request.session))
+        Ok(views.html.viewAccount(findAccountByEmail(request.session.data("connected")).head))   //searches for the account related to the email address in the cookie
       }
   }
 
@@ -99,8 +95,9 @@ class AccountController @Inject extends Controller with Formatter {
     */
   def viewCard = Action {
     implicit request =>
-      Ok(views.html.viewCard(CardDetails.getCards(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.cardID))(request.session))
+      Ok(views.html.viewCard(findAccountByEmail(request.session.data("connected")).head.paymentCards)(request.session))
   }
+
 
   /**
     * this function will display all address customer has added
@@ -109,7 +106,7 @@ class AccountController @Inject extends Controller with Formatter {
     */
   def viewAddress = Action {
     implicit request =>
-      Ok(views.html.viewAddress(Address.getAddress(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.addressID))(request.session))
+      Ok(views.html.viewAddress(findAccountByEmail(request.session.data("connected")).head.address))
   }
 
   /**
@@ -144,7 +141,6 @@ class AccountController @Inject extends Controller with Formatter {
         Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.cardID,
         cardForm.bindFromRequest().data("cardholder"),
         cardForm.bindFromRequest().data("cardnumber"),
-        cardForm.bindFromRequest().data("cv"),
         cardForm.bindFromRequest().data("expirationMonth"),
         cardForm.bindFromRequest().data("expirationYear")
       )
