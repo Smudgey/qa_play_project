@@ -62,15 +62,13 @@ object Account_New {
       BSONDocument(
         "ID" -> account_New.accountID,
         "Username" -> account_New.username,
-        "Password" -> account_New.accountID,
-        "Name" -> account_New.accountID,
-        "Phone" -> account_New.accountID,
+        "Password" -> account_New.password,
+        "Name" -> account_New.name,
+        "Phone" -> account_New.phone,
         "Address" -> account_New.address,
         "PaymentCards" -> account_New.paymentCards
       )
     }
-
-
   }
 
   /**

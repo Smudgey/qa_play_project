@@ -1,13 +1,15 @@
 package controllers
 
+import akka.actor.FSM.Failure
 import com.google.inject.Inject
 import models._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
+import play.mvc.Http.Session
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
-import scala.concurrent.ExecutionContext.Implicits.global
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.ExecutionContext
 import scala.util.Success
 
@@ -30,9 +32,8 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     )
   )
   // this will create address form
-  private val addressForm: Form[Address] = Form(
-    mapping(
-      "" -> text,
+  private val addressForm = Form(
+    tuple(
       "houseNumber" -> nonEmptyText,
       "streetName" -> nonEmptyText,
       "town" -> nonEmptyText,
@@ -40,21 +41,16 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
       "county" -> nonEmptyText,
       "postcode" -> nonEmptyText
     )
-    (Address.apply)
-    (Address.unapply)
   )
   // this will create card detail form
-  private val cardForm: Form[CardDetails] = Form(
-    mapping(
-      "" -> text,
+  private val cardForm = Form(
+    tuple(
       "cardholder" -> nonEmptyText,
       "cardnumber" -> nonEmptyText,
       "cv" -> nonEmptyText,
       "expirationMonth" -> nonEmptyText,
       "expirationYear" -> nonEmptyText
     )
-    (CardDetails.apply)
-    (CardDetails.unapply)
   )
 
   /**
@@ -62,7 +58,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def register = Action {
     implicit request =>
-      Ok(views.html.registerStart(request.session, request.flash))
+      Ok(views.html.registerStart(request.session))
   }
 
   /**
@@ -70,7 +66,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def address = Action {
     implicit request =>
-      Ok(views.html.registerAddress(request.session, request.flash))
+      Ok(views.html.registerAddress(request.session))
   }
 
   /**
@@ -78,7 +74,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def bank = Action {
     implicit request =>
-      Ok(views.html.registerCard(request.session, request.flash))
+      Ok(views.html.registerCard(request.session))
   }
 
 
@@ -91,11 +87,11 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     implicit request => {
       if (Login.findLogin(userForm.bindFromRequest().data("email")).isEmpty) {
         //Redirect to next step, address, passing both the session and flash data
-        Redirect(routes.RegisterController.address()) withSession(
+        Redirect(routes.RegisterController.address()).withSession(
           "Username" -> userForm.bindFromRequest().data("email"),
           "Password" -> userForm.bindFromRequest().data("password"),
           "Name" -> userForm.bindFromRequest().data("fullName"),
-          "Phone" -> userForm.bindFromRequest().data("phone"))
+          "Phone" -> "07758787847")
       } else {
         //user already exists
         Redirect(routes.RegisterController.register())
@@ -110,8 +106,13 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def createAddress() = Action {
     implicit request => {
+      //Pass through all the data to the next step in the register process
       Redirect(routes.RegisterController.bank()).withSession(
-        "AddressLine1" -> (addressForm.bindFromRequest().data("houseNumber") + " " + addressForm.bindFromRequest().data("streetName")),
+        "Username" -> request.session.data("Username"),
+        "Password" -> request.session.data("Password"),
+        "Name" -> request.session.data("Name"),
+        "Phone" -> "07758787847",
+        "AddressLine1" -> s" ${addressForm.bindFromRequest().data("houseNumber")} ${addressForm.bindFromRequest().data("streetName")}",
         "AddressLine2" -> addressForm.bindFromRequest().data("town"),
         "AddressCity" -> addressForm.bindFromRequest().data("city"),
         "AddressCounty" -> addressForm.bindFromRequest().data("county"),
@@ -127,43 +128,51 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def createCard() = Action {
     implicit request => {
-      var flag = false
+      //flag used to check if user already exists
+      val flag = false
+      //connect to the specified database and collection
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(result) =>
+          if (findAccountByEmail(request.session.data("Username")).isEmpty) {
+            //Create addresses
+            val addressArray = Array[Address_New](
+              Address_New(
+                request.session.data("AddressLine1"),
+                request.session.data("AddressLine2"),
+                request.session.data("AddressCity"),
+                request.session.data("AddressCounty"),
+                request.session.data("AddressPostcode")
+              )
+            )
 
-      //TODO
-
-      if (!flag) {
-        //Create addresses
-        val addressArray: Array[Address_New] = Array.empty
-        addressArray :+ Address_New(
-          addressForm.bindFromRequest().data("houseNumber") + addressForm.bindFromRequest().data("streetName"),
-          addressForm.bindFromRequest().data("town"),
-          addressForm.bindFromRequest().data("city"),
-          addressForm.bindFromRequest().data("county"),
-          addressForm.bindFromRequest().data("postcode")
-        )
-        //create payment cards
-        val paymentCardsArray: Array[PaymentCards] = Array.empty
-        paymentCardsArray :+ PaymentCards(
-          cardForm.bindFromRequest().data("cardholder"),
-          cardForm.bindFromRequest().data("cardnumber"),
-          cardForm.bindFromRequest().data("expirationMonth") + cardForm.bindFromRequest().data("expirationYear")
-        )
-        //Create new Account in database
-        Account_New.create(result, Account_New(
-          randomID,
-          userForm.bindFromRequest().data("email"),
-          userForm.bindFromRequest().data("password"),
-          userForm.bindFromRequest().data("fullName"),
-          userForm.bindFromRequest().data("phone"),
-          addressArray,
-          paymentCardsArray
-        ))
+            //create payment cards
+            val paymentCardsArray = Array[PaymentCards](
+              PaymentCards(
+                cardForm.bindFromRequest().data("cardholder"),
+                cardForm.bindFromRequest().data("cardnumber"),
+                cardForm.bindFromRequest().data("expirationMonth") + "/" + cardForm.bindFromRequest().data("expirationYear")
+              )
+            )
+            //Create new Account in database
+            Account_New.create(result, Account_New(
+              randomID,
+              request.session.data("Username"),
+              request.session.data("Password"),
+              request.session.data("Name"),
+              request.session.data("Phone"),
+              addressArray,
+              paymentCardsArray
+            ))
+          }
       }
 
+      //wait for the connection method to finish, as it may set the flag
       Thread.sleep(3000)
       if (flag) {
-        Redirect(routes.HomeController.index()).withSession("connected" -> request.flash.get("Username").toString)
+        //new user was created, so write their name to the connection key in session and redirect
+        Redirect(routes.HomeController.index()).withSession("connected" -> request.session.data("Username"))
       } else {
+        //user already exists
         Redirect(routes.RegisterController.register())
       }
     }
@@ -182,6 +191,4 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     val tmp = request.session.data("tmp")
     Redirect(routes.HomeController.index()).withSession().withSession("connected" -> tmp.replaceAll(" ", ""))*/
   }
-}
-
 }

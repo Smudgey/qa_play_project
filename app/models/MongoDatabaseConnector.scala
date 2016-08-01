@@ -108,7 +108,9 @@ trait MongoDatabaseConnector {
         )
         result.find(query).one[Account_New].onComplete {
           case Success(account) =>
-            toReturn += Account_New(account.get.accountID, account.get.username, account.get.password, account.get.name, account.get.phone, account.get.address, account.get.paymentCards)
+            if(!account.isEmpty) {
+              toReturn += Account_New(account.get.accountID, account.get.username, account.get.password, account.get.name, account.get.phone, account.get.address, account.get.paymentCards)
+            }
 
           case Failure(fail) =>
             toReturn
