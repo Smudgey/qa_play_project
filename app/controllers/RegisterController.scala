@@ -134,7 +134,6 @@ class RegisterController @Inject extends Controller with Formatter {
         account.cardID,
         cardForm.bindFromRequest().data("cardholder"),
         cardForm.bindFromRequest().data("cardnumber"),
-        cardForm.bindFromRequest().data("cv"),
         cardForm.bindFromRequest().data("expirationMonth"),
         cardForm.bindFromRequest().data("expirationMonth"))
       val tmp = request.session.data("tmp")
