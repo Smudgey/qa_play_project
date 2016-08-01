@@ -60,7 +60,6 @@ class AccountController @Inject extends Controller with Formatter with MongoData
       Ok(views.html.manageAccount(request.session))
   }
 
-
   /**
     * this function will update the customer details with new details
     *
@@ -72,7 +71,6 @@ class AccountController @Inject extends Controller with Formatter with MongoData
       Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
     }
   }
-
 
   /**
     * this function will display account details page
@@ -99,6 +97,7 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     implicit request =>
       Ok(views.html.viewCard(findAccountByEmail(request.session.data("connected")).head.paymentCards)(request.session))
   }
+
 
   /**
     * this function will display all address customer has added
@@ -142,7 +141,6 @@ class AccountController @Inject extends Controller with Formatter with MongoData
         Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.cardID,
         cardForm.bindFromRequest().data("cardholder"),
         cardForm.bindFromRequest().data("cardnumber"),
-        cardForm.bindFromRequest().data("cv"),
         cardForm.bindFromRequest().data("expirationMonth"),
         cardForm.bindFromRequest().data("expirationYear")
       )

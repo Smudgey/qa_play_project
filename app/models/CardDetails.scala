@@ -32,6 +32,7 @@ object CardDetails extends Formatter {
   private var cardList = ArrayBuffer[CardDetails](
     CardDetails("0", "a", "000", "00", "0000"),
     CardDetails("1", "b", "111", "11", "1111")
+
   )
 
   /**
@@ -40,11 +41,10 @@ object CardDetails extends Formatter {
     * @param accountID       Account ID
     * @param holder          Card holders name
     * @param cardNumber      Long card number
-    * @param cv              CV verification code
     * @param expirationMonth Card expiration month
     * @param expirationYear  Card expiration month
     */
-  def addCard(accountID: String, holder: String, cardNumber: String, cv: String, expirationMonth: String, expirationYear: String): Unit = {
+  def addCard(accountID: String, holder: String, cardNumber: String, expirationMonth: String, expirationYear: String): Unit = {
     val tmp = randomID
     cardList += CardDetails(tmp, holder, cardNumber, expirationMonth, expirationYear)
     cardMap += CardMap(accountID, tmp)
