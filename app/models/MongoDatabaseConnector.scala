@@ -1,15 +1,11 @@
 package models
 
-import com.typesafe.config.ConfigFactory
-import reactivemongo.api.{FailoverStrategy, MongoDriver}
 import reactivemongo.api.collections.bson.BSONCollection
-import reactivemongo.api.commands.WriteResult
-import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+import reactivemongo.bson.BSONDocument
 import reactivemongo.core.nodeset.Authenticate
 
-import scala.concurrent.{ExecutionContext, Future}
-import scala.util.{Failure, Success, Try}
-import scala.concurrent.ExecutionContext.Implicits.global
+import scala.collection.mutable.ArrayBuffer
+import scala.util.{Failure, Success}
 
 /**
   * Created by rytis on 28/07/16.
@@ -30,11 +26,10 @@ trait MongoDatabaseConnector {
 
   }
 
-  import reactivemongo.api.{MongoConnection, MongoDriver}
+  import reactivemongo.api.MongoDriver
 
   import scala.concurrent.ExecutionContext.Implicits.global
   import scala.concurrent.Future
-
 
 
   /*
@@ -45,13 +40,14 @@ trait MongoDatabaseConnector {
       db <- con
     } yield db
   */
+  private val driver = new MongoDriver
 
   def connectToDatabase(collectionName: String, databaseName: String): Future[BSONCollection] = {
 
 
     val credentials = List(Authenticate(databaseName, "appaccess", "appaccess"))
 
-    val driver = new MongoDriver
+
 
     def servs: List[String] = List("192.168.1.15:27017")
 
@@ -60,7 +56,7 @@ trait MongoDatabaseConnector {
     /*if (collectionName == CollectionNames.ACCOUNT_COLLECTION && databaseName == DatabaseNames.ACCOUNT_DATABASE ||
       collectionName == CollectionNames.ORDER_COLLECTION && databaseName == DatabaseNames.ORDERS_DATABASE ||
       collectionName == CollectionNames.PRODUCT_COLLECTION && databaseName == DatabaseNames.ORDERS_DATABASE) {*/
-      conn.database(databaseName).map(_.collection(collectionName))
+    conn.database(databaseName).map(_.collection(collectionName))
 
   }
 
@@ -120,5 +116,39 @@ trait MongoDatabaseConnector {
       println(resolution)
       driver.close()
   }*/
+
+
+  def findAccountByEmail(email: String): ArrayBuffer[Account_New] = {
+
+    var toReturn = ArrayBuffer[Account_New]()
+
+
+    connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+      case Success(result) =>
+
+        val query = BSONDocument(
+          "Username" -> email
+        )
+
+        result.find(query).one[Account_New].onComplete {
+
+          case Success(account) =>
+
+            toReturn += Account_New(account.get.accountID, account.get.username, account.get.password, account.get.name, account.get.phone, account.get.address, account.get.paymentCards)
+
+          case Failure(fail) =>
+            toReturn
+        }
+
+      case Failure(fail) =>
+        toReturn
+
+    }
+
+    Thread.sleep(500)
+    toReturn
+
+  }
+
 
 }

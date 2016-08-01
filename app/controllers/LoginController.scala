@@ -6,8 +6,9 @@ import play.api.data.Form
 import play.api.data.Forms.{mapping, nonEmptyText, text}
 import play.api.mvc.{Action, Controller}
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
-import scala.concurrent.ExecutionContext.Implicits.global
 
+import scala.collection.mutable.ArrayBuffer
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Success
 
@@ -45,40 +46,19 @@ class LoginController @Inject extends Controller with MongoDatabaseConnector {
     */
   def validateLogin() = Action {
     implicit request => {
-      var flag = false
+      val account = findAccountByEmail(loginForm.bindFromRequest().data("email"))
 
-
-      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
-        case Success(result) =>
-
-          def findAccount()(implicit ec: ExecutionContext, reader: BSONDocumentReader[Account_New]): Unit = {
-            val query = BSONDocument(
-              "Username" -> loginForm.bindFromRequest().data("email")
-            )
-
-            val ppl = result.find(query).cursor[Account_New].collect[List]()
-            ppl.map {
-              people => for (p <- people)
-                if (p.username == loginForm.bindFromRequest().data("email") && p.password == loginForm.bindFromRequest().data("password")) {
-                  flag = true
-                }
-            }
-          }
-      }
-
-      if (flag) {
-
-        Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
-      } else {
+      if (account.isEmpty) {
         Redirect(routes.LoginController.login())
-
+      } else {
+        if (account.head.username == loginForm.bindFromRequest().data("email") && account.head.password == loginForm.bindFromRequest().data("password")) {
+          Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
+        } else {
+          Redirect(routes.LoginController.login())
+        }
       }
-
-
     }
 
-
-      Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
 
   }
 
