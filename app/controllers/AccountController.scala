@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import models._
 import play.api.data.Forms._
 import play.api.data._
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{Action, Controller, Session}
 
 /*
   * Create By rytis
@@ -12,7 +12,7 @@ import play.api.mvc.{Action, Controller}
   * Last worked on by Rytis on 26/07/2916
   */
 
-class AccountController @Inject extends Controller with Formatter {
+class AccountController @Inject extends Controller with Formatter with MongoDatabaseConnector {
 
   //form for customer adding card details
   private val cardForm: Form[CardDetails] = Form(
@@ -87,8 +87,7 @@ class AccountController @Inject extends Controller with Formatter {
       if (request.session.get("connected").isEmpty) {
         Redirect(routes.HomeController.index())
       } else {
-
-        Ok(views.html.viewAccount(CustomerDetails.getDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID).get)(request.session))
+        Ok(views.html.viewAccount(findAccountByEmail(request.session.data("connected")).head))   //searches for the account related to the email address in the cookie
       }
   }
 
@@ -109,7 +108,7 @@ class AccountController @Inject extends Controller with Formatter {
     */
   def viewAddress = Action {
     implicit request =>
-      Ok(views.html.viewAddress(Address.getAddress(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.addressID))(request.session))
+      Ok(views.html.viewAddress(findAccountByEmail(request.session.data("connected")).head.address))
   }
 
   /**
