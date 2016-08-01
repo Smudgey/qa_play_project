@@ -20,7 +20,6 @@ class AccountController @Inject extends Controller with Formatter with MongoData
       "" -> text,
       "cardholder" -> nonEmptyText,
       "cardnumber" -> nonEmptyText,
-      "cv" -> nonEmptyText,
       "expirationMonth" -> nonEmptyText,
       "expirationYear" -> nonEmptyText
     )
@@ -98,7 +97,7 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     */
   def viewCard = Action {
     implicit request =>
-      Ok(views.html.viewCard(CardDetails.getCards(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.cardID))(request.session))
+      Ok(views.html.viewCard(findAccountByEmail(request.session.data("connected")).head.paymentCards)(request.session))
   }
 
   /**
