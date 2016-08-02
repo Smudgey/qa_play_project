@@ -11,7 +11,7 @@
 <!-- TODO Swap this generate method with a database call.-->
 @if(Product.inventory.isEmpty) {
     @Product.dummyConnection()
-<p>"Connection created"</p>
+    <p>"Connection created"</p>
 }
 
 <!DOCTYPE html>
@@ -130,29 +130,29 @@
 
                         @if(session.get("connected").isEmpty) {
                             <div class="btn-group">
-                            @helper.form(routes.LoginController.validateLogin) {
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Login
-                                </button>
+                                <form action="@routes.LoginController.validateLogin" method="post">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Login
+                                    </button>
 
-                                <ul class="dropdown-menu loginDropdown">
-                                    <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
-                                    <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
-                                    <li>
-                                        <div class="vcenter">
-                                            <a href="@routes.AboutContactController.aboutAndContact" class="label label-default">
-                                                Forgot password?</a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="btn-group">
-                                            <button type="submit" class="btn btn-default">Login</button>
-                                            <a type="button" href="@routes.RegisterController.register" class="btn btn-default">
-                                                Register</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            }
+                                    <ul class="dropdown-menu loginDropdown">
+                                        <li><input name="email" type="text" class="form-control" placeholder="Email"></li>
+                                        <li><input name="password" type="password" class="form-control" placeholder="Password"></li>
+                                        <li>
+                                            <div class="vcenter">
+                                                <a href="@routes.AboutContactController.aboutAndContact" class="label label-default">
+                                                    Forgot password?</a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="btn-group">
+                                                <button type="submit" class="btn btn-default">Login</button>
+                                                <a type="button" href="@routes.RegisterController.register" class="btn btn-default">
+                                                    Register</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </form>
                             </div>
 
                         } else {
