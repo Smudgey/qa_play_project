@@ -17,10 +17,12 @@ POST        /purchaseHistory           controllers.PurchaseHistoryController.ord
 GET         /purchaseHistory           controllers.PurchaseHistoryController.viewPurchase
 
 
-GET         /catalogue                 controllers.CatalogueController.show(query:String)
-POST        /catalogue                 controllers.SearchController.search
-GET         /category/clearance        controllers.CatalogueController.showClearance
-GET         /category/*cat             controllers.CatalogueController.showCategory(cat: String)
+GET         /catalogue                controllers.CatalogueController.show(query:String)
+POST        /catalogue                controllers.SearchController.search
+GET         /category/clearance       controllers.CatalogueController.showClearance
+GET         /category/*cat            controllers.CatalogueController.showCategory(cat: String)
+POST        /catalogue/price           controllers.SearchController.filterSearch
+GET         /catalogue/*min&*max      controllers.CatalogueController.priceFilter(min: Double, max: Double)
 
 GET         /view-product              controllers.ProductViewController.viewProduct(pid: Int)
 
@@ -55,4 +57,7 @@ GET         /assets/*file              controllers.Assets.versioned(path="/publi
 GET         /aboutContact              controllers.AboutContactController.aboutAndContact
 POST        /aboutContact              controllers.AboutContactController.createEnquiry
 
-GET         /adminEnquiries            controllers.AboutContactController.printEnquiries
+
+GET         /adminEnquiries           controllers.AboutContactController.printEnquiries
+
+

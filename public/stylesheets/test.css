@@ -1,0 +1,35 @@
+.bodyx {
+  padding: 2em 5em;
+  font: normal 40px/50px Tahoma, sans-serif;
+  color: #999;
+}
+.px {
+  height: 50px;
+  float: left;
+  margin-right: 0.3em;
+}
+.bx {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  height: 50px;
+}
+.spanx {
+  display: inline-block;
+  color: #a80314;
+  position: relative;
+  white-space: nowrap;
+  top: 0;
+  left: 0;
+  animation: move 10s;
+  animation-iteration-count: infinite;
+animation-delay: 2s;
+}
+
+@keyframes move {
+0%  { top: 0px; }
+20% { top: -50px; }
+40% { top: -100px; }
+60% { top: -150px; }
+80% { top: -200px; }
+}
