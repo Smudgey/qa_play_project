@@ -19,9 +19,21 @@ class SearchController @Inject extends Controller {
     (SearchQuery.unapply)
   )
 
+  val filterForm = Form(
+    tuple(
+      "price-min"-> default(number, 0),
+      "price-max"-> default(number, 9999)
+    )
+  )
+
   def search() = Action {
     implicit request => {
       Redirect(routes.CatalogueController.show(searchForm.bindFromRequest().data("searchQuery")))
+    }
+  }
+  def filterSearch = Action {
+    implicit request => {
+      Redirect(routes.CatalogueController.priceFilter(filterForm.bindFromRequest().get._1, filterForm.bindFromRequest().get._2))
     }
   }
 

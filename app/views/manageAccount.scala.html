@@ -2,7 +2,7 @@
 @main("") {
     @manageAccountsSidebar("Manage Account") {
         <script>changeTab("editAccount")</script>
-        @helper.form(routes.AccountController.updateAccount) {
+        <form id="editAccount" action="@routes.AccountController.updateAccount()">
             <div class="center-text">
 
                 <div class="form-group input-group">
@@ -18,14 +18,15 @@
 
                 <div class="form-group input-group">
                     <span class="input-group-addon">Phone</span>
-                    <input type="text" name="phone" class="form-control" placeholder="your new phone number...">
+                    <input type="text" name="phone" class="form-control" placeholder="your new phone number..." maxlength="11">
                 </div>
 
                 <div >
-                    <button class="btn btn-default" type="submit">Submit</button>
+                    <button class="btn btn-default" type="button" onclick="validateEditAccount()">Submit</button>
                 </div>
             </div>
-        }
+
+        </form>
 
     }
 }

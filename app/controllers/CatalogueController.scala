@@ -22,7 +22,7 @@ class CatalogueController @Inject() extends Controller with Formatter {
   def showCategory(cat: String) = Action {
     implicit request =>
     //Take in a Category enumeration as a string and match it to a value
-      Ok(views.html.catalogue(prodFor)(Product.listByCat(Category.withName(decodeUri(cat))).toArray)(request.session))
+      Ok(views.html.catalogue(prodFor)(Product.searchByCategory(cat).toArray)(request.session))
   }
 
   def show(query: String) = Action {
@@ -35,5 +35,8 @@ class CatalogueController @Inject() extends Controller with Formatter {
       Ok(views.html.catalogue(prodFor)(Product.clearanceStock.toArray)(request.session))
   }
 
-
+  def priceFilter(min: Double, max: Double) = Action {
+    implicit request =>
+      Ok(views.html.catalogue(prodFor)(Product.searchByPrice(min, max).toArray)(request.session))
+  }
 }

@@ -1,5 +1,6 @@
 package models
 
+
 import scala.collection.{mutable => m}
 
 /**
@@ -14,5 +15,10 @@ object Enquiry {
   def createNewEnquiry(name:String, email:String, enquiry:String): Unit = {
     val tempDesc = new EnquiryDescription(name, email, enquiry)
     enquiries+= tempDesc
+
   }
+
+
+
+
 }

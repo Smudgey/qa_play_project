@@ -4,7 +4,11 @@ import com.google.inject.Inject
 import models._
 import play.api.data.Forms._
 import play.api.data._
-import play.api.mvc.{Action, Controller, Session}
+import play.api.mvc.{Action, Controller}
+import reactivemongo.bson.BSONDocument
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.util.{Failure, Success}
 
 /*
   * Create By rytis
@@ -84,7 +88,7 @@ class AccountController @Inject extends Controller with Formatter with MongoData
       if (request.session.get("connected").isEmpty) {
         Redirect(routes.HomeController.index())
       } else {
-        Ok(views.html.viewAccount(findAccountByEmail(request.session.data("connected")).head))   //searches for the account related to the email address in the cookie
+        Ok(views.html.viewAccount(findAccountByEmail(request.session.data("connected")).head)) //searches for the account related to the email address in the cookie
       }
   }
 
@@ -155,7 +159,29 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     */
   def removeCard(cardNumber: String) = Action {
     implicit request =>
-      CardDetails.removeCard(cardNumber)
+
+
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(collection) =>
+
+
+          val query = BSONDocument(
+            "$pull" -> BSONDocument(
+              "PaymentCards" -> BSONDocument(
+                "CardNumber" -> cardNumber
+              )
+            )
+          )
+
+          val person = BSONDocument(
+            "Email" -> request.session.data("connected")
+          )
+
+          collection.update(person, query)
+        case Failure(fail) =>
+      }
+
+      Thread.sleep(3000)
       Redirect(routes.AccountController.viewCard())
   }
 
