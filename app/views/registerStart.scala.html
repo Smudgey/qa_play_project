@@ -7,9 +7,20 @@
                         <form id="registerForm" action="@routes.RegisterController.createUser()" method="post">
 
                             <div class="input-group form-group">
-                                <span class="input-group-addon">Full name</span>
-                                <input name="fullName" type="text" class="form-control">
+                                <span class="input-group-addon">First name</span>
+                                <input name="firstName" type="text" class="form-control">
                             </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Last name</span>
+                                <input name="lastName" type="text" class="form-control">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <span class="input-group-addon">Phone</span>
+                                <input name="phone" type="text" class="form-control">
+                            </div>
+
                             <div class="input-group form-group">
                                 <span class="input-group-addon">Email</span>
                                 <input name="email" type="text" class="form-control">
@@ -26,10 +37,8 @@
                             </div>
 
                             <div class="form-group text-center">
-                                <input onclick="validateRegister()" id="btnRegister" type="button" class="btn btn-default" value="Register">
+                                <input id="btnRegister" type="submit" class="btn btn-default" value="Register">
                             </div>
-
-
                         </form>
                         <hr>
 

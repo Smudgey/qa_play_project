@@ -25,18 +25,18 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
   // this will create register form
   private val userForm = Form(
     tuple(
-      "fullName" -> nonEmptyText,
-      "email" -> nonEmptyText,
+      "firstName" -> nonEmptyText,
+      "lastName" -> nonEmptyText,
       "phone" -> nonEmptyText,
+      "email" -> nonEmptyText,
       "password" -> nonEmptyText
     )
   )
   // this will create address form
   private val addressForm = Form(
     tuple(
-      "houseNumber" -> nonEmptyText,
-      "streetName" -> nonEmptyText,
-      "town" -> nonEmptyText,
+      "addressLine1" -> nonEmptyText,
+      "addressLine2" -> nonEmptyText,
       "city" -> nonEmptyText,
       "county" -> nonEmptyText,
       "postcode" -> nonEmptyText
@@ -84,13 +84,14 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     */
   def createUser() = Action {
     implicit request => {
-      if (Login.findLogin(userForm.bindFromRequest().data("email")).isEmpty) {
+      if (findAccountByEmail(userForm.bindFromRequest().data("email")).isEmpty) {
         //Redirect to next step, address, passing both the session and flash data
         Redirect(routes.RegisterController.address()).withSession(
-          "Username" -> userForm.bindFromRequest().data("email"),
+          "Email" -> userForm.bindFromRequest().data("email"),
           "Password" -> userForm.bindFromRequest().data("password"),
-          "Name" -> userForm.bindFromRequest().data("fullName"),
-          "Phone" -> "07758787847")
+          "FirstName" -> userForm.bindFromRequest().data("firstName"),
+          "LastName" -> userForm.bindFromRequest().data("lastName"),
+          "Phone" -> userForm.bindFromRequest().data("phone"))
       } else {
         //user already exists
         Redirect(routes.RegisterController.register())
@@ -107,12 +108,13 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     implicit request => {
       //Pass through all the data to the next step in the register process
       Redirect(routes.RegisterController.bank()).withSession(
-        "Username" -> request.session.data("Username"),
+        "Email" -> request.session.data("Email"),
         "Password" -> request.session.data("Password"),
-        "Name" -> request.session.data("Name"),
-        "Phone" -> "07758787847",
-        "AddressLine1" -> s" ${addressForm.bindFromRequest().data("houseNumber")} ${addressForm.bindFromRequest().data("streetName")}",
-        "AddressLine2" -> addressForm.bindFromRequest().data("town"),
+        "FirstName" -> request.session.data("FirstName"),
+        "LastName" -> request.session.data("LastName"),
+        "Phone" -> request.session.data("Phone"),
+        "AddressLine1" -> addressForm.bindFromRequest().data("addressLine1"),
+        "AddressLine2" -> addressForm.bindFromRequest().data("addressLine2"),
         "AddressCity" -> addressForm.bindFromRequest().data("city"),
         "AddressCounty" -> addressForm.bindFromRequest().data("county"),
         "AddressPostcode" -> addressForm.bindFromRequest().data("postcode")
@@ -132,7 +134,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
       //connect to the specified database and collection
       connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
         case Success(result) =>
-          if (findAccountByEmail(request.session.data("Username")).isEmpty) {
+          if (findAccountByEmail(request.session.data("Email")).isEmpty) {
             //Create addresses
             val addressArray = Array[Address_New](
               Address_New(
@@ -155,9 +157,10 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
             //Create new Account in database
             Account_New.create(result, Account_New(
               randomID,
-              request.session.data("Username"),
+              request.session.data("Email"),
               request.session.data("Password"),
-              request.session.data("Name"),
+              request.session.data("FirstName"),
+              request.session.data("FirstName"),
               request.session.data("Phone"),
               addressArray,
               paymentCardsArray
@@ -169,25 +172,11 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
       Thread.sleep(3000)
       if (flag) {
         //new user was created, so write their name to the connection key in session and redirect
-        Redirect(routes.HomeController.index()).withSession("connected" -> request.session.data("Username"))
+        Redirect(routes.HomeController.index()).withSession("connected" -> request.session.data("Email"))
       } else {
         //user already exists
         Redirect(routes.RegisterController.register())
       }
     }
-
-
-    /*val account = Account.getAccountViaEmail(Login.findLogin(request.session.data("tmp")).get.lid).get
-    val randomCardID = randomID
-    account.cardID = randomCardID
-    CardDetails.addCard(
-      account.cardID,
-      cardForm.bindFromRequest().data("cardholder"),
-      cardForm.bindFromRequest().data("cardnumber"),
-      cardForm.bindFromRequest().data("cv"),
-      cardForm.bindFromRequest().data("expirationMonth"),
-      cardForm.bindFromRequest().data("expirationYear"))
-    val tmp = request.session.data("tmp")
-    Redirect(routes.HomeController.index()).withSession().withSession("connected" -> tmp.replaceAll(" ", ""))*/
   }
 }

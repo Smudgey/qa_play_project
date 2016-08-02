@@ -104,12 +104,12 @@ trait MongoDatabaseConnector {
     connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
       case Success(result) =>
         val query = BSONDocument(
-          "Username" -> email
+          "Email" -> email
         )
         result.find(query).one[Account_New].onComplete {
           case Success(account) =>
             if(!account.isEmpty) {
-              toReturn += Account_New(account.get.accountID, account.get.username, account.get.password, account.get.name, account.get.phone, account.get.address, account.get.paymentCards)
+              toReturn += Account_New(account.get.accountID, account.get.username, account.get.password, account.get.firstName, account.get.lastName, account.get.phone, account.get.address, account.get.paymentCards)
             }
 
           case Failure(fail) =>
