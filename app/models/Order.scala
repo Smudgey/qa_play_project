@@ -3,6 +3,8 @@ package models
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -17,7 +19,7 @@ case class Order(accountID: String, orderID: String, orderLines: ArrayBuffer[Ord
 object Order extends Formatter {
 
   // this will give today's timestamp
-  val today = new SimpleDateFormat("hh:mm aa d-M-y").format(Calendar.getInstance().getTime)
+  //val today = new SimpleDateFormat("hh:mm aa d-M-y").format(Calendar.getInstance().getTime)
 
   // dummy data
   private val orderList = ArrayBuffer[Order](
