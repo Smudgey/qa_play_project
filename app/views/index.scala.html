@@ -12,69 +12,65 @@
 
     @message
     <script>changePage("home")</script>
-<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/test.css")">
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/test.css")">
 
 
 
     <div class="container">
 
 
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
+                <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
 
-
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-                    <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-
-                    <div class="item active">
-                        <a href= "@routes.CatalogueController.show("")"> <img class="image-responsive" src="@routes.Assets.versioned("images/MAIN3.png")"/> </a>
-                    </div>
-                    <div class="item">
-                        <a href= "@routes.CatalogueController.showCategory(Category.Clothing.toString)"> <img class="image-reponsive" src="@routes.Assets.versioned("images/MAIN2.png")"/> </a>
-                    </div>
-                    <div class="item">
-                        <a href= "@routes.CatalogueController.showClearance"> <img class="image-reponsive" src="@routes.Assets.versioned("images/MAIN1.png")"/> </a>
-                    </div>
+                <div class="item active">
+                    <a href= "@routes.CatalogueController.show("")"> <img class="image-responsive" src="@routes.Assets.versioned("images/MAIN3.png")"/> </a>
                 </div>
+                <div class="item">
+                    <a href= "@routes.CatalogueController.showCategory(Category.Clothing.toString)"> <img class="image-reponsive" src="@routes.Assets.versioned("images/MAIN2.png")"/> </a>
+                </div>
+                <div class="item">
+                    <a href= "@routes.CatalogueController.showClearance"> <img class="image-reponsive" src="@routes.Assets.versioned("images/MAIN1.png")"/> </a>
+                </div>
+            </div>
 
-                <div class="text-center">
-                    <div class="bodyx">
-                        <div class="px">We sell the best</div>
-                        <div class="bx">
-                            <div class="spanx">
-                                Gnomes<br />
-                                Tools<br />
-                                Bird Accessories<br />
-                                Garden Furniture<br />
-                                Plant Pots
-                            </div>
+            <div class="text-center">
+                <div class="bodyx">
+                    <div class="px">We sell the best</div>
+                    <div class="bx">
+                        <div class="spanx">
+                            Gnomes<br />
+                            Tools<br />
+                            Bird Accessories<br />
+                            Garden Furniture<br />
+                            Plant Pots
                         </div>
                     </div>
                 </div>
+            </div>
 
 
-                <div class="margin text-center">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <a href="@routes.CatalogueController.showClearance"><img class="image-responsive" src="@routes.Assets.versioned("images/clearance.png")"/></a>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <a href="@routes.CatalogueController.showCategory(Category.Gnome.toString)"><img class="image-responsive" src="@routes.Assets.versioned("images/new_arrivals.png")"/></a>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)"><img class="image-responsive" src="@routes.Assets.versioned("images/we_recommend.png")"/></a>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <a href="@routes.CatalogueController.showCategory(Category.PlantPot.toString)"><img class="image-responsive" src="@routes.Assets.versioned("images/most_popular.png")"/></a>
-
-                    </div>
-
-
+            <div class="margin text-center">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href="@routes.CatalogueController.showClearance"><img class="image-responsive" src="@routes.Assets.versioned("images/clearance.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href="@routes.CatalogueController.showCategory(Category.Gnome.toString)"><img class="image-responsive" src="@routes.Assets.versioned("images/new_arrivals.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)"><img class="image-responsive" src="@routes.Assets.versioned("images/we_recommend.png")"/></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <a href="@routes.CatalogueController.showCategory(Category.PlantPot.toString)"><img class="image-responsive" src="@routes.Assets.versioned("images/most_popular.png")"/></a>
 
                 </div>
 
+
             </div>
+
         </div>
+    </div>
     </div>
 
 }
