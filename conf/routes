@@ -14,7 +14,8 @@ GET         /removeCard                controllers.AccountController.removeCard(
 GET         /removeAddress             controllers.AccountController.removeAddress(address: String)
 
 POST        /purchaseHistory           controllers.PurchaseHistoryController.orderRating
-GET         /purchaseHistory           controllers.PurchaseHistoryController.showPurchase
+GET         /purchaseHistory           controllers.PurchaseHistoryController.viewPurchase
+
 
 
 GET         /catalogue                controllers.CatalogueController.show(query:String)

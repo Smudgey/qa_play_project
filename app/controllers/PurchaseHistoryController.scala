@@ -17,37 +17,7 @@ import ExecutionContext.Implicits.global
   */
 class PurchaseHistoryController @Inject extends Controller with MongoDatabaseConnector{
 
-  /**
-    * this function will display customers order history
-    *
-    * @return
-    */
-  def showPurchase = Action {
-    Redirect(routes.PurchaseHistoryController.viewPurchase())
-  }
 
-  def viewPurchase(implicit ec: ExecutionContext, reader: BSONDocumentReader[Order_New]) = Action {
-    implicit request =>
-
-      if (request.session.get("connected").isEmpty) {
-        Redirect(routes.LoginController.login())
-      } else {
-
-        val accId = findAccountByEmail(request.session.data("connected")).head.accountID
-        println(accId)
-
-
-//        connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete(
-//          for (order <- orders) {
-//            if(order.)
-//          }
-//        )
-
-
-
-        Ok(views.html.purchaseHistory(Order.getOrderHistory(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID).toArray)(request.session))
-      }
-  }
 
   // form for getting star rating amount
   private val starForm = Form(
@@ -57,6 +27,21 @@ class PurchaseHistoryController @Inject extends Controller with MongoDatabaseCon
     )
   )
 
+  /**
+    * this function will display customers order history
+    *
+    * @return
+    */
+
+  def viewPurchase = Action {
+    implicit request =>
+      if (request.session.get("connected").isEmpty) {
+        Redirect(routes.LoginController.login())
+      } else {
+//        Ok(views.html.purchaseHistory(Order.getOrderHistory(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID).toArray)(request.session))
+        Ok(views.html.test(getOrderHistory(request.session.data("connected")).toArray))
+      }
+  }
 
   /**
     * this function will add star rating to user order
@@ -66,7 +51,7 @@ class PurchaseHistoryController @Inject extends Controller with MongoDatabaseCon
   def orderRating = Action {
     implicit request =>
       Order.setStarRating(starForm.bindFromRequest().data("oid"), starForm.bindFromRequest().data("rating").toInt)
-      Redirect(routes.PurchaseHistoryController.viewPurchase())
+      Redirect(routes.PurchaseHistoryController.viewPurchase() )
   }
 
 }
