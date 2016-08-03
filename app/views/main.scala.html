@@ -169,19 +169,17 @@
                             </ul>
                         </li>
                         <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
-                            About Us</a></li>
-
-
-                        <li><a href="@routes.PurchaseHistoryController.viewPurchase">FUCK YEAH</a></li>
+                            About Us</a>
+                        </li>
                     </ul>
 
-            <div class="navbar-form navbar-right">
+                    <div class="navbar-form navbar-right">
 
-                <a class="btn btn-success" href="@routes.BasketController.basket()">
-                    Cart
-                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                    <span class="badge">@session.get("basketItemCount")</span>
-                </a>
+                        <a class="btn btn-success" href="@routes.BasketController.basket()">
+                            Cart
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <span class="badge">@session.get("basketItemCount")</span>
+                        </a>
 
 
                         @if(session.get("connected").isEmpty) {
