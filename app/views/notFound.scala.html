@@ -1,1 +1,26 @@
+<script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
+<script>
+
+    $(document).ready(function () {
+        var counter = 5;
+        setInterval(function () {
+            counter--;
+            $('#time').html(counter);
+        }, 1000);
+
+        setTimeout(function () {
+            window.location.href = "http://localhost:9000";
+        }, 5000)
+
+
+    });
+
+
+
+
+</script>
+
+
 <h1>Not found</h1>
+<h2>returning to home in <span id="time">5</span></h2>
+
