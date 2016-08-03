@@ -2,13 +2,13 @@ package models
 
 import reactivemongo.api.MongoDriver
 import reactivemongo.api.collections.bson.BSONCollection
-import reactivemongo.bson.BSONDocument
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
 import reactivemongo.core.nodeset.Authenticate
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
   * Created by rytis on 28/07/16.
@@ -44,33 +44,30 @@ trait MongoDatabaseConnector {
   def getOrderHistory(email: String): ArrayBuffer[Order_New] = {
     var toReturn = ArrayBuffer[Order_New]()
 
-    val accId = findAccountByEmail(email).head.accountID
+    //val accId = findAccountByEmail(email).head.accountID
 
-    println("acc: "+accId.getClass)
+    //println("acc: "+ accId)
 
     connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
       case Success(result) =>
         println("connected")
         val query = BSONDocument(
-          "accountID" -> accId
+          "accountID" -> "108921209"
         )
         val ordersList = result.find(query).cursor[Order_New].collect[List]()
-        ordersList.map {
-          orders =>
-            if(orders.isEmpty){
-              println("empty")
-            } else {
-              for(ord <- orders) {
-                println(ord)
-              }
+        ordersList.onComplete {
+          case Success(orders) =>
+            for (ord <- orders) {
+              toReturn += ord
             }
-          }
-
+          case Failure(t) => println("failed")
+        }
       case Failure(fail) =>
         println("failed")
     }
 
     Thread.sleep(3000)
+    println(toReturn.length)
     toReturn
 
   }

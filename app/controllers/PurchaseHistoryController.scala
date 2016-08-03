@@ -38,8 +38,7 @@ class PurchaseHistoryController @Inject extends Controller with MongoDatabaseCon
       if (request.session.get("connected").isEmpty) {
         Redirect(routes.LoginController.login())
       } else {
-//        Ok(views.html.purchaseHistory(Order.getOrderHistory(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.accountID).toArray)(request.session))
-        Ok(views.html.test(getOrderHistory(request.session.data("connected")).toArray))
+        Ok(views.html.purchaseHistory(getOrderHistory(request.session.data("connected")).toArray))
       }
   }
 

@@ -162,15 +162,18 @@
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Clearance <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="@routes.CatalogueController.showClearance">All clearance</a></li>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="@routes.CatalogueController.showClearance">All clearance</a></li>
+
+                            </ul>
+                        </li>
+                        <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
+                            About Us</a></li>
+
+
+                        <li><a href="@routes.PurchaseHistoryController.viewPurchase">FUCK YEAH</a></li>
                     </ul>
-                </li>
-                <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
-                    About Us</a>
-                </li>
-            <li><a href="@routes.PurchaseHistoryController.viewPurchase">FUCK YEAH</a></li>
-            </ul>
 
             <div class="navbar-form navbar-right">
 
@@ -179,6 +182,7 @@
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                     <span class="badge">@session.get("basketItemCount")</span>
                 </a>
+
 
                         @if(session.get("connected").isEmpty) {
 
@@ -219,6 +223,21 @@
                         <li><a href="@routes.AccountController.viewAddress()">View Address</a></li>
                         <li><a href="@routes.AccountController.addNewAddress()">Register Address</a></li>
                     </ul>
+
+                    } else {
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Account
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@routes.AccountController.viewAccount()">My Account</a></li>
+                            <li><a href="@routes.AccountController.updateAccount()">Edit Account</a></li>
+                            <li><a href="@routes.PurchaseHistoryController.viewPurchase">Purchase History</a></li>
+                            <li><a href="@routes.AccountController.viewCard()">View Card</a></li>
+                            <li><a href="@routes.AccountController.addNewCard()">Register Card</a></li>
+                            <li><a href="@routes.AccountController.viewAddress()">View Address</a></li>
+                            <li><a href="@routes.AccountController.addNewAddress()">Register Address</a></li>
+                        </ul>
 
                         <a href="@routes.LoginController.logout" class="btn btn-default">Logout</a>
 
