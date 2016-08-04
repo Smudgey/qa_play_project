@@ -2,11 +2,11 @@
 @main("") {
     @manageAccountsSidebar("Add cards") {
         <script> changeTab("addNewCard")</script>
-        <form action="@routes.AccountController.addCard()" method="post">
+        <form id="card" action="@routes.AccountController.addCard()" method="post">
             @cardTemplate()
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
-                    <input class="btn btn-default" type="submit" value ="Submit">
+                    <input class="btn btn-default" type="button" onclick="validateCard()" value ="Submit">
                 </div>
             </div>
         </form>

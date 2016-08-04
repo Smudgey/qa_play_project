@@ -43,7 +43,6 @@ class BasketController @Inject() extends Controller {
       //If product is available, add to basket.  Otherwise show appropriate error message
       if (p.hasXAvailable(1)) {
         OrderLine.addToBasket(OrderLine(p))
-
       } else {
         //TODO Add some user feedback here
       }
@@ -61,6 +60,8 @@ class BasketController @Inject() extends Controller {
     implicit request =>
       val quant = updateFor.bindFromRequest().get._1(0)
       val pid = updateFor.bindFromRequest().get._2(0)
+
+      Product.findProduct(pid).get.stock += OrderLine.findOrderLine(pid).get.quantity
 
       OrderLine.findOrderLine(pid).get.quantity = quant
       Product.findProduct(pid).get.stock -= quant

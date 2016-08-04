@@ -24,6 +24,7 @@ class CatalogueController @Inject() extends Controller with Formatter with Mongo
     implicit request =>
     //Take in a Category enumeration as a string and match it to a value
       Ok(views.html.catalogue(findByCategory(cat))(request.session))
+
   }
 
   def show(query: String) = Action {
@@ -36,5 +37,8 @@ class CatalogueController @Inject() extends Controller with Formatter with Mongo
       Ok(views.html.catalogue(Product.clearanceStock.toArray)(request.session))
   }*/
 
-
+  def priceFilter(min: Double, max: Double) = Action {
+    implicit request =>
+      Ok(views.html.catalogue(prodFor)(Product.searchByPrice(min, max).toArray)(request.session))
+  }
 }
