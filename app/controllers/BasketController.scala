@@ -73,7 +73,7 @@ class BasketController @Inject() extends Controller {
     implicit request =>
 
       if (OrderLine.findOrderLine(pid).isDefined) {
-        OrderLine.removeItem(pid)
+        OrderLine.removeItem("")
         Redirect(routes.BasketController.basket)
       } else {
         //TODO add error message saying that item has already been deleted

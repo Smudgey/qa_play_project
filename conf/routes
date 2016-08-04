@@ -19,10 +19,10 @@ GET         /purchaseHistory           controllers.PurchaseHistoryController.sho
 
 GET         /catalogue                 controllers.CatalogueController.show(query:String)
 POST        /catalogue                 controllers.SearchController.search
-GET         /category/clearance        controllers.CatalogueController.showClearance
+#GET         /category/clearance        controllers.CatalogueController.showClearance
 GET         /category/*cat             controllers.CatalogueController.showCategory(cat: String)
 
-GET         /view-product              controllers.ProductViewController.viewProduct(pid: Int)
+GET         /view-product              controllers.ProductViewController.viewProduct(itemID: String)
 
 POST        /login                     controllers.LoginController.validateLogin
 GET         /login                     controllers.LoginController.login
@@ -39,8 +39,8 @@ POST        /                          controllers.RegisterController.createCard
 POST        /payment                   controllers.PaymentController.registerPayment
 
 GET         /basket                    controllers.BasketController.basket
-GET         /basket/item               controllers.BasketController.add(pid:Int)
-GET         /basket/removed            controllers.BasketController.removeItem(pid: Int)
+GET         /basket/item               controllers.BasketController.add(itemID:Int)
+GET         /basket/removed            controllers.BasketController.removeItem(itemID: Int)
 GET         /basket/0                  controllers.BasketController.clear
 POST        /basket/update             controllers.BasketController.update
 

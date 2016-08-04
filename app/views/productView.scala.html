@@ -1,4 +1,4 @@
-@(p: Product)(implicit session: Session)
+@(p: Product_New)(implicit session: Session)
 
 @main("ProductView") {
     <div class="container">
@@ -8,22 +8,22 @@
 
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-            <img height="400" width="400" class="small-margin" src="@p.urlList(0)">
+            <img height="400" width="400" class="small-margin" src="@p.images(0)">
             <div>
-            @for(i <- 1 to p.urlList.length - 1) {
-                <img height="100" width="100" src="@p.urlList(i)">
+            @for(i <- 1 to p.images.length - 1) {
+                <img height="100" width="100" src="@p.images(i)">
                 }
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 text-left">
 
-            <h1>@p.name</h1>
-            <h2>Product ID: @p.pid</h2>
+            <h1>@p.product</h1>
+            <h2>Product ID: @p.itemID</h2>
             <h3>In stock: <em><b>@p.stock</b></em></h3>
             <h3>Price: <em><b>£@p.price</b></em></h3>
 
-            <a type="submit" class="btn btn-success medium-margin" href="@routes.BasketController.add(p.pid)">Add to basket</a>
+            <a type="submit" class="btn btn-success medium-margin" href="@routes.BasketController.add(0)">Add to basket</a>
 
             <h3>Description</h3>
             <p> @p.description</p>

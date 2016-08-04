@@ -1,5 +1,7 @@
 package models
 
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -8,6 +10,7 @@ import scala.collection.mutable.ArrayBuffer
 
 
 case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, var price: Double, var clearance: Double, var special: Double, var category: Category.Value) extends URL {
+
 
 
 // URL: String

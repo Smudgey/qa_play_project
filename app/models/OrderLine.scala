@@ -45,10 +45,10 @@ object OrderLine extends Formatter {
     accumulate(basket, 0)
   }
 
-  def removeItem(pid: Int): Unit = {
+  def removeItem(pid: String): Unit = {
 
-    size -= findOrderLine(pid).get.quantity
-    basket.remove(basket.indexOf(findOrderLine(pid).get))
+    size -= findOrderLine(0).get.quantity
+    basket.remove(basket.indexOf(findOrderLine(0).get))
   }
 
 //  def updateBasket(oli: OrderLine): Unit = {

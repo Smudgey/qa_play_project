@@ -1,5 +1,5 @@
 @import scala.collection.mutable.ArrayBuffer
-@(form: Form[Int])(products: Array[Product])(implicit session: Session)
+@(products: Array[Product_New])(implicit session: Session)
     @main("Catalogue") {
 
       <style>
@@ -25,7 +25,7 @@ max-width: 100px; max-height: 100px;
 
         <div id="products">
         @sidebar {
-            @grid(form)(products)
+            @grid(products)
         }
         </div>
 
