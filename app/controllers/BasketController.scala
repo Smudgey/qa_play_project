@@ -3,7 +3,7 @@ package controllers
 import javax.inject._
 
 import play.api.mvc._
-import _root_.models.{Login, OrderLine, Product}
+import models._
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -14,18 +14,18 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Marko on 11/07/2016.
   */
 @Singleton
-class BasketController @Inject() extends Controller {
+class BasketController @Inject() extends Controller with MongoDatabaseConnector {
 
   private val prodFor = Form(
     single(
-      "pid" -> number
+      "pid" -> text
     )
   )
 
   private val updateFor = Form(
     tuple(
       "quant" -> list(number),
-      "pid" -> list(number)
+      "pid" -> list(text)
     )
   )
 
@@ -34,15 +34,16 @@ class BasketController @Inject() extends Controller {
       Ok(views.html.basket(updateFor)(request.session))
   }
 
-  def add(pid: Int) = Action {
+  def add(pid: String) = Action {
     implicit request =>
       //Load this product into value for ease
       println(pid)
-      val p = Product.findProduct(pid).get
+      val p = findProductByID(pid)
 
       //If product is available, add to basket.  Otherwise show appropriate error message
       if (p.hasXAvailable(1)) {
-        OrderLine.addToBasket(OrderLine(p))
+        OrderLine_New.addToBasket(OrderLine_New(p.itemID, 1, p.price))
+        println()
       } else {
         //TODO Add some user feedback here
       }
@@ -61,20 +62,22 @@ class BasketController @Inject() extends Controller {
       val quant = updateFor.bindFromRequest().get._1(0)
       val pid = updateFor.bindFromRequest().get._2(0)
 
-      Product.findProduct(pid).get.stock += OrderLine.findOrderLine(pid).get.quantity
+      val p = findProductByID(pid)
 
-      OrderLine.findOrderLine(pid).get.quantity = quant
-      Product.findProduct(pid).get.stock -= quant
+      p.stock += OrderLine_New.findOrderLine(pid).get.quantity
+
+      OrderLine_New.findOrderLine(pid).get.quantity = quant
+      p.stock -= quant
 
       OrderLine.getSize
       Redirect(routes.BasketController.basket)
   }
 
-  def removeItem(pid: Int) = Action {
+  def removeItem(pid: String) = Action {
     implicit request =>
 
-      if (OrderLine.findOrderLine(pid).isDefined) {
-        OrderLine.removeItem(pid)
+      if (OrderLine_New.findOrderLine(pid).isDefined) {
+        OrderLine_New.removeItem("")
         Redirect(routes.BasketController.basket)
       } else {
         //TODO add error message saying that item has already been deleted

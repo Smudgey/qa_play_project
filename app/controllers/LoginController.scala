@@ -1,6 +1,8 @@
 package controllers
 
-import com.google.inject.Inject
+
+import javax.inject.Inject
+
 import models.MongoDatabaseConnector
 import org.mindrot.jbcrypt.BCrypt
 import play.api.data.Form
