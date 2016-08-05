@@ -1,17 +1,19 @@
 
 
-@(form: Form[Int])(products: Array[Product])(implicit session: Session)
+@(products: Array[Product_New])(implicit session: Session)
 
 @if(!products.isEmpty) {
 @for(p <- products) {
-    <div class="item col-xs-12 col-sm-12 col-md-4 col-lg-4">
+
+    <div class="item col-xs-12 col-sm-12 col-md-4 col-lg-4" >
         <div>
-            <a href="@routes.ProductViewController.viewProduct(p.pid)">
-                <img height="250" width="250" src="@p.urlList" alt="" />
+            <a href="@routes.ProductViewController.viewProduct(p.itemID)">
+                <img height="250" width="250" class="group list-group-image" src="@p.images" alt="" />
+
 
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
-                    @p.name</h4>
+                    @p.product</h4>
                 </div>
             </a>
 
@@ -27,7 +29,7 @@
                 </div>
 
                 <div class="col-xs-12 col-md-6">
-                    <a type="submit" class="btn btn-success" href="@routes.BasketController.add(p.pid)">Add to basket</a>
+                    <a type="submit" class="btn btn-success" href="@routes.BasketController.add(p.itemID)">Add to basket</a>
                 </div>
 
             </div>

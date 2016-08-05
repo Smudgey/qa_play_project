@@ -1,5 +1,7 @@
 package models
 
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -8,6 +10,7 @@ import scala.collection.mutable.ArrayBuffer
 
 
 case class Product(pid: Int, name: String, description: String, var stock: Int, var pwareStock: Int, var price: Double, var category: Array[Category.Value]) extends URL {
+
 
 
 // URL: String
@@ -23,9 +26,7 @@ case class Product(pid: Int, name: String, description: String, var stock: Int, 
     pwareStock += pwareQuantity
   }
 
-  def hasXAvailable(x: Int): Boolean ={
-   this.stock >= x
-  }
+
 }
 
 object Product extends Formatter{
@@ -79,7 +80,7 @@ object Product extends Formatter{
     this.add(inventory, Product(741, "Table", "An outdoor table perched ontop of a hippo", 5, 0, 8.99,  Array[Category.Value](Category.FurnitureTable)))
     this.add(inventory, Product(742, "Normal Chair", "An average chair with a fancy cover", 5, 0, 8.99, Array[Category.Value]( Category.FurnitureChair)))
 
-    Product.findProduct(701).get.urlList += "/assets/images/ugly-gnome-15606748new.jpg"
+    Product.findProduct(701).get.urlList += "/assets/images/ugly-gnome-15606748.jpg"
     Product.findProduct(702).get.urlList += "/assets/images/Snerdley_Shell_Seeking_Gnomes.png"
     Product.findProduct(703).get.urlList += "/assets/images/109913-277x425-History_gnomes.png"
     Product.findProduct(704).get.urlList += "/assets/images/military-lawn-gnomes.png"
@@ -155,7 +156,7 @@ object Product extends Formatter{
 
   //def searchByPrice(price: Double) = inventory.filter(_.price <= price)
 
-  def searchByPrice(min: Double, max: Double) = inventory.filter(_.price >= min).filter(_.price <= max).sortBy(_.price)
+//  def searchByPrice(min: Double, max: Double) = inventory.filter(_.price >= min).filter(_.price <= max).sortBy(_.price)
 
 //  def searchByCategory(query: String) = inventory.filter(_.category.toString.toLowerCase.contains(query.toLowerCase()))
 
