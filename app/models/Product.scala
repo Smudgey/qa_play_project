@@ -36,7 +36,7 @@ object Product extends Formatter{
   //TODO remove calls to this method and replace with database connection
   def dummyConnection(): Unit = {
     inventory.clear()
-    this.add(inventory, Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 99.99, Array[Category.Value](Category.GnomeBig)))
+    this.add(inventory, Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 19.99, Array[Category.Value](Category.GnomeBig)))
     this.add(inventory, Product(702, "Beach Gnome", "This gnome is always ready for the beach, whatever the weather", 87, 58, 11.99, Array[Category.Value](Category.GnomeSmall)))
     this.add(inventory, Product(703, "Supportive Gnome", "His supportive face will support you in your times of need.", 14, 2, 6.99, Array[Category.Value](Category.GnomeBig)))
     this.add(inventory, Product(704, "Evil Gnome", "Possessed by evil demons, do not let inside your house.", 2, 1, 5.98, Array[Category.Value](Category.GnomeMedium)))
