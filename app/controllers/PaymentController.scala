@@ -12,7 +12,7 @@ import play.api.mvc._
   * Created by Luke on 07/07/2016.
   */
 @Singleton
-class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controller {
+class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controller with Formatter {
 
   /**
     * Create a form of type Payment
@@ -42,29 +42,31 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   def checkoutBasket = Action {
     implicit request =>
-      if (request.session.get("connected").isEmpty) {
-        Redirect(routes.LoginController.login())
-      }
-      else {
+//      if (request.session.get("connected").isEmpty) {
+//        Redirect(routes.LoginController.login())
+//      }
+//      else {
         val in = checkoutForm.bindFromRequest().data("registerCard")
         var payMthd: PaymentMethod.Value = null
-        if (in == "payNow") {
-          payMthd = PaymentMethod.PayNow
-        } else if (in == "payLater") {
-          payMthd = PaymentMethod.PayLater
-        } else {
-          payMthd = PaymentMethod.Other
+        in match {
+          case "payNow" => payMthd = PaymentMethod.PayNow
+          case "payLater" => payMthd = PaymentMethod.PayLater
+          case _ => payMthd = PaymentMethod.Other
         }
         val cust = Login.findLogin(request.session.data("connected")).get.lid
-        val ol = OrderLine.basket
-        val price = OrderLine.totalPrice(ol)
-        val status = OrderStatus.Ordered
-        val time = Order.today
+        val ol = OrderLine_New.basket
+        val price = OrderLine_New.totalPrice(ol)
+        val status = OrderStatus.Ordered.toString
+        val td = todaysDate
+        val time = timeNow
+
+        val o = Order_New(randomInt, cust, td, time, status, payMthd.toString, ol.toArray, price, 0)
+        println("YES: " + o)
 
         //TODO Direct to the card registerCard page
         Ok(views.html.registerCard(request.session))
 
-      }
+//      }
   }
 
   /**

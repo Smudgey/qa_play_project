@@ -31,7 +31,7 @@ object Order extends Formatter {
       0,
       OrderStatus.Dispatched,
       PaymentMethod.PayLater,
-      today, 3),
+      todaysDate, 3),
     Order("0", randomID,
       ArrayBuffer[OrderLine](
         OrderLine(Product.findProduct(703).get, 2, 1)
@@ -39,7 +39,7 @@ object Order extends Formatter {
       0,
       OrderStatus.Dispatched,
       PaymentMethod.PayLater,
-      today, 5)
+      todaysDate, 5)
   )
 
   // calculates dummy orders prices

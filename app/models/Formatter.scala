@@ -12,7 +12,8 @@ trait Formatter {
     BigDecimal(price).setScale(2, BigDecimal.RoundingMode.UP).toDouble
   }
 
-  val today = new SimpleDateFormat("hh:mm aa d-M-y").format(Calendar.getInstance().getTime)
+  val todaysDate = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime)
+  val timeNow = new SimpleDateFormat("hh-mm-ss " ).format(Calendar.getInstance().getTime)
 
   def decodeUri(str: String): String = {
     str.replace("%20", " ")
@@ -35,5 +36,6 @@ trait Formatter {
   }
 
   def randomID : String = java.util.UUID.randomUUID.toString
+  def randomInt : Int  = java.util.UUID.randomUUID().asInstanceOf[Int]
 
 }

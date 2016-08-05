@@ -49,7 +49,7 @@ trait MongoDatabaseConnector {
   def getOrderHistory(email: String): ArrayBuffer[Order_New] = {
     var toReturn = ArrayBuffer[Order_New]()
 
-    //val accId = findAccountByEmail(email).head.accountID
+    val accId = findAccountByEmail(email).head.accountID
 
     //println("acc: "+ accId)
 
@@ -57,7 +57,7 @@ trait MongoDatabaseConnector {
       case Success(result) =>
         println("connected")
         val query = BSONDocument(
-          "accountID" -> "108921209"
+          "accountID" -> accId
         )
         val ordersList = result.find(query).cursor[Order_New].collect[List]()
         ordersList.onComplete {
@@ -87,7 +87,7 @@ trait MongoDatabaseConnector {
         )
         result.find(query).one[Account_New].onComplete {
           case Success(account) =>
-            if (!account.isEmpty) {
+            if (account.isDefined) {
               toReturn += Account_New(account.get.accountID, account.get.username, account.get.password, account.get.firstName, account.get.lastName, account.get.phone, account.get.address, account.get.paymentCards)
             }
 

@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject._
 
+import models.Formatter
 import play.api.i18n.I18nSupport
 import play.api.mvc._
 import play.i18n.MessagesApi
@@ -11,7 +12,7 @@ import play.i18n.MessagesApi
   * application's home page.
   */
 @Singleton
-class HomeController @Inject() extends Controller {
+class HomeController @Inject() extends Controller with Formatter{
 
   /**
     * Create an Action to render an HTML page with a welcome message.
@@ -21,7 +22,6 @@ class HomeController @Inject() extends Controller {
     */
   def index = Action {
     implicit request =>
-
       Ok(views.html.index("")(request.session))
   }
 

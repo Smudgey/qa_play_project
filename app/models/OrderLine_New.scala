@@ -27,7 +27,7 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
       OrderLine_New(
         doc.getAs[String]("productID").get,
         doc.getAs[Int]("quantity").get,
-        doc.getAs[Double]("price").get
+        priceFormat(doc.getAs[Double]("price").get)
       )
 
 
@@ -63,8 +63,6 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
       }
       addOrIncrease(basket, oli)
     }
-
-    print(basket)
   }
     def getSize: Int = {
       def accumulate(bsk: ArrayBuffer[OrderLine_New], total: Int): Int = {
