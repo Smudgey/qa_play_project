@@ -2,6 +2,7 @@ package controllers
 
 import com.google.inject.Inject
 import models.MongoDatabaseConnector
+import org.mindrot.jbcrypt.BCrypt
 import play.api.data.Form
 import play.api.data.Forms.{nonEmptyText, tuple}
 import play.api.mvc.{Action, Controller}
@@ -45,7 +46,7 @@ class LoginController @Inject()(val messagesApi: MessagesApi)  extends Controlle
       if (account.isEmpty) {
         Redirect(routes.LoginController.login()).flashing("type" -> "fail", "class" -> Messages("login.fail.class"), "message" -> Messages("login.fail"))
       } else {
-        if (account.head.username == loginForm.bindFromRequest().data("email") && account.head.password == loginForm.bindFromRequest().data("password")) {
+        if (account.head.username == loginForm.bindFromRequest().data("email") && BCrypt.checkpw(loginForm.bindFromRequest().data("password"), account.head.password)) {
           Redirect(routes.HomeController.index()).withSession("connected" -> loginForm.bindFromRequest().data("email"))
         } else {
           Redirect(routes.LoginController.login()).flashing("type" -> "fail", "class" -> "alert alert-danger", "message" -> Messages("login.fail"))
