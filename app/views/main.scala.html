@@ -4,6 +4,7 @@
 * two arguments, a `String` for the title of the page and an `Html`
 * object to insert into the body of the page.
 *@
+
 @import models.Category
 
 @(title: String)(content: Html)(implicit session: Session)
@@ -72,33 +73,47 @@
                                 Gnomes <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Gnomes</li>
+                                <li role="separator" class="divider"></li>
+
                                 <li><a href="@routes.CatalogueController.showCategory(Category.Gnome.toString)">
-                                    All Gnomes</a></li>
-                                <ul>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.GnomeBig.toString)">
-                                        Big Gnomes</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.GnomeMedium.toString)">
-                                        Medium Gnomes</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.GnomeSmall.toString)">
-                                        Small Gnomes</a></li>
-                                </ul>
+                                    All</a>
+                                </li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.GnomeBig.toString)">
+                                    Big Gnomes</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.GnomeMedium.toString)">
+                                    Medium Gnomes</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.GnomeSmall.toString)">
+                                    Small Gnomes</a>
+                                </li>
+
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Gnome Accessories</li>
+                                <li role="separator" class="divider"></li>
 
                                 <li><a href="@routes.CatalogueController.showCategory(Category.Clothing.toString)">
-                                    Gnome Clothing</a></li>
-                                <ul>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ClothingHat.toString)">
-                                        Hats</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ClothingJumper.toString)">
-                                        Jumpers</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ClothingTrouser.toString)">
-                                        Trousers</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ClothingUnderwear.toString)">
-                                        Underwear</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ClothingShoe.toString)">
-                                        Shoes</a></li>
-                                </ul>
+                                    All</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingHat.toString)">
+                                    Hats</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingJumper.toString)">
+                                    Jumpers</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingTrouser.toString)">
+                                    Trousers</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingUnderwear.toString)">
+                                    Underwear</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ClothingShoe.toString)">
+                                    Shoes</a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -107,25 +122,39 @@
                                 Gardening <span class="caret"></span></a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="@routes.CatalogueController.showCategory(Category.Tool.toString)">
-                                    Tools</a></li>
-                                <ul>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ToolRake.toString)">
-                                        Rakes</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ToolSpade.toString)">
-                                        Spades</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.ToolAxe.toString)">
-                                        Axes</a></li>
-                                </ul>
 
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Tools</li>
+                                <li role="separator" class="divider"></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.Tool.toString)">
+                                    All</a>
+                                </li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ToolRake.toString)">
+                                    Rakes</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ToolSpade.toString)">
+                                    Spades</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.ToolAxe.toString)">
+                                    Axes</a>
+                                </li>
+
+
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Plants</li>
+                                <li role="separator" class="divider"></li>
                                 <li><a href="@routes.CatalogueController.showCategory(Category.Plant.toString)">
-                                    Plants</a></li>
-                                <ul>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.PlantTree.toString)">
-                                        Trees</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.PlantPotted.toString)">
-                                        Potted Plants</a></li>
-                                </ul>
+                                    All</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantTree.toString)">
+                                    Trees</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantPotted.toString)">
+                                    Potted Plants</a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -134,27 +163,41 @@
                                 Miscellaneous <span class="caret"></span></a>
 
                             <ul class = "dropdown-menu">
-                                <li><a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)">
-                                    Bird Items</a></li>
-                                <ul>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.BirdFeeder.toString)">
-                                        Feeders</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.BirdHouse.toString)">
-                                        Bird Houses</a></li>
-                                </ul>
 
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Bird Items</li>
+                                <li role="separator" class="divider"></li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.BirdItem.toString)">
+                                    All</a>
+                                </li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.BirdFeeder.toString)">
+                                    Feeders</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.BirdHouse.toString)">
+                                    Bird Houses</a>
+                                </li>
+
+
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Furniture</li>
+                                <li role="separator" class="divider"></li>
                                 <li><a href="@routes.CatalogueController.showCategory(Category.Furniture.toString)">
-                                    Furniture</a></li>
-                                <ul>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.FurnitureGazebo.toString)">
-                                        Gazebos</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.FurnitureChair.toString)">
-                                        Chairs</a></li>
-                                    <li><a href="@routes.CatalogueController.showCategory(Category.FurnitureTable.toString)">
-                                        Tables</a></li>
-                                </ul>
-                                <li><a href="@routes.CatalogueController.showCategory(Category.PlantPot.toString)">
-                                    Plant Pots</a></li>
+                                    All</a>
+                                </li>
+
+                                <li><a href="@routes.CatalogueController.showCategory(Category.FurnitureGazebo.toString)">
+                                    Gazebos</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.FurnitureChair.toString)">
+                                    Chairs</a>
+                                </li>
+                                <li><a href="@routes.CatalogueController.showCategory(Category.FurnitureTable.toString)">
+                                    Tables</a>
+                                </li>
+
+
                             </ul>
                         </li>
 
@@ -169,7 +212,8 @@
                             </ul>
                         </li>
                         <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
-                            About Us</a></li>
+                            About Us</a>
+                        </li>
                     </ul>
 
                     <div class="navbar-form navbar-right">
@@ -179,6 +223,7 @@
                             <span class="glyphicon glyphicon-shopping-cart"></span>
                             <span class="badge">@session.get("basketItemCount")</span>
                         </a>
+
 
                         @if(session.get("connected").isEmpty) {
 
@@ -210,16 +255,26 @@
 
                         </div>
 
+                    <ul class="dropdown-menu">
+                        <li><a href="@routes.AccountController.viewAccount()">My Account</a></li>
+                        <li><a href="@routes.AccountController.updateAccount()">Edit Account</a></li>
+                        <li><a href="@routes.PurchaseHistoryController.viewPurchase">Purchase History</a></li>
+                        <li><a href="@routes.AccountController.viewCard()">View Card</a></li>
+                        <li><a href="@routes.AccountController.addNewCard()">Register Card</a></li>
+                        <li><a href="@routes.AccountController.viewAddress()">View Address</a></li>
+                        <li><a href="@routes.AccountController.addNewAddress()">Register Address</a></li>
+                    </ul>
+
                     } else {
+
                     <div class="btn-group">
                         <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Manage Account
                         </button>
-
                         <ul class="dropdown-menu">
                             <li><a href="@routes.AccountController.viewAccount()">My Account</a></li>
                             <li><a href="@routes.AccountController.updateAccount()">Edit Account</a></li>
-                            <li><a href="@routes.PurchaseHistoryController.showPurchase">Purchase History</a></li>
+                            <li><a href="@routes.PurchaseHistoryController.viewPurchase">Purchase History</a></li>
                             <li><a href="@routes.AccountController.viewCard()">View Card</a></li>
                             <li><a href="@routes.AccountController.addNewCard()">Register Card</a></li>
                             <li><a href="@routes.AccountController.viewAddress()">View Address</a></li>

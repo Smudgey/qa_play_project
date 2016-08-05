@@ -184,7 +184,7 @@ object Product extends Formatter{
   }
 
 
-  def findProduct(pid: Int) = inventory.find(_.pid == pid)
+  def findProduct(pid: Int) = inventory.find(_.pid.equals(pid))
 
   def add(list: ArrayBuffer[Product], prod: Product): Unit = {
     list += prod

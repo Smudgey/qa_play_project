@@ -13,9 +13,8 @@ GET         /addNewAddress              controllers.AccountController.addNewAddr
 GET         /removeCard                 controllers.AccountController.removeCard(cardNumber: String)
 GET         /removeAddress              controllers.AccountController.removeAddress(address: String)
 
-POST        /purchaseHistory            controllers.PurchaseHistoryController.orderRating
-GET         /purchaseHistory            controllers.PurchaseHistoryController.showPurchase
-
+POST        /purchaseHistory           controllers.PurchaseHistoryController.orderRating
+GET         /purchaseHistory           controllers.PurchaseHistoryController.viewPurchase
 
 GET         /catalogue                  controllers.CatalogueController.show(query:String)
 POST        /catalogue                  controllers.SearchController.search

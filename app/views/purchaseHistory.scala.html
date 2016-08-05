@@ -1,4 +1,4 @@
-@(list: Array[Order])(implicit session: Session)
+@(list: Array[Order_New])(implicit session: Session)
 @main("") {
     @manageAccountsSidebar("Purchase History") {
         <script>changeTab("viewPurchaseHistory")</script>
@@ -10,7 +10,7 @@
                 @for(o <- list) {
                     <tr>
                         <td>Order ID: <br> @o.orderID</td>
-                        <td>Order Status: <br> @o.status</td>
+                        <td>Order Status: <br> @o.orderStatus</td>
                         <td>Order Payment: <br> @o.paymentMethod</td>
                         <td>Date Ordered: <br> @o.time</td>
                         <td>Star Rating:
@@ -59,10 +59,9 @@
                                                 </tr>
                                                 @for(ol <- o.orderLines) {
                                                     <tr>
-                                                        <td> @ol.prod.name</td>
-                                                        <td>£@ol.prod.price</td>
+                                                        <td> @ol.prodId</td>
+                                                        <td>£@ol.price</td>
                                                         <td> @ol.quantity</td>
-                                                        <td> @ol.pwareQuantity</td>
                                                     </tr>
                                                 }
                                                 <tr>
