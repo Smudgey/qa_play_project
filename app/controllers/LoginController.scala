@@ -1,6 +1,8 @@
 package controllers
 
-import com.google.inject.Inject
+
+import javax.inject.Inject
+
 import models.MongoDatabaseConnector
 import play.api.data.Form
 import play.api.data.Forms.{nonEmptyText, tuple}

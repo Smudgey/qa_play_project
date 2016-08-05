@@ -23,10 +23,7 @@ GET         /category/*cat              controllers.CatalogueController.showCate
 POST        /catalogue/price            controllers.SearchController.filterSearch
 GET         /catalogue/*min&*max        controllers.CatalogueController.priceFilter(min: Double, max: Double)
 
-GET         /catalogue                 controllers.CatalogueController.show(query:String)
-POST        /catalogue                 controllers.SearchController.search
-#GET         /category/clearance        controllers.CatalogueController.showClearance
-GET         /category/*cat             controllers.CatalogueController.showCategory(cat: String)
+
 
 GET         /view-product              controllers.ProductViewController.viewProduct(itemID: String)
 
@@ -42,22 +39,19 @@ POST        /                           controllers.RegisterController.createCar
 
 POST        /payment                    controllers.PaymentController.registerPayment
 
-GET         /basket                     controllers.BasketController.basket
-GET         /basket/item                controllers.BasketController.add(pid:Int)
-GET         /basket/removed             controllers.BasketController.removeItem(pid: Int)
-GET         /basket/0                   controllers.BasketController.clear
-POST        /basket/update              controllers.BasketController.update
+POST        /login                      controllers.LoginController.validateLogin
+GET         /login                      controllers.LoginController.login
 
-<<<<<<< HEAD
+
 GET         /basket                    controllers.BasketController.basket
-GET         /basket/item               controllers.BasketController.add(itemID:Int)
-GET         /basket/removed            controllers.BasketController.removeItem(itemID: Int)
+GET         /basket/item               controllers.BasketController.add(itemID: String)
+GET         /basket/removed            controllers.BasketController.removeItem(itemID: String)
 GET         /basket/0                  controllers.BasketController.clear
 POST        /basket/update             controllers.BasketController.update
-=======
+
 GET         /checkout                   controllers.PaymentController.checkout
 POST        /checkout                   controllers.PaymentController.checkoutBasket
->>>>>>> mongoConnection
+
 
 GET         /satisfactionForm           controllers.CustomerSatisfactionController.show
 POST        /satisfactionForm           controllers.CustomerSatisfactionController.submitForm

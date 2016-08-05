@@ -32,13 +32,14 @@ class CatalogueController @Inject() extends Controller with Formatter with Mongo
     Ok(views.html.catalogue(allProducts(query))(request.session))
   }
 
-  /*def showClearance = Action {
+  def showClearance = Action {
     implicit request =>
-      Ok(views.html.catalogue(Product.clearanceStock.toArray)(request.session))
-  }*/
+      Ok(views.html.catalogue(Array())(request.session))
+  }
 
   def priceFilter(min: Double, max: Double) = Action {
     implicit request =>
-      Ok(views.html.catalogue(prodFor)(Product.searchByPrice(min, max).toArray)(request.session))
+//      Ok(views.html.catalogue(prodFor)(Product.searchByPrice(min, max).toArray)(request.session))
+      Redirect(routes.HomeController.index())
   }
 }

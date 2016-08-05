@@ -28,7 +28,7 @@
             <h3>In stock: <em><b>@p.stock</b></em></h3>
             <h3>Price: <em><b>£@p.price</b></em></h3>
 
-            <a type="submit" class="btn btn-success medium-margin" href="@routes.BasketController.add(0)">Add to basket</a>
+            <a type="submit" class="btn btn-success medium-margin" href="@routes.BasketController.add(p.itemID)">Add to basket</a>
 
             <h3>Description</h3>
             <p> @p.description</p>

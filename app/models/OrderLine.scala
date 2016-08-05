@@ -60,30 +60,7 @@ object OrderLine extends Formatter {
 //
 //  }
 
-  def addToBasket(oli: OrderLine): Unit = {
-    //Do product stock validation here
-    if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
 
-      //TODO send some response that request cant be fulfilled
-
-    } else {
-      oli.prod.decrementStock(oli.quantity, oli.pwareQuantity)
-      size += oli.quantity + oli.pwareQuantity
-
-      def addOrIncrease(bsk: ArrayBuffer[OrderLine], oli2: OrderLine): Unit ={
-        if( bsk.isEmpty ){
-          basket += oli2
-        } else if(bsk.head.prod.pid == oli2.prod.pid) {
-
-          bsk.head.quantity       += oli2.quantity
-          bsk.head.pwareQuantity  += oli2.pwareQuantity
-        } else {
-          addOrIncrease(bsk.tail, oli2)
-        }
-      }
-      addOrIncrease(basket, oli)
-    }
-  }
 
   def findOrderLine(pid:Int) = basket.find(_.prod.pid == pid)
 }
