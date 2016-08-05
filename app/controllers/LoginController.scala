@@ -54,6 +54,7 @@ class LoginController @Inject()(val messagesApi: MessagesApi)  extends Controlle
           Redirect(routes.LoginController.login()).flashing("type" -> "fail", "class" -> "alert alert-danger", "message" -> Messages("login.fail"))
         }
       }
+      
     }
 
 

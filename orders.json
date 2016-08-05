@@ -1,126 +1,149 @@
 [
-    {
-      "orderID":1,
-      "accountID": "108909989",
-      "date": "26\/07\/2016",
-      "time": "10:30:39",
-      "orderStatus": "Dispatched",
-      "paymentMethod": "PayLater",
-      "orderLines": [
-        {
-          "productID": "g99",
-          "quantity": 3,
-          "price": 11
-        },
-        {
-          "productID": "g01",
-          "quantity": 1,
-          "price": 11
-        },
-        {
-          "productID": "g98",
-          "quantity": 2,
-          "price": 11
-        }
-      ],
-      "totalPrice": 66, 
-      "rating": 4
-    },
-    {
-      "orderID":2,
-      "accountID": "108909276",
-      "date": "26\/07\/2016",
-      "time": "12:33:12",
-      "orderStatus": "Dispatched",
-      "paymentMethod": "PayLater",
-      "orderLines": [
-        {
-          "productID": "g03",
-          "quantity": 2,
-          "price": 14
-        }
-      ],
-      "totalPrice": 28,
-      "rating": 2	  
-    },
-    {
-      "orderID":3,
-      "accountID": "108909215",
-      "date": "22\/08\/2016",
-      "time": "19:11:01",
-      "orderStatus": "Dispatched",
-      "paymentMethod": "PayLater",
-      "orderLines": [
-        {
-          "productID": "g05",
-          "quantity": 1,
-          "price": 7
-        }
-      ],
-      "totalPrice": 7,
-      "rating": 3
-    },
-    {
-      "orderID":4,
-      "accountID": "108921265",
-      "date": "21\/03\/2016",
-      "time": "22:45:34",
-      "orderStatus": "Dispatched",
-      "paymentMethod": "PayLater",
-      "orderLines": [
-        {
-          "productID": "g12",
-          "quantity": 4,
-          "price":120
-        }
-      ],
-      "totalPrice": 240,
-      "rating": 5
-    },
-    {
-      "orderID":5,
-      "accountID": "108921209",
-      "date": "21\/05\/2016",
-      "time": "18:59:22",
-      "orderStatus": "Dispatched",
-      "paymentMethod": "PayLater",
-      "orderLines": [
-        {
-          "productID": "g06",
-          "quantity": 1,
-          "price": 7
-        },
-        {
-          "productID": "g93",
-          "quantity": 1,
-          "price": 44
-          
-        }
-      ],
-      "totalPrice": 51,
-      "rating": 4
-    },
-    {
-      "orderID":6,
-      "accountID": "121921209",
-      "date": "31\/03\/2016",
-      "time": "09:09:18",
-      "orderStatus": "Dispatched",
-      "paymentMethod": "PayLater",
-      "orderLines": [
-        {
-          "productID": "g92",
-          "quantity": 1,
-          "price": 92
+  {
+    "orderID":1,
+    "accountID": "108909989",
+    "date": "26\/07\/2016",
+    "time": "10:30:39",
+    "orderStatus": "Dispatched",
+    "paymentMethod": "PayLater",
+    "orderLines": [
+      {
+        "productID": "g99",
+        "quantity": 3,
+        "price": 11.00
+      },
+      {
+        "productID": "g01",
+        "quantity": 1,
+        "price": 11.00
+      },
+      {
+        "productID": "g98",
+        "quantity": 2,
+        "price": 11.00
+      }
+    ],
+    "totalPrice": 66.00,
+    "rating": 4
+  },
+  {
+    "orderID":2,
+    "accountID": "108909276",
+    "date": "26\/07\/2016",
+    "time": "12:33:12",
+    "orderStatus": "Dispatched",
+    "paymentMethod": "PayLater",
+    "orderLines": [
+      {
+        "productID": "g03",
+        "quantity": 2,
+        "price": 14.00
+      }
+    ],
+    "totalPrice": 28.00,
+    "rating": 2
+  },
+  {
+    "orderID":3,
+    "accountID": "108909215",
+    "date": "22\/08\/2016",
+    "time": "19:11:01",
+    "orderStatus": "Dispatched",
+    "paymentMethod": "PayLater",
+    "orderLines": [
+      {
+        "productID": "g05",
+        "quantity": 1,
+        "price": 7.00
+      }
+    ],
+    "totalPrice": 7.00,
+    "rating": 3
+  },
+  {
+    "orderID":4,
+    "accountID": "108921265",
+    "date": "21\/03\/2016",
+    "time": "22:45:34",
+    "orderStatus": "Dispatched",
+    "paymentMethod": "PayLater",
+    "orderLines": [
+      {
+        "productID": "g12",
+        "quantity": 4,
+        "price": 40.00
+      }
+    ],
+    "totalPrice": 160.00,
+    "rating": 5
+  },
+  {
+    "orderID":5,
+    "accountID": "108921209",
+    "date": "21\/05\/2016",
+    "time": "18:59:22",
+    "orderStatus": "Dispatched",
+    "paymentMethod": "PayLater",
+    "orderLines": [
+      {
+        "productID": "g06",
+        "quantity": 1,
+        "price": 7.00
+      },
+      {
+        "productID": "g93",
+        "quantity": 1,
+        "price": 44.00
 
-        },
-        {
-          "productID": "g10",
-          "quantity": 2,
-          "price": 42
-        }
-      ],
-      "totalPrice": 176,
-      "rating":1
-    }
-  ]
+      }
+    ],
+    "totalPrice": 51.00,
+    "rating": 4
+  },
+  {
+    "orderID":6,
+    "accountID": "121921209",
+    "date": "31\/03\/2016",
+    "time": "09:09:18",
+    "orderStatus": "Dispatched",
+    "paymentMethod": "PayLater",
+    "orderLines": [
+      {
+        "productID": "g92",
+        "quantity": 1,
+        "price": 92.00
+
+      },
+      {
+        "productID": "g10",
+        "quantity": 2,
+        "price": 42.00
+      }
+    ],
+    "totalPrice": 176.00,
+    "rating":1
+  },
+  {
+    "orderID":7,
+    "accountID": "9f5cae6e-c02f-493b-b4a1-68ebd2b3f1a6",
+    "date": "03\/08\/2016",
+    "time": "19:48:26",
+    "orderStatus": "Dispatched",
+    "paymentMethod": "PayLater",
+    "orderLines": [
+      {
+        "productID": "g01",
+        "quantity": 1,
+        "price": 11.00
+
+      },
+      {
+        "productID": "g02",
+        "quantity": 2,
+        "price": 22.00
+      }
+    ],
+    "totalPrice": 33.00,
+    "rating":1
+  }
+]
