@@ -10,8 +10,8 @@
       "porousware"
     ],
     "Description": "Our worst selling gnome, horrible.",
-    "Stock": "12",
-    "price": "11"
+    "Stock": 12,
+    "price": 11.99
   },
   {
     "Product": "Beach Gnome",
@@ -24,8 +24,8 @@
       "porousware"
     ],
     "Description": "This gnome is always ready for the beach, whatever the weather",
-    "Stock": "12",
-    "price": "11"
+    "Stock": 12,
+    "price": 11.99
   },
   {
     "Product": "Supportive Gnome",
@@ -38,8 +38,8 @@
       "porousware"
     ],
     "Description": "His supportive face will support you in your times of need.",
-    "Stock": "17",
-    "price": "14"
+    "Stock": 17,
+    "price": 14.99
   },
   {
     "Product": "Evil Gnome",
@@ -52,8 +52,8 @@
       "porousware"
     ],
     "Description": "Possessed by evil demons, do not let inside your house.",
-    "Stock": "7",
-    "price": "6"
+    "Stock": 7,
+    "price": 6.99
   },
   {
     "Product": "Harry Potter Gnome",
@@ -66,8 +66,8 @@
       "porousware"
     ],
     "Description": "Looks exactly like Daniel Radcliffe",
-    "Stock": "9",
-    "price": "7"
+    "Stock": 9,
+    "price": 7.99
   },
   {
     "Product": "Terminator",
@@ -80,8 +80,8 @@
       "porousware"
     ],
     "Description": "I'll be back!",
-    "Stock": "9",
-    "price": "7"
+    "Stock": 9,
+    "price": 7.99
   },
   {
     "Product": "Dictator Gnome",
@@ -94,8 +94,8 @@
       "porousware"
     ],
     "Description": "Your favourite dictator is now available as a garden gnome!",
-    "Stock": "45",
-    "price": "44"
+    "Stock": 45,
+    "price": 44.99
   },
   {
     "Product": "Donald Gnome",
@@ -108,8 +108,8 @@
       "porousware"
     ],
     "Description": "Amazing hair.",
-    "Stock": "47",
-    "price": "42"
+    "Stock": 47,
+    "price": 42.99
   },
   {
     "Product": "Invisible Gnome",
@@ -122,8 +122,8 @@
       "porousware"
     ],
     "Description": "It's an invisible gnome.",
-    "Stock": "47",
-    "price": "42"
+    "Stock": 47,
+    "price": 42.99
   },
   {
     "Product": "Super Gnome",
@@ -136,8 +136,8 @@
       "porousware"
     ],
     "Description": "Your very own superhero gnome.",
-    "Stock": "47",
-    "price": "42"
+    "Stock": 47,
+    "price": 42.99
   },
   {
     "Product": "Ninja Gnome",
@@ -150,8 +150,8 @@
       "porousware"
     ],
     "Description": "Much stealth, very silent, wow.",
-    "Stock": "40",
-    "price": "42"
+    "Stock": 40,
+    "price": 42.99
   },
   {
     "Product": "Thug Gnome",
@@ -164,8 +164,8 @@
       "porousware"
     ],
     "Description": "Beware of Tyrone the gnome.",
-    "Stock": "47",
-    "price": "40"
+    "Stock": 47,
+    "price": 40.99
   },
   {
     "Product": "Rytis Gnome",
@@ -177,8 +177,8 @@
       "gnome"
     ],
     "Description": "Our worst selling gnome, horrible.",
-    "Stock": "12",
-    "price": "11"
+    "Stock": 12,
+    "price": 11.99
   },
   {
     "Product": "Beach Gnome",
@@ -190,8 +190,8 @@
       "gnome"
     ],
     "Description": "This gnome is always ready for the beach, whatever the weather",
-    "Stock": "12",
-    "price": "11"
+    "Stock": 12,
+    "price": 11.99
   },
   {
     "Product": "Supportive Gnome",
@@ -203,8 +203,8 @@
       "gnome"
     ],
     "Description": "His supportive face will support you in your times of need.",
-    "Stock": "17",
-    "price": "14"
+    "Stock": 17,
+    "price": 14.99
   },
   {
     "Product": "Evil Gnome",
@@ -216,8 +216,8 @@
       "gnome"
     ],
     "Description": "Possessed by evil demons, do not let inside your house.",
-    "Stock": "7",
-    "price": "6"
+    "Stock": 7,
+    "price": 6.99
   },
   {
     "Product": "Harry Potter Gnome",
@@ -229,8 +229,8 @@
       "gnome"
     ],
     "Description": "Looks exactly like Daniel Radcliffe",
-    "Stock": "9",
-    "price": "7"
+    "Stock": 9,
+    "price": 7.99
   },
   {
     "Product": "Terminator",
@@ -242,8 +242,8 @@
       "gnome"
     ],
     "Description": "I'll be back!",
-    "Stock": "9",
-    "price": "7"
+    "Stock": 9,
+    "price": 7.99
   },
   {
     "Product": "Dictator Gnome",
@@ -255,8 +255,8 @@
       "gnome"
     ],
     "Description": "Your favourite dictator is now available as a garden gnome!",
-    "Stock": "45",
-    "price": "44"
+    "Stock": 45,
+    "price": 44.99
   },
   {
     "Product": "Donald Gnome",
@@ -268,8 +268,8 @@
       "gnome"
     ],
     "Description": "Amazing hair.",
-    "Stock": "47",
-    "price": "42"
+    "Stock": 47,
+    "price": 42.99
   },
   {
     "Product": "Invisible Gnome",
@@ -281,8 +281,8 @@
       "gnome"
     ],
     "Description": "It's an invisible gnome.",
-    "Stock": "47",
-    "price": "42"
+    "Stock": 47,
+    "price": 42.99
   },
   {
     "Product": "Super Gnome",
@@ -294,8 +294,8 @@
       "gnome"
     ],
     "Description": "Your very own superhero gnome.",
-    "Stock": "47",
-    "price": "42"
+    "Stock": 47,
+    "price": 42.99
   },
   {
     "Product": "Ninja Gnome",
@@ -307,8 +307,8 @@
       "gnome"
     ],
     "Description": "Much stealth, very silent, wow.",
-    "Stock": "40",
-    "price": "42"
+    "Stock": 40,
+    "price": 42.99
   },
   {
     "Product": "Thug Gnome",
@@ -320,7 +320,7 @@
       "gnome"
     ],
     "Description": "Beware of Tyrone the gnome.",
-    "Stock": "47",
-    "price": "40"
+    "Stock": 47,
+    "price": 40.99
   }
 ]
