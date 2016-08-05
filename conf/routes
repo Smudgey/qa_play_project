@@ -23,10 +23,10 @@ GET         /category/*cat              controllers.CatalogueController.showCate
 POST        /catalogue/price            controllers.SearchController.filterSearch
 GET         /catalogue/*min&*max        controllers.CatalogueController.priceFilter(min: Double, max: Double)
 
-GET         /view-product               controllers.ProductViewController.viewProduct(pid: Int)
 
-POST        /login                      controllers.LoginController.validateLogin
-GET         /login                      controllers.LoginController.login
+
+GET         /view-product              controllers.ProductViewController.viewProduct(itemID: String)
+
 
 GET         /logout                     controllers.LoginController.logout
 
@@ -39,14 +39,19 @@ POST        /                           controllers.RegisterController.createCar
 
 POST        /payment                    controllers.PaymentController.registerPayment
 
-GET         /basket                     controllers.BasketController.basket
-GET         /basket/item                controllers.BasketController.add(pid:Int)
-GET         /basket/removed             controllers.BasketController.removeItem(pid: Int)
-GET         /basket/0                   controllers.BasketController.clear
-POST        /basket/update              controllers.BasketController.update
+POST        /login                      controllers.LoginController.validateLogin
+GET         /login                      controllers.LoginController.login
+
+
+GET         /basket                    controllers.BasketController.basket
+GET         /basket/item               controllers.BasketController.add(itemID: String)
+GET         /basket/removed            controllers.BasketController.removeItem(itemID: String)
+GET         /basket/0                  controllers.BasketController.clear
+POST        /basket/update             controllers.BasketController.update
 
 GET         /checkout                   controllers.PaymentController.checkout
 POST        /checkout                   controllers.PaymentController.checkoutBasket
+
 
 GET         /satisfactionForm           controllers.CustomerSatisfactionController.show
 POST        /satisfactionForm           controllers.CustomerSatisfactionController.submitForm

@@ -1,5 +1,6 @@
 package models
 
+import org.mindrot.jbcrypt.BCrypt
 import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID}
 
@@ -63,7 +64,7 @@ object Account_New {
       BSONDocument(
         "ID" -> account_New.accountID,
         "Email" -> account_New.username,
-        "Password" -> account_New.password,
+        "Password" -> BCrypt.hashpw(account_New.password, BCrypt.gensalt()),
         "First Name" -> account_New.firstName,
         "Last Name" -> account_New.lastName,
         "Phone" -> account_New.phone,

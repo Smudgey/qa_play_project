@@ -2,17 +2,21 @@ package controllers
 
 import javax.inject._
 
+
+import models.{MongoDatabaseConnector, Product}
+import play.api.mvc._
 import models.Product
 import play.api.mvc.{Action, Controller}
 
 
-class ProductViewController @Inject() extends Controller {
+@Singleton
+class ProductViewController @Inject() extends Controller with MongoDatabaseConnector{
 
-  def viewProduct(pid: Int) = Action {
+
+  def viewProduct(pid: String) = Action {
     implicit request =>
 
-      Product.findProduct(pid).map {
-        order => Ok(views.html.productView(order)(request.session))
-      }.getOrElse(NotFound(views.html.notFound()))
+      Ok(views.html.productView(findProductByID(pid))(request.session))
+
   }
 }
