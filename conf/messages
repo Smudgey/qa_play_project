@@ -1,3 +1,4 @@
 index.title = Home
 login.fail = Invalid password/Username
 login.fail.class = alert alert-danger
+order.confirm =
