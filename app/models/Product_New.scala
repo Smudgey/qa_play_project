@@ -26,7 +26,7 @@ case class Product_New(itemID: String, product: String, images: Array[String], c
 }
 
 
-object Product_New {
+object Product_New extends Formatter {
 
   implicit object productReader extends BSONDocumentReader[Product_New] {
     def read(doc: BSONDocument): Product_New =
@@ -37,7 +37,7 @@ object Product_New {
         doc.getAs[Array[String]]("Category").get,
         doc.getAs[String]("Description").get,
         doc.getAs[Int]("Stock").get,
-        doc.getAs[Double]("price").get
+        priceFormat(doc.getAs[Double]("price").get)
       )
   }
 
