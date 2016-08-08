@@ -122,6 +122,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
     }
   }
 
+
   /**
     * this function will create CardDetails object for the customer
     *
