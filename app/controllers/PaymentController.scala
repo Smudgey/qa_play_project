@@ -65,9 +65,13 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
         val orderID = randomInt
         val ord = Order_New(orderID, cust, td, time, status, payMthd.toString, ol.toArray, price, 0)
 
+        for (o <- ol) {
+          println(s"Stock: "+ findProductByID(o.prodId).stock +"\nNew stock: " + (findProductByID(o.prodId).stock - o.quantity))
+          Product_New.updateDatabaseStock(o.prodId, findProductByID(o.prodId).stock - o.quantity)
+        }
+
         connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
           case Success(result) =>
-
             Order_New.create(result, ord)
         }
         Ok(views.html.orderConfirm(ord)(request.session))

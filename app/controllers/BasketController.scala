@@ -52,7 +52,7 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
 
   def clear = Action {
     implicit request =>
-      OrderLine.clear()
+      OrderLine_New.clear()
       println("Basket: " + Product.inventory.size + "\nClearance" + Product.clearanceStock.size )
       Redirect(routes.BasketController.basket).withSession("basketItemCount" -> "")
   }
@@ -64,12 +64,16 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
 
       val p = findProductByID(pid)
 
+      //Reset the value
       p.stock += OrderLine_New.findOrderLine(pid).get.quantity
 
+      //Set the new quantity
       OrderLine_New.findOrderLine(pid).get.quantity = quant
-      p.stock -= quant
 
-      OrderLine.getSize
+      //Set the new stock level
+      p.decrementStock(p.stock - quant)
+
+      OrderLine_New.getSize
       Redirect(routes.BasketController.basket).withSession(request.session)
   }
 
