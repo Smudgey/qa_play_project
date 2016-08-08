@@ -8,11 +8,14 @@ import play.api.data.Forms._
 import play.api.i18n.MessagesApi
 import play.api.mvc._
 
+import scala.util.Success
+import scala.concurrent.ExecutionContext.Implicits.global
+
 /**
   * Created by Luke on 07/07/2016.
   */
 @Singleton
-class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controller with Formatter {
+class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controller with Formatter with MongoDatabaseConnector {
 
   /**
     * Create a form of type Payment
@@ -42,10 +45,10 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
 
   def checkoutBasket = Action {
     implicit request =>
-//      if (request.session.get("connected").isEmpty) {
-//        Redirect(routes.LoginController.login())
-//      }
-//      else {
+      if (request.session.get("connected").isEmpty) {
+        Redirect(routes.LoginController.login())
+      }
+      else {
         val in = checkoutForm.bindFromRequest().data("registerCard")
         var payMthd: PaymentMethod.Value = null
         in match {
@@ -53,21 +56,25 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
           case "payLater" => payMthd = PaymentMethod.PayLater
           case _ => payMthd = PaymentMethod.Other
         }
-        val cust = Login.findLogin(request.session.data("connected")).get.lid
+        val cust = findAccountByEmail(request.session.data("connected")).head.accountID
         val ol = OrderLine_New.basket
         val price = OrderLine_New.totalPrice(ol)
         val status = OrderStatus.Ordered.toString
         val td = todaysDate
         val time = timeNow
+        val orderID = randomInt
+        val ord = Order_New(orderID, cust, td, time, status, payMthd.toString, ol.toArray, price, 0)
 
-        val o = Order_New(randomInt, cust, td, time, status, payMthd.toString, ol.toArray, price, 0)
-        println("YES: " + o)
+        connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
+          case Success(result) =>
 
-        //TODO Direct to the card registerCard page
-        Ok(views.html.registerCard(request.session))
+            Order_New.create(result, ord)
+        }
+        Ok(views.html.orderConfirm(ord)(request.session))
 
-//      }
+      }
   }
+
 
   /**
     * Load the registerCard page, passing in the card form

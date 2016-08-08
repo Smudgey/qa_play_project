@@ -65,16 +65,38 @@ trait MongoDatabaseConnector {
             for (ord <- orders) {
               toReturn += ord
             }
-          case Failure(t) => println("failed")
+          case Failure(t) => println("failed in query")
         }
       case Failure(fail) =>
-        println("failed")
+        println("failed in connection")
     }
 
-    Thread.sleep(3000)
-    println(toReturn.length)
+    Thread.sleep(500)
+
     toReturn
 
+  }
+
+  def findOrder(oid: Int): Order_New = {
+    var toReturn = ArrayBuffer[Order_New]()
+
+    connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
+      case Success(result) =>
+        val query = BSONDocument("orderID" -> oid)
+
+        result.find(query).one[Order_New].onComplete {
+          case Success(order) =>
+            if (order.isDefined)
+              toReturn += order.get
+          case Failure(fail) =>
+            println("not found")
+            toReturn
+        }
+      case Failure(fail) =>
+        toReturn
+    }
+    Thread.sleep(500)
+    toReturn.head
   }
 
   def findAccountByEmail(email: String): ArrayBuffer[Account_New] = {
