@@ -52,7 +52,7 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
 
   def clear = Action {
     implicit request =>
-      OrderLine_New.clear()
+      OrderLine_New.clear
       println("Basket: " + Product.inventory.size + "\nClearance" + Product.clearanceStock.size )
       Redirect(routes.BasketController.basket).withSession("basketItemCount" -> "")
   }
@@ -81,7 +81,7 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
     implicit request =>
 
       if (OrderLine_New.findOrderLine(pid).isDefined) {
-        OrderLine_New.removeItem("")
+        OrderLine_New.removeItem(pid)
         Redirect(routes.BasketController.basket).withSession(request.session)
       } else {
         //TODO add error message saying that item has already been deleted

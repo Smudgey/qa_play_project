@@ -87,6 +87,7 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
 
   def removeItem(pid: String): Unit = {
 
+    println("Remove Item: "+ pid)
     size -= findOrderLine(pid).get.quantity
     basket.remove(basket.indexOf(findOrderLine(pid).get))
   }
@@ -101,6 +102,14 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
     addToTot(bsk, 0)
   }
 
+  def clear : Unit = {
+    for(ol <- basket) {
+    val product = Product_New.findProductByID(ol.prodId)
+    product.stock += ol.quantity
+  }
+    basket.clear()
+    size = basket.size
+  }
 
 
 }

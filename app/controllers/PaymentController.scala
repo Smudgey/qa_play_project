@@ -73,6 +73,7 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
         connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
           case Success(result) =>
             Order_New.create(result, ord)
+            OrderLine_New.basket.clear()
         }
         Ok(views.html.orderConfirm(ord)(request.session))
 
