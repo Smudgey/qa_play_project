@@ -41,18 +41,15 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     (CustomerDetails.unapply)
   )
   //form form adding address
-  private val addressForm: Form[Address] = Form(
-    mapping(
-      "" -> text,
-      "houseNumber" -> nonEmptyText,
-      "streetName" -> nonEmptyText,
-      "town" -> nonEmptyText,
+
+  private val addressFormNew = Form(
+    tuple(
+      "addressLine1" -> nonEmptyText,
+      "addressLine2" -> nonEmptyText,
       "city" -> nonEmptyText,
       "county" -> nonEmptyText,
       "postcode" -> nonEmptyText
     )
-    (Address.apply)
-    (Address.unapply)
   )
 
 
@@ -203,15 +200,45 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     * @return
     */
   def addAddress() = Action {
+
     implicit request =>
-      Address.addAddress(
-        Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.addressID,
-        addressForm.bindFromRequest().data("houseNumber"),
-        addressForm.bindFromRequest().data("streetName"),
-        addressForm.bindFromRequest().data("town"),
-        addressForm.bindFromRequest().data("city"),
-        addressForm.bindFromRequest().data("county"),
-        addressForm.bindFromRequest().data("postcode"))
-      Redirect(routes.AccountController.addNewAddress())
-  }
+
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(result) =>
+
+          val person = BSONDocument(
+            "Email" -> request.session.data("connected")
+          )
+
+
+          val query = BSONDocument(
+            "$push" -> BSONDocument(
+              "Address" -> BSONDocument(
+                "AddressLine1" -> addressFormNew.bindFromRequest().data("addressLine1"),
+                "AddressLine2" -> addressFormNew.bindFromRequest().data("addressLine2"),
+                "AddressCity" -> addressFormNew.bindFromRequest().data("city"),
+                "AddressCounty" -> addressFormNew.bindFromRequest().data("county"),
+                "AddressPostcode" -> addressFormNew.bindFromRequest().data("postcode")
+              )
+            )
+          )
+          result.update(person, query)
+        case Failure(fail) =>
+          println("fail")
+      }
+          Thread.sleep(3000)
+          Redirect(routes.AccountController.viewAddress())
+
+      }
+
+
+
+
+
 }
+
+
+
+
+
+
