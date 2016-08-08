@@ -8,11 +8,18 @@ import org.scalatest.{FlatSpec, Matchers, Tag}
   */
 class OrderTest extends FlatSpec with Matchers with MongoDatabaseConnector{
 
-  val orderTest = getOrderHistory("x")
+  val orderHistoryTest = getOrderHistory("x")
+  val findOrderTest = findOrder(7)
 
-  it should "Get the Customer's Order History" taggedAs FindOrder in(
-    orderTest.isEmpty shouldEqual false
+  it should "Get the Customer's Order History" taggedAs FindOrderHistory in(
+    orderHistoryTest.isEmpty shouldEqual false
+    )
+
+  it should "Get an Order" taggedAs FindOrder in(
+    findOrderTest.equals(findOrder(7)) shouldEqual true
+
     )
 
 }
-object FindOrder extends Tag("test.modelsTest.FindOrder")
+object FindOrderHistory extends Tag("test.modelsTest.FindOrderHistory")
+object FindOrder extends Tag("test.modelTest.FindOrder")
