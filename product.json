@@ -6,7 +6,7 @@
       "/assets/images/ugly-gnome-15606748.jpg"
     ],
     "Category": [
-      "big gnome",
+      "big gnome"
     ],
     "Description": "Our worst selling gnome, horrible.",
     "Stock": 12,
@@ -531,5 +531,5 @@
     "Description": "An average chair with a fancy cover",
     "Stock": 140,
     "price": 3.99
-  },
+  }
 ]
