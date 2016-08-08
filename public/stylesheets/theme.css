@@ -15,7 +15,7 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {
   border-color: #5d0311;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #a80314;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #fff;
   outline: 0 none; }
 
 @font-face {
@@ -55,12 +55,12 @@ body {
 
 /* navbar */
 .navbar-default {
-  background-color: #a80314;
+  background-color: #fff;
   border-bottom: #000000 solid 1px; }
 
 /* title */
 .navbar-default .navbar-brand {
-  color: #a80314;
+  color: #fff;
   border-color: transparent;
   -webkit-transition: color 0.5s ease-in-out;
   -moz-transition: color 0.5s ease-in-out;
@@ -76,7 +76,7 @@ body {
 
 /* link */
 .navbar-default .navbar-nav > li > a {
-  color: #a80314;
+  color: #fff;
   -webkit-transition: color 0.5s ease-in-out;
   -moz-transition: color 0.5s ease-in-out;
   transition: color 0.5s ease-in-out; }
@@ -99,7 +99,7 @@ body {
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
   color: #000000;
-  background-color: #a80314; }
+  background-color: #fff; }
 
 /* caret */
 .navbar-default .navbar-nav > .dropdown > a .caret {
