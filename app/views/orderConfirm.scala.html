@@ -1,0 +1,14 @@
+@import models.Order_New
+
+@(ord : Order_New)(implicit session: Session)
+
+@main("Basket") {
+
+    <p>Thankyou for your order!</p>
+    <p>Your order reference is: <strong> @ord.orderID </strong></p>
+    <p>The status of your order is: <strong>@ord.orderStatus</strong></p>
+    <p></p>
+    <p> </p>
+    <p> </p>
+
+  }

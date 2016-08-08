@@ -3,6 +3,7 @@ package models
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
 
 import scala.collection.mutable.ArrayBuffer
+import models.Order
 
 /**
   * Created by Administrator on 06/07/2016.
@@ -36,6 +37,7 @@ object Product extends Formatter{
 
   //TODO remove calls to this method and replace with database connection
   def dummyConnection(): Unit = {
+
     inventory.clear()
     this.add(inventory, Product(701, "Rytis Gnome", "Our worst selling gnome, horrible.", 6, 0, 19.99, Array[Category.Value](Category.GnomeBig)))
     this.add(inventory, Product(702, "Beach Gnome", "This gnome is always ready for the beach, whatever the weather", 87, 58, 11.99, Array[Category.Value](Category.GnomeSmall)))

@@ -47,7 +47,7 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
       } else {
         //TODO Add some user feedback here
       }
-      Redirect(routes.BasketController.basket()).withSession("basketItemCount" -> OrderLine.getSize.toString)
+      Redirect(routes.BasketController.basket()).withSession("basketItemCount" -> OrderLine.getSize.toString).withSession(request.session)
   }
 
   def clear = Action {
@@ -70,7 +70,7 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
       p.stock -= quant
 
       OrderLine.getSize
-      Redirect(routes.BasketController.basket)
+      Redirect(routes.BasketController.basket).withSession(request.session)
   }
 
   def removeItem(pid: String) = Action {
@@ -78,18 +78,12 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
 
       if (OrderLine_New.findOrderLine(pid).isDefined) {
         OrderLine_New.removeItem("")
-        Redirect(routes.BasketController.basket)
+        Redirect(routes.BasketController.basket).withSession(request.session)
       } else {
         //TODO add error message saying that item has already been deleted
-        Redirect(routes.BasketController.basket)
+        Redirect(routes.BasketController.basket).withSession(request.session)
       }
   }
 
-
-  //  def checkout() = Action {
-  //    implicit request =>
-  //      Ok(views.html.checkout()(request.session))
-  //
-  //  }
 
 }
