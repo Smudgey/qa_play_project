@@ -29,29 +29,31 @@ class BasketTest extends FlatSpec with Matchers with MongoDatabaseConnector{
 
   it should "Add Item to basket" taggedAs AddToBasketSuccess in(
 
-    (orderLine.findOrderLine("701").get.prodId == findProductByID("701").itemID) shouldEqual true
+    orderLine.findOrderLine("701").get.prodId == findProductByID("701").itemID shouldEqual true
 
     )
 
-//  it should "Does not Add to Basket" taggedAs AddToBasketFail in(
-//    )
+  it should "Does not Add to Basket" taggedAs AddToBasketFail in(
+    orderLine.findOrderLine("799").isEmpty shouldEqual true
+    )
 
 
-//  orderLine.removeItem("702")
-//  it should "Remove Item 702 from basket" taggedAs RemoveFromBasketSuccess in(
-//    )
-//
-//  it should "Does not remove item from basket" taggedAs RemoveFromBasketFail in(
-//
-//    )
+  orderLine.removeItem("702")
+  it should "Remove Item 702 from basket" taggedAs RemoveFromBasketSuccess in(
+    orderLine.findOrderLine("702").isEmpty shouldEqual true
+    )
+
+  it should "Does not remove item from basket" taggedAs RemoveFromBasketFail in(
+    orderLine.findOrderLine("701").isEmpty shouldEqual false
+    )
 
   it should "Get Total Cost" taggedAs TotalCostSuccess in(
-    orderLine.totalPrice(basketTest) == (testProduct.price + testProduct2.price + testProduct3.price) shouldEqual true
+    orderLine.totalPrice(basketTest) == (testProduct.price + testProduct3.price) shouldEqual true
     )
 
 }
 object AddToBasketSuccess extends Tag("test.models.AddToBasketSuccess")
-//object AddToBasketFail extends Tag("test.models.AddToBasketFail")
-//object RemoveFromBasketSuccess extends Tag("test.models.RemoveFromBasketSuccess")
-//object RemoveFromBasketFail extends Tag("test.models.RemoveFromBasketFail")
+object AddToBasketFail extends Tag("test.models.AddToBasketFail")
+object RemoveFromBasketSuccess extends Tag("test.models.RemoveFromBasketSuccess")
+object RemoveFromBasketFail extends Tag("test.models.RemoveFromBasketFail")
 object TotalCostSuccess extends Tag("test.models.TotalCostSuccess")
