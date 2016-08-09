@@ -1,6 +1,6 @@
 package controllersTest
 
-import models.{MongoDatabaseConnector, OrderLine_New}
+import models.{MongoDatabaseConnector, OrderLine_New, Product_New}
 import org.scalatest.{FlatSpec, Matchers, Tag}
 
 import scala.collection.mutable.ArrayBuffer
@@ -51,9 +51,12 @@ class BasketTest extends FlatSpec with Matchers with MongoDatabaseConnector{
     orderLine.totalPrice(basketTest) == (testProduct.price + testProduct3.price) shouldEqual true
     )
 
+
+
+
 }
-object AddToBasketSuccess extends Tag("test.models.AddToBasketSuccess")
-object AddToBasketFail extends Tag("test.models.AddToBasketFail")
-object RemoveFromBasketSuccess extends Tag("test.models.RemoveFromBasketSuccess")
-object RemoveFromBasketFail extends Tag("test.models.RemoveFromBasketFail")
-object TotalCostSuccess extends Tag("test.models.TotalCostSuccess")
+object AddToBasketSuccess extends Tag("test.modelsTest.AddToBasketSuccess")
+object AddToBasketFail extends Tag("test.modelsTest.AddToBasketFail")
+object RemoveFromBasketSuccess extends Tag("test.modelsTest.RemoveFromBasketSuccess")
+object RemoveFromBasketFail extends Tag("test.modelsTest.RemoveFromBasketFail")
+object TotalCostSuccess extends Tag("test.modelsTest.TotalCostSuccess")
