@@ -8,23 +8,23 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Administrator on 09/08/2016.
   */
-class SearchCatalogueTest extends FlatSpec with Matchers with MongoDatabaseConnector{
+class SearchCatalogueTest extends FlatSpec with Matchers with MongoDatabaseConnector {
 
+  val filterItems = findByCategory("Gnome")
+  it should "Filter List is Not Empty" taggedAs FindGnome in {
+    filterItems.isEmpty shouldEqual false
+  }
 
+  it should "Check Empty" taggedAs CheckEmpty in {
+    filterItems.nonEmpty shouldEqual true
+  }
 
-//  val filterItems = findByCategory("Gnome")
-//
-//  def checkFilterItems():Boolean  = (
-//  for(fI <- filterItems){
-//    if(fI.category.)
-//  }
-//  )
-//
-//  it should "Find Gnomes" taggedAs FindGnome in(
-//
-//    )
-
-
+  it should "Find Gnome" taggedAs FindAGnome in{
+    val gnome = filterItems.find(_.itemID == "701")
+    gnome.isEmpty shouldEqual false
+  }
 
 }
 object FindGnome extends Tag("test.modelsTest.FindGnome")
+object CheckEmpty extends Tag("test.modelsTest.CheckEmpty")
+object FindAGnome extends Tag("test.modelsTest.FindAGnome")
