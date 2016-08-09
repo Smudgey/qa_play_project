@@ -1,6 +1,6 @@
 body
 {
-	padding: 50px;
+	padding: 40px;
 }
 
 .animate
@@ -12,12 +12,12 @@ body
 .action-button
 {
 	position: relative;
-	padding: 5px 5px;
-  margin: 0px 7px 7px 0px;
+	padding: 3px 3px;
+  margin: 0px 3px 3px 0px;
   float: left;
-	border-radius: 10px;
+	border-radius: 8px;
 	font-family: 'Impact';
-	font-size: 20px;
+	font-size: 18px;
 	color: #FFF;
 	text-decoration: none;
 }
