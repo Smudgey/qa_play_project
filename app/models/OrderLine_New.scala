@@ -3,10 +3,10 @@
   */
 package models
 
-import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
+
 import scala.concurrent._
 import ExecutionContext.Implicits.global
-
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -27,10 +27,18 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
       OrderLine_New(
         doc.getAs[String]("productID").get,
         doc.getAs[Int]("quantity").get,
-        doc.getAs[Double]("price").get
+        priceFormat(doc.getAs[Double]("price").get)
       )
+  }
 
-
+  implicit object OrderLineWriter extends BSONDocumentWriter[OrderLine_New] {
+    def write(oln: OrderLine_New): BSONDocument = {
+      BSONDocument(
+        "productID" -> oln.prodId,
+        "quantity" -> oln.quantity,
+        "price" -> oln.price
+      )
+    }
   }
 
   def returnProduct(itemID: String): Product_New = {
@@ -63,8 +71,6 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
       }
       addOrIncrease(basket, oli)
     }
-
-    print(basket)
   }
     def getSize: Int = {
       def accumulate(bsk: ArrayBuffer[OrderLine_New], total: Int): Int = {

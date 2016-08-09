@@ -38,6 +38,9 @@
 
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/zoom.css")">
 
+        <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/mainButtons.css")">
+
 
         <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")"></script>
 
@@ -48,6 +51,9 @@
         <script src="@routes.Assets.versioned("javascripts/formValidation.js")"></script>
 
     </head>
+
+
+    
 
     <body role="document">
 
@@ -62,14 +68,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <br>
                     <a class="navbar-brand" href="@routes.HomeController.index">NBG</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
+                    <br>
                     <ul class="nav navbar-nav">
-                        <li id="homePageCategory"><a href="@routes.HomeController.index">Home</a></li>
-                        <li id="catalogueCategory"><a href="@routes.CatalogueController.show("")">Catalogue</a></li>
+                        <li id="catalogueCategoryHome"><a href="@routes.HomeController.index" class="action-button shadow animate red"  role="button" aria-haspopup="true" aria-expanded="false">Home</a></li>
+                        <li id="catalogueCategoryCat"><a class="action-button shadow animate red" role="button" aria-haspopup="true" aria-expanded="false" href="@routes.CatalogueController.show("")">Catalogue</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle action-button shadow animate red" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gnomes <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -118,7 +126,7 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle action-button shadow animate red" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Gardening <span class="caret"></span></a>
 
                             <ul class="dropdown-menu">
@@ -159,7 +167,7 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle action-button shadow animate red" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Miscellaneous <span class="caret"></span></a>
 
                             <ul class = "dropdown-menu">
@@ -203,7 +211,7 @@
 
                         <li class="dropdown">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle action-button shadow animate red" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Clearance <span class="caret"></span></a>
 
                             <ul class="dropdown-menu">
@@ -211,7 +219,7 @@
 
                             </ul>
                         </li>
-                        <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact">
+                        <li id="aboutUsPageCategory"><a href="@routes.AboutContactController.aboutAndContact" class="action-button shadow animate red" role="button" aria-haspopup="true" aria-expanded="false">
                             About Us</a>
                         </li>
                     </ul>
@@ -288,11 +296,15 @@
                 }
             </div>
             </div>
+<br>
 
         </nav>
 
         @helper.form(routes.SearchController.search) {
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <br>
+                <br>
+                <br>
                 <div class="input-group searchBar">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
