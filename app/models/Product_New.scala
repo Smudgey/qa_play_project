@@ -2,6 +2,9 @@ package models
 
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.util.{Failure, Success}
+
 /**
   * Created by Administrator on 03/08/2016.
   */
@@ -14,19 +17,17 @@ case class Product_New(itemID: String, product: String, images: Array[String], c
   // URL: String
   def decrementStock(quantity: Int): Unit = {
     //Add stock validation here?
-    stock = stock - quantity
-
+    this.stock -= quantity
   }
 
   def incrementStock(quantity: Int): Unit = {
     //Add stock validation here?
-    stock += quantity
-
+    this.stock += quantity
   }
 }
 
 
-object Product_New extends Formatter {
+object Product_New extends Formatter with MongoDatabaseConnector{
 
   implicit object productReader extends BSONDocumentReader[Product_New] {
     def read(doc: BSONDocument): Product_New =
@@ -39,6 +40,18 @@ object Product_New extends Formatter {
         doc.getAs[Int]("Stock").get,
         priceFormat(doc.getAs[Double]("price").get)
       )
+  }
+
+  def updateDatabaseStock(pid: String, stock: Int): Unit = {
+    connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
+      case Success(result) =>
+        val query = BSONDocument("itemID" -> pid)
+        val modifier = BSONDocument("$set" -> BSONDocument("Stock" -> stock))
+        result.update(query, modifier)
+
+      case Failure(fail) =>
+        println("stock update failed")
+    }
   }
 
 }
