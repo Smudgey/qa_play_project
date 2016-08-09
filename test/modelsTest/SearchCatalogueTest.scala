@@ -1,9 +1,8 @@
 package modelsTest
 
-import models.{MongoDatabaseConnector, Product_New}
+import models.{MongoDatabaseConnector}
 import org.scalatest.{FlatSpec, Matchers, Tag}
 
-import scala.collection.mutable.ArrayBuffer
 
 /**
   * Created by Administrator on 09/08/2016.

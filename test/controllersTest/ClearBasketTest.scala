@@ -1,6 +1,6 @@
 package controllersTest
 
-import models.{MongoDatabaseConnector, OrderLine_New}
+import models.{MongoDatabaseConnector, OrderLine}
 import org.scalatest.{FlatSpec, Matchers, Tag}
 
 /**
@@ -8,7 +8,7 @@ import org.scalatest.{FlatSpec, Matchers, Tag}
   */
 class ClearBasketTest extends FlatSpec with Matchers with MongoDatabaseConnector{
 
-  val orderLine = OrderLine_New
+  val orderLine = OrderLine
 
   val basketTest = orderLine.basket
 
@@ -16,9 +16,9 @@ class ClearBasketTest extends FlatSpec with Matchers with MongoDatabaseConnector
   val testProduct2 = findProductByID("702")
   val testProduct3 = findProductByID("703")
 
-  orderLine.addToBasket(OrderLine_New(testProduct.itemID, 1, testProduct.price))
-  orderLine.addToBasket(OrderLine_New(testProduct2.itemID, 1, testProduct2.price))
-  orderLine.addToBasket(OrderLine_New(testProduct3.itemID, 1, testProduct3.price))
+  orderLine.addToBasket(OrderLine(testProduct.itemID, 1, testProduct.price))
+  orderLine.addToBasket(OrderLine(testProduct2.itemID, 1, testProduct2.price))
+  orderLine.addToBasket(OrderLine(testProduct3.itemID, 1, testProduct3.price))
 
   println(basketTest.size)
 

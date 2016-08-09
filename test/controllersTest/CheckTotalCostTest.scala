@@ -1,6 +1,6 @@
 package controllersTest
 
-import models.{MongoDatabaseConnector, OrderLine_New, Product_New}
+import models._
 import org.scalatest.{FlatSpec, Matchers, Tag}
 
 /**
@@ -8,13 +8,13 @@ import org.scalatest.{FlatSpec, Matchers, Tag}
   */
 class CheckOrdersTest extends FlatSpec with Matchers with MongoDatabaseConnector{
 
-  val orderLine = OrderLine_New
+  val orderLine = OrderLine
 
   val basketTest = orderLine.basket
 
-  val expensiveProduct = Product_New("1001","200ft Tall Gnome", Array[String]("image"),Array[String]("GiantGnome"),"Showoff the biggest gnome", 4, 5999.99)
+  val expensiveProduct = Product("1001","200ft Tall Gnome", Array[String]("image"),Array[String]("GiantGnome"),"Showoff the biggest gnome", 4, 5999.99)
 
-  val orderLineTest = new OrderLine_New(expensiveProduct.itemID, 2, expensiveProduct.price)
+  val orderLineTest = new OrderLine(expensiveProduct.itemID, 2, expensiveProduct.price)
 
   basketTest += orderLineTest
 
