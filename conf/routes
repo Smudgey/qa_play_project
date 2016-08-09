@@ -11,7 +11,7 @@ POST        /addNewAddress              controllers.AccountController.addAddress
 GET         /addNewAddress              controllers.AccountController.addNewAddress
 
 GET         /removeCard                 controllers.AccountController.removeCard(cardNumber: String)
-GET         /removeAddress              controllers.AccountController.removeAddress(address: String)
+GET         /removeAddress              controllers.AccountController.removeAddress(address1: String, address2: String, postcode: String)
 
 POST        /purchaseHistory           controllers.PurchaseHistoryController.orderRating
 GET         /purchaseHistory           controllers.PurchaseHistoryController.viewPurchase

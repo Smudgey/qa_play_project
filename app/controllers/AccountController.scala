@@ -180,8 +180,6 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     */
   def removeCard(cardNumber: String) = Action {
     implicit request =>
-
-
       connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
         case Success(collection) =>
           val query = BSONDocument(
@@ -198,20 +196,39 @@ class AccountController @Inject extends Controller with Formatter with MongoData
         case Failure(fail) =>
       }
 
-      Thread.sleep(3000)
+      Thread.sleep(500)
       Redirect(routes.AccountController.viewCard())
   }
 
   /**
     * this function will remove customer address
     *
-    * @param addressID AddressID
+    * @param address1 First Line of address
+    * @param address2 Second line of address
+    * @param postcode Postcode
     * @return
     */
-  def removeAddress(addressID: String) = Action {
+  def removeAddress(address1: String, address2: String, postcode: String) = Action {
     implicit request =>
-      //      Address.removeAddress(addressID)
-
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(collection) =>
+          val query = BSONDocument(
+            "$pull" -> BSONDocument(
+              "Address" -> BSONDocument(
+                "AddressLine1" -> address1,
+                "AddressLine2" -> address2,
+                "AddressPostcode" -> postcode
+              )
+            )
+          )
+          val person = BSONDocument(
+            "Email" -> request.session.data("connected")
+          )
+          collection.update(person, query)
+        case Failure(fail) =>
+          throw fail
+      }
+      Thread.sleep(500)
       Redirect(routes.AccountController.viewAddress())
   }
 
@@ -223,10 +240,8 @@ class AccountController @Inject extends Controller with Formatter with MongoData
   def addAddress() = Action {
 
     implicit request =>
-
       connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
         case Success(result) =>
-
           val person = BSONDocument(
             "Email" -> request.session.data("connected")
           )
@@ -243,9 +258,9 @@ class AccountController @Inject extends Controller with Formatter with MongoData
           )
           result.update(person, query)
         case Failure(fail) =>
-          println("fail")
+          throw fail
       }
-      Thread.sleep(3000)
+      Thread.sleep(500)
       Redirect(routes.AccountController.viewAddress())
 
   }
