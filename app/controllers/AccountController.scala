@@ -13,7 +13,7 @@ import scala.util.{Failure, Success}
 /*
   * Create By rytis
   *
-  * Last worked on by Rytis on 26/07/2916
+  * Last worked on by Mark on 09/08/2016
   */
 
 class AccountController @Inject extends Controller with Formatter with MongoDatabaseConnector {
@@ -31,14 +31,13 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     (CardDetails.unapply)
   )
   //form for updating customer details
-  private val updateDetailsForm: Form[CustomerDetails] = Form(
-    mapping(
-      "name" -> text,
+  private val updateDetailsForm = Form(
+    tuple(
+      "fname" -> text,
+      "lname" -> text,
       "email" -> text,
       "phone" -> text
     )
-    (CustomerDetails.apply)
-    (CustomerDetails.unapply)
   )
   //form form adding address
 
@@ -67,13 +66,25 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     * @return
     */
   def updateAccount() = Action {
-    implicit request => {
-      //      CustomerDetails.updateDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID, updateDetailsForm.bindFromRequest().data("name"), updateDetailsForm.bindFromRequest().data("phone"), updateDetailsForm.bindFromRequest().data("email"))
-      //      Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
-      //    }
+    implicit request =>
 
-      Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
-    }
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(result) =>
+          val query = BSONDocument("Email" -> request.session.data("connected"))
+          val modifier = BSONDocument(
+            "$set" -> BSONDocument(
+              "First Name" -> updateDetailsForm.bindFromRequest().data("fname"),
+              "Last Name" -> updateDetailsForm.bindFromRequest().data("lname"),
+              "Email" -> updateDetailsForm.bindFromRequest().data("email"),
+              "Phone" -> updateDetailsForm.bindFromRequest().data("phone")
+            )
+          )
+          result.update(query, modifier)
+        case Failure(fail) =>
+          throw fail
+      }
+      Redirect(routes.AccountController.viewAccount()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
+
   }
 
   /**

@@ -42,17 +42,17 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
 
       //If product is available, add to basket.  Otherwise show appropriate error message
       if (p.hasXAvailable(1)) {
-        OrderLine_New.addToBasket(OrderLine_New(p.itemID, 1, p.price))
+        OrderLine.addToBasket(OrderLine(p.itemID, 1, p.price))
         println()
       } else {
         //TODO Add some user feedback here
       }
-      Redirect(routes.BasketController.basket()).withSession("basketItemCount" -> OrderLine_New.getSize.toString).withSession(request.session)
+      Redirect(routes.BasketController.basket()).withSession("basketItemCount" -> OrderLine.getSize.toString).withSession(request.session)
   }
 
   def clear = Action {
     implicit request =>
-      OrderLine_New.clear
+      OrderLine.clear
       Redirect(routes.BasketController.basket).withSession("basketItemCount" -> "")
   }
 
@@ -64,23 +64,23 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
       val p = findProductByID(pid)
 
       //Reset the value
-      p.stock += OrderLine_New.findOrderLine(pid).get.quantity
+      p.stock += OrderLine.findOrderLine(pid).get.quantity
 
       //Set the new quantity
-      OrderLine_New.findOrderLine(pid).get.quantity = quant
+      OrderLine.findOrderLine(pid).get.quantity = quant
 
       //Set the new stock level
       p.decrementStock(p.stock - quant)
 
-      OrderLine_New.getSize
+      OrderLine.getSize
       Redirect(routes.BasketController.basket).withSession(request.session)
   }
 
   def removeItem(pid: String) = Action {
     implicit request =>
 
-      if (OrderLine_New.findOrderLine(pid).isDefined) {
-        OrderLine_New.removeItem(pid)
+      if (OrderLine.findOrderLine(pid).isDefined) {
+        OrderLine.removeItem(pid)
         Redirect(routes.BasketController.basket).withSession(request.session)
       } else {
         //TODO add error message saying that item has already been deleted

@@ -39,15 +39,27 @@ function validateLogin() {
 function validateEditAccount(){
 
     var eAForm = $('#editAccount');
-    var eAName = eAForm.find("input[name=name]");
+    var eafName = eAForm.find("input[name=fname]");
+    var ealName   = eAForm.find("input[name=lname]")
     var eAEmail = eAForm.find("input[name=email]")
     var eAPhone = eAForm.find("input[name=phone]");
 
     var eABool = true;
 
     if(!/[A-Za-z]/.test(eAName.val()) || eAName.val() == null || eAName.val() == 0){
-        eAName.parent().addClass("has-error");
-        alert("Invalid Name");
+        eafName.parent().addClass("has-error");
+        alert("Invalid First Name");
+        eABool = false;
+
+    }
+    if(!/[A-Za-z]/.test(eafName.val()) || eafName.val() == null || eafName.val() == 0){
+        eafName.parent().addClass("has-error");
+        alert("Invalid First Name");
+        eABool = false;
+
+    }if(!/[A-Za-z]/.test(ealName.val()) || ealName.val() == null || ealName.val() == 0){
+        ealName.parent().addClass("has-error");
+        alert("Invalid First Name");
         eABool = false;
 
     }

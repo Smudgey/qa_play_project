@@ -12,31 +12,31 @@ import scala.concurrent.{ExecutionContext, Future}
 
 
 /**
-  * Offers a(n instantiable [in contrast to the Account_New *object*]) data structure to represent an instance of Account_New. :).
+  * Offers a(n instantiable [in contrast to the Account *object*]) data structure to represent an instance of Account. :).
   */
-case class Account_New(accountID: String, username: String, password: String, firstName: String, lastName: String, phone: String, address: Array[Address_New], paymentCards: Array[PaymentCards]) {}
+case class Account(accountID: String, username: String, password: String, firstName: String, lastName: String, phone: String, address: Array[Address], paymentCards: Array[PaymentCards]) {}
 
 
 /**
-  * Account_New class, has a case class that accepts in the appropriate parameters required to
+  * Account class, has a case class that accepts in the appropriate parameters required to
   * create a new account user (i.e accountID, username, etc.)
   */
-object Account_New {
+object Account {
 
   /**
-    * The necessary logic to read in from the database an entry of type Account_New from a
-    * BSON document. Returns an instance of Account_New.
+    * The necessary logic to read in from the database an entry of type Account from a
+    * BSON document. Returns an instance of Account.
     *
     * This is using a custom AccountReader object - MongoReactive offers a variety of
     * default BSONDocumentReaders, we're overriding the standard BSONDocumentReader.
     *
-    * This is because the Account_New is a custom object, we're not just inputting into
+    * This is because the Account is a custom object, we're not just inputting into
     * our collection standard default values such as a collection of Strings types/objects.
     **/
-  implicit object AccountReader extends BSONDocumentReader[Account_New] {
+  implicit object AccountReader extends BSONDocumentReader[Account] {
     //inheriting methods pertaining to BSONDocumentReader
-    def read(doc: BSONDocument): Account_New =
-    Account_New(
+    def read(doc: BSONDocument): Account =
+    Account(
       doc.getAs[String]("ID").get,
       /*this is a bit iffy, basically what's being said is if there's a key
       * that has the value of "ID" then wrap it around a Some class, if not
@@ -52,24 +52,24 @@ object Account_New {
       doc.getAs[String]("First Name").get,
       doc.getAs[String]("Last Name").get,
       doc.getAs[String]("Phone").get,
-      doc.getAs[Array[Address_New]]("Address").get,
+      doc.getAs[Array[Address]]("Address").get,
       doc.getAs[Array[PaymentCards]]("PaymentCards").get)
   }
 
   /**
     * See comments on AccountReader. Very similar.
     */
-  implicit object AccountWriter extends BSONDocumentWriter[Account_New] {
-    def write(account_New: Account_New): BSONDocument = {
+  implicit object AccountWriter extends BSONDocumentWriter[Account] {
+    def write(Account: Account): BSONDocument = {
       BSONDocument(
-        "ID" -> account_New.accountID,
-        "Email" -> account_New.username,
-        "Password" -> BCrypt.hashpw(account_New.password, BCrypt.gensalt()),
-        "First Name" -> account_New.firstName,
-        "Last Name" -> account_New.lastName,
-        "Phone" -> account_New.phone,
-        "Address" -> account_New.address,
-        "PaymentCards" -> account_New.paymentCards
+        "ID" -> Account.accountID,
+        "Email" -> Account.username,
+        "Password" -> BCrypt.hashpw(Account.password, BCrypt.gensalt()),
+        "First Name" -> Account.firstName,
+        "Last Name" -> Account.lastName,
+        "Phone" -> Account.phone,
+        "Address" -> Account.address,
+        "PaymentCards" -> Account.paymentCards
       )
     }
   }
@@ -77,11 +77,11 @@ object Account_New {
   /**
     * Create method, takes in a personCollection and shoves into the database it
     */
-  def create(personCollection: BSONCollection, account: Account_New)(implicit ec: ExecutionContext, writer: BSONDocumentWriter[Account_New]): Future[Unit] = {
+  def create(personCollection: BSONCollection, account: Account)(implicit ec: ExecutionContext, writer: BSONDocumentWriter[Account]): Future[Unit] = {
     val writeResult = personCollection.insert(account)
     writeResult.map(_ => {
       /*presumably this is just using the writer implicitly to know how to output every key we loop through
-      * as a valid entry in a BSONDocument as an Account_New object.... I'll try to improve this description later*/
+      * as a valid entry in a BSONDocument as an Account object.... I'll try to improve this description later*/
     })
   }
 

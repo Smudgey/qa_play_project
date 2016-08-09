@@ -8,7 +8,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 03/08/2016.
   */
-case class Product_New(itemID: String, product: String, images: Array[String], category: Array[String], description: String, var stock: Int, price: Double) {
+case class Product(itemID: String, product: String, images: Array[String], category: Array[String], description: String, var stock: Int, price: Double) {
 
   def hasXAvailable(x: Int): Boolean = {
     this.stock >= x
@@ -27,11 +27,11 @@ case class Product_New(itemID: String, product: String, images: Array[String], c
 }
 
 
-object Product_New extends Formatter with MongoDatabaseConnector{
+object Product extends Formatter with MongoDatabaseConnector{
 
-  implicit object productReader extends BSONDocumentReader[Product_New] {
-    def read(doc: BSONDocument): Product_New =
-      Product_New(
+  implicit object productReader extends BSONDocumentReader[Product] {
+    def read(doc: BSONDocument): Product =
+      Product(
         doc.getAs[String]("itemID").get,
         doc.getAs[String]("Product").get,
         doc.getAs[Array[String]]("images").get,

@@ -15,24 +15,24 @@ import scala.collection.mutable.ArrayBuffer
   * The orderline class takes in a product, an order quantitry and a porousware quantity (not used)  A product is passed rather than a product ID so that the objects variables can be called
   * within this class.
   */
-case class OrderLine_New(prodId: String, var quantity: Int, price: Double) {}
+case class OrderLine(prodId: String, var quantity: Int, price: Double) {}
 
-object OrderLine_New extends Formatter with MongoDatabaseConnector {
+object OrderLine extends Formatter with MongoDatabaseConnector {
 
-  var basket = new ArrayBuffer[OrderLine_New]
+  var basket = new ArrayBuffer[OrderLine]
   var size = getSize
 
-  implicit object OrderLineReader extends BSONDocumentReader[OrderLine_New] {
-    def read(doc: BSONDocument): OrderLine_New =
-      OrderLine_New(
+  implicit object OrderLineReader extends BSONDocumentReader[OrderLine] {
+    def read(doc: BSONDocument): OrderLine =
+      OrderLine(
         doc.getAs[String]("productID").get,
         doc.getAs[Int]("quantity").get,
         priceFormat(doc.getAs[Double]("price").get)
       )
   }
 
-  implicit object OrderLineWriter extends BSONDocumentWriter[OrderLine_New] {
-    def write(oln: OrderLine_New): BSONDocument = {
+  implicit object OrderLineWriter extends BSONDocumentWriter[OrderLine] {
+    def write(oln: OrderLine): BSONDocument = {
       BSONDocument(
         "productID" -> oln.prodId,
         "quantity" -> oln.quantity,
@@ -41,11 +41,11 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
     }
   }
 
-  def returnProduct(itemID: String): Product_New = {
+  def returnProduct(itemID: String): Product = {
     findProductByID(itemID)
   }
 
-  def addToBasket(oli: OrderLine_New): Unit = {
+  def addToBasket(oli: OrderLine): Unit = {
 
     val p = findProductByID(oli.prodId)
 
@@ -58,7 +58,7 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
       p.decrementStock(oli.quantity)
       size += oli.quantity
 
-      def addOrIncrease(bsk: ArrayBuffer[OrderLine_New], oli2: OrderLine_New): Unit = {
+      def addOrIncrease(bsk: ArrayBuffer[OrderLine], oli2: OrderLine): Unit = {
         if (bsk.isEmpty) {
           basket += oli2
         } else if (bsk.head.prodId == oli2.prodId) {
@@ -74,7 +74,7 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
   }
 
   def getSize: Int = {
-    def accumulate(bsk: ArrayBuffer[OrderLine_New], total: Int): Int = {
+    def accumulate(bsk: ArrayBuffer[OrderLine], total: Int): Int = {
       if (bsk.isEmpty)
         total
       else
@@ -92,8 +92,8 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
     basket.remove(basket.indexOf(findOrderLine(pid).get))
   }
 
-  def totalPrice(bsk: ArrayBuffer[OrderLine_New]): Double = {
-    def addToTot(bsk: ArrayBuffer[OrderLine_New], total: Double): Double = {
+  def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
+    def addToTot(bsk: ArrayBuffer[OrderLine], total: Double): Double = {
       if (bsk.isEmpty)
         priceFormat(total)
       else
@@ -104,7 +104,7 @@ object OrderLine_New extends Formatter with MongoDatabaseConnector {
 
   def clear : Unit = {
     for(ol <- basket) {
-    val product = Product_New.findProductByID(ol.prodId)
+    val product = Product.findProductByID(ol.prodId)
     product.stock += ol.quantity
   }
     basket.clear()

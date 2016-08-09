@@ -23,8 +23,6 @@ GET         /category/*cat              controllers.CatalogueController.showCate
 POST        /catalogue/price            controllers.SearchController.filterSearch
 GET         /catalogue/*min&*max        controllers.CatalogueController.priceFilter(min: Double, max: Double)
 
-
-
 GET         /view-product              controllers.ProductViewController.viewProduct(itemID: String)
 
 
