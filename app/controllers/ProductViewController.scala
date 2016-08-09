@@ -2,10 +2,7 @@ package controllers
 
 import javax.inject._
 
-
-import models.{MongoDatabaseConnector, Product}
-import play.api.mvc._
-import models.Product
+import models.MongoDatabaseConnector
 import play.api.mvc.{Action, Controller}
 
 

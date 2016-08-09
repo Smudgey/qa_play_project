@@ -1,12 +1,11 @@
 package models
 
-import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
-import _root_.models.Order
-import org.mindrot.jbcrypt.BCrypt
 import reactivemongo.api.collections.bson.BSONCollection
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent._
-import ExecutionContext.Implicits.global
+import scala.util.{Failure, Success}
 
 
 /**
@@ -53,5 +52,14 @@ object Order_New extends MongoDatabaseConnector{
       /*presumably this is just using the writer implicitly to know how to output every key we loop through
       * as a valid entry in a BSONDocument as an Account_New object.... I'll try to improve this description later*/
     })
+  }
+
+  def setStarRating(orderID: String, rating: Int): Unit = {
+    connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
+      case Success(result) =>
+        result.update(BSONDocument("orderID" -> orderID), BSONDocument("$set" -> BSONDocument("rating" -> rating)))
+      case Failure(fail) =>
+        throw fail
+    }
   }
 }

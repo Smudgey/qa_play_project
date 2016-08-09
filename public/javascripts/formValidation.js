@@ -187,7 +187,6 @@ function validateCard(){
         var cardForm = $('#card');
         var cardHolder = cardForm.find("input[name=cardholder]");
         var cardNumber = cardForm.find("input[name=cardnumber]");
-        var cV = cardForm.find("input[name=cv]");
         var expirationMonth = cardForm.find("input[name=expirationMonth]");
         var expirationYear = cardForm.find("input[name=expirationYear]");
         var cBool = true;
@@ -206,12 +205,6 @@ function validateCard(){
             cBool = false;
 
         }
-        if(!/[0-9]/.test(cV.val()) || cV.val() == null || cV.val().length == 0 && cV.val().length != 3){
-            cV.parent().addClass("has-error");
-            alert("Incorrect cv");
-            cBool = false;
-
-        }
         if(!/[0-9]/.test(expirationMonth.val()) || expirationMonth.val() == null || expirationMonth.val().length == 0 || expirationMonth.val().length != 2){
 
             expirationMonth.parent().addClass("has-error");
@@ -219,7 +212,7 @@ function validateCard(){
             cBool = false;
 
         }
-        if(!/[0-9]/.test(expirationYear.val()) || expirationYear.val() == null || expirationYear.val().length == 0 || expirationYear.val().length != 4){
+        if(!/[0-9]/.test(expirationYear.val()) || expirationYear.val() == null || expirationYear.val().length == 0 || expirationYear.val().length != 2){
 
             expirationYear.parent().addClass("has-error");
             alert("Incorrect Expiration Year");

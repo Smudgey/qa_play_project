@@ -49,7 +49,7 @@ class PurchaseHistoryController @Inject extends Controller with MongoDatabaseCon
     */
   def orderRating = Action {
     implicit request =>
-      Order.setStarRating(starForm.bindFromRequest().data("oid"), starForm.bindFromRequest().data("rating").toInt)
+      Order_New.setStarRating(starForm.bindFromRequest().data("oid"), starForm.bindFromRequest().data("rating").toInt)
       Redirect(routes.PurchaseHistoryController.viewPurchase() )
   }
 

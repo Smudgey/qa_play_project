@@ -47,13 +47,12 @@ class BasketController @Inject() extends Controller with MongoDatabaseConnector 
       } else {
         //TODO Add some user feedback here
       }
-      Redirect(routes.BasketController.basket()).withSession("basketItemCount" -> OrderLine.getSize.toString).withSession(request.session)
+      Redirect(routes.BasketController.basket()).withSession("basketItemCount" -> OrderLine_New.getSize.toString).withSession(request.session)
   }
 
   def clear = Action {
     implicit request =>
       OrderLine_New.clear
-      println("Basket: " + Product.inventory.size + "\nClearance" + Product.clearanceStock.size )
       Redirect(routes.BasketController.basket).withSession("basketItemCount" -> "")
   }
 

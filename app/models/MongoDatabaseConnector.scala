@@ -40,9 +40,13 @@ trait MongoDatabaseConnector {
     val credentials = List(Authenticate(databaseName, "appaccess", "appaccess"))
 
     def servs: List[String] = List("192.168.1.15:27017")
-
     val conn = driver.connection(servs, authentications = credentials)
-
+//
+//    new Thread(
+//      new Runnable {
+//        def run() { conn.close()}
+//      }
+//    )
     conn.database(databaseName).map(_.collection(collectionName))
   }
 
@@ -137,7 +141,7 @@ trait MongoDatabaseConnector {
         result.find(query).one[Product_New].onComplete {
           case Success(product) =>
 
-            returnHere += Product_New( product.get.itemID,product.get.product, product.get.images, product.get.category, product.get.description, product.get.stock, product.get.price)
+            returnHere += Product_New(product.get.itemID, product.get.product, product.get.images, product.get.category, product.get.description, product.get.stock, product.get.price)
 
           case Failure(fail) =>
             returnHere
@@ -154,7 +158,7 @@ trait MongoDatabaseConnector {
 
     connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
       case Success(result) =>
-        val query = BSONDocument("Category"-> BSONDocument("$regex" -> s"(.*$category).*"))
+        val query = BSONDocument("Category" -> BSONDocument("$regex" -> s"(.*$category).*"))
         result.find(query).cursor[Product_New].collect[ArrayBuffer]().map {
           case products =>
             categoryBuffer = products
@@ -164,6 +168,7 @@ trait MongoDatabaseConnector {
 
     }
     Thread.sleep(500)
+
     categoryBuffer.toArray
   }
 
