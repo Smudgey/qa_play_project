@@ -131,57 +131,69 @@ function validateRegister(){
 function validateAddress() {
 
     var addressForm = $('#addressForm');
-    var houseNumber = addressForm.find("input[name=houseNumber]");
-    var streetName = addressForm.find("input[name=streetName]");
-    var town = addressForm.find("input[name=town]");
+    var a1 = addressForm.find("input[name=addressLine1]");
+    var a2 = addressForm.find("input[name=addressLine2]");
     var city = addressForm.find("input[name=city]");
     var county = addressForm.find("input[name=county]");
     var postcode = addressForm.find("input[name=postcode]");
 
     var aBool = true;
 
-    if (!/[A-Za-z0-9]/.test(houseNumber.val()) || houseNumber.val() == null || houseNumber.val().length == 0) {
+    // if (!/[A-Za-z0-9]/.test(a1.val()) || a1.val() == null || a1.val().length == 0) {
+    //
+    //     a1.parent().addClass("has-error");
+    //     alert("Incorrect Address Line 1");
+    //     aBool = false;
+    //
+    // }
+    // if (!/[A-Za-z]/.test(a2.val()) || a2 == null || a2.val().length == 0) {
+    //
+    //     a2.parent().addClass("has-error");
+    //     alert("Incorrect Address Line 2");
+    //     aBool = false;
+    //
+    // }
+    // if (!/[A-Za-z]/.test(city.val()) || city == null || city.val().length == 0) {
+    //
+    //     city.parent().addClass("has-error");
+    //     alert("Incorrect City");
+    //     aBool = false;
+    //
+    // }
+    // if (!/[A-Za-z]/.test(county.val()) || county == null || county.val().length == 0) {
+    //
+    //     county.parent().addClass("has-error");
+    //     alert("Incorrect County");
+    //     aBool = false;
+    //
+    // }
+    // if (!/[A-Za-z0-9]/.test(postcode.val()) || postcode == null || postcode.val().length == 0) {
+    //
+    //     postcode.parent().addClass("has-error");
+    //     alert("Incorrect Post Code");
+    //     aBool = false;
+    //
+    // }
 
-        houseNumber.parent().addClass("has-error");
-        alert("Incorrect HouseNumber/Name");
+    if (a1.val() == null) {
+        alert("a1");
         aBool = false;
-
     }
-    if (!/[A-Za-z]/.test(streetName.val()) || streetName.val() == null || streetName.val().length == 0) {
-
-        streetName.parent().addClass("has-error");
-        alert("Incorrect Street Name");
+    if (a2.val() == null) {
+        alert("a2");
         aBool = false;
-
     }
-    if (!/[A-Za-z]/.test(town.val()) || town.val() == null || town.val().length == 0) {
-
-        town.parent().addClass("has-error");
-        alert("Incorrect Town");
+    if (city.val() == null) {
+        alert("a3");
         aBool = false;
-
     }
-
-    if (!/[A-Za-z]/.test(city.val()) || city.val() == null || city.val().length == 0) {
-
-        city.parent().addClass("has-error");
-        alert("Incorrect City");
+    if (county.val() == null) {
+        alert("a4");
         aBool = false;
-
     }
-    if (!/[A-Za-z]/.test(county.val()) || county.val() == null || county.val().length == 0) {
-
-        county.parent().addClass("has-error");
-        alert("Incorrect County");
+    if (postcode.val() == null) {
+        alert("a5");
         aBool = false;
-
-    }
-    if (!/[A-Za-z0-9]/.test(postcode.val()) || postcode.val() == null || postcode.val().length == 0) {
-
-        postcode.parent().addClass("has-error");
-        alert("Incorrect Post Code");
-        aBool = false;
-
     }
 
     if (aBool) {
