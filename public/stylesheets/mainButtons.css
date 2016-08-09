@@ -1,0 +1,58 @@
+body
+{
+	padding: 40px;
+}
+
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	padding: 3px 3px;
+  margin: 0px 3px 3px 0px;
+  float: left;
+	border-radius: 8px;
+	font-family: 'Impact';
+	font-size: 18px;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.white
+{
+	background-color: #fff;
+	border-bottom: 5px solid #fff;
+	text-shadow: 0px -2px #e5e5e5;
+}
+
+.red
+{
+	background-color: #a80314;
+	border: 2px solid #830512;
+	text-shadow: 0px -2px #ff3333;
+}
+
+.green
+{
+	background-color: #82BF56;
+	border-bottom: 5px solid #669644;
+	text-shadow: 0px -2px #669644;
+}
+
+.yellow
+{
+	background-color: #F2CF66;
+	border-bottom: 5px solid #D1B358;
+	text-shadow: 0px -2px #D1B358;
+}
+
+.action-button:active
+{
+	transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}
