@@ -154,18 +154,14 @@ trait MongoDatabaseConnector {
 
     connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
       case Success(result) =>
-        val query = BSONDocument(
-          "category" -> category
-        )
-        result.find(query).one[Product_New].onComplete {
-          case Success(product) =>
-            categoryBuffer += Product_New(product.get.product, product.get.itemID, product.get.images, product.get.category, product.get.description, product.get.stock, product.get.price)
-
-          case Failure(fail) =>
-            categoryBuffer
+        val query = BSONDocument("Category"-> BSONDocument("$regex" -> s"(.*$category).*"))
+        result.find(query).cursor[Product_New].collect[ArrayBuffer]().map {
+          case products =>
+            categoryBuffer = products
+          case _ =>
+            None
         }
-      case Failure(fail) =>
-        categoryBuffer
+
     }
     Thread.sleep(500)
     categoryBuffer.toArray
