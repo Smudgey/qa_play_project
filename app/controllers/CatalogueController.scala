@@ -23,7 +23,8 @@ class CatalogueController @Inject() extends Controller with Formatter with Mongo
   def showCategory(cat: String) = Action {
     implicit request =>
     //Take in a Category enumeration as a string and match it to a value
-      Ok(views.html.catalogue(findByCategory(cat))(request.session))
+      println(getCatVal(cat))
+      Ok(views.html.catalogue(findByCategory(getCatVal(cat)))(request.session))
 
   }
 

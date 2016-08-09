@@ -32,7 +32,7 @@
                         @helper.form(routes.BasketController.update) {
                             @defining(OrderLine_New.returnProduct(oli.prodId)){ prod =>
                         <div class="row">
-                            <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+                            <div class="col-xs-2"><img class="img-responsive" src="@prod.images(0)">
                             </div>
                             <div class="col-xs-4">
                                 <h4 class="product-name"><strong>@prod.product</strong></h4><h4><small>@prod.description</small></h4>

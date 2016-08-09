@@ -16,7 +16,7 @@ class OrderTest extends FlatSpec with Matchers with MongoDatabaseConnector{
     )
 
   it should "Get an Order" taggedAs FindOrder in(
-    findOrderTest.orderID == (findOrder(7).orderID) shouldEqual true
+    findOrderTest.orderID == findOrder(7).orderID shouldEqual true
 
     )
 
