@@ -76,8 +76,6 @@ function validateEditAccount(){
     if(eABool){
         eAForm.submit()
     }
-
-
 }
 
 function validateRegister(){
@@ -187,9 +185,7 @@ function validateAddress() {
     }
 
     if (aBool) {
-
         addressForm.submit()
-
     }
 
 }
