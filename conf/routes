@@ -11,7 +11,7 @@ POST        /addNewAddress              controllers.AccountController.addAddress
 GET         /addNewAddress              controllers.AccountController.addNewAddress
 
 GET         /removeCard                 controllers.AccountController.removeCard(cardNumber: String)
-GET         /removeAddress              controllers.AccountController.removeAddress(address: String)
+GET         /removeAddress              controllers.AccountController.removeAddress(address1: String, address2: String, postcode: String)
 
 POST        /purchaseHistory           controllers.PurchaseHistoryController.orderRating
 GET         /purchaseHistory           controllers.PurchaseHistoryController.viewPurchase
@@ -22,8 +22,6 @@ GET         /category/clearance         controllers.CatalogueController.showClea
 GET         /category/*cat              controllers.CatalogueController.showCategory(cat: String)
 POST        /catalogue/price            controllers.SearchController.filterSearch
 GET         /catalogue/*min&*max        controllers.CatalogueController.priceFilter(min: Double, max: Double)
-
-
 
 GET         /view-product              controllers.ProductViewController.viewProduct(itemID: String)
 

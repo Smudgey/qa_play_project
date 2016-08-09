@@ -1,5 +1,4 @@
-@import _root_.models.OrderLine
-@import models.MongoDatabaseConnector
+
 
 @(form : Form[(List[Int], List[String])] )(implicit session: Session)
 @main("Basket") {
@@ -24,13 +23,13 @@
                     </div>
                 </div>
                 <div class = "panel-body">
-                    <p>There are currently <strong><em>@OrderLine_New.getSize</em></strong> items in your basket
+                    <p>There are currently <strong><em>@OrderLine.getSize</em></strong> items in your basket
                     </p>
-                    @if(!OrderLine_New.basket.isEmpty){
-                        @for((oli, i) <- OrderLine_New.basket.view.zipWithIndex) {
+                    @if(!OrderLine.basket.isEmpty){
+                        @for((oli, i) <- OrderLine.basket.view.zipWithIndex) {
 
                         @helper.form(routes.BasketController.update) {
-                            @defining(OrderLine_New.returnProduct(oli.prodId)){ prod =>
+                            @defining(OrderLine.returnProduct(oli.prodId)){ prod =>
                         <div class="row">
                             <div class="col-xs-2"><img class="img-responsive" src="@prod.images(0)">
                             </div>
@@ -90,7 +89,7 @@
                         </div>
 
                         <div class="col-xs-6">
-                            <h4 class="text-right">Total <strong> £@OrderLine_New.totalPrice(OrderLine_New.basket)</strong></h4>
+                            <h4 class="text-right">Total <strong> £@OrderLine.totalPrice(OrderLine.basket)</strong></h4>
                         </div>
                         <div style="width: auto;" class="col-xs-3">
                             <a class="btn btn-success btn-block" href="@routes.PaymentController.checkout">

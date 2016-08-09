@@ -1,4 +1,4 @@
-@import _root_.models.{Category, Product}
+
 @(content: Html)
 
 <div class="navbar navbar-default visible-xs">
@@ -27,7 +27,7 @@
                 <div id="group-@i" class="list-group collapse ">
                     @for(sub <- Category.categoryMap(parent)) {
                     <a class="list-group-item" href="@routes.CatalogueController.showCategory(sub.toString)">
-                        <span class="badge">@Product.searchByCategory(sub.toString).size</span> @Category.formatCategory(sub.toString)
+                        <span class="badge">@Product.findByCategory(sub.toString).size</span> @Category.formatCategory(sub.toString)
                     </a>
                     }
                 </div>
