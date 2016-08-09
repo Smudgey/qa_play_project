@@ -137,8 +137,8 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
         case Success(result) =>
           if (findAccountByEmail(request.session.data("Email")).isEmpty) {
             //Create addresses
-            val addressArray = Array[Address_New](
-              Address_New(
+            val addressArray = Array[Address](
+              Address(
                 request.session.data("AddressLine1"),
                 request.session.data("AddressLine2"),
                 request.session.data("AddressCity"),
@@ -156,12 +156,12 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
               )
             )
             //Create new Account in database
-            Account_New.create(result, Account_New(
+            Account.create(result, Account(
               randomID,
               request.session.data("Email"),
               request.session.data("Password"),
               request.session.data("FirstName"),
-              request.session.data("FirstName"),
+              request.session.data("LastName"),
               request.session.data("Phone"),
               addressArray,
               paymentCardsArray
