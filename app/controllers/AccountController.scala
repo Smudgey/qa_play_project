@@ -13,7 +13,7 @@ import scala.util.{Failure, Success}
 /*
   * Create By rytis
   *
-  * Last worked on by Rytis on 26/07/2916
+  * Last worked on by Mark on 09/08/2016
   */
 
 class AccountController @Inject extends Controller with Formatter with MongoDatabaseConnector {
@@ -31,14 +31,13 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     (CardDetails.unapply)
   )
   //form for updating customer details
-  private val updateDetailsForm: Form[CustomerDetails] = Form(
-    mapping(
-      "name" -> text,
+  private val updateDetailsForm = Form(
+    tuple(
+      "fname" -> text,
+      "lname" -> text,
       "email" -> text,
       "phone" -> text
     )
-    (CustomerDetails.apply)
-    (CustomerDetails.unapply)
   )
   //form form adding address
 
@@ -67,10 +66,25 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     * @return
     */
   def updateAccount() = Action {
-    implicit request => {
-      CustomerDetails.updateDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID, updateDetailsForm.bindFromRequest().data("name"), updateDetailsForm.bindFromRequest().data("phone"), updateDetailsForm.bindFromRequest().data("email"))
-      Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
-    }
+    implicit request =>
+
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(result) =>
+          val query = BSONDocument("Email" -> request.session.data("connected"))
+          val modifier = BSONDocument(
+            "$set" -> BSONDocument(
+              "First Name" -> updateDetailsForm.bindFromRequest().data("fname"),
+              "Last Name" -> updateDetailsForm.bindFromRequest().data("lname"),
+              "Email" -> updateDetailsForm.bindFromRequest().data("email"),
+              "Phone" -> updateDetailsForm.bindFromRequest().data("phone")
+            )
+          )
+          result.update(query, modifier)
+        case Failure(fail) =>
+          throw fail
+      }
+      Redirect(routes.AccountController.viewAccount()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
+
   }
 
   /**
@@ -138,13 +152,23 @@ class AccountController @Inject extends Controller with Formatter with MongoData
   def addCard() = Action {
     implicit request =>
 
-      CardDetails.addCard(
-        Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.cardID,
-        cardForm.bindFromRequest().data("cardholder"),
-        cardForm.bindFromRequest().data("cardnumber"),
-        cardForm.bindFromRequest().data("expirationMonth"),
-        cardForm.bindFromRequest().data("expirationYear")
-      )
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(result) =>
+          val query = BSONDocument("Email" -> request.session.data("connected"))
+          val modifier = BSONDocument(
+            "$push" -> BSONDocument(
+              "PaymentCards" -> BSONDocument(
+                "CardName" -> cardForm.bindFromRequest().data("cardholder"),
+                "CardNumber"-> cardForm.bindFromRequest().data("cardnumber"),
+                "CardExpiry" -> (cardForm.bindFromRequest().data("expirationMonth") + "/" + cardForm.bindFromRequest().data("expirationYear"))
+                )
+              )
+          )
+          println(query +"\n" +modifier)
+          result.update(query, modifier)
+        case Failure(fail) =>
+          throw fail
+      }
       Redirect(routes.AccountController.addNewCard())
   }
 
@@ -156,12 +180,8 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     */
   def removeCard(cardNumber: String) = Action {
     implicit request =>
-
-
       connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
         case Success(collection) =>
-
-
           val query = BSONDocument(
             "$pull" -> BSONDocument(
               "PaymentCards" -> BSONDocument(
@@ -169,28 +189,46 @@ class AccountController @Inject extends Controller with Formatter with MongoData
               )
             )
           )
-
           val person = BSONDocument(
             "Email" -> request.session.data("connected")
           )
-
           collection.update(person, query)
         case Failure(fail) =>
       }
 
-      Thread.sleep(3000)
+      Thread.sleep(500)
       Redirect(routes.AccountController.viewCard())
   }
 
   /**
     * this function will remove customer address
     *
-    * @param addressID AddressID
+    * @param address1 First Line of address
+    * @param address2 Second line of address
+    * @param postcode Postcode
     * @return
     */
-  def removeAddress(addressID: String) = Action {
+  def removeAddress(address1: String, address2: String, postcode: String) = Action {
     implicit request =>
-      Address.removeAddress(addressID)
+      connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
+        case Success(collection) =>
+          val query = BSONDocument(
+            "$pull" -> BSONDocument(
+              "Address" -> BSONDocument(
+                "AddressLine1" -> address1,
+                "AddressLine2" -> address2,
+                "AddressPostcode" -> postcode
+              )
+            )
+          )
+          val person = BSONDocument(
+            "Email" -> request.session.data("connected")
+          )
+          collection.update(person, query)
+        case Failure(fail) =>
+          throw fail
+      }
+      Thread.sleep(500)
       Redirect(routes.AccountController.viewAddress())
   }
 
@@ -202,15 +240,11 @@ class AccountController @Inject extends Controller with Formatter with MongoData
   def addAddress() = Action {
 
     implicit request =>
-
       connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
         case Success(result) =>
-
           val person = BSONDocument(
             "Email" -> request.session.data("connected")
           )
-
-
           val query = BSONDocument(
             "$push" -> BSONDocument(
               "Address" -> BSONDocument(
@@ -224,15 +258,12 @@ class AccountController @Inject extends Controller with Formatter with MongoData
           )
           result.update(person, query)
         case Failure(fail) =>
-          println("fail")
+          throw fail
       }
-          Thread.sleep(3000)
-          Redirect(routes.AccountController.viewAddress())
+      Thread.sleep(500)
+      Redirect(routes.AccountController.viewAddress())
 
-      }
-
-
-
+  }
 
 
 }

@@ -1,43 +1,81 @@
+/**
+  * Created by Administrator on 02/08/2016.
+  */
 package models
 
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
+
+import scala.concurrent._
+import ExecutionContext.Implicits.global
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by Marko on 11/07/2016.
+  * Created by Marko on 02/08/2016.
   *
-  * The orderline class takes in a product, an order quantitry and a porousware quantity <NOT USED>.  A product is passed rather than a product ID so that the objects variables can be called
-  * within this class, rather than
+  * The orderline class takes in a product, an order quantitry and a porousware quantity (not used)  A product is passed rather than a product ID so that the objects variables can be called
+  * within this class.
   */
-case class OrderLine(prod: Product, var quantity: Int = 1, var pwareQuantity: Int = 0) {}
+case class OrderLine(prodId: String, var quantity: Int, price: Double) {}
 
-object OrderLine extends Formatter {
+object OrderLine extends Formatter with MongoDatabaseConnector {
 
   var basket = new ArrayBuffer[OrderLine]
   var size = getSize
 
-    def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
-    def addToTot(bsk: ArrayBuffer[OrderLine], total: Double): Double = {
-      if (bsk.isEmpty)
-        priceFormat(total)
-      else
-        addToTot(bsk.tail, total + bsk.head.prod.price * bsk.head.quantity)
-    }
-    addToTot(bsk, 0)
+  implicit object OrderLineReader extends BSONDocumentReader[OrderLine] {
+    def read(doc: BSONDocument): OrderLine =
+      OrderLine(
+        doc.getAs[String]("productID").get,
+        doc.getAs[Int]("quantity").get,
+        priceFormat(doc.getAs[Double]("price").get)
+      )
   }
 
-  def clear(): Unit = {
-    for(ol <- basket) {
-      val product = Product.findProduct(ol.prod.pid).get
-      product.stock       += ol.quantity
-      product.pwareStock  += ol.pwareQuantity
+  implicit object OrderLineWriter extends BSONDocumentWriter[OrderLine] {
+    def write(oln: OrderLine): BSONDocument = {
+      BSONDocument(
+        "productID" -> oln.prodId,
+        "quantity" -> oln.quantity,
+        "price" -> oln.price
+      )
     }
-    basket.clear()
-    size = basket.size
+  }
+
+  def returnProduct(itemID: String): Product = {
+    findProductByID(itemID)
+  }
+
+  def addToBasket(oli: OrderLine): Unit = {
+
+    val p = findProductByID(oli.prodId)
+
+    //Do product stock validation here
+    if (oli.quantity > p.stock) {
+
+      //TODO send some response that request cant be fulfilled
+
+    } else {
+      p.decrementStock(oli.quantity)
+      size += oli.quantity
+
+      def addOrIncrease(bsk: ArrayBuffer[OrderLine], oli2: OrderLine): Unit = {
+        if (bsk.isEmpty) {
+          basket += oli2
+        } else if (bsk.head.prodId == oli2.prodId) {
+
+          bsk.head.quantity += oli2.quantity
+
+        } else {
+          addOrIncrease(bsk.tail, oli2)
+        }
+      }
+      addOrIncrease(basket, oli)
+    }
   }
 
   def getSize: Int = {
     def accumulate(bsk: ArrayBuffer[OrderLine], total: Int): Int = {
-      if(bsk.isEmpty)
+      if (bsk.isEmpty)
         total
       else
         accumulate(bsk.tail, total + bsk.head.quantity)
@@ -45,24 +83,33 @@ object OrderLine extends Formatter {
     accumulate(basket, 0)
   }
 
+  def findOrderLine(pid: String) = basket.find(_.prodId == pid)
+
   def removeItem(pid: String): Unit = {
 
-    size -= findOrderLine(0).get.quantity
-    basket.remove(basket.indexOf(findOrderLine(0).get))
+    println("Remove Item: "+ pid)
+    size -= findOrderLine(pid).get.quantity
+    basket.remove(basket.indexOf(findOrderLine(pid).get))
   }
 
-//  def updateBasket(oli: OrderLine): Unit = {
-//    if (oli.quantity > Product.findProduct(oli.prod.pid).get.stock) {
-//
-//    } else {
-//
-//    }
-//
-//  }
+  def totalPrice(bsk: ArrayBuffer[OrderLine]): Double = {
+    def addToTot(bsk: ArrayBuffer[OrderLine], total: Double): Double = {
+      if (bsk.isEmpty)
+        priceFormat(total)
+      else
+        addToTot(bsk.tail, total + bsk.head.price * bsk.head.quantity)
+    }
+    addToTot(bsk, 0)
+  }
+
+  def clear : Unit = {
+    for(ol <- basket) {
+    val product = Product.findProductByID(ol.prodId)
+    product.stock += ol.quantity
+  }
+    basket.clear()
+    size = basket.size
+  }
 
 
-
-  def findOrderLine(pid:Int) = basket.find(_.prod.pid == pid)
 }
-
-
