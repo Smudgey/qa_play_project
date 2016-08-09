@@ -55,12 +55,12 @@ body {
 
 /* navbar */
 .navbar-default {
-  background-color: #fff;
+  background-color: #6b6b6b;
   border-bottom: #000000 solid 1px; }
 
 /* title */
 .navbar-default .navbar-brand {
-  color: #fff;
+  color: #6b6b6b;
   border-color: transparent;
   -webkit-transition: color 0.5s ease-in-out;
   -moz-transition: color 0.5s ease-in-out;
