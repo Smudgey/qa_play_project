@@ -1,12 +1,10 @@
 package controllersTest
 
-import controllers.AccountController
-import models.{Address_New, MongoDatabaseConnector}
+import models.{MongoDatabaseConnector}
 import org.scalatest.{FlatSpec, Matchers, Tag}
 import reactivemongo.bson.BSONDocument
 import scala.concurrent.ExecutionContext.Implicits.global
 
-import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success}
 
 /**

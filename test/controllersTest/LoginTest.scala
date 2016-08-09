@@ -4,8 +4,6 @@ import models.MongoDatabaseConnector
 import org.mindrot.jbcrypt.BCrypt
 import org.scalatest.{FlatSpec, Matchers, Tag}
 
-//hashing
-
 /**
   * Created by Administrator on 08/08/2016.
   */
@@ -36,5 +34,3 @@ object UsernameFail extends Tag("test.modelsTest.UsernameFail")
 object PasswordSuccess extends Tag("test.modelsTest.PasswordSuccess")
 object PasswordFail extends Tag("test.modelsTest.PasswordFail")
 
-//object LoginSuccess extends Tag("test.modelsTest.LoginSuccess")
-//object LoginFail extends Tag("test.modelsTest.LoginFail")

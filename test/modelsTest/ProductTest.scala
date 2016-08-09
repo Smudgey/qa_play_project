@@ -1,6 +1,6 @@
 package modelsTest
 
-import models.{MongoDatabaseConnector, Product_New}
+import models.{MongoDatabaseConnector}
 import org.scalatest.{FlatSpec, Matchers, Tag}
 
 /**
