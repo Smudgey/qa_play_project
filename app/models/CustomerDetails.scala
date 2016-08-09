@@ -36,14 +36,14 @@ object CustomerDetails {
     * @param telephoneNumber Customer name
     * @param email Customer Name
     */
-  def updateDetails(cid: String, name: String, telephoneNumber: String, email: String): Unit = {
-    val customer = detailsList.find(_.cid == cid).get
-    customer.telephoneNumber = telephoneNumber
-    customer.name = name
-
-    val account = Account.getAccountViaDetailsID(cid).get
-    Login.findLoginByID(account.loginID).get.email = email
-  }
+//  def updateDetails(cid: String, name: String, telephoneNumber: String, email: String): Unit = {
+//    val customer = detailsList.find(_.cid == cid).get
+//    customer.telephoneNumber = telephoneNumber
+//    customer.name = name
+//
+//    val account = Account.getAccountViaDetailsID(cid).get
+//    Login.findLoginByID(account.loginID).get.email = email
+//  }
 
   def addDetails(cid: String, name: String, telephoneNumber: String): Unit = {
     detailsList += CustomerDetails(cid, name, telephoneNumber)

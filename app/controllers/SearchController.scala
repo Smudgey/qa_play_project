@@ -1,7 +1,7 @@
 package controllers
 
 import com.google.inject.Inject
-import models.{Login, Product, SearchQuery}
+import models.{Login, Product}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
@@ -11,12 +11,10 @@ import play.api.mvc.{Action, Controller}
   */
 class SearchController @Inject extends Controller {
 
-  val searchForm: Form[SearchQuery] = Form(
-    mapping(
+  val searchForm = Form(
+    single(
       "searchQuery" -> nonEmptyText
     )
-    (SearchQuery.apply)
-    (SearchQuery.unapply)
   )
 
   val filterForm = Form(

@@ -68,7 +68,10 @@ class AccountController @Inject extends Controller with Formatter with MongoData
     */
   def updateAccount() = Action {
     implicit request => {
-      CustomerDetails.updateDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID, updateDetailsForm.bindFromRequest().data("name"), updateDetailsForm.bindFromRequest().data("phone"), updateDetailsForm.bindFromRequest().data("email"))
+      //      CustomerDetails.updateDetails(Account.getAccountViaEmail(Login.findLogin(request.session.data("connected")).get.lid).get.detailsID, updateDetailsForm.bindFromRequest().data("name"), updateDetailsForm.bindFromRequest().data("phone"), updateDetailsForm.bindFromRequest().data("email"))
+      //      Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
+      //    }
+
       Redirect(routes.AccountController.manageAccounts()).withSession("connected" -> updateDetailsForm.bindFromRequest().data("email"))
     }
   }
