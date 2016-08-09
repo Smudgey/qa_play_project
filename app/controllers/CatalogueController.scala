@@ -1,13 +1,10 @@
 package controllers
 import javax.inject._
 
-import _root_.models.{Category, Formatter, MongoDatabaseConnector, Product}
+import _root_.models.{Formatter, MongoDatabaseConnector}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
-import reactivemongo.api.MongoConnectionOptions
-
-import scala.collection.mutable.ArrayBuffer
 
 /**
   * Created by Marko on 08/07/2016.

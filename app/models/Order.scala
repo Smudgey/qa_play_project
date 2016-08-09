@@ -1,83 +1,65 @@
 package models
 
-import java.text.SimpleDateFormat
-import java.util.Calendar
+import reactivemongo.api.collections.bson.BSONCollection
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 
-import reactivemongo.bson.{BSONDocument, BSONDocumentReader}
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent._
+import scala.util.{Failure, Success}
 
-import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by Paul on 13/07/2016.
-  *
-  * Last worked on by Rytis on 25/07/2016
-  *
+  * Created by Marko on 02/08/2016.
   */
+case class Order(orderID: Int, accountID: String, date: String, time: String, orderStatus: String, paymentMethod: String, orderLines: Array[OrderLine], totalPrice: Double, rating: Int) {}
 
-case class Order(accountID: String, orderID: String, orderLines: ArrayBuffer[OrderLine], var totalPrice: Double, status: OrderStatus.Value, paymentMethod: PaymentMethod.Value, time: String, var rating: Int) {}
+object Order extends MongoDatabaseConnector{
 
-object Order extends Formatter {
+  implicit object OrderReader extends BSONDocumentReader[Order] {
+    def read(doc: BSONDocument): Order =
+      Order(
+        doc.getAs[Int]("orderID").get,
+        doc.getAs[String]("accountID").get,
+        doc.getAs[String]("date").get,
+        doc.getAs[String]("time").get,
+        doc.getAs[String]("orderStatus").get,
+        doc.getAs[String]("paymentMethod").get,
+        doc.getAs[Array[OrderLine]]("orderLines").get,
+        doc.getAs[Double]("totalPrice").get,
+        doc.getAs[Int]("rating").get
+      )
+  }
 
-  // this will give today's timestamp
-  //val today = new SimpleDateFormat("hh:mm aa d-M-y").format(Calendar.getInstance().getTime)
-
-  // dummy data
-  private val orderList = ArrayBuffer[Order](
-    Order("0", randomID,
-      ArrayBuffer[OrderLine](
-        OrderLine(Product.findProduct(701).get, 3, 1),
-        OrderLine(Product.findProduct(702).get, 2, 0)
-      ),
-      0,
-      OrderStatus.Dispatched,
-      PaymentMethod.PayLater,
-      todaysDate, 3),
-    Order("0", randomID,
-      ArrayBuffer[OrderLine](
-        OrderLine(Product.findProduct(703).get, 2, 1)
-      ),
-      0,
-      OrderStatus.Dispatched,
-      PaymentMethod.PayLater,
-      todaysDate, 5)
-  )
-
-  // calculates dummy orders prices
-  totalPrice()
-
-  /**
-    * this function will loop through orders and total up order items
-    */
-  def totalPrice(): Unit = {
-    for (order <- orderList) {
-      order.totalPrice = OrderLine.totalPrice(order.orderLines)
+  implicit object OrderWriter extends BSONDocumentWriter[Order] {
+    def write(on: Order): BSONDocument = {
+      BSONDocument(
+        "orderID" -> on.orderID,
+        "accountID" -> on.accountID,
+        "date" -> on.date,
+        "time" -> on.time,
+        "orderStatus" -> on.orderStatus,
+        "paymentMethod" -> on.paymentMethod,
+        "orderLines" -> on.orderLines,
+        "totalPrice" -> on.totalPrice,
+        "rating" -> on.rating
+      )
     }
   }
 
-  /**
-    * this function will get order object by ID
-    *
-    * @param orderID Order ID
-    * @return
-    */
-  def getOrderByID(orderID: String) = orderList.find(_.orderID == orderID)
+  def create(orderCollection: BSONCollection, order: Order)(implicit ec: ExecutionContext, writer: BSONDocumentWriter[Order]): Future[Unit] = {
+    val writeResult = orderCollection.insert(order)
+    writeResult.map(_ => {
+      /*presumably this is just using the writer implicitly to know how to output every key we loop through
+      * as a valid entry in a BSONDocument as an Account object.... I'll try to improve this description later*/
+    })
+  }
 
-  /**
-    * this function will find customers purchase history via Customer ID
-    *
-    * @param accountID Customer ID
-    * @return
-    */
-  def getOrderHistory(accountID: String) = orderList.filter(_.accountID == accountID)
-
-
-  /**
-    * this function will set star rating for purchase order
-    *
-    * @param orderID Order ID
-    * @param rating  User input star rating
-    */
   def setStarRating(orderID: String, rating: Int): Unit = {
-    getOrderByID(orderID).get.rating = rating
+    connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
+      case Success(result) =>
+        result.update(BSONDocument("orderID" -> orderID), BSONDocument("$set" -> BSONDocument("rating" -> rating)))
+      case Failure(fail) =>
+        throw fail
+    }
   }
 }

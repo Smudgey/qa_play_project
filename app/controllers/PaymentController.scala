@@ -57,23 +57,23 @@ class PaymentController @Inject()(val messagesApi: MessagesApi) extends Controll
           case _ => payMthd = PaymentMethod.Other
         }
         val cust = findAccountByEmail(request.session.data("connected")).head.accountID
-        val ol = OrderLine_New.basket
-        val price = OrderLine_New.totalPrice(ol)
+        val ol = OrderLine.basket
+        val price = OrderLine.totalPrice(ol)
         val status = OrderStatus.Ordered.toString
         val td = todaysDate
         val time = timeNow
         val orderID = randomInt
-        val ord = Order_New(orderID, cust, td, time, status, payMthd.toString, ol.toArray, price, 0)
+        val ord = Order(orderID, cust, td, time, status, payMthd.toString, ol.toArray, price, 0)
 
         for (o <- ol) {
           println(s"Stock: "+ findProductByID(o.prodId).stock +"\nNew stock: " + (findProductByID(o.prodId).stock - o.quantity))
-          Product_New.updateDatabaseStock(o.prodId, findProductByID(o.prodId).stock - o.quantity)
+          Product.updateDatabaseStock(o.prodId, findProductByID(o.prodId).stock - o.quantity)
         }
 
         connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
           case Success(result) =>
-            Order_New.create(result, ord)
-            OrderLine_New.basket.clear()
+            Order.create(result, ord)
+            OrderLine.basket.clear()
         }
         Ok(views.html.orderConfirm(ord)(request.session))
 
