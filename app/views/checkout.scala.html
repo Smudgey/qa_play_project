@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class = "panel-body">
-                        <p>There are currently <strong><em>@OrderLine_New.size</em></strong> items in your basket
+                        <p>There are currently <strong><em>@OrderLine_New.getSize</em></strong> items in your basket
                         </p>
                         @if(!OrderLine_New.basket.isEmpty) {
                             @for(oli <- OrderLine_New.basket) {

@@ -21,13 +21,13 @@ object Category extends Enumeration with Formatter{
   val ClothingHat     = Value("Clothing/Hat")
 
   val Plant           = Value("Plants")
-  val PlantTree       = Value("Plants/Tree")
-  val PlantPotted     = Value("Plants/Potted")
-  val PlantPot        = Value("Plants/Pot")
+  val PlantTree       = Value("Plant/Tree")
+  val PlantPotted     = Value("Plant/Potted")
+  val PlantPot        = Value("Plant/Pot")
 
   val BirdItem        = Value("Birds")
-  val BirdHouse       = Value("Birds/BirdHouse")
-  val BirdFeeder      = Value("Birds/Feeder")
+  val BirdHouse       = Value("Bird/House")
+  val BirdFeeder      = Value("Bird/Feeder")
 
   val Furniture       = Value("Furniture")
   val FurnitureGazebo = Value("Furniture/Gazebo")
