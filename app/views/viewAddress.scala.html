@@ -1,4 +1,4 @@
-@(arr: Array[Address_New])(implicit session: Session)
+@(arr: Array[Address])(implicit session: Session)
 @main("") {
     @manageAccountsSidebar("Address") {
         <script>changeTab("viewAddress")</script>
@@ -35,9 +35,9 @@
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-left">
                     <h3>@address.postcode</h3>
                 </div>
-                @*<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">*@
-                    @*<a href="@routes.AccountController.removeAddress(address.)" class="btn btn-danger">Remove</a>*@
-                @*</div>*@
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <a href="@routes.AccountController.removeAddress(address.addressLineOne, address.addressLineTwo, address.postcode)" class="btn btn-danger">Remove</a>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <hr>
                 </div>

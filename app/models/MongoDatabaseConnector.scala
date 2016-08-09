@@ -17,6 +17,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 /**
   * Created by rytis on 28/07/16.
+  * Last worked on by Mark on 09/08/2016
   */
 trait MongoDatabaseConnector {
 
@@ -40,14 +41,18 @@ trait MongoDatabaseConnector {
     val credentials = List(Authenticate(databaseName, "appaccess", "appaccess"))
 
     def servs: List[String] = List("192.168.1.15:27017")
-
     val conn = driver.connection(servs, authentications = credentials)
-
+//
+//    new Thread(
+//      new Runnable {
+//        def run() { conn.close()}
+//      }
+//    )
     conn.database(databaseName).map(_.collection(collectionName))
   }
 
-  def getOrderHistory(email: String): ArrayBuffer[Order_New] = {
-    var toReturn = ArrayBuffer[Order_New]()
+  def getOrderHistory(email: String): ArrayBuffer[Order] = {
+    var toReturn = ArrayBuffer[Order]()
 
     val accId = findAccountByEmail(email).head.accountID
 
@@ -59,7 +64,7 @@ trait MongoDatabaseConnector {
         val query = BSONDocument(
           "accountID" -> accId
         )
-        val ordersList = result.find(query).cursor[Order_New].collect[List]()
+        val ordersList = result.find(query).cursor[Order].collect[List]()
         ordersList.onComplete {
           case Success(orders) =>
             for (ord <- orders) {
@@ -77,14 +82,14 @@ trait MongoDatabaseConnector {
 
   }
 
-  def findOrder(oid: Int): Order_New = {
-    var toReturn = ArrayBuffer[Order_New]()
+  def findOrder(oid: Int): Order = {
+    var toReturn = ArrayBuffer[Order]()
 
     connectToDatabase(CollectionNames.ORDER_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
       case Success(result) =>
         val query = BSONDocument("orderID" -> oid)
 
-        result.find(query).one[Order_New].onComplete {
+        result.find(query).one[Order].onComplete {
           case Success(order) =>
             if (order.isDefined)
               toReturn += order.get
@@ -99,34 +104,34 @@ trait MongoDatabaseConnector {
     toReturn.head
   }
 
-  def findAccountByEmail(email: String): ArrayBuffer[Account_New] = {
-    var toReturn = ArrayBuffer[Account_New]()
+  def findAccountByEmail(email: String): ArrayBuffer[Account] = {
+    var toReturn = ArrayBuffer[Account]()
 
     connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
       case Success(result) =>
         val query = BSONDocument(
           "Email" -> email
         )
-        result.find(query).one[Account_New].onComplete {
+        result.find(query).one[Account].onComplete {
           case Success(account) =>
             if (account.isDefined) {
-              toReturn += Account_New(account.get.accountID, account.get.username, account.get.password, account.get.firstName, account.get.lastName, account.get.phone, account.get.address, account.get.paymentCards)
+              toReturn += Account(account.get.accountID, account.get.username, account.get.password, account.get.firstName, account.get.lastName, account.get.phone, account.get.address, account.get.paymentCards)
             }
 
           case Failure(fail) =>
-            toReturn
+            throw fail
         }
 
       case Failure(fail) =>
-        toReturn
+        throw fail
     }
 
     Thread.sleep(500)
     toReturn
   }
 
-  def findProductByID(itemID: String): Product_New = {
-    var returnHere = ArrayBuffer[Product_New]()
+  def findProductByID(itemID: String): Product = {
+    var returnHere = ArrayBuffer[Product]()
 
     connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
       case Success(result) =>
@@ -134,28 +139,28 @@ trait MongoDatabaseConnector {
         val query = BSONDocument(
           "itemID" -> itemID
         )
-        result.find(query).one[Product_New].onComplete {
+        result.find(query).one[Product].onComplete {
           case Success(product) =>
 
-            returnHere += Product_New( product.get.itemID,product.get.product, product.get.images, product.get.category, product.get.description, product.get.stock, product.get.price)
+            returnHere += Product(product.get.itemID, product.get.product, product.get.images, product.get.category, product.get.description, product.get.stock, product.get.price)
 
           case Failure(fail) =>
-            returnHere
+            throw fail
         }
       case Failure(fail) =>
-        returnHere
+        throw fail
     }
     Thread.sleep(500)
     returnHere.head
   }
 
-  def findByCategory(category: String): Array[Product_New] = {
-    var categoryBuffer = ArrayBuffer[Product_New]()
+  def findByCategory(category: String): Array[Product] = {
+    var categoryBuffer = ArrayBuffer[Product]()
 
     connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
       case Success(result) =>
-        val query = BSONDocument("Category"-> BSONDocument("$regex" -> s"(.*$category).*"))
-        result.find(query).cursor[Product_New].collect[ArrayBuffer]().map {
+        val query = BSONDocument("Category" -> BSONDocument("$regex" -> s"(.*$category).*"))
+        result.find(query).cursor[Product].collect[ArrayBuffer]().map {
           case products =>
             categoryBuffer = products
           case _ =>
@@ -164,11 +169,12 @@ trait MongoDatabaseConnector {
 
     }
     Thread.sleep(500)
+
     categoryBuffer.toArray
   }
 
-  def allProducts(itemName: String): Array[Product_New] = {
-    var returnBuffer = ArrayBuffer[Product_New]()
+  def allProducts(itemName: String): Array[Product] = {
+    var returnBuffer = ArrayBuffer[Product]()
 
     connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
 
@@ -177,7 +183,7 @@ trait MongoDatabaseConnector {
 
         val query = BSONDocument()
 
-        result.find(query).cursor[Product_New].collect[ArrayBuffer]().onComplete {
+        result.find(query).cursor[Product].collect[ArrayBuffer]().onComplete {
           case Success(coll) =>
             returnBuffer = coll
         }

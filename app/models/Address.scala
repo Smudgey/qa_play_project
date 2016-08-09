@@ -1,81 +1,49 @@
 package models
 
-import scala.collection.mutable.ArrayBuffer
+import reactivemongo.api.collections.bson.BSONCollection
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 
-/*
-  * Create By rytis
-  *
-  * Last worked on by Rytis on 26/07/2916
-  */
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
-  * this class will represent user address
-  *
-  * @param addressID   Address ID
-  * @param houseNumber House number
-  * @param streetName  Street name
-  * @param town        town
-  * @param city        City
-  * @param county      County
-  * @param postcode    Postcode
+  * Created by rytis on 28/07/16.
   */
-case class Address(addressID: String, houseNumber: String, streetName: String, town: String, city: String, county: String, postcode: String) {}
+case class Address(addressLineOne: String, addressLineTwo: String, city: String, county: String, postcode: String) {}
 
-case class AddressMap(accountID: String, addressID: String) {}
+object Address {
 
-object Address extends Formatter{
-  private var addressList = ArrayBuffer[Address](
-    Address("0", "a", "a", "a", "a", "a", "a"),
-    Address("1", "b", "b", "b", "b", "b", "b")
-  )
-
-  private var addressMap = ArrayBuffer[AddressMap](
-    AddressMap("a0", "0"),
-    AddressMap("a0", "1")
-  )
-
-
-  /**
-    * this function will add customer address to storage
-    *
-    * @param accountID   AccountID
-    * @param houseNumber House number
-    * @param streetName  Street name
-    * @param town        town
-    * @param city        City
-    * @param county      County
-    * @param postcode    Postcode
-    */
-  def addAddress(accountID: String, houseNumber: String, streetName: String, town: String, city: String, county: String, postcode: String): Unit = {
-    val tmp = randomID
-    addressList += Address(tmp, houseNumber, streetName, town, city, county, postcode)
-    addressMap += AddressMap(accountID, tmp)
+  implicit object AddressReader extends BSONDocumentReader[Address] {
+    def read(doc: BSONDocument): Address =
+      Address(
+        doc.getAs[String]("AddressLine1").get,
+        doc.getAs[String]("AddressLine2").get,
+        doc.getAs[String]("AddressCity").get,
+        doc.getAs[String]("AddressCounty").get,
+        doc.getAs[String]("AddressPostcode").get
+      )
   }
 
-  /**
-    * this function will get all of the customer address via AddressID
-    * @param addressID AddressID
-    * @return Array of Address objects
-    */
-  def getAddress(addressID: String): Array[Address] = {
-    val addressIDs = addressMap.filter(_.accountID == addressID)
-    var toReturn = ArrayBuffer[Address]()
-    for (address <- addressIDs) {
-      toReturn += addressList.find(_.addressID == address.addressID).get
-    }
-    toReturn.toArray
+  implicit object AddressWriter extends BSONDocumentWriter[Address] {
+    def write(address: Address): BSONDocument =
+      BSONDocument(
+        "AddressLine1" -> address.addressLineOne,
+        "AddressLine2" -> address.addressLineTwo,
+        "AddressCity" -> address.city,
+        "AddressCounty" -> address.county,
+        "AddressPostcode" -> address.postcode
+
+      )
   }
 
-  /**
-    * this function will remove customer address by address ID
-    * @param addressID AddressID
-    */
-  def removeAddress(addressID: String): Unit = {
-    val card = addressList.find(_.addressID == addressID).get
-    addressList.remove(addressList.indexOf(card))
-    addressMap.remove(addressMap.indexOf(addressMap.find(_.addressID == card.addressID).get))
-
+  def create(addressCollection: BSONCollection, address: Address)(implicit ec: ExecutionContext, writer: BSONDocumentWriter[Address]): Future[Unit] = {
+    val writeResult = addressCollection.insert(address)
+    writeResult.map(_ => {
+      /*presumably this is just using the writer implicitly to know how to output every key we loop through
+      * as a valid entry in a BSONDocument as an Account object.... I'll try to improve this description later*/
+    })
   }
 
 }
+
+
 
