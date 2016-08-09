@@ -6,7 +6,7 @@ import org.scalatest.{FlatSpec, Matchers, Tag}
 /**
   * Created by Administrator on 09/08/2016.
   */
-class RejectTotalCost10000Orders extends FlatSpec with Matchers with MongoDatabaseConnector{
+class CheckOrdersTest extends FlatSpec with Matchers with MongoDatabaseConnector{
 
   val orderLine = OrderLine_New
 
@@ -18,9 +18,9 @@ class RejectTotalCost10000Orders extends FlatSpec with Matchers with MongoDataba
 
   basketTest += orderLineTest
 
-  it should "Reject Total Cost of Orders above 10000" taggedAs Reject10000 in(
+  it should "Check Total Cost of Orders above 10000" taggedAs CheckTotalCost in(
     orderLine.totalPrice(basketTest) > 10000.00 shouldEqual true
     )
 
 }
-object Reject10000 extends Tag("test.modelsTest.Reject10000")
+object CheckTotalCost extends Tag("test.modelsTest.Reject10000")
