@@ -9,33 +9,36 @@
     <div class ="row">
 
 
+        <div class="row">
+            <div class="col-sm-12">
+
+                <br>
 
 
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-xs-18 col-sm-18">
+                        <div class="col-md-4"> <img class="image-reponsive" src="@routes.Assets.versioned("images/team.jpg")"/>
 
-                        <br>
+                        </div>
 
+                        <div class="col-xs-8 col-sm-8" style="font-family: Times New Roman Italic size = 15;">
+                            <em align="left">
 
-                        <div class="row">
-                            <div class="col-xs-18 col-sm-18">
-                                <div class="col-md-4"> <img class="image-reponsive" src="@routes.Assets.versioned("images/team.jpg")"/>
+                                <h2 class="navbar-brand" style="color: #a80314" align="center">
+                                    We are a traditional catalogue company specialising in selling <br><br>
+                                    garden and gnome accessories. We have recently expanded our <br><br>
+                                    services to include online purchases.
+                                    We aim to please our<br><br>
+                                    customers and would appreciate any feedback or questions. <br><br>
+                                    Feel free to use the enquiry form below and we will get back to you <br><br>
+                                    as soon as possible.</h2>
 
-                            </div>
+                            </em>
 
-                            <div class="col-xs-8 col-sm-8" style="font-family:Times New Roman Italic size=15;">
-                                <em align="left">
-
-                                <h2 class="navbar-brand" style="color:#a80314" align="center">We are a traditional catalogue company specialising in selling <br><br> garden and gnome accessories. We have recently expanded our <br><br>services to include online purchases.
-                                We aim to please our<br><br> customers and would appreciate any feedback or questions. <br><br>Feel free to use the enquiry form below and we will get back to you <br><br>as soon as possible.</h2>
-
-                                </em>
-
-                            </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
 
 
         </div>
@@ -43,50 +46,50 @@
 
         <canvas id="myCanvas" width="1200" height="200"></canvas>
         <script>
-      var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
+                var canvas = document.getElementById('myCanvas');
+                var context = canvas.getContext('2d');
 
-      context.beginPath();
-      context.moveTo(10, 50);
-      context.lineTo(1500, 50);
-      context.stroke();
-    </script>
+                context.beginPath();
+                context.moveTo(10, 50);
+                context.lineTo(1500, 50);
+                context.stroke();
+        </script>
 
 
-    @helper.form(routes.AboutContactController.createEnquiry()) {
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <h2 >Enquire below:</h2>
-                <div class="container">
-                    <div class="row text-center">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="vcenter">
+        @helper.form(routes.AboutContactController.createEnquiry()) {
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <h2 >Enquire below:</h2>
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-md-12 col-lg-12">
+                                <div class="vcenter">
 
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon">Fullname</span>
-                                    <input name="name" class="form-control" type="text">
-                                </div>
+                                    <div class="input-group form-group">
+                                        <span class="input-group-addon">Fullname</span>
+                                        <input name="name" class="form-control" type="text">
+                                    </div>
 
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon">Email</span>
-                                    <input name="email" class="form-control" type="text">
-                                </div>
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon">Enquiry</span>
-                                    <input name="enquiry" class="form-control" type="text">
-                                </div>
+                                    <div class="input-group form-group">
+                                        <span class="input-group-addon">Email</span>
+                                        <input name="email" class="form-control" type="text">
+                                    </div>
+                                    <div class="input-group form-group">
+                                        <span class="input-group-addon">Enquiry</span>
+                                        <input name="enquiry" class="form-control" type="text">
+                                    </div>
 
-                                <div class="form-group text-center">
-                                    <input id="btnLogin" type="submit" class="btn btn-default" value="Submit">
+                                    <div class="form-group text-center">
+                                        <input id="btnLogin" type="submit" class="btn btn-default" value="Submit">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-    }
+            </div>
+}
 }
 
 
