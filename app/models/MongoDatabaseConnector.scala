@@ -179,13 +179,11 @@ trait MongoDatabaseConnector {
     connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
 
       case Success(result) =>
-
-
-        val query = BSONDocument()
-
-        result.find(query).cursor[Product].collect[ArrayBuffer]().onComplete {
+        result.find(BSONDocument()).cursor[Product].collect[ArrayBuffer]().onComplete {
           case Success(coll) =>
             returnBuffer = coll
+          case Failure(fail) =>
+            throw fail
         }
     }
 
@@ -193,4 +191,29 @@ trait MongoDatabaseConnector {
     println(returnBuffer.length)
     returnBuffer.toArray
   }
+
+  def findProductsInPriceRance(min: Double, max: Double): Array[Product] = {
+    var r = ArrayBuffer[Product]()
+
+    connectToDatabase(CollectionNames.PRODUCT_COLLECTION, DatabaseNames.ORDERS_DATABASE).onComplete {
+      case Success(result) =>
+        val query = BSONDocument(
+          "price" -> BSONDocument(
+            "$gte" -> min,
+            "$lte" -> max
+          )
+        )
+        result.find(query).cursor[Product].collect[ArrayBuffer]().onComplete {
+          case Success(prods) =>
+            r = prods
+          case Failure(fail) =>
+            throw fail
+        }
+      case Failure(fail) =>
+        throw fail
+    }
+    Thread.sleep(500)
+    r.toArray
+  }
 }
+

@@ -26,8 +26,8 @@
                 </h4>
                 <div id="group-@i" class="list-group collapse ">
                     @for(sub <- Category.categoryMap(parent)) {
-                    <a class="list-group-item" href="@routes.CatalogueController.showCategory(sub.toString)">
-                        <span class="badge">@Product.findByCategory(sub.toString).size</span> @Category.formatCategory(sub.toString)
+                    <a class="list-group-item" href="@routes.CatalogueController.showCategory(sub.toString)">@Category.formatCategory(sub.toString)
+                        <!--<span class="badge">@Product.findByCategory(sub.toString).length </span> -->
                     </a>
                     }
                 </div>
