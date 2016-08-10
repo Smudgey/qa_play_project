@@ -16,7 +16,8 @@ libraryDependencies ++= Seq(
 
 )
 
-
+libraryDependencies += "com.thenewmotion.akka" %% "akka-rabbitmq" % "2.3"
+libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.4.9-RC2"
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 resolvers += "Typesafe repository releases" at "http://repo.typesafe.com/typesafe/releases/"
