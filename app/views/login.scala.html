@@ -15,15 +15,15 @@
                         </div>
                     }
 
-
+                    <p id="validateLogin"></p>
                     <form id="loginForm" action="@routes.LoginController.validateLogin()" method="post">
                         <div class="input-group form-group">
                             <span class="input-group-addon">Username</span>
-                            <input name="email" type="text" class="form-control">
+                            <input name="email" type="text" class="form-control"> <p id="validateEmail"></p>
                         </div>
                         <div class="input-group form-group">
                             <span class="input-group-addon">Password</span>
-                            <input name="password" type="password" class="form-control">
+                            <input name="password" type="password" class="form-control"><p id="validatePassword"></p>
                         </div>
 
                         <div class="form-group text-center">

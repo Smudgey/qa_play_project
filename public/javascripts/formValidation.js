@@ -12,28 +12,63 @@
  */
 
 function validateLogin() {
+
     var form = $('#loginForm');
     var email = form.find("input[name=email]");
     var password = form.find("input[name=password]");
     var bool = true;
 
-    if (!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(email.val()) || email.val() == null || email.val().length == 0) {
-        email.parent().addClass("has-error");
-        bool = false;
-        alert("Incorrect email");
-        console.log("this is a test");
-    }
-    if (!/[A-Za-z0-9]/.test(password.val()) || password.val() == null || password.val().length == 0) {
-        password.parent().addClass("has-error");
-        alert("Incorrect password");
+    if(email.checkValidity() == false){
+        document.getElementsByName("validateEmail").innerHTML = email.validationMessage;
         bool = false;
     }
-    if (bool) {
+    if(password.checkValidity() == false){
+        document.getElementsByName("validatePassword").innerHTML = email.validationMessage;
+        bool = false;
+    }
+    if(bool){
         form.submit()
     }
     else{
-        alert("Incorrect username or password");
+        document.getElementsByName("validateLogin").innerHTML = "Please Enter Email Address and Password";
     }
+
+    // if (!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(email.val()) || email.val() == null || email.val().length == 0) {
+    //
+    //
+    //
+    // }
+
+
+    // if (bool) {
+    //     form.submit()
+    // }
+    // else{
+    //     alert("Incorrect username or password");
+    // }
+
+    // var form = $('#loginForm');
+    // var email = form.find("input[name=email]");
+    // var password = form.find("input[name=password]");
+    // var bool = true;
+    //
+    // if (!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(email.val()) || email.val() == null || email.val().length == 0) {
+    //     email.parent().addClass("has-error");
+    //     bool = false;
+    //     alert("Incorrect email");
+    //     console.log("this is a test");
+    // }
+    // if (!/[A-Za-z0-9]/.test(password.val()) || password.val() == null || password.val().length == 0) {
+    //     password.parent().addClass("has-error");
+    //     alert("Incorrect password");
+    //     bool = false;
+    // }
+    // if (bool) {
+    //     form.submit()
+    // }
+    // else{
+    //     alert("Incorrect username or password");
+    // }
 }
 
 function validateEditAccount(){
