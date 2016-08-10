@@ -49,5 +49,5 @@ it should "Find User's credit card" taggedAs AddingCardDetails in{
   }
 
 }
-object AddingCardDetails extends Tag("test.models.AddingCardDetails")
-object AddingCardDetailsFail extends Tag("test.models.AddingCardDetailsFail")
+object AddingCardDetails extends Tag("test.modelsTest.AddingCardDetails")
+object AddingCardDetailsFail extends Tag("test.modelsTest.AddingCardDetailsFail")
