@@ -39,46 +39,50 @@
         <div class="row">
             <div class="col-sm-12">
 
-                <br>
 
 
-                <div class="row">
-                    <div class="col-xs-18 col-sm-18">
-                        <div class="col-md-4"> <img class="image-reponsive" src="@routes.Assets.versioned("images/team.jpg")"/>
 
-                        </div>
+                <div class="row" align="center">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="col-md-12"> <img style="border:3px solid black" class="image-reponsive" border="200" src="@routes.Assets.versioned("images/team.jpg")"/>
 
-
-                        <div class="col-xs-8 col-sm-8" style="font-family: Times New Roman Italic size = 18;">
-                            <em align="left">
-
-                                <h2 class="navbar-brand" style="color: #000
-                                    font-family: Impact" align="center">
-                                    We are a traditional catalogue company specialising in selling <br><br>
-                                    garden and gnome accessories. We have recently expanded our <br><br>
-                                    services to include online purchases.
-                                    We aim to please our<br><br>
-                                    customers and would appreciate any feedback or questions. <br><br>
-                                    Feel free to use the enquiry form below and we will get back to you <br><br>
-                                    as soon as possible.</h2>
-                                <br>
-                                <br>
-                                <br>
-                            </em>
                         </div>
                     </div>
                 </div>
+
+                <div class="row" align="center">
+                <div class="col-xs-12 col-sm-12 row" style="font-family: Times New Roman Italic;">
+                    <em>
+
+                        <h2 style="color: #000;
+                                    font-family: Arial" align="center">
+                            <font size="4">
+                                We are a traditional catalogue company specialising in selling
+                                garden and gnome accessories. We have recently expanded our
+                                services to include online purchases.
+                                We are located in Stockport, use the map below to see exactly where we are!
+                                We aim to please our
+                                customers and would appreciate any feedback or questions.
+                                Feel free to use the enquiry form below and we will get back to you
+                                as soon as possible.
+                            </font>
+                        </h2>
+
+
+                    </em>
+                </div>
+                </div>
+
             </div>
 
         </div>
 
         <br>
         <br>
-        <br>
-        <br>
+
         <div class="row">
             <div align="center" class="col-sm-12" id="googleMap" style="width: 500px;
-                height: 380px;"></div>
+                height: 380px;border:3px solid black"></div>
 
             <div align="center">
                 @helper.form(routes.AboutContactController.createEnquiry()) {
