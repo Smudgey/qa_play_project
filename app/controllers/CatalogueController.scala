@@ -37,7 +37,8 @@ class CatalogueController @Inject() extends Controller with Formatter with Mongo
 
   def priceFilter(min: Double, max: Double) = Action {
     implicit request =>
-//      Ok(views.html.catalogue(prodFor)(Product.searchByPrice(min, max).toArray)(request.session))
-      Redirect(routes.HomeController.index())
+
+//      connectToDatabase(CollectionNames.PRODUCT_COLLECTION_COLLECTION, DatabaseNames.ORDERS_DATABASE)
+      Ok(views.html.catalogue(findProductsInPriceRance(min, max))(request.session))
   }
 }

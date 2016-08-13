@@ -169,7 +169,7 @@ class AccountController @Inject extends Controller with Formatter with MongoData
         case Failure(fail) =>
           throw fail
       }
-      Redirect(routes.AccountController.addNewCard())
+      Redirect(routes.AccountController.viewCard())
   }
 
   /**

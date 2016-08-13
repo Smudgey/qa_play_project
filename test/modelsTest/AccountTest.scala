@@ -6,7 +6,7 @@ import org.scalatest.{FlatSpec, Matchers, Tag}
 /**
   * Created by Administrator on 05/08/2016.
   */
-class Account_New_Test extends FlatSpec with Matchers with MongoDatabaseConnector{
+class AccountTest extends FlatSpec with Matchers with MongoDatabaseConnector{
 
   val accountPass = findAccountByEmail("paultan@hotmail.com")
 

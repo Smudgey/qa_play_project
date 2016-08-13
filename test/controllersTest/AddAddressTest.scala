@@ -52,5 +52,5 @@ class AddAddressTest extends FlatSpec with Matchers with MongoDatabaseConnector 
   }
 }
 
-object AddAddress extends Tag("test.models.AddAddress") {}
-object AddAddressFail extends Tag("test.models.AddAddressFail"){}
+object AddAddress extends Tag("test.modelsTest.AddAddress") {}
+object AddAddressFail extends Tag("test.modelsTest.AddAddressFail"){}

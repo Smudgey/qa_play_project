@@ -11,14 +11,14 @@ class OrderTest extends FlatSpec with Matchers with MongoDatabaseConnector{
   val orderHistoryTest = getOrderHistory("x")
   val findOrderTest = findOrder(7)
 
-  it should "Get the Customer's Order History" taggedAs FindOrderHistory in(
+  it should "Get the Customer's Order History" taggedAs FindOrderHistory in{
     orderHistoryTest.isEmpty shouldEqual false
-    )
+  }
 
-  it should "Get an Order" taggedAs FindOrder in(
+  it should "Get an Order" taggedAs FindOrder in{
     findOrderTest.orderID == findOrder(7).orderID shouldEqual true
+  }
 
-    )
 
 }
 object FindOrderHistory extends Tag("test.modelsTest.FindOrderHistory")
