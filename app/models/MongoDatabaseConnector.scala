@@ -40,7 +40,7 @@ trait MongoDatabaseConnector {
   def connectToDatabase(collectionName: String, databaseName: String): Future[BSONCollection] = {
     val credentials = List(Authenticate(databaseName, "appaccess", "appaccess"))
 
-    def servs: List[String] = List("192.168.1.15:27017")
+    def servs: List[String] = List("localhost:27017")
     val conn = driver.connection(servs, authentications = credentials)
 //
 //    new Thread(

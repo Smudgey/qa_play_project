@@ -246,39 +246,130 @@ function validateCard(){
         var expirationYear = cardForm.find("input[name=expirationYear]");
         var cBool = true;
 
-        if(!/[A-Za-z]/.test(cardHolder.val()) || cardHolder.val() == null || cardHolder.val().length == 0){
+        // if(!/[A-Za-z]/.test(cardHolder.val()) || cardHolder.val() == null || cardHolder.val().length == 0){
+        //
+        //     cardHolder.parent().addClass("has-error");
+        //     alert("Incorrect Name for Card Holder");
+        //     cBool = false;
+        //
+        // }
+        // if(!/[0-9]/.test(cardNumber.val()) || cardNumber.val() == null || (cardNumber.val().length == 0 || cardNumber.val().length != 16)){
+        //
+        //     cardNumber.parent().addClass("has-error");
+        //     alert("Incorrect Card Number");
+        //     cBool = false;
+        //
+        // }
+        // if(!/[0-9]/.test(expirationMonth.val()) || expirationMonth.val() == null || expirationMonth.val().length == 0 || expirationMonth.val().length != 2){
+        //
+        //     expirationMonth.parent().addClass("has-error");
+        //     alert("Incorrect Expiration Month");
+        //     cBool = false;
+        //
+        // }
+        // if(!/[0-9]/.test(expirationYear.val()) || expirationYear.val() == null || expirationYear.val().length == 0 || expirationYear.val().length != 2){
+        //
+        //     expirationYear.parent().addClass("has-error");
+        //     alert("Incorrect Expiration Year");
+        //     cBool = false;
+        //
+        // }
 
-            cardHolder.parent().addClass("has-error");
-            alert("Incorrect Name for Card Holder");
+    // !/[A-Za-z]/.test(cardHolder.val())
+
+    function validateCardHolder(){
+        if (!/[A-Za-z]/.test(cardHolder.val()) || cardHolder.val() == null || cardHolder.val().length == 0) {
+
+            var invalidCH = document.getElementById("checkCardH");
+
+            invalidCH.innerHTML = "Invalid Card Holder";
+            invalidCH.style.color = "#ff0000";
+
             cBool = false;
 
         }
-        if(!/[0-9]/.test(cardNumber.val()) || cardNumber.val() == null || (cardNumber.val().length == 0 || cardNumber.val().length != 16)){
+        else{
 
-            cardNumber.parent().addClass("has-error");
-            alert("Incorrect Card Number");
+            var validCH = document.getElementById("checkCardH");
+
+            validCH.innerHTML = "Cardholder Name";
+            validCH.style.color = "#000000";
+            cBool
+        }
+    }
+
+    function validateCardNumber(){
+        if (!/[0-9]/.test(cardNumber.val()) || cardNumber.val() == null || cardNumber.val().length == 0 || cardNumber.val().length != 16) {
+
+            var invalidCN = document.getElementById("checkCardN");
+
+            invalidCN.innerHTML = "Invalid Card Number";
+            invalidCN.style.color = "#ff0000";
+
             cBool = false;
+        }
+        else{
+
+            var validCN = document.getElementById("checkCardN");
+
+            validCN.innerHTML = "Card Number";
+            validCN.style.color = "#000000";
+            cBool
 
         }
-        if(!/[0-9]/.test(expirationMonth.val()) || expirationMonth.val() == null || expirationMonth.val().length == 0 || expirationMonth.val().length != 2){
+    }
 
-            expirationMonth.parent().addClass("has-error");
-            alert("Incorrect Expiration Month");
+    function validateMonth() {
+        if (!/[0-9]/.test(expirationMonth.val()) || expirationMonth.val() == null || expirationMonth.val().length == 0 || expirationMonth.val() > 12 || expirationMonth.val().length != 2) {
+
+            var invalidM = document.getElementById("checkMonth");
+
+            invalidM.innerHTML = "Invalid Expiry Month";
+            invalidM.style.color = "#ff0000";
+
             cBool = false;
+        }
+        else{
+
+            var validM = document.getElementById("checkMonth");
+
+            validM.innerHTML = "Expiration Month";
+            validM.style.color = "#000000";
+
+            cBool
 
         }
-        if(!/[0-9]/.test(expirationYear.val()) || expirationYear.val() == null || expirationYear.val().length == 0 || expirationYear.val().length != 2){
+    }
 
-            expirationYear.parent().addClass("has-error");
-            alert("Incorrect Expiration Year");
+    function validateYear() {
+        if (!/[0-9]/.test(expirationYear.val()) || expirationYear.val() == null || expirationYear.val().length == 0 || expirationYear.val().length != 2) {
+            // alert("a4");
+
+            var invalidY = document.getElementById("checkYear");
+
+            invalidY.innerHTML = "Invalid Expiry Year";
+            invalidY.style.color = "#ff0000";
+
             cBool = false;
-
         }
+        else{
+            var validY = document.getElementById("checkYear");
 
-        if(cBool){
+            validY.innerHTML = "Expiration Year";
+            validY.style.color = "#000000";
 
-            cardForm.submit()
-
+            cBool
         }
+    }
+
+    validateCardHolder()
+    validateCardNumber()
+    validateMonth()
+    validateYear()
+
+    if (cBool) {
+        cardForm.submit()
+    }
+
 
 }
