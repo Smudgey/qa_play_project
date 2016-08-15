@@ -168,8 +168,8 @@ function validateRegister(){
 
     var rForm = $('#registerForm');
     var rfirstname = rForm.find("input[name=firstName]");
-    var rlastname = rForm.find("input[name=lastName")
-    var rPhone = rForm.find("input[name=phone");
+    var rlastname = rForm.find("input[name=lastName]");
+    var rPhone = rForm.find("input[name=phone]");
     var rEmail = rForm.find("input[name=email]");
     var rPassword = rForm.find("input[name=password]");
     var rConfirm = rForm.find("input[name=confirm]");
