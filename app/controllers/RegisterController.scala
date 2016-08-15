@@ -131,7 +131,7 @@ class RegisterController @Inject extends Controller with Formatter with MongoDat
   def createCard() = Action {
     implicit request => {
       //flag used to check if user already exists
-      val flag = false
+      val flag = true
       //connect to the specified database and collection
       connectToDatabase(CollectionNames.ACCOUNT_COLLECTION, DatabaseNames.ACCOUNT_DATABASE).onComplete {
         case Success(result) =>

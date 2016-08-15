@@ -12,120 +12,292 @@
  */
 
 function validateLogin() {
+
     var form = $('#loginForm');
     var email = form.find("input[name=email]");
     var password = form.find("input[name=password]");
     var bool = true;
 
-    if (!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(email.val()) || email.val() == null || email.val().length == 0) {
-        email.parent().addClass("has-error");
-        bool = false;
-        alert("Incorrect email");
-        console.log("this is a test");
+    function loginEmail(){
+
+        var loginEmail = document.getElementById("checkEmail");
+
+        if(email.val() == null || email.val() == 0){
+            loginEmail.innerHTML = "Invalid Email Address";
+            loginEmail.style.color = "#ff0000";
+
+            bool = false;
+        }
+        else if(!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(email.val())){
+            loginEmail.innerHTML = "Enter a Valid Email address e.g. daniel47@hotmail.com";
+            loginEmail.style.color = "#ff0000";
+            bool = false;
+        }
+        else{
+            loginEmail.innerHTML = null;
+        }
     }
-    if (!/[A-Za-z0-9]/.test(password.val()) || password.val() == null || password.val().length == 0) {
-        password.parent().addClass("has-error");
-        alert("Incorrect password");
-        bool = false;
+
+    function loginPWD() {
+        var loginPWD = document.getElementById("checkPWD");
+        if (password.val() == null || password.val().length == 0) {
+            loginPWD.innerHTML = "Invalid Password";
+            loginPWD.style.color = "#ff0000";
+            bool = false;
+        }
+        else{
+            loginPWD.innerHTML = null;
+        }
     }
-    if (bool) {
+
+    loginEmail();
+    loginPWD();
+    if(bool){
         form.submit()
     }
     else{
-        alert("Incorrect username or password");
+        document.getElementsByName("validateLogin").innerHTML = "Please Enter Email Address and Password";
     }
+
 }
 
 function validateEditAccount(){
 
-    var eAForm = $('#editAccount');
-    var eafName = eAForm.find("input[name=fname]");
-    var ealName   = eAForm.find("input[name=lname]")
-    var eAEmail = eAForm.find("input[name=email]")
-    var eAPhone = eAForm.find("input[name=phone]");
+    var eForm = $('#editAccount');
+    var efName = eForm.find("input[name=fname]");
+    var elName = eForm.find("input[name=lname]")
+    var eEmail = eForm.find("input[name=email]")
+    var ePhone = eForm.find("input[name=phone]");
 
-    var eABool = true;
+    var eBool = true;
 
-    if(!/[A-Za-z]/.test(eAName.val()) || eAName.val() == null || eAName.val() == 0){
-        eafName.parent().addClass("has-error");
-        alert("Invalid First Name");
-        eABool = false;
+    function editFirstName(){
 
+        var checkEFN = document.getElementById("checkFN");
+
+        if(efName.val() == null || efName.val() == 0){
+            checkEFN.innerHTML = "Invalid First Name";
+            checkEFN.style.color = "#ff0000";
+            eBool = false;
+        }
+        else if(!/[A-Za-z]/.test(efName.val())){
+            checkEFN.innerHTML = "Please Enter Text Only";
+            checkEFN.style.color = "#ff0000";
+            eBool = false;
+        }
+        else{
+            checkEFN.innerHTML = "First Name";
+            checkEFN.style.color = "#000000";
+        }
     }
-    if(!/[A-Za-z]/.test(eafName.val()) || eafName.val() == null || eafName.val() == 0){
-        eafName.parent().addClass("has-error");
-        alert("Invalid First Name");
-        eABool = false;
 
-    }if(!/[A-Za-z]/.test(ealName.val()) || ealName.val() == null || ealName.val() == 0){
-        ealName.parent().addClass("has-error");
-        alert("Invalid First Name");
-        eABool = false;
+    function editLastName(){
 
+        var checkELN = document.getElementById("checkLN");
+
+        if(elName.val() == null || elName.val() == 0){
+            checkELN.innerHTML = "Invalid Last Name";
+            checkELN.style.color = "#ff0000";
+            eBool = false;
+        }
+        else if(!/[A-Za-z]/.test(elName.val())){
+            checkELN.innerHTML = "Please Enter Text Only";
+            checkELN.style.color = "#ff0000";
+            eBool = false;
+        }
+        else{
+            checkELN.innerHTML = "Last Name";
+            checkELN.style.color = "#000000";
+        }
     }
-    if(!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(eAEmail.val()) || eAEmail.val() == null || eAEmail.val() == 0){
-        eAEmail.parent().addClass("has-error");
-        alert("Invalid Email");
-        eABool = false;
+
+    function editEmail(){
+
+        var checkEmail = document.getElementById("checkEmail");
+
+        if(eEmail.val() == null || eEmail.val() == 0){
+            checkEmail.innerHTML = "Invalid Email Address";
+            checkEmail.style.color = "#ff0000";
+            eBool = false;
+        }
+        else if(!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(eEmail.val())){
+            checkEmail.innerHTML = "Enter a Valid Email address e.g. daniel47@hotmail.com";
+            checkEmail.style.color = "#ff0000";
+            eBool = false;
+        }
+        else{
+            checkEmail.innerHTML = "Email";
+            checkEmail.style.color = "#000000";
+        }
     }
-    if(!/[0-9]/.test(eAPhone.val()) || eAPhone.val() == null || eAPhone.val().length == 0 || eAPhone.val().length != 11){
-        eAPhone.parent().addClass("has-error");
-        alert("Invalid Phone Number");
-        eABool = false;
+
+    function editPhone(){
+        var checkEPH = document.getElementById("checkPhone");
+        if (ePhone.val() == null || ePhone.val().length == 0 || ePhone.val().length != 11) {
+            checkEPH.innerHTML = "Invalid Phone Number";
+            checkEPH.style.color = "#ff0000";
+            eBool = false;
+        }
+        else if(!/[0-9]/.test(ePhone.val())){
+            checkEPH.innerHTML = "Enter Numbers Only e.g. 07899324592";
+            checkEPH.style.color = "#ff0000";
+            eBool = false;
+        }
+        else{
+            checkEPH.innerHTML = "Phone";
+            checkEPH.style.color = "#000000";
+        }
     }
-    if(eABool){
-        eAForm.submit()
+
+    editFirstName();
+    editLastName();
+    editEmail();
+    editPhone();
+
+    if(eBool){
+        eForm.submit()
+    }
+    else{
+        var failLogin = document.getElementById("failLogin");
+        failLogin.innerHTML = "Login Failed";
+        failLogin.style.color = "#ff0000";
     }
 }
 
 function validateRegister(){
 
     var rForm = $('#registerForm');
-    var rFullname = rForm.find("input[name=fullName]");
+    var rfirstname = rForm.find("input[name=firstName]");
+    var rlastname = rForm.find("input[name=lastName")
+    var rPhone = rForm.find("input[name=phone");
     var rEmail = rForm.find("input[name=email]");
     var rPassword = rForm.find("input[name=password]");
     var rConfirm = rForm.find("input[name=confirm]");
     var rBool = true;
 
+    function validateFirstName(){
+        var checkFN = document.getElementById("checkFN");
+        if (rfirstname.val() == null || rfirstname.val().length == 0) {
 
-    if(!/[A-Za-z]/.test(rFullname.val()) || rFullname.val() == null || rFullname.val().length == 0){
+            checkFN.innerHTML = "Invalid First Name";
+            checkFN.style.color = "#ff0000";
+            rBool = false;
+        }
+        else if(!/[A-Za-z]/.test(rfirstname.val())){
+            checkFN.innerHTML = "Please Text Only";
+            checkFN.style.color = "#ff0000";
 
-        rFullname.parent().addClass("has-error");
-        alert("Incorrect Name");
-        rBool = false;
+            rBool= false;
 
+        }
+        else{
+            checkFN.innerHTML = "First name";
+            checkFN.style.color = "#000000";
+        }
     }
-    if(!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(rEmail.val()) || rEmail.val() == null || rEmail.val().length == 0){
 
-        rEmail.parent().addClass("has-error");
-        alert("Incorrect Email");
-        rBool = false;
+    function validateLastName(){
+        var checkLN = document.getElementById("checkLN");
+        if (rlastname.val() == null || rlastname.val().length == 0) {
+            checkLN.innerHTML = "Invalid Last Name";
+            checkLN.style.color = "#ff0000";
+            rBool = false;
+        }
+        else if(!/[A-Za-z]/.test(rlastname.val())){
+            checkLN.innerHTML = "Please Text Only";
+            checkLN.style.color = "#ff0000";
+            rBool = false;
 
+        }
+        else{
+            checkLN.innerHTML = "Last name";
+            checkLN.style.color = "#000000";
+        }
     }
-    if(!/[A-Za-z0-9]/.test(rPassword.val()) || rPassword.val() == null || rPassword.val().length == 0){
 
-        rPassword.parent().addClass("has-error");
-        alert("Enter Password")
-        rBool = false;
-
+    function validatePhone() {
+        var checkPH = document.getElementById("checkPhone");
+        if (rPhone.val() == null || rPhone.val().length == 0 || rPhone.val().length != 11) {
+            checkPH.innerHTML = "Invalid Phone Number";
+            checkPH.style.color = "#ff0000";
+            rBool = false;
+        }
+        else if(!/[0-9]/.test(rPhone.val())){
+            checkPH.innerHTML = "Enter Numbers Only e.g. 07899324592";
+            checkPH.style.color = "#ff0000";
+            rBool = false;
+        }
+        else{
+            checkPH.innerHTML = "Expiration Month";
+            checkPH.style.color = "#000000";
+        }
     }
-    if(!/[A-Za-z0-9]/.test(rConfirm.val()) || rConfirm.val() == null || rConfirm.val().length == 0){
-        if(rPassword != rConfirm){
-            rConfirm.parent().addClass("has-error");
-            alert("Password does not match");
+
+    function validateEmail() {
+        var checkE = document.getElementById("checkEmail");
+        if (rEmail.val() == null || rEmail.val().length == 0) {
+            checkE.innerHTML = "Invalid Email Address";
+            checkE.style.color = "#ff0000";
+            rBool = false;
+        }
+        else if(!/^[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/.test(rEmail.val())){
+            checkE.innerHTML = "Enter a Valid Email address e.g. daniel47@hotmail.com";
+            checkE.style.color = "#ff0000";
+            rBool = false;
+        }
+        else{
+            checkE.innerHTML = "Expiration Year";
+            checkE.style.color = "#000000";
+        }
+    }
+
+    function validatePWD() {
+        var checkPWD = document.getElementById("checkPWD");
+        if (rPassword.val() == null || rPassword.val().length == 0) {
+            checkPWD.innerHTML = "Enter a Password";
+            checkPWD.style.color = "#ff0000";
+            rBool = false;
+        }
+        else{
+            checkPWD.innerHTML = "Password";
+            checkPWD.style.color = "#000000";
+        }
+    }
+
+    function validateCPWD() {
+        var checkCPWD = document.getElementById("checkCPWD");
+        if (rConfirm.val() == null || rConfirm.val().length == 0) {
+            checkCPWD.innerHTML = "Invalid Expiry Year";
+            checkCPWD.style.color = "#ff0000";
+            rBool = false;
         }
 
-        rConfirm.parent().addClass("has-error");
-        alert("Password does not match or not entered")
-        rBool = false;
+        else if(rConfirm != rPassword){
+            checkCPWD.innerHTML = "Passwords do not Match";
+            checkCPWD.style.color = "#ff0000";
+        }
 
+        else{
+            checkCPWD.innerHTML = "Confirm Password";
+            checkCPWD.style.color = "#000000";
+        }
     }
-    if(rBool){
 
+    validateFirstName();
+    validateLastName();
+    validatePhone();
+    validateEmail();
+    validatePWD();
+    validateCPWD();
+
+    if (rBool) {
         rForm.submit()
-
     }
-
+    else{
+        var registerFail = document.getElementById("registerFail");
+        registerFail.innerHTML = "Please Enter Missing Details";
+        registerFail.style.color = "#ff0000";
+    }
 }
 
 function validateAddress() {
@@ -139,65 +311,93 @@ function validateAddress() {
 
     var aBool = true;
 
-    // if (!/[A-Za-z0-9]/.test(a1.val()) || a1.val() == null || a1.val().length == 0) {
-    //
-    //     a1.parent().addClass("has-error");
-    //     alert("Incorrect Address Line 1");
-    //     aBool = false;
-    //
-    // }
-    // if (!/[A-Za-z]/.test(a2.val()) || a2 == null || a2.val().length == 0) {
-    //
-    //     a2.parent().addClass("has-error");
-    //     alert("Incorrect Address Line 2");
-    //     aBool = false;
-    //
-    // }
-    // if (!/[A-Za-z]/.test(city.val()) || city == null || city.val().length == 0) {
-    //
-    //     city.parent().addClass("has-error");
-    //     alert("Incorrect City");
-    //     aBool = false;
-    //
-    // }
-    // if (!/[A-Za-z]/.test(county.val()) || county == null || county.val().length == 0) {
-    //
-    //     county.parent().addClass("has-error");
-    //     alert("Incorrect County");
-    //     aBool = false;
-    //
-    // }
-    // if (!/[A-Za-z0-9]/.test(postcode.val()) || postcode == null || postcode.val().length == 0) {
-    //
-    //     postcode.parent().addClass("has-error");
-    //     alert("Incorrect Post Code");
-    //     aBool = false;
-    //
-    // }
 
-    if (a1.val() == null) {
-        alert("a1");
-        aBool = false;
+    function validateA1(){
+        var checka1 = document.getElementById("checkA1");
+        if (a1.val() == null || a1.val().length == 0) {
+            checka1.innerHTML = "Please Enter Address Line 1";
+            checka1.style.color = "#ff0000";
+            aBool = false;
+        }
+        else{
+            checka1.innerHTML = null;
+        }
     }
-    if (a2.val() == null) {
-        alert("a2");
-        aBool = false;
+
+    function validateA2(){
+        var checka2 = document.getElementById("checkA2");
+        if (a2.val() == null || a2.val().length == 0) {
+            checka2.innerHTML = "Please Enter Address Line 2";
+            checka2.style.color = "#ff0000";
+            aBool = false;
+        }
+        else{
+            checka2.innerHTML = null;
+        }
     }
-    if (city.val() == null) {
-        alert("a3");
-        aBool = false;
+
+    function validateCity(){
+        var checkcity = document.getElementById("checkCity");
+        if (city.val() == null || city.val().length == 0) {
+            checkcity.innerHTML = "Please Enter City";
+            checkcity.style.color = "#ff0000";
+            aBool = false;
+        }
+        else if(!/[A-Za-z]/.test(city.val())){
+            checkcity.innerHTML = "Invalid City";
+            checkcity.style.color = "#ff0000";
+            aBool = false;
+        }
+        else{
+            checkcity.innerHTML = null;
+        }
     }
-    if (county.val() == null) {
-        alert("a4");
-        aBool = false;
+    function validateCounty(){
+        var checkcounty = document.getElementById("checkCounty");
+        if (county.val() == null || county.val().length == 0) {
+            checkcounty.innerHTML = "Please Enter County";
+            checkcounty.style.color = "#ff0000";
+            aBool = false;
+        }
+        else if(!/[A-Za-z]/.test(county.val())){
+            checkcounty.innerHTML = "Invalid City";
+            checkcounty.style.color = "#ff0000";
+            aBool = false;
+        }
+        else{
+            checkcounty.innerHTML = null;
+        }
     }
-    if (postcode.val() == null) {
-        alert("a5");
-        aBool = false;
+    function validatePostCode(){
+        var checkpostcode = document.getElementById("checkPostCode");
+        if (postcode.val() == null || postcode.val().length == 0) {
+            checkpostcode.innerHTML = "Please Enter Post Code";
+            checkpostcode.style.color = "#ff0000";
+            aBool = false;
+        }
+        else if(!/^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/.test(postcode.val())){
+            checkpostcode.innerHTML = "Invalid Post Code";
+            checkpostcode.style.color = "#ff0000";
+            aBool = false;
+        }
+        else{
+            checkpostcode.innerHTML = null;
+        }
     }
+
+    validateA1();
+    validateA2();
+    validateCity();
+    validateCounty();
+    validatePostCode();
 
     if (aBool) {
         addressForm.submit()
+    }
+    else{
+        var addressFail = document.getElementById("addressFail");
+        addressFail.innerHTML = "Please Enter Missing Details";
+        addressFail.style.color = "#ff000000";
     }
 
 }
@@ -211,39 +411,92 @@ function validateCard(){
         var expirationYear = cardForm.find("input[name=expirationYear]");
         var cBool = true;
 
-        if(!/[A-Za-z]/.test(cardHolder.val()) || cardHolder.val() == null || cardHolder.val().length == 0){
-
-            cardHolder.parent().addClass("has-error");
-            alert("Incorrect Name for Card Holder");
+    function validateCardHolder(){
+        var checkCH = document.getElementById("checkCardH");
+        if (cardHolder.val() == null || cardHolder.val().length == 0) {
+            checkCH.innerHTML = "Invalid Card Holder";
+            checkCH.style.color = "#ff0000";
             cBool = false;
-
         }
-        if(!/[0-9]/.test(cardNumber.val()) || cardNumber.val() == null || (cardNumber.val().length == 0 || cardNumber.val().length != 16)){
+        else if(!/[A-Za-z]/.test(cardHolder.val())){
+            checkCH.innerHTML = "Please Enter Text Only";
+            checkCH.style.color = "#ff0000";
+            cBool= false;
+        }
+        else{
+            checkCH.innerHTML = "Cardholder Name";
+            checkCH.style.color = "#000000";
+        }
+    }
 
-            cardNumber.parent().addClass("has-error");
-            alert("Incorrect Card Number");
+    function validateCardNumber(){
+        var checkCN = document.getElementById("checkCardN");
+        if (cardNumber.val() == null || cardNumber.val().length == 0 || cardNumber.val().length != 16) {
+            checkCN.innerHTML = "Invalid Card Number";
+            checkCN.style.color = "#ff0000";
             cBool = false;
-
         }
-        if(!/[0-9]/.test(expirationMonth.val()) || expirationMonth.val() == null || expirationMonth.val().length == 0 || expirationMonth.val().length != 2){
-
-            expirationMonth.parent().addClass("has-error");
-            alert("Incorrect Expiration Month");
+        else if(!/[0-9]/.test(cardNumber.val()) ){
+            checkCN.innerHTML = "Please Enter Numbers Only e.g. 1234567812345678";
+            checkCN.style.color = "#ff0000";
             cBool = false;
-
         }
-        if(!/[0-9]/.test(expirationYear.val()) || expirationYear.val() == null || expirationYear.val().length == 0 || expirationYear.val().length != 2){
+        else{
+            checkCN.innerHTML = "Card Number";
+            checkCN.style.color = "#000000";
+        }
+    }
 
-            expirationYear.parent().addClass("has-error");
-            alert("Incorrect Expiration Year");
+    function validateMonth() {
+        var checkM = document.getElementById("checkMonth");
+        if (expirationMonth.val() == null || expirationMonth.val().length == 0 || expirationMonth.val() > 12 || expirationMonth.val().length != 2) {
+            checkM.innerHTML = "Invalid Expiry Month";
+            checkM.style.color = "#ff0000";
             cBool = false;
-
         }
-
-        if(cBool){
-
-            cardForm.submit()
-
+        else if(!/[0-9]/.test(expirationMonth.val())){
+            checkM.innerHTML = "Enter only Numbers e.g. 02 for February";
+            checkM.style.color = "#ff0000";
+            cBool = false;
         }
+        else{
+            checkM.innerHTML = "Expiration Month";
+            checkM.style.color = "#000000";
+        }
+    }
+
+    function validateYear() {
+        var checkY = document.getElementById("checkYear");
+        if (expirationYear.val() == null || expirationYear.val().length == 0 || expirationYear.val().length != 2) {
+            checkY.innerHTML = "Invalid Expiry Year";
+            checkY.style.color = "#ff0000";
+            cBool = false;
+        }
+        else if(!/[0-9]/.test(expirationYear.val()) ){
+            checkY.innerHTML = "Enter only Numbers e.g. 21 for 2021";
+            checkY.style.color = "#ff0000";
+            cBool = false;
+        }
+        else{
+            checkY.innerHTML = "Expiration Year";
+            checkY.style.color = "#000000";
+        }
+    }
+
+    validateCardHolder();
+    validateCardNumber();
+    validateMonth();
+    validateYear();
+
+    if (cBool) {
+        cardForm.submit()
+    }
+    else{
+        var cardFail = document.getElementById("cardFail");
+        cardFail.innerHTML = "Please Enter Missing Details";
+        cardFail.style.color = "#ff0000";
+
+    }
+
 
 }
