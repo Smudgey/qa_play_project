@@ -52,17 +52,21 @@
                                         <div class="panel-body">
                                             <table class="table">
                                                 <tr>
+                                                    <td>Product ID</td>
                                                     <td>Product Name</td>
                                                     <td>Cost</td>
                                                     <td>Quantity</td>
-                                                    <td>Porusware Quantity</td>
+
                                                 </tr>
                                                 @for(ol <- o.orderLines) {
-                                                    <tr>
-                                                        <td> @ol.prodId</td>
-                                                        <td>£@ol.price</td>
-                                                        <td> @ol.quantity</td>
-                                                    </tr>
+                                                    @defining(Product.findProductByID(ol.prodId)) { prod =>
+                                                        <tr>
+                                                            <td> @prod.itemID</td>
+                                                            <td>@prod.product</td>
+                                                            <td>£@ol.price</td>
+                                                            <td> @ol.quantity</td>
+                                                        </tr>
+                                                    }
                                                 }
                                                 <tr>
                                                     <td colspan="4">Total Price: £@o.totalPrice</td>
@@ -78,7 +82,9 @@
                         </td>
                     </tr>
                 }
-            } else {<p>kdfhgklsdfgklzxdjg</p>}
+            } else {
+                <p>kdfhgklsdfgklzxdjg</p>
+            }
             </table>
 
         </div>
