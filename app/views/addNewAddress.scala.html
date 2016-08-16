@@ -2,7 +2,7 @@
 @main("") {
     @manageAccountsSidebar("New Address") {
         <script>changeTab("registerAddress")</script>
-        <form id="addressFormNew" action="@routes.AccountController.addAddress()" method="post">
+        <form id="addressForm" action="@routes.AccountController.addAddress()" method="post">
             @addressTemplate()
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -7,7 +7,7 @@
                     <form id="addressForm" action="@routes.RegisterController.createAddress()" method="post">
                         @addressTemplate()
                         <div class="form-group text-center">
-                            <input type="submit" class="btn btn-default" value="Next">
+                            <input type="button" onclick="validateAddress()" class="btn btn-default" value="Next">
                         </div>
 
                     </form>
